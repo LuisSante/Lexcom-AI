@@ -1,12 +1,11 @@
 import '../../css/navbar.css'
 
-interface NavbarItem 
-{
+interface NavbarItem {
     key: string;
     title: string;
     url: string;
 }
-  
+
 export const NavbarItems: NavbarItem[] = [
     {
         key: '1',
@@ -15,13 +14,13 @@ export const NavbarItems: NavbarItem[] = [
     },
     {
         key: '2',
-        title: 'Services',
-        url: '/Services',
+        title: '¿Cómo funciona?',
+        url: '#'
     },
     {
         key: '3',
-        title: 'About',
-        url: '#',
+        title: 'Services',
+        url: '/Services',
     },
     {
         key: '4',
@@ -31,8 +30,7 @@ export const NavbarItems: NavbarItem[] = [
     },
     {
         key: '5',
-        title: 'PhD',
-        url: '#'
-        // url: '/PhD',
+        title: 'About',
+        url: '#',
     },
 ];
