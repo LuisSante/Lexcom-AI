@@ -3,6 +3,10 @@ import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import How_work from './pages/How_work';
 import Services from './pages/Services';
+import Faq from './pages/FAQ';
+import About from './pages/About';
+import { BrowserRouter } from 'react-router-dom';
+
 
 function App() {
   const [scrollHeight, setScrollHeight] = useState(0);
@@ -16,7 +20,6 @@ function App() {
     window.addEventListener("scroll", handleScroll);
 
     return () => {
-      // Cleanup the event listener when the component is unmounted
       window.removeEventListener("scroll", handleScroll);
     };
   }, [scrollHeight]);
@@ -25,9 +28,13 @@ function App() {
   return (
     <>
       <div className='position-pages'>
-        <Navbar isScrolling={scrollHeight} />
-        <How_work />
-        <Services />
+        <BrowserRouter>
+          <Navbar isScrolling={scrollHeight} />
+          <How_work id="howork" />
+          <Services id="services" />
+          <Faq id="faq"></Faq>
+          <About id='about' />
+        </BrowserRouter>
       </div>
     </>
   )

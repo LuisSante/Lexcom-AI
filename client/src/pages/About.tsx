@@ -1,9 +1,17 @@
 import React from 'react'
 
-function About() {
+interface ComponentProps {
+  id: string
+}
+
+const About: React.FC<ComponentProps> = ({id}) =>{
   return (
-    <div>About</div>
+    <div id = {id}>
+      <h1>
+      About
+      </h1>
+    </div>
   )
 }
 
-export default About
+export default About;

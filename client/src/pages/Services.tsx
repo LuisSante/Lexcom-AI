@@ -1,8 +1,20 @@
 import '../css/services.css'
 
-function Services() {
+interface ComponentProps {
+  id: string;
+}
+
+const Services: React.FC<ComponentProps> = ({id}) => {
   return (
-    <div className='container-page'>
+    <div className='container-page-services' id={id}>
+      <h1>{id}</h1>
+      <h1>Services</h1>
+      <h1>Services</h1>
+      <h1>Services</h1>
+      <h1>Services</h1>
+      <h1>Services</h1>
+      <h1>Services</h1>
+      <h1>Services</h1>
       <h1>Services</h1>
       <h1>Services</h1>
       <h1>Services</h1>

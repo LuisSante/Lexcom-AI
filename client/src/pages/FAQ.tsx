@@ -1,9 +1,31 @@
-import React from 'react'
+interface ComponentProps {
+  id: string;
+}
 
-function FAQ() {
+const Faq: React.FC<ComponentProps> = ({id}) => {
   return (
-    <div>FAQ</div>
+    <div id = {id}>
+      <h1>FAQ</h1>
+      <h1>FAQ</h1>
+      <h1>FAQ</h1>
+      <h1>FAQ</h1>
+      <h1>FAQ</h1>
+      <h1>FAQ</h1>
+      <h1>FAQ</h1>
+      <h1>FAQ</h1>
+      <h1>FAQ</h1>
+      <h1>FAQ</h1>
+      <h1>FAQ</h1>
+      <h1>FAQ</h1>
+      <h1>FAQ</h1>
+      <h1>FAQ</h1>
+      <h1>FAQ</h1>
+      <h1>FAQ</h1>
+      <h1>FAQ</h1>
+      <h1>FAQ</h1>
+      <h1>FAQ</h1>
+    </div>
   )
 }
 
-export default FAQ
+export default Faq;

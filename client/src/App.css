@@ -1,16 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
 
-html,
-body,
-#root{
+body {
   height: 100%;
   width: 100%;
-  font-family: 'Poppins';
+  font-family: 'Poppins', sans-serif;
   margin: 0;
-  /* @apply bg-gray-100 text-gray-500 */
+  background-color: #f8f9fa;
 }
 
-.position-pages{
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+.position-pages {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }

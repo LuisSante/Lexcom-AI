@@ -1,11 +1,15 @@
 import '../css/how_work.css'
 
-function How_work() {
+interface ComponentProps {
+  id: string;
+}
+
+const How_work: React.FC<ComponentProps> = ({id}) => {
 
   return (
-    <div className='container-page'>
+    <div className='container-page-how-work' id={id}>
       <h1>
-        How_work
+        {id}
       </h1>
       <h1>
         How_work
