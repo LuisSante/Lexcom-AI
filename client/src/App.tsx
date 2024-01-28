@@ -3,6 +3,7 @@ import { Table, Form, Input, Checkbox, Button, notification } from 'antd'
 import type { TableProps } from 'antd'
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import Navbar from './components/Navbar';
 
 interface DataType {
   key: string;
@@ -85,10 +86,28 @@ function App() {
       )
   }
 
+  const [scrollHeight, setScrollHeight] = useState(0);
+
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    setScrollHeight(position);
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      // Cleanup the event listener when the component is unmounted
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [scrollHeight]);
+
+
   return (
     <>
       {contextHolder}
-      <div className='grid grid-cols-2'>
+      <Navbar isScrolling={scrollHeight} />
+      <div className='pt-10 grid grid-cols-2'>
         <div className='p-8 flex flex-col gap-4'>
           <p className='text-2xl'>Agregar un pendiente</p>
           <Form
@@ -130,6 +149,18 @@ function App() {
           <Table columns={columns} dataSource={todos} />
         </div>
       </div>
+      <h1>a</h1>
+      <h1>a</h1>
+      <h1>a</h1>
+      <h1>a</h1>
+      <h1>a</h1>
+      <h1>a</h1>
+      <h1>a</h1>
+      <h1>a</h1>
+      <h1>a</h1>
+      <h1>a</h1>
+      <h1>a</h1>
+      <h1>a</h1>
     </>
   )
 }
