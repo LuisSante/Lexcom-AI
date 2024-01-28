@@ -1,8 +1,24 @@
-import React from 'react'
+import '../css/services.css'
 
 function Services() {
   return (
-    <div>Services</div>
+    <div className='container-page'>
+      <h1>Services</h1>
+      <h1>Services</h1>
+      <h1>Services</h1>
+      <h1>Services</h1>
+      <h1>Services</h1>
+      <h1>Services</h1>
+      <h1>Services</h1>
+      <h1>Services</h1>
+      <h1>Services</h1>
+      <h1>Services</h1>
+      <h1>Services</h1>
+      <h1>Services</h1>
+      <h1>Services</h1>
+      <h1>Services</h1>
+      <h1>Services</h1>
+    </div>
   )
 }
 

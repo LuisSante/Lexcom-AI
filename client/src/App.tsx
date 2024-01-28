@@ -2,6 +2,7 @@ import './App.css'
 import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import How_work from './pages/How_work';
+import Services from './pages/Services';
 
 function App() {
   const [scrollHeight, setScrollHeight] = useState(0);
@@ -23,8 +24,11 @@ function App() {
 
   return (
     <>
-      <Navbar isScrolling={scrollHeight} />
-      <How_work/>
+      <div className='position-pages'>
+        <Navbar isScrolling={scrollHeight} />
+        <How_work />
+        <Services />
+      </div>
     </>
   )
 }

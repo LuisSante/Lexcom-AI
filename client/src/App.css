@@ -6,5 +6,11 @@ body,
   height: 100%;
   width: 100%;
   font-family: 'Poppins';
-  @apply bg-gray-100 text-gray-500
+  margin: 0;
+  /* @apply bg-gray-100 text-gray-500 */
+}
+
+.position-pages{
+  display: flex;
+  flex-direction: column;
 }
