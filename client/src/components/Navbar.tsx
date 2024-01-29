@@ -71,7 +71,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolling }) => {
                 {NavbarItems.map((item, index) => (
 
                     <li key={index}>
-                        <Link to={item.url} onClick={() => scrollToSection(item.id_)}
+                        <Link to={`#${item.id_}`} onClick={() => scrollToSection(item.id_)}
                             className="nav_links">
                             {item.title}
                         </Link>
