@@ -83,7 +83,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolling }) => {
                 </div>
                 <Modal
                     title="Login"
-                    visible={loginModalVisible}
+                    open={loginModalVisible}
                     onCancel={handleLoginModalCancel}
                     footer={null}
                 >
@@ -91,7 +91,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolling }) => {
                 </Modal>
                 <Modal
                     title="Register"
-                    visible={registerModalVisible}
+                    open={registerModalVisible}
                     onCancel={handleRegisterModalCancel}
                     footer={null}
                 >

@@ -1,3 +1,4 @@
+// import { useNavigate } from "react-router-dom";
 import {
     Button,
     Checkbox,
@@ -6,6 +7,8 @@ import {
     Input,
     Select,
 } from 'antd';
+// import axios from "axios";
+// import { useNavigate  } from 'react-router-dom';
 
 const { Option } = Select;
 
@@ -33,6 +36,16 @@ const tailFormItemLayout = {
     },
 };
 
+
+// const navigate = useNavigate();
+
+
+//  const onFinish = async (e) => {
+//     e.preventDefault();
+//     // await axios.post("http://localhost:3001/users", user);
+//     // navigate(`/`);
+//  };
+
 const Register: React.FC = () => {
     const [form] = Form.useForm();
 
@@ -45,8 +58,7 @@ const Register: React.FC = () => {
             {...formItemLayout}
             form={form}
             name="register"
-            //   onFinish={onFinish}
-            initialValues={{ residence: ['zhejiang', 'hangzhou', 'xihu'], prefix: '86' }}
+            // onFinish={onFinish}
             style={{ maxWidth: 600 }}
             scrollToFirstError
         >
