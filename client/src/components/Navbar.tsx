@@ -20,7 +20,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolling }) => {
 
 
     const initialFormData = {
-        username: "",
+        user: "",
         password: "",
         remember: "",
     };
