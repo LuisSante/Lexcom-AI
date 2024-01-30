@@ -1,12 +1,10 @@
-import '../css/home.css'
-// import { Route, Routes } from 'react-router-dom';
+import '../css/styles_home/home.css'
 import { useEffect, useState } from 'react';
-// import Dashboard from './Dashboard';
 import Navbar from '../components/Navbar';
-import How_work from './How_work';
-import Services from './Services';
-import Faq from './FAQ';
-import About from './About';
+import How_work from '../components/components_home/How_work';
+import Services from '../components/components_home/Services';
+import Faq from '../components/components_home/FAQ';
+import About from '../components/components_home/About';
 
 
 const Home: React.FC = () => {

@@ -1,4 +1,4 @@
-import '../css/how_work.css'
+import '../../css/styles_home/how_work.css'
 
 interface ComponentProps {
   id: string;
