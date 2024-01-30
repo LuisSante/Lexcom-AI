@@ -6,9 +6,30 @@ import {
     Form,
     Input,
     Select,
+    notification,
 } from 'antd';
+import axios from 'axios';
+import { useState } from 'react';
 // import axios from "axios";
 // import { useNavigate  } from 'react-router-dom';
+
+interface FormValues {
+    title: string;
+    description: string;
+    completed: boolean;
+    key: string; 
+    name: string; 
+    surname: string;
+    phone: string;
+    country:string;
+    city: string;
+    address:string;
+    email:string;
+    password:string;
+    user:string;
+    gender:string;
+    date_of_birth:Date;
+}
 
 const { Option } = Select;
 
@@ -41,24 +62,52 @@ const tailFormItemLayout = {
 
 
 //  const onFinish = async (e) => {
-//     e.preventDefault();
-//     // await axios.post("http://localhost:3001/users", user);
-//     // navigate(`/`);
 //  };
 
 const Register: React.FC = () => {
     const [form] = Form.useForm();
+    const [user, setUser] = useState<FormValues[]>([])
+    const [api, contextHolder] = notification.useNotification();
+    
+    const onFinish = (values: FormValues) => {
+        console.log(values)
+        axios.post('http://localhost:8000/api/user', values)
+          .then(
+            res => {
+              if (res.status === 201) {
+                console.log(res.data)
+                setUser([...user, res.data])
+                api.success({
+                  message: 'Registro exitoso!',
+                  description: 'Usuario registrado correctamente',
+                  duration: 1000
+                })
+              }
+            }
+          )
+          .catch(
+            err => {
+              api.error({
+                message: 'Error al registrar usuario',
+                description: `${err.message}`,
+                duration: 1000
+              })
+            }
+          )
+      }
 
-    //   const onFinish = (values: any) => {
+    //   const on.Finish = (values: any) => {
     //     console.log('Received values of form: ', values);
     //   };
 
     return (
+        <>
+        {contextHolder}
         <Form
             {...formItemLayout}
             form={form}
             name="register"
-            // onFinish={onFinish}
+            onFinish={onFinish}
             style={{ maxWidth: 600 }}
             scrollToFirstError
         >
@@ -168,8 +217,8 @@ const Register: React.FC = () => {
             </Form.Item>
 
             <Form.Item
-                name="nickname"
-                label="Nickname"
+                name="user"
+                label="user"
                 tooltip="What do you want others to call you?"
                 rules={[{ required: true, message: 'Please input your nickname!', whitespace: true }]}
             >
@@ -219,6 +268,7 @@ const Register: React.FC = () => {
                 </Button>
             </Form.Item>
         </Form>
+        </>
     );
 };
 
