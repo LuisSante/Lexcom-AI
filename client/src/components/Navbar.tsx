@@ -64,7 +64,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolling }) => {
     };
 
     return (
-        <nav className={`navbar ${isScrolling > 20 ? 'scrolling' : ''}`}>
+        <nav className={`navbar ${isScrolling > 10 ? 'scrolling' : ''}`}>
             {/* <div dangerouslySetInnerHTML={{ __html: sgvlogolexcom }} className="navbar_logo" onClick={toTheTop}></div> */}
             <div className="navbar_logo" onClick={toTheTop}>
                 <img src={logo} alt="Lexcom Logo" />
