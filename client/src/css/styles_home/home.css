@@ -1,6 +1,5 @@
 .position-pages {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+}

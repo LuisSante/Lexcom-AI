@@ -1,63 +1,71 @@
-a:hover {
+/* a:hover {
   @apply transition duration-200;
   @apply text-gray-700
-}
+} */
 
 .navbar {
   position: fixed;
   top: 0;
-  background-color: transparent;
+  background-color: black;
   width: 100%;
-  min-height: 80px; 
   padding-left: 5%;
-  font-size: 1.5rem;
+  font-size: 130%;
   z-index: 1;
   display: flex;
   align-items: center;
+
+  transition: height 0.3s ease-in-out;
 }
 
-.scrolling{
+.scrolling {
   background-color: black;
+  color: white;
+  /* background-color: white; */
   transition: all 0.5s ease;
+
+  
 }
 
-.navbar_logo{
+.navbar_logo {
   height: 80px;
   line-height: 80px;
-  color: purple;
   cursor: pointer;
   font-size: 2rem;
   padding-left: 2%;
+  margin-top: 40px;
 }
 
 .nav_menu {
   display: flex;
   list-style: none;
   text-align: center;
-  justify-content: flex;
+  margin-top: 20px;
+  align-items: center;
 }
 
-.nav_links{
-  color: purple;
+.nav_links {
+  color:purple;
   text-decoration: none;
   padding: 0.5rem 1rem;
 }
 
-.nav_links:hover{
-  background-color: rgb(29, 133, 127);
+.scrolling .nav_links {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+}
+
+.nav_links:hover {
+  background-color: white;
   border-radius: 4px;
   transition: all 0.2s ease-out;
 }
 
-.fa_bars{
-  color: white;
-}
-
-.menu_icon{
+.menu_icon {
   display: none;
   cursor: pointer;
   font-size: 1.5rem;
-  color: purple;
+  color: white;
   margin-right: 2%;
   height: 40px;
   align-items: center;
@@ -65,9 +73,53 @@ a:hover {
 
 .button-container {
   display: flex;
+  flex-direction: row;
   gap: 10px;
   width: 500px;
   justify-content: flex-end;
+}
+
+.button-container .login-btn,
+.button-container .register-btn {
+  border: 2.5px solid;
+  color: #fff;
+  cursor: pointer;
+
+  box-sizing: border-box;
+  background: linear-gradient(91deg, #ff1cf7 2.26%, #00f0ff 100%);
+  border: 1.5px solid white;
+  /* Añadido un estilo transparente a la propiedad border */
+  border-radius: 100px;
+}
+
+.button-container .login-btn:hover,
+.button-container .register-btn:hover {
+  border: 2.5px solid;
+  background-color: black !important;
+  color: #fff !important;
+  border-color: black !important;
+}
+
+
+@media (max-width: 1274px) {
+  .button-container {
+    justify-content: center;
+    transition: all 0.5s ease-out;
+  }
+}
+
+@media (max-width: 1055px) {
+  .button-container {
+    justify-content: flex-start;
+    transition: all 0.5s ease-out;
+  }
+}
+
+@media (max-width: 870px) {
+  .button-container {
+    display: grid;
+    transition: all 0.5s ease-out;
+  }
 }
 
 @media (max-width: 768px) {
@@ -77,7 +129,7 @@ a:hover {
   }
 
   .nav_menu {
-    display: none; 
+    display: none;
     flex-direction: column;
     position: absolute;
     top: 80px;
@@ -86,12 +138,12 @@ a:hover {
     /* background-color: white; */
   }
 
-  .scrolling_bars_container{
+  .scrolling_bars_container {
     background-color: transparent;
     transition: all 0.5s ease;
   }
 
-  .scrolling_bars_container.active{
+  .scrolling_bars_container.active {
     background-color: black;
     transition: all 0.5s ease;
   }
@@ -106,16 +158,12 @@ a:hover {
   }
 
   .nav_links {
-    width: 100%; 
+    width: 100%;
     box-sizing: border-box;
   }
 
-  .button-container {
-    display: none; /* Mostrar los botones cuando el menú está activo en pantallas más pequeñas */
-  }
-
   .button-container.active {
-    display: flex; /* Mostrar los botones cuando el menú está activo en pantallas más pequeñas */
+    display: flex;
     flex-direction: column;
     width: auto;
   }

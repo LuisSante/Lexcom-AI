@@ -6,6 +6,9 @@ import '../css/navbar.css'
 import { Link } from 'react-router-dom';
 import Login from "./Login";
 import Register from "./Register";
+// import sgvlogolexcom from "./image/lexcom_init";
+import logo from '../assets/lexcom.svg';
+import React from 'react';
 
 
 interface NavbarProps {
@@ -62,8 +65,9 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolling }) => {
 
     return (
         <nav className={`navbar ${isScrolling > 20 ? 'scrolling' : ''}`}>
+            {/* <div dangerouslySetInnerHTML={{ __html: sgvlogolexcom }} className="navbar_logo" onClick={toTheTop}></div> */}
             <div className="navbar_logo" onClick={toTheTop}>
-                Lexcom
+                <img src={logo} alt="Lexcom Logo" />
             </div>
             <Bars3Icon className="menu_icon" onClick={handleClick} />
             <ul className={(clicked && isScrolling > 20) ? "nav_menu active scrolling_bars_container active" :
@@ -78,8 +82,8 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolling }) => {
                     </li>
                 ))}
                 <div className={clicked ? "button-container active" : "button-container"}>
-                    <Button type="primary" onClick={showLoginModal}>Login</Button>
-                    <Button type="primary" onClick={showRegisterModal}>Register</Button>
+                    <Button className="login-btn" onClick={showLoginModal}>Login</Button>
+                    <Button className="register-btn" onClick={showRegisterModal}>Register</Button>
                 </div>
                 <Modal
                     title="Login"

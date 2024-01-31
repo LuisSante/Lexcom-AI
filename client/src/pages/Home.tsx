@@ -5,6 +5,7 @@ import How_work from '../components/components_home/How_work';
 import Services from '../components/components_home/Services';
 import Faq from '../components/components_home/FAQ';
 import About from '../components/components_home/About';
+import Welcome from '../components/components_home/Welcome';
 
 
 const Home: React.FC = () => {
@@ -27,12 +28,17 @@ const Home: React.FC = () => {
     return (
         <div className='position-pages'>
             <Navbar isScrolling={scrollHeight} />
-            <How_work id="howork" />
-            <Services id="services" />
-            <Faq id="faq"></Faq>
-            <About id='about' />
+            <div>
+                <Welcome></Welcome>
+                <How_work id="howork" />
+                <Services id="services" />
+                <Faq id="faq"></Faq>
+                <About id='about' />
+            </div>
         </div>
     )
 }
 
 export default Home;
+
+
