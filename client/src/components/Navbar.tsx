@@ -69,11 +69,10 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolling }) => {
             <div className="navbar_logo" onClick={toTheTop}>
                 <img src={logo} alt="Lexcom Logo" />
             </div>
-            <Bars3Icon className="menu_icon" onClick={handleClick} />
-            <ul className={(clicked && isScrolling > 20) ? "nav_menu active scrolling_bars_container active" :
-                (clicked && isScrolling < 20) ? "nav_menu active" : "nav_menu"}>
+            <ul className={(clicked && isScrolling > 10) ? "nav_menu active scrolling_bars_container active" :
+                (clicked && isScrolling < 10) ? "nav_menu active" : "nav_menu"}>
                 {NavbarItems.map((item, index) => (
-
+                    
                     <li key={index}>
                         <Link to={`#${item.id_}`} onClick={() => scrollToSection(item.id_)}
                             className="nav_links">
@@ -102,6 +101,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolling }) => {
                     <Register />
                 </Modal>
             </ul>
+            <Bars3Icon className="menu_icon" onClick={handleClick} />
         </nav>
     );
 }

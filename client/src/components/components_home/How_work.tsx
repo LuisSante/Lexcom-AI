@@ -2,10 +2,14 @@ import '../../css/styles_home/how_work.css'
 import line_chart from '../../assets/line_chart.svg'
 import shop from '../../assets/shop.svg'
 import kevin_systrom from '../../assets/kevin_systrom.svg'
-import primero from '../../assets/1.svg'
+import number_one from '../../assets/number_one.svg'
+import number_two from '../../assets/number_two.svg'
+import number_three from '../../assets/number_three.svg'
+
+
 import michael from '../../assets/michael_lexcom.svg'
 import woman from '../../assets/woman.svg'
-import undefined from '../../assets/undefined.svg'
+import mostache from '../../assets/mostache_lexcom.svg'
 
 interface ComponentProps {
   id: string;
@@ -20,8 +24,8 @@ const How_work: React.FC<ComponentProps> = ({ id }) => {
           <div className="div-29" id="div-29">
             <div className="div-30">
               <div className="div-31">
-                {/* <span style="color: rgb(244 237 237)">¿Qué es un</span>
-                            <span style="">Producto Ganador?</span> */}
+                <span style={{ color: 'rgb(244 237 237)' }}>¿Qué es un</span>
+                <span style={{}}> Producto Ganador?</span>
               </div>
               <div className="div-32">
                 Es aquel que la gente quiere comprar, te permite ganar dinero, no
@@ -36,8 +40,8 @@ const How_work: React.FC<ComponentProps> = ({ id }) => {
                       <img src={line_chart} />
                       <div className="div-36">Costos 70% menos</div>
                       <div className="div-37">
-                        Con nuestra IA olvidate de invertir en servicios de prueba
-                        para cada aplicacion de tus productos ganadores
+                        Con nuestra IA olvídate de invertir en servicios de prueba
+                        para cada aplicación de tus productos ganadores
                       </div>
                     </div>
                   </div>
@@ -46,8 +50,8 @@ const How_work: React.FC<ComponentProps> = ({ id }) => {
                       <img src={shop} />
                       <div className="div-39">Acorde al mercado actual</div>
                       <div className="div-40">
-                        Gracias al aprendizaje automatico, los resultados de tus
-                        busquedas estaran siempre de acorde a las nuevas tendencias
+                        Gracias al aprendizaje autmatico, los resultados de tus
+                        búsquedas estarán siempre de acorde a las nuevas tendencias
                       </div>
                     </div>
                   </div>
@@ -56,11 +60,11 @@ const How_work: React.FC<ComponentProps> = ({ id }) => {
             </div>
             <div className="div-44">
               <div className="div-45">
-                <span>¿¡Cómo</span>
-                <span>LexCom</span>
+                <span>¿¡Cómo </span>
+                <span> LexCom funciona </span>
                 <span>Para productos Ganadores</span>
-                <span>Trabaja</span>
-                <span>!?</span>
+                {/* <span>Trabaja</span> */}
+                <span> !?</span>
               </div>
               <div className="div-46">
                 ¿Te ha pasado elegir un producto sin estar seguro si se venderá
@@ -72,18 +76,14 @@ const How_work: React.FC<ComponentProps> = ({ id }) => {
               </div>
               <div className="div-47">
                 <div className="div-48" >
+
                   <div className="column-9">
-                    {/* <div className="div-49" style="display: flex;align-content: center;justify-content: space-between;"> */}
-                    <div className="div-49">
-                      {/* <div style="display: flex;justify-content: center;align-content: center;"> */}
-                      <div>
-                        <img />
+                    <div className="div-49" style={{ display: 'flex', alignContent: 'center', justifyContent: 'space-between' }} >
+                      <div style={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
+                        <img src={number_one} />
                       </div>
-
-
-                      <div className="div-56">Registrate e ingresa</div>
-                      {/* <img loading="lazy" srcset="{% static 'img/dc1.png' %}" className="img-16" /> */}
-                      <img src={michael} />
+                      <div className="div-56">Regístrate e ingresa</div>
+                      <img loading="lazy" src={michael} className="img-16" />
                       <div className="div-54">
                         Ofrecemos un periodo gratuito para que puedas probar todo
                         nuestro potencial!
@@ -96,37 +96,32 @@ const How_work: React.FC<ComponentProps> = ({ id }) => {
 
                   <div className="column-10">
                     <div className="div-55">
-                      {/* <div style="display: flex;justify-content: center;align-content: center;"> */}
-                      <div>
-                        <img src={primero}></img>
+                      <div style={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
+                        <img src={number_two}></img>
                       </div>
                       <div className="div-56">
                         Detalla el producto que planeas vender
                       </div>
-                      {/* <img loading="lazy" srcset="{% static 'img/img3.png' %}" className="img-16" /> */}
-                      <img src={woman} />
+                      <img loading="lazy" src={woman} className="img-16" />
                       <div className="div-57">
-                        Podras detallar sesde imagenes hasta tipo de producto, esto
-                        ayudara a hacer mas especifica tu busqueda
+                        Podras detallar sesde imágenes hasta tipo de producto, esto
+                        ayudará a hacer más específica tu búsqueda
                       </div>
                     </div>
                   </div>
+
                   <div className="column-11">
                     <div className="div-58">
-                      {/* <div style="display: flex;justify-content: center;align-content: center;"> */}
-                      <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="59" height="59" fill="white" className="bi bi-3-circle-fill" viewBox="0 0 16 16">
-                          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-8.082.414c.92 0 1.535.54 1.541 1.318.012.791-.615 1.36-1.588 1.354-.861-.006-1.482-.469-1.54-1.066H5.104c.047 1.177 1.05 2.144 2.754 2.144 1.653 0 2.954-.937 2.93-2.396-.023-1.278-1.031-1.846-1.734-1.916v-.07c.597-.1 1.505-.739 1.482-1.876-.03-1.177-1.043-2.074-2.637-2.062-1.675.006-2.59.984-2.625 2.12h1.248c.036-.556.557-1.054 1.348-1.054.785 0 1.348.486 1.348 1.195.006.715-.563 1.237-1.342 1.237h-.838v1.072h.879Z" />
-                        </svg>
+                      <div style={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
+                        <img src={number_three} />
                       </div>
                       <div className="div-56">
-                        Visualiza si tendra exito en ventas o no
+                        Visualiza si tendrá éxito en ventas o no
                       </div>
-                      {/* <img loading="lazy" srcset="{% static 'img/ps3.png' %}" className="img-16" /> */}
-                      <img src={undefined} />
+                      <img loading="lazy" src={mostache} className="img-16" />
                       <div className="div-63">
                         Proporcionamos, no solo una respuesta afirmativa/negativa,
-                        con nosotros podras ver estadisticas de exito de ventas de
+                        con nosotros podras ver estadísticas de éxito de ventas de
                         tu producto
                       </div>
                     </div>
@@ -156,12 +151,6 @@ const How_work: React.FC<ComponentProps> = ({ id }) => {
             <div className="div-68b">”</div>
             <div className="div-69">
               <img src={kevin_systrom} />
-              <div className="div-70">
-                <div className="div-71">kevin systrom</div>
-                <div className="div-72">
-                  Co-fundador de Instagram
-                </div>
-              </div>
             </div>
           </div>
         </div>

@@ -42,7 +42,8 @@
 .welcome-logo {
     width: 55%;
     height: 55%;
-    margin-top: -28px;
+    margin-top: -17px;
+    margin-bottom: 14px;
 }
 
 .phrase-down {
@@ -91,5 +92,5 @@
 
 .welcome-plane{
     margin-top: -60px;
-    width: 100%;
+    width: 90%;
 }
