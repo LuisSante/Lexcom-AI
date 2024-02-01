@@ -6,7 +6,6 @@ import '../css/navbar.css'
 import { Link } from 'react-router-dom';
 import Login from "./Login";
 import Register from "./Register";
-// import sgvlogolexcom from "./image/lexcom_init";
 import logo from '../assets/lexcom.svg';
 import React from 'react';
 
