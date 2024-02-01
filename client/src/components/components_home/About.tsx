@@ -1,3 +1,4 @@
+import { Footer } from 'antd/es/layout/layout';
 import React from 'react'
 
 interface ComponentProps {
@@ -7,9 +8,9 @@ interface ComponentProps {
 const About: React.FC<ComponentProps> = ({id}) =>{
   return (
     <div id = {id}>
-      <h1>
-      About
-      </h1>
+      <Footer style={{background: 'black', color: 'white', textAlign: 'center' }}>
+        Lexcom ©{new Date().getFullYear()} Created by Lexcom
+      </Footer>
     </div>
   )
 }

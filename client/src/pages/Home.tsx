@@ -6,6 +6,8 @@ import Services from '../components/components_home/Services';
 import Faq from '../components/components_home/FAQ';
 import About from '../components/components_home/About';
 import Welcome from '../components/components_home/Welcome';
+import ForYou from '../components/components_home/ForYou';
+import Amazing from '../components/components_home/Amazing';
 
 
 const Home: React.FC = () => {
@@ -32,7 +34,9 @@ const Home: React.FC = () => {
                 <Welcome></Welcome>
                 <How_work id="howork" />
                 <Services id="services" />
+                <ForYou/>
                 <Faq id="faq"></Faq>
+                <Amazing/>
                 <About id='about' />
             </div>
         </div>
