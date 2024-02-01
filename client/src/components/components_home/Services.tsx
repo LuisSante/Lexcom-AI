@@ -12,9 +12,19 @@ interface NameButton {
 }
 
 
-const ButtonPrincing: React.FC<NameButton> = ({name}) => {
+const ButtonPrincing: React.FC<NameButton> = ({ name }) => {
   const [clicked] = useState(false);
   const [registerModalVisible, setRegisternModalVisible] = useState(false);
+
+  const styleButton = {
+    background: 'transparent',
+    border: 'none',
+    color: 'white',
+    fontSize: '15px',
+    height: 0,
+    fontWeight: 'bold',
+    padding: '0'
+  }
 
   const showRegisterModal = () => {
     setRegisternModalVisible(true);
@@ -27,17 +37,8 @@ const ButtonPrincing: React.FC<NameButton> = ({name}) => {
   return (
     <>
       <div className={clicked ? "read active" : "read "}>
-        <Button className="ant-btn"
-          onClick={showRegisterModal}
-          style={{
-            background: 'transparent',
-            border: 'none',
-            color: 'white',
-            fontSize: '25px',
-            height: 0,
-            fontWeight: 'bold',
-            padding: '0'
-          }}>
+        <Button onClick={showRegisterModal}
+          style={styleButton}>
           {name}
         </Button>
       </div>
@@ -85,7 +86,7 @@ const Services: React.FC<ComponentProps> = ({ id }) => {
               </ul>
               {/* <a onclick="showRegister()" className="read">Pruebalo Gratis</a> */}
               {/* <p className="read">Pruébalo Gratis</p> */}
-              <ButtonPrincing {...registerData}/>
+              <ButtonPrincing {...registerData} />
 
 
             </div>
@@ -122,7 +123,7 @@ const Services: React.FC<ComponentProps> = ({ id }) => {
                 <li>Trends</li>
               </ul>
               {/* <a className="read" onclick="showRegister()">Pruebalo Gratis</a> */}
-              <ButtonPrincing {...registerData}/>
+              <ButtonPrincing {...registerData} />
             </div>
           </div>
 

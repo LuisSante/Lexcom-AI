@@ -538,6 +538,12 @@
     padding: 30px;
 }
 
+@media (max-width: 350px){
+    .img-16 {
+        width: 100px
+    }
+}
+
 .img-dc {
     aspect-ratio: 1.03;
     object-fit: cover;

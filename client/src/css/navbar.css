@@ -1,20 +1,13 @@
-/* a:hover {
-  @apply transition duration-200;
-  @apply text-gray-700
-} */
-
 .navbar {
   position: fixed;
   top: 0;
   background-color: rgb(0, 0, 0);
-  width: 100%;
+  /* width: 18%; */
   padding-left: 5%;
   font-size: 120%;
   z-index: 1;
   display: flex;
   align-items: center;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
 
   transition: height 0.3s ease-in-out;
 }
@@ -22,10 +15,24 @@
 .scrolling {
   background-color: black;
   color: white;
-  /* background-color: white; */
   transition: all 0.5s ease;
-
+}
+@media (max-width: 1215px){
+  .navbar {
+    width: 95%;
+    padding-left: 5%;
+    font-size: 120%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    transition: height 0.3s ease-in-out;
+  }
   
+  .scrolling {
+    background-color: black;
+    color: white;
+    transition: all 0.5s ease;
+  }
 }
 
 .navbar_logo {
@@ -161,7 +168,6 @@
     top: 80px;
     left: 0;
     width: 100%;
-    /* background-color: white; */
   }
 
   .scrolling_bars_container {
@@ -190,9 +196,6 @@
   }
 
   .button-container.active {    
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* width: auto; */
     display: contents;
   }
 
