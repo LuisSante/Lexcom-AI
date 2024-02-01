@@ -2,6 +2,8 @@ import React from 'react';
 import { Button, Checkbox, Form, Input, notification } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 interface FieldType {
   password: string;
@@ -12,23 +14,22 @@ interface FieldType {
 const Login: React.FC<FieldType>= () => {
   const [form] = Form.useForm();
   const [api, contextHolder] = notification.useNotification();
+  const navigate = useNavigate(); 
 
   const onFinish = (values: FieldType) => {
     console.log(values);
-    axios.post('http://localhost:8000/api/user/login', values)
+    axios.post('http://localhost:8000/api/login', values)
       .then(
         res => {
           if (res.status === 200) {  // Cambiado de 201 a 200 para reflejar éxito en el inicio de sesión
 
             console.log(res.data);
-            // Puedes manejar la respuesta del servidor según tus necesidades
-            // Por ejemplo, podrías almacenar información del usuario en el estado o en el almacenamiento local.
-            // setUser(res.data.user);  // Suponiendo que res.data tiene información del usuario
             api.success({
               message: 'Inicio de sesión exitoso!',
               description: 'Bienvenido de nuevo a LexCom',
               duration: 1000
             });
+            navigate('/dashboard'); 
           }
         }
       )

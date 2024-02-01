@@ -6,7 +6,7 @@ class Todo(models.Model):
     description = models.TextField()
     completed = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True) 
 
 class User(models.Model):
     name = models.CharField(max_length=200)
@@ -19,4 +19,4 @@ class User(models.Model):
     password = models.CharField(max_length=200)
     user = models.CharField(max_length=200, default='user')
     gender = models.CharField(max_length=30)
-    date_of_birth = models.DateTimeField(null=True, blank=True)
+    date_of_birth = models.DateTimeField(null=True, blank=True) 
