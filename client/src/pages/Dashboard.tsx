@@ -5,6 +5,7 @@ import Tutorial from '../pages/Tutorial';
 
 import React, { useState } from 'react';
 import type { MenuProps } from 'antd';
+import { Input } from 'antd';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -46,6 +47,24 @@ const Dashboard: React.FC = () => {
 
   return (
     <Layout>
+      <Header style={{ display: 'flex', alignItems: 'center' }}>
+        <Input.Search
+          placeholder="Search"
+          style={{ width: '200px', marginLeft: 'auto', marginRight: '16px' }}
+          onSearch={(value) => {
+            // Aquí puedes manejar la lógica de búsqueda
+            console.log('Search:', value);
+          }}
+        />
+        <div className="demo-logo" />
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          defaultSelectedKeys={['2']}
+          items={items1}
+          style={{ flex: 1, minWidth: 0 }}
+        />
+      </Header>
       <Content style={{ padding: '0 48px' }}>
         <Breadcrumb style={{ margin: '16px 0' }}>
           <Breadcrumb.Item>Home</Breadcrumb.Item>
