@@ -37,7 +37,8 @@
 
 @media (max-width: 890px) {
     .grip-pricing {
-        grid-template-columns: repeat(2, calc(50% - 1rem));;
+        grid-template-columns: repeat(2, calc(50% - 1rem));
+        ;
         justify-content: center;
     }
 
@@ -58,7 +59,8 @@
 
 @media (max-width: 685px) {
     .grip-pricing {
-        grid-template-columns: repeat(1, calc(80% - 1rem));;
+        grid-template-columns: repeat(1, calc(80% - 1rem));
+        ;
         justify-content: center;
     }
 
@@ -170,18 +172,25 @@
     font-size: 14px;
     font-weight: 700;
     color: #ffffff;
-    padding: 2px 20px;
+    padding: 8px;
     position: relative;
     text-transform: uppercase;
     transition: all 0.3s ease 0s;
 
-    /* Establecer el borde con un gradiente lineal */
     border: 2px solid;
     border-image: linear-gradient(to right, #7700ff, #000dff, #00dbde);
     border-image-slice: 1;
 
-    /* Eliminar el borde derecho */
     border-right: none;
+}
+
+@media (max-width: 410px) {
+    .pricingTable .read {
+        width: 100px;
+        /* height: 35px; */
+        font: 100px;
+        padding: 8.1px;
+    }
 }
 
 

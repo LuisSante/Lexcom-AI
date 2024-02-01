@@ -3,7 +3,7 @@ import robotlexcom from '../../assets/robot_lexcom.svg'
 
 const Amazing = () => {
     return (
-        <>
+        <div className='amazing-container'>
             <div className="div-182">
                 <div className="div-183">
                     <div className="div-184">
@@ -29,7 +29,7 @@ const Amazing = () => {
             <div className="div-188">
                 <img loading="lazy" src={robotlexcom} className="img-back" />
             </div>
-        </>
+        </div>
     )
 }
 
