@@ -1,69 +1,33 @@
-import { Button, Modal } from 'antd';
 import '../../css/styles_home/services.css'
 import Register from '../Register';
 import { useState } from 'react';
+import ButtonComponent from '../ButtonComponent';
 
 interface ComponentProps {
   id: string;
 }
 
-interface NameButton {
-  name: string;
+const styleButton = {
+  background: 'transparent',
+  border: 'none',
+  color: 'white',
+  fontSize: '15px',
+  height: 0,
+  fontWeight: 'bold',
+  padding: '0'
 }
 
+const name: string = "Registrate ahora";
 
-const ButtonPrincing: React.FC<NameButton> = ({ name }) => {
-  const [clicked] = useState(false);
-  const [registerModalVisible, setRegisternModalVisible] = useState(false);
-
-  const styleButton = {
-    background: 'transparent',
-    border: 'none',
-    color: 'white',
-    fontSize: '15px',
-    height: 0,
-    fontWeight: 'bold',
-    padding: '0'
-  }
-
-  const showRegisterModal = () => {
-    setRegisternModalVisible(true);
-  };
-
-  const handleRegisterModalCancel = () => {
-    setRegisternModalVisible(false);
-  };
-
-  return (
-    <>
-      <div className={clicked ? "read active" : "read "}>
-        <Button onClick={showRegisterModal}
-          style={styleButton}>
-          {name}
-        </Button>
-      </div>
-      <Modal
-        title="Pruebelo_gratis"
-        open={registerModalVisible}
-        onCancel={handleRegisterModalCancel}
-        footer={null}
-      >
-        <Register />
-      </Modal>
-    </>
-  )
-
+const types = {
+  name: name,
+  ButtonForm: Register,
+  styleButton: styleButton,
 }
 
 const Services: React.FC<ComponentProps> = ({ id }) => {
 
-  const registerData = {
-    name: "Registrate ahora",
-  };
-
-  // const GoData = {
-  //   name: "Registrate ahora",
-  // };
+  const [clicked] = useState(false);
 
   return (
     <div className='container-page-services' id={id}>
@@ -84,10 +48,9 @@ const Services: React.FC<ComponentProps> = ({ id }) => {
                 <li>Recomendacion de ventas</li>
                 <li>-</li>
               </ul>
-              {/* <a onclick="showRegister()" className="read">Pruebalo Gratis</a> */}
-              {/* <p className="read">Pruébalo Gratis</p> */}
-              <ButtonPrincing {...registerData} />
-
+              <div className={clicked ? "read active" : "read "}>
+                <ButtonComponent {...types} />
+              </div>
 
             </div>
 
@@ -105,8 +68,9 @@ const Services: React.FC<ComponentProps> = ({ id }) => {
                 <li> Recomendación de ventas</li>
                 <li>- </li>
               </ul>
-              {/* <a onclick="showRegister()" className="read">Pruebalo Gratis</a> */}
-              <ButtonPrincing {...registerData} />
+              <div className={clicked ? "read active" : "read "}>
+                <ButtonComponent {...types} />
+              </div>
             </div>
             <div className="pricingTable">
               <div className="pricingTable-header">
@@ -122,8 +86,9 @@ const Services: React.FC<ComponentProps> = ({ id }) => {
                 <li>Recomendacion de ventas</li>
                 <li>Trends</li>
               </ul>
-              {/* <a className="read" onclick="showRegister()">Pruebalo Gratis</a> */}
-              <ButtonPrincing {...registerData} />
+              <div className={clicked ? "read active" : "read "}>
+                <ButtonComponent {...types} />
+              </div>
             </div>
           </div>
 
@@ -145,7 +110,6 @@ const Services: React.FC<ComponentProps> = ({ id }) => {
           <br />
           ¡Sin riesgos, garantizado!
         </div>
-        {/* <a className="div-148" onclick="showRegister()"> */}
         <p className="div-148">
           <div className="div-149">¡Vamos!</div>
         </p>
