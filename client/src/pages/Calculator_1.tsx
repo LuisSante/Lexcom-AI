@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Calculator: React.FC = () => {
+const Calculator_1: React.FC = () => {
   const [input, setInput] = useState<string>(''); // Estado para almacenar la entrada del usuario
 
   const handleButtonClick = (value: string) => {
@@ -26,4 +26,4 @@ const Calculator: React.FC = () => {
   );
 };
 
-export default Calculator;
+export default Calculator_1;

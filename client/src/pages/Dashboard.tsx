@@ -1,8 +1,8 @@
 import SideBar from "../components/Sidebar"
-import Calculator from '../pages/Calculator';
+import Calculator_1 from './Calculator_1';
 import Calculator_2 from '../pages/Calculator_2';
 import Tutorial from '../pages/Tutorial';
-
+import '../css/Dashboard.css';
 import React, { useState } from 'react';
 import type { MenuProps } from 'antd';
 import { Input } from 'antd';
@@ -16,7 +16,7 @@ const items1: MenuProps['items'] = ['1', '2', '3'].map((key) => ({
 }));
 
 
-const calculatorFunctions = [Calculator, Calculator_2];
+const calculatorFunctions = [Calculator_1, Calculator_2];
 
 const items2: MenuProps['items'] = [Tutorial, {
   key: 'Calculators',
@@ -46,7 +46,7 @@ const Dashboard: React.FC = () => {
   const [selectedMenu, setSelectedMenu] = useState<string | null>(null);
 
   return (
-    <Layout>
+    <Layout  className="body-layout">
       <Header style={{ display: 'flex', alignItems: 'center' }}>
         <Input.Search
           placeholder="Search"
@@ -65,28 +65,24 @@ const Dashboard: React.FC = () => {
           style={{ flex: 1, minWidth: 0 }}
         />
       </Header>
-      <Content style={{ padding: '0 48px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
+      <Content style={{ padding: '0 0px' }}>
         <Layout
-          style={{ padding: '24px 0', background: colorBgContainer, borderRadius: borderRadiusLG }}
+           className="lexcom-layout"
         >
-          <Sider style={{ background: colorBgContainer }} width={200}>
+          <Sider className="lexcom-sider" width={200}>
             <Menu
+              className="lexcom-menu"
               mode="inline"
               defaultSelectedKeys={['1']}
-              style={{ height: '100%' }}
+
               items={items2}
               onSelect={(item) => setSelectedMenu(item.key as string)}
             />
           </Sider>
-          <Content style={{ padding: '0 24px', minHeight: 800 }}>
+          <Content style={{ padding: '0 24px', minHeight: 700 }}>
             {/* Renderizar el componente según la selección actual */}
             {selectedMenu === 'Tutorial' && <Tutorial />}
-            {selectedMenu === 'Calculator' && <Calculator />}
+            {selectedMenu === 'Calculator_1' && <Calculator_1 />}
             {selectedMenu === 'Calculator_2' && <Calculator_2 />}               
           </Content>
         </Layout>

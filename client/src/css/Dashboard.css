@@ -1,0 +1,23 @@
+.lexcom-sider {
+    background: #000;
+  }
+  
+  .lexcom-menu {
+    height: 100%;
+    background: #000;
+    color: #fff;
+  }
+  .body-layout {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    color: #fff;
+  }
+  
+  .lexcom-layout {
+    background: #000;
+    background-image: url('../assets/robot_lexcom.svg'); /* Reemplaza 'ruta_de_la_imagen.jpg' con la ruta real de tu imagen */
+    background-size: cover;
+    background-position: center center;
+    
+  }
