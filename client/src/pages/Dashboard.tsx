@@ -5,16 +5,17 @@ import Tutorial from '../pages/Tutorial';
 import '../css/Dashboard.css';
 import React, { useState } from 'react';
 import type { MenuProps } from 'antd';
-import { Input } from 'antd';
+import { Input, Button } from 'antd';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons';
 
 const { Header, Content, Footer, Sider } = Layout;
+
 
 const items1: MenuProps['items'] = ['1', '2', '3'].map((key) => ({
   key,
   label: `nav ${key}`,
 }));
-
 
 const calculatorFunctions = [Calculator_1, Calculator_2];
 
@@ -44,13 +45,13 @@ const Dashboard: React.FC = () => {
   } = theme.useToken();
 
   const [selectedMenu, setSelectedMenu] = useState<string | null>(null);
-
+  const [collapsed, setCollapsed] = useState(false);
   return (
     <Layout  className="body-layout">
       <Header style={{ display: 'flex', alignItems: 'center' }}>
         <Input.Search
           placeholder="Search"
-          style={{ width: '200px', marginLeft: 'auto', marginRight: '16px' }}
+          style={{ width: '200px', marginLeft: 'auto', marginRight: '160px' }}
           onSearch={(value) => {
             // Aquí puedes manejar la lógica de búsqueda
             console.log('Search:', value);
@@ -69,7 +70,23 @@ const Dashboard: React.FC = () => {
         <Layout
            className="lexcom-layout"
         >
-          <Sider className="lexcom-sider" width={200}>
+          <Sider className="lexcom-sider" 
+          width={200}
+          collapsible
+          collapsed={collapsed}
+          onCollapse={(collapsed) => setCollapsed(collapsed)}
+          trigger={
+            <div className="sider-trigger-container">
+              <Button
+                type="text"
+                className="menu-button"
+                icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                onClick={() => setCollapsed(!collapsed)}
+                
+              />
+            </div>
+          }
+          >
             <Menu
               className="lexcom-menu"
               mode="inline"
