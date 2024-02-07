@@ -208,3 +208,13 @@
   }
 
 }
+
+.login-container {
+  width: 400px;
+  padding: 15px;
+  background: rgb(0, 0, 0);
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 0 15px 30px rgb(165 159 159 / 24%);
+  color: #fff;
+}

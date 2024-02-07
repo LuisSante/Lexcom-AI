@@ -1,4 +1,4 @@
-import { Button, Modal } from "antd";
+import { Button, Modal,ConfigProvider } from "antd";
 import { NavbarItems } from "./logic/NavbarItems";
 import { useState } from "react";
 import { Bars3Icon } from "@heroicons/react/24/outline";
@@ -82,22 +82,42 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolling }) => {
                     <Button className="login-btn" onClick={showLoginModal}>Login</Button>
                     <Button className="register-btn" onClick={showRegisterModal}>Register</Button>
                 </div>
+                <ConfigProvider
+                  theme={{
+                    components: {
+                      Modal: {
+                              titleColor:'#fff',
+                              colorBgContainer: '#f6ffed',
+                              controlOutline:'#000000',
+                              contentBg:'#000000',
+                              titleFontSize:25,
+                              headerBg:'#000000',
+                              colorIcon:'#fff',
+                              colorIconHover:'#ecb6ff'
+                      },
+                    },
+                  }}
+                >
                 <Modal
-                    title="Login"
+                    title="Bienvenido a LexCom"
+                    className="login-container"
                     open={loginModalVisible}
                     onCancel={handleLoginModalCancel}
                     footer={null}
                 >
                     <Login {...initialFormData} />
                 </Modal>
+                
                 <Modal
                     title="Register"
+                    className="login-container"
                     open={registerModalVisible}
                     onCancel={handleRegisterModalCancel}
                     footer={null}
-                >
+                    >
                     <Register />
                 </Modal>
+             </ConfigProvider>
             </ul>
             <Bars3Icon className="menu_icon" onClick={handleClick} />
         </nav>
