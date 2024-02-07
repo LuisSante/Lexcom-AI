@@ -6,6 +6,7 @@ import {
     Input,
     Select,
     notification,
+    ConfigProvider,
 } from 'antd';
 import axios from 'axios';
 import { useState } from 'react';
@@ -57,7 +58,7 @@ const tailFormItemLayout = {
 const Register: React.FC = () => {
     const [form] = Form.useForm();
     const [user, setUser] = useState<FormValues[]>([])
-    const [api, contextHolder] = notification.useNotification();
+    const [api, contextHolder] = notification.useNotification();  
 
     const onFinish = (values: FormValues) => {
         console.log(values)
@@ -86,13 +87,22 @@ const Register: React.FC = () => {
             )
     }
 
-    //   const on.Finish = (values: any) => {
-    //     console.log('Received values of form: ', values);
-    //   };
+  
 
     return (
         <>
             {contextHolder}
+            <ConfigProvider
+         theme={{
+           components: {
+             Form: {
+                     labelColor:'#fff',
+                     colorBgContainer: '#f6ffed',
+                     controlOutline:'#000000',
+             },
+           },
+         }}
+       >
             <Form
                 {...formItemLayout}
                 form={form}
@@ -101,6 +111,7 @@ const Register: React.FC = () => {
                 style={{ maxWidth: 600 }}
                 scrollToFirstError
             >
+
                 <Form.Item
                     name="name"
                     label="Name"
@@ -141,6 +152,7 @@ const Register: React.FC = () => {
                     rules={[{ required: true, message: 'Please input your city!', whitespace: true }]}
                 >
                     <Input />
+
                 </Form.Item>
 
                 <Form.Item
@@ -258,6 +270,7 @@ const Register: React.FC = () => {
                     </Button>
                 </Form.Item>
             </Form>
+            </ConfigProvider>
         </>
     );
 };
