@@ -1,4 +1,3 @@
-// import { useNavigate } from "react-router-dom";
 import {
     Button,
     Checkbox,
@@ -10,8 +9,6 @@ import {
 } from 'antd';
 import axios from 'axios';
 import { useState } from 'react';
-// import axios from "axios";
-// import { useNavigate  } from 'react-router-dom';
 
 interface FormValues {
     title: string;
@@ -56,13 +53,6 @@ const tailFormItemLayout = {
         },
     },
 };
-
-
-// const navigate = useNavigate();
-
-
-//  const onFinish = async (e) => {
-//  };
 
 const Register: React.FC = () => {
     const [form] = Form.useForm();
@@ -217,8 +207,8 @@ const Register: React.FC = () => {
                 </Form.Item>
 
                 <Form.Item
-                    name="user"
-                    label="user"
+                    name="username"
+                    label="Username"
                     tooltip="What do you want others to call you?"
                     rules={[{ required: true, message: 'Please input your nickname!', whitespace: true }]}
                 >
