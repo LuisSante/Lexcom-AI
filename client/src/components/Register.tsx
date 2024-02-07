@@ -62,7 +62,7 @@ const Register: React.FC = () => {
 
     const onFinish = (values: FormValues) => {
         console.log(values)
-        axios.post('http://localhost:8000/api/user', values)
+        axios.post('http://localhost:8000/api/v1/register', values)
             .then(
                 res => {
                     if (res.status === 201) {

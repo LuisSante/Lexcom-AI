@@ -8,7 +8,7 @@ import '../css/login.css'
 interface FieldType {
   password: string;
   remember: string;
-  user: string;
+  email: string;
 }
 
 const Login: React.FC<FieldType> = () => {
@@ -18,7 +18,7 @@ const Login: React.FC<FieldType> = () => {
 
   const onFinish = (values: FieldType) => {
     console.log(values);
-    axios.post('http://localhost:8000/api/login', values)
+    axios.post('http://localhost:8000/api/v1/login', values)
       .then(
         res => {
           if (res.status === 200) {  // Cambiado de 201 a 200 para reflejar éxito en el inicio de sesión
@@ -73,8 +73,8 @@ const Login: React.FC<FieldType> = () => {
         // onFinish={onFinish} 
         >
           <Form.Item<FieldType>
-            label="User"
-            name="user"
+            label="E-mail"
+            name="email"
             rules={[{ required: true, message: 'Porfavor ingresa tu usuario!' }]}
 
           >
