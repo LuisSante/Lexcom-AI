@@ -1,13 +1,18 @@
-from rest_framework import routers
-from api.views.todo import TodoViewSet
-from api.views.user import UserViewSet,LoginView
-from api.views.product import SerpApiViewSet
+from django.urls import path
+from .views import user
 
-router = routers.DefaultRouter(trailing_slash=False)
+urlpatterns = [
+    path(r'register' , user.RegisterView.as_view(), name="register"),
+    path(r'login' , user.LoginView.as_view(), name="register"),
+    path(r'user' , user.UserView.as_view(), name="user"),
+    path(r'logout' , user.LogoutView.as_view(), name="user")
+]
 
-router.register(r"todo", TodoViewSet, basename="todo")
-router.register(r"user" , UserViewSet, basename="user")
-router.register(r"login" , LoginView, basename="user")
-# router.register(r"product/<str:id>/" , SerpApiViewSet, basename="product_detail")
+# from rest_framework.routers import DefaultRouter
+# from .views.user import RegisterView
 
-urlpatterns = router.urls
+# router = DefaultRouter()
+
+# router.register(r"register" , RegisterView.as_view(), 'register')
+
+# urlpatterns = router.urls

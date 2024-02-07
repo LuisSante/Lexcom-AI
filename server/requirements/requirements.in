@@ -5,3 +5,5 @@ django-cors-headers
 python-dotenv
 openai
 google-search-results
+djangorestframework-oauth
+PyJWT
