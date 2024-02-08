@@ -13,7 +13,7 @@ import datetime
 
 class RegisterView(APIView):
     # queryset = User.objects.all()
-    permission_classes = [AllowAny]
+    # permission_classes = [AllowAny]
 
     def post(self, request):
         serializer = UserSerializer(data=request.data)
@@ -25,7 +25,7 @@ class RegisterView(APIView):
 
 class LoginView(APIView):
     # queryset = User.objects.all()
-    permission_classes = [AllowAny]
+    # permission_classes = [AllowAny]
 
     def post(self, request):
         email = request.data['email']
@@ -46,7 +46,6 @@ class LoginView(APIView):
         }
 
         token = jwt.encode(payload, 'secret', algorithm='HS256')
-        # token = jwt.encode(payload, 'secret' , algorithm='HS256').decode('utf-8')
 
         response = Response()
         response.set_cookie(key='jwt', value=token , httponly=True)
@@ -58,7 +57,6 @@ class LoginView(APIView):
         return response
 
 class UserView(APIView):
-    permission_classes = [AllowAny]
     def get(self, request):
         token = request.COOKIES.get('jwt')
 

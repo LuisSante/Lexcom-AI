@@ -1,53 +1,51 @@
 import os
 import requests
 from dotenv import load_dotenv
-from rest_framework import viewsets, status
-from rest_framework.views import APIView  
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.request import Request
+from rest_framework import viewsets
 from rest_framework.response import Response
 from api.BackendClient.serpapi import GoogleApiClient
-
+from rest_framework.exceptions import AuthenticationFailed
+import jwt
 
 load_dotenv()
 API_KEY = os.getenv("SERPAPI_KEY")
-API_CLIENT_TOKEN = "" ## authenticacion
 
-class SerpApiViewSet(viewsets.ViewSet):
-    # permission_classes = [IsAuthenticated]
-    # authentication_classes = [TokenAuthentication]
+class GoogleApiView(viewsets.ViewSet):
+    def get_serpapi_client(self, request):
 
-    def get_serpapi_client(self):
+        token = request.COOKIES.get('jwt')
+
+        if not token:
+            raise AuthenticationFailed('Unauthenticated!')
+
         return GoogleApiClient(
-            token = API_CLIENT_TOKEN,
+            token = token,
             api_key = API_KEY,
         )
 
-    def region_data(self, request: Request, *args, **kwargs):
-        serpapi_client = self.get_serpapi_client()
+    def region_data(self, request, id):
+        serpapi_client = self.get_serpapi_client(request)
         try:
-            product = request.GET.getlist('product')
-            response = serpapi_client.get_google_region_data(product)
+            response = serpapi_client.get_google_region_data(id)
             response.raise_for_status()
             return Response(response.json()["interest_by_region"])
         except requests.RequestException as e:
             return Response({'error': str(e)}, status=500)
 
-    def trends_data(self, request: Request):
-        serpapi_client = self.get_serpapi_client()
+    def trends_data(self, request, id):
+        serpapi_client = self.get_serpapi_client(request)
         try:
-            response = serpapi_client.get_google_trends_data('product', 'US')
+            response = serpapi_client.get_google_trends_data(id, 'US')
             response.raise_for_status()
             return Response(response.json()["interest_over_time"])
         except requests.RequestException as e:
             return Response({'error': str(e)}, status=500)
 
 
-    def topics_data(self, request: Request):
-        serpapi_client = self.get_serpapi_client()
+    def topics_data(self, request, id):
+        serpapi_client = self.get_serpapi_client(request)
         try: 
-            response = serpapi_client.get_topics_relation('product')
+            response = serpapi_client.get_topics_relation(id)
             response.raise_for_status()
             return Response(response.json()["interest_over_time"])
         except requests.RequestException as e:
