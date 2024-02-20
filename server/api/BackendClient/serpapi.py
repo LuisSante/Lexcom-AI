@@ -3,8 +3,7 @@ import requests
 class GoogleApiClient:
     token = None
 
-    def __init__(self, token, api_key):
-        # self.token = token
+    def __init__(self, api_key):
         self.api_key = api_key
         self.api_base = "https://serpapi.com/search.json"
         

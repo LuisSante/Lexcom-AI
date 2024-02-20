@@ -2,7 +2,7 @@ import { Footer } from 'antd/es/layout/layout';
 import React from 'react'
 
 interface ComponentProps {
-  id: string
+  id?: string
 }
 
 const About: React.FC<ComponentProps> = ({ id }) => {

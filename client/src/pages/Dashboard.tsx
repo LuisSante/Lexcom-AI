@@ -43,7 +43,7 @@ const items2: MenuProps['items'] = [{
 } 
 ].map((page, index) => {
   const key = page.key || page.label || page.name; // Usar key si está presente, de lo contrario, usar label
-
+  console.log(page.name)
   const generateChildren = page.children && page.children.length > 0; // Páginas que tienen subnavegación
 
   return {
@@ -118,7 +118,6 @@ const Dashboard: React.FC = () => {
           placeholder="Search"
           style={{ width: '400px', marginLeft: 'auto', marginRight: '160px' }}
           onSearch={(value) => {
-            // Aquí puedes manejar la lógica de búsqueda
             console.log('Search:', value);
           }}
         />
