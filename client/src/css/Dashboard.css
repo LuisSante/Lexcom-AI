@@ -33,3 +33,23 @@
     background-position: center center;
     
   }
+
+  .navbar_logo_ {
+    height: 60px;
+    cursor: pointer;
+    padding-left: 1%;
+    display: flex;
+    align-items: center;
+    margin-top: 15px
+  }
+
+  .welcome {
+    letter-spacing: 1.6px;
+    background: linear-gradient(91deg, #ff1cf7 2.26%, #00f0ff 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    font: 100 17px/25px "Poppins", sans-serif;
+    color: white
+}

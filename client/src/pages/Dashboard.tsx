@@ -1,32 +1,47 @@
-import SideBar from "../components/Sidebar"
 import Calculator_1 from './Calculator_1';
 import Calculator_2 from '../pages/Calculator_2';
 import Tutorial from '../pages/Tutorial';
 import '../css/Dashboard.css';
 import React, { useState } from 'react';
+import {Avatar,Space, Input, Button } from 'antd';
+import {  Dropdown,ConfigProvider,Layout, Menu, theme } from 'antd';
+import { DownOutlined,MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons';
+import {  UserOutlined,CalculatorOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Input, Button } from 'antd';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import { MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons';
+import About from '../components/components_home/About';
+import logo from '../assets/lexcom.svg';
 
-const { Header, Content, Footer, Sider } = Layout;
-
-
-const items1: MenuProps['items'] = ['1', '2', '3'].map((key) => ({
-  key,
-  label: `nav ${key}`,
-}));
-
+const { Header, Content, Sider } = Layout;
+//<Avatar src={<img src={url} alt="avatar" />} />
 const calculatorFunctions = [Calculator_1, Calculator_2];
 
-const items2: MenuProps['items'] = [Tutorial, {
-  key: 'Calculators',
-  label: 'Calculators',
+const items2: MenuProps['items'] = [{
+  key: 'Tutorial',
+  label: 'Tutorial',
+  icon: UserOutlined,
+},
+{
+  key: 'Predicción de éxito',
+  label: 'Predicción de éxito',
+  icon: UserOutlined,
+}, {
+  key: 'Promt Generator',
+  label: 'Promt Generator',
+  icon: UserOutlined,
+},{
+  key: 'Calculadoras',
+  label: 'Calculadoras',
+  icon: CalculatorOutlined,
   children: calculatorFunctions.map((calculatorFunc, j) => ({
     key: `${calculatorFunc.name}`,
     label: `${calculatorFunc.name}`,
-  })),
-} as any].map((page, index) => {
+  })),}as any , 
+{
+  key: 'Cursos',
+  label: 'Cursos',
+  icon: UserOutlined,
+} 
+].map((page, index) => {
   const key = page.key || page.label || page.name; // Usar key si está presente, de lo contrario, usar label
 
   const generateChildren = page.children && page.children.length > 0; // Páginas que tienen subnavegación
@@ -34,47 +49,105 @@ const items2: MenuProps['items'] = [Tutorial, {
   return {
     key: key,
     label: key,
-
     children: generateChildren ? page.children : undefined,
   };
 });
 
+const items: MenuProps['items'] = [
+  {
+    key: '1',
+    label: (
+      <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+        Perfil
+      </a>
+    ),
+  },
+  {
+    key: '2',
+    label: (
+      <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
+        Mi Plan
+      </a>
+    ),
+  },
+  {
+    key: '3',
+    label: (
+      <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
+        Confuguraciones
+      </a>
+    ),
+  },
+  {
+    key: '4',
+    danger: true,
+    label: 'Cerrar Sesión',
+  },
+];
 const Dashboard: React.FC = () => {
+  
+  const [collapsed, setCollapsed] = useState(false);
   const {
-    token: { colorBgContainer, borderRadiusLG },
+    token: {  borderRadiusLG },
   } = theme.useToken();
+  //const url = 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg';
 
   const [selectedMenu, setSelectedMenu] = useState<string | null>(null);
-  const [collapsed, setCollapsed] = useState(false);
+  const [marginL, setmarginL]=useState(250);
+
+
   return (
-    <Layout  className="body-layout">
-      <Header style={{ display: 'flex', alignItems: 'center' }}>
+    <ConfigProvider
+        theme={{
+          components: {
+            Layout: {
+              headerBg: '#000',
+              bodyBg:'#000',
+            },
+          },
+        }}
+      >
+    <Layout  className="body-layout" style={{ minHeight: '100vh' }}>
+      <Header style={{ display: 'flex', alignItems: 'center',justifyItems:'space-between',position: 'sticky',
+          top: 0,
+          zIndex: 1,
+          width: '100%'}}>
+      <img src={logo} alt="Lexcom Logo" className="navbar_logo_"/>
         <Input.Search
+          size="large"
           placeholder="Search"
-          style={{ width: '200px', marginLeft: 'auto', marginRight: '160px' }}
+          style={{ width: '400px', marginLeft: 'auto', marginRight: '160px' }}
           onSearch={(value) => {
             // Aquí puedes manejar la lógica de búsqueda
             console.log('Search:', value);
           }}
         />
-        <div className="demo-logo" />
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={['2']}
-          items={items1}
-          style={{ flex: 1, minWidth: 0 }}
-        />
+        
+        <Space size={16} wrap>
+          <p className="welcome">Bienvenido</p>
+          <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+          <Dropdown menu={{ items }} arrow={{ pointAtCenter: true }}>
+            <a onClick={(e) => e.preventDefault()}>
+              <Space>
+                <DownOutlined />
+              </Space>
+            </a>
+          </Dropdown>
+        </Space>
       </Header>
-      <Content style={{ padding: '0 0px' }}>
-        <Layout
-           className="lexcom-layout"
-        >
+        <Layout >
           <Sider className="lexcom-sider" 
-          width={200}
+          width={250}
           collapsible
           collapsed={collapsed}
-          onCollapse={(collapsed) => setCollapsed(collapsed)}
+          onCollapse={(collapsed) => {
+            setCollapsed(collapsed);
+            if (collapsed) {
+              setmarginL(50);
+            } else {
+              setmarginL(250);
+            }
+          }}
           trigger={
             <div className="sider-trigger-container">
               <Button
@@ -83,28 +156,41 @@ const Dashboard: React.FC = () => {
                 icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                 onClick={() => setCollapsed(!collapsed)}
                 
-              />
+                />
             </div>
           }
+          style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 60, bottom: 0 }}
           >
             <Menu
               className="lexcom-menu"
               mode="inline"
               defaultSelectedKeys={['1']}
-
+              
               items={items2}
               onSelect={(item) => setSelectedMenu(item.key as string)}
-            />
+              />
           </Sider>
-          <Content style={{ padding: '0 24px', minHeight: 700 }}>
-            {/* Renderizar el componente según la selección actual */}
-            {selectedMenu === 'Tutorial' && <Tutorial />}
-            {selectedMenu === 'Calculator_1' && <Calculator_1 />}
-            {selectedMenu === 'Calculator_2' && <Calculator_2 />}               
-          </Content>
+          <Layout style={{
+              padding: 24,
+              minHeight: 360,
+              marginLeft:marginL
+            }} className="lexcom-layout">
+            
+            <Content style={{ margin: '0 16px',padding: '0 24px', minHeight: 700 }} >
+              {/* Renderizar el componente según la selección actual */}
+              {selectedMenu === 'Tutorial' && <Tutorial />}
+              
+              {selectedMenu === 'Calculator_1' && <Calculator_1 />}
+              {selectedMenu === 'Calculator_2' && <Calculator_2 />}               
+            </Content>
         </Layout>
-      </Content>
+        </Layout >
+        <Layout  style={{marginLeft:marginL}}>
+
+          <About id='about'/>
+        </Layout>
     </Layout>
+    </ConfigProvider>
   );
 };
 
