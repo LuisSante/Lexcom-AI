@@ -13,13 +13,13 @@ API_KEY = os.getenv("SERPAPI_KEY")
 class GoogleApiView(viewsets.ViewSet):
     def get_serpapi_client(self, request):
 
-        token = request.COOKIES.get('jwt')
+        # token = request.COOKIES.get('jwt')
 
-        if not token:
-            raise AuthenticationFailed('Unauthenticated!')
+        # if not token:
+        #     raise AuthenticationFailed('Unauthenticated!')
 
         return GoogleApiClient(
-            token = token,
+            # token = token,
             api_key = API_KEY,
         )
 

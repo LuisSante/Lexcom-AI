@@ -21,9 +21,9 @@ const Login: React.FC<FieldType> = () => {
     axios.post('http://localhost:8000/api/v1/login', values)
       .then(
         res => {
-          if (res.status === 200) {  // Cambiado de 201 a 200 para reflejar éxito en el inicio de sesión
-
-            console.log(res.data);
+          if (res.status === 200) {
+            const token = res.data.jwt;
+            localStorage.setItem('jwtToken', token);
             api.success({
               message: 'Inicio de sesión exitoso!',
               description: 'Bienvenido de nuevo a LexCom',
@@ -47,8 +47,6 @@ const Login: React.FC<FieldType> = () => {
   return (
     <>
       {contextHolder}
-
-
        <ConfigProvider
          theme={{
            components: {
