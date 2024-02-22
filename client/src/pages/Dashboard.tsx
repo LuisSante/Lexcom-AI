@@ -3,10 +3,10 @@ import Calculator_2 from '../pages/Calculator_2';
 import Tutorial from '../pages/Tutorial';
 import '../css/Dashboard.css';
 import React, { useState } from 'react';
-import {Avatar,Space, Input, Button } from 'antd';
-import {  Dropdown,ConfigProvider,Layout, Menu, theme } from 'antd';
-import { DownOutlined,MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons';
-import {  UserOutlined,CalculatorOutlined } from '@ant-design/icons';
+import { Avatar, Space, Input, Button } from 'antd';
+import { Dropdown, ConfigProvider, Layout, Menu, theme } from 'antd';
+import { DownOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
+import { UserOutlined, CalculatorOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import About from '../components/components_home/About';
 import logo from '../assets/lexcom.svg';
@@ -28,19 +28,20 @@ const items2: MenuProps['items'] = [{
   key: 'Promt Generator',
   label: 'Promt Generator',
   icon: UserOutlined,
-},{
+}, {
   key: 'Calculadoras',
   label: 'Calculadoras',
   icon: CalculatorOutlined,
   children: calculatorFunctions.map((calculatorFunc, j) => ({
     key: `${calculatorFunc.name}`,
     label: `${calculatorFunc.name}`,
-  })),}as any , 
+  })),
+} as any,
 {
   key: 'Cursos',
   label: 'Cursos',
   icon: UserOutlined,
-} 
+}
 ].map((page, index) => {
   const key = page.key || page.label || page.name; // Usar key si está presente, de lo contrario, usar label
   console.log(page.name)
@@ -74,7 +75,7 @@ const items: MenuProps['items'] = [
     key: '3',
     label: (
       <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
-        Confuguraciones
+        Configuraciones
       </a>
     ),
   },
@@ -85,110 +86,112 @@ const items: MenuProps['items'] = [
   },
 ];
 const Dashboard: React.FC = () => {
-  
+
   const [collapsed, setCollapsed] = useState(false);
   const {
-    token: {  borderRadiusLG },
+    token: { borderRadiusLG },
   } = theme.useToken();
   //const url = 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg';
 
   const [selectedMenu, setSelectedMenu] = useState<string | null>(null);
-  const [marginL, setmarginL]=useState(250);
+  const [marginL, setmarginL] = useState(250);
 
 
   return (
     <ConfigProvider
-        theme={{
-          components: {
-            Layout: {
-              headerBg: '#000',
-              bodyBg:'#000',
-            },
+      theme={{
+        components: {
+          Layout: {
+            headerBg: '#000',
+            bodyBg: '#000',
           },
-        }}
-      >
-    <Layout  className="body-layout" style={{ minHeight: '100vh' }}>
-      <Header style={{ display: 'flex', alignItems: 'center',justifyItems:'space-between',position: 'sticky',
+        },
+      }}
+    >
+      <Layout className="body-layout" style={{ minHeight: '100vh' }}>
+        <Header style={{
+          display: 'flex', alignItems: 'center', justifyItems: 'space-between', position: 'sticky',
           top: 0,
           zIndex: 1,
-          width: '100%'}}>
-      <img src={logo} alt="Lexcom Logo" className="navbar_logo_"/>
-        <Input.Search
-          size="large"
-          placeholder="Search"
-          style={{ width: '400px', marginLeft: 'auto', marginRight: '160px' }}
-          onSearch={(value) => {
-            console.log('Search:', value);
-          }}
-        />
-        
-        <Space size={16} wrap>
-          <p className="welcome">Bienvenido</p>
-          <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
-          <Dropdown menu={{ items }} arrow={{ pointAtCenter: true }}>
-            <a onClick={(e) => e.preventDefault()}>
-              <Space>
-                <DownOutlined />
-              </Space>
-            </a>
-          </Dropdown>
-        </Space>
-      </Header>
+          width: '100%'
+        }}>
+          <img src={logo} alt="Lexcom Logo" className="navbar_logo_" />
+          <Input.Search
+            size="large"
+            placeholder="Search"
+            style={{ width: '400px', marginLeft: 'auto', marginRight: '160px' }}
+            onSearch={(value) => {
+              console.log('Search:', value);
+            }}
+          />
+
+          <Space size={16} wrap>
+            <p className="welcome">Bienvenido</p>
+            <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+            <Dropdown menu={{ items }} arrow={{ pointAtCenter: true }}>
+              <a onClick={(e) => e.preventDefault()}>
+                <Space>
+                  <DownOutlined />
+                </Space>
+              </a>
+            </Dropdown>
+          </Space>
+        </Header>
         <Layout >
-          <Sider className="lexcom-sider" 
-          width={250}
-          collapsible
-          collapsed={collapsed}
-          onCollapse={(collapsed) => {
-            setCollapsed(collapsed);
-            if (collapsed) {
-              setmarginL(50);
-            } else {
-              setmarginL(250);
-            }
-          }}
-          trigger={
-            <div className="sider-trigger-container">
-              <Button
-                type="text"
-                className="menu-button"
-                icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                onClick={() => setCollapsed(!collapsed)}
-                
+          <Sider className="lexcom-sider"
+            width={250}
+            collapsible
+            collapsed={collapsed}
+            onCollapse={(collapsed) => {
+              setCollapsed(collapsed);
+              if (collapsed) {
+                setmarginL(50);
+              } else {
+                setmarginL(250);
+              }
+            }}
+            trigger={
+              <div className="sider-trigger-container">
+                <Button
+                  type="text"
+                  className="menu-button"
+                  icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                  onClick={() => setCollapsed(!collapsed)}
+
                 />
-            </div>
-          }
-          style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 60, bottom: 0 }}
+              </div>
+            }
+            style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 60, bottom: 0 }}
           >
             <Menu
               className="lexcom-menu"
               mode="inline"
               defaultSelectedKeys={['1']}
-              
+
               items={items2}
               onSelect={(item) => setSelectedMenu(item.key as string)}
-              />
+            />
           </Sider>
           <Layout style={{
-              padding: 24,
-              minHeight: 360,
-              marginLeft:marginL
-            }} className="lexcom-layout">
-            
-            <Content style={{ margin: '0 16px',padding: '0 24px', minHeight: 700 }} >
+            padding: 24,
+            minHeight: 360,
+            marginLeft: marginL
+          }} className="lexcom-layout">
+
+            <Content style={{ margin: '0 16px', padding: '0 24px', minHeight: 700 }} >
               {/* Renderizar el componente según la selección actual */}
               {selectedMenu === 'Tutorial' && <Tutorial />}
-              
-              {selectedMenu === 'Calculator_1' && <Calculator_1 />}
-              {selectedMenu === 'Calculator_2' && <Calculator_2 />}               
-            </Content>
-        </Layout>
-        </Layout >
-        <Layout  style={{marginLeft:marginL}}>
 
-          <About id='about'/>
+              {selectedMenu === 'Calculator_1' && <Calculator_1 />}
+              {selectedMenu === 'Calculator_2' && <Calculator_2 />}
+            </Content>
+          </Layout>
+        </Layout >
+        <Layout style={{ marginLeft: marginL }}>
+
+          <About id='about' />
         </Layout>
-    </Layout>
+      </Layout>
     </ConfigProvider>
   );
 };
