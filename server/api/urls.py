@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import user
-from .views import serpapi
+from .views import serpapi, openai
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -19,4 +19,5 @@ urlpatterns = [
     path(r'product/<str:id>/region_data' , serpapi.GoogleApiView.as_view({'get': 'region_data'}), name="region_data"),
     path(r'product/<str:id>/trends_data' , serpapi.GoogleApiView.as_view({'get': 'trends_data'}), name="product_trends"),
     path(r'product/<str:id>/topics_data' , serpapi.GoogleApiView.as_view({'get': 'topics_data'}), name="topics_data"),
+    path(r'openai/<str:id>' , openai.OpenAIApiView.as_view({'get': 'recommend_video'}), name="recommend_video"),
 ]

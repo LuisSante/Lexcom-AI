@@ -1,5 +1,6 @@
 import os
 import requests
+import openai
 from dotenv import load_dotenv
 from rest_framework import viewsets
 from rest_framework.response import Response
