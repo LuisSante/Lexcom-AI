@@ -6,4 +6,5 @@ python-dotenv
 openai
 google-search-results
 djangorestframework-oauth
-PyJWT
+djangorestframework-simplejwt
+djangorestframework-simplejwt[crypto]

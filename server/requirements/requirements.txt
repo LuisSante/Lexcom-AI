@@ -19,10 +19,14 @@ certifi==2024.2.2
     #   httpcore
     #   httpx
     #   requests
+cffi==1.16.0
+    # via cryptography
 charset-normalizer==3.3.2
     # via requests
 colorama==0.4.6
     # via tqdm
+cryptography==42.0.4
+    # via djangorestframework-simplejwt
 distro==1.9.0
     # via openai
 django==5.0.1
@@ -30,11 +34,16 @@ django==5.0.1
     #   -r requirements.in
     #   django-cors-headers
     #   djangorestframework
+    #   djangorestframework-simplejwt
 django-cors-headers==4.3.1
     # via -r requirements.in
 djangorestframework==3.14.0
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   djangorestframework-simplejwt
 djangorestframework-oauth==1.1.0
+    # via -r requirements.in
+djangorestframework-simplejwt[crypto]==5.3.1
     # via -r requirements.in
 exceptiongroup==1.2.0
     # via anyio
@@ -55,12 +64,14 @@ openai==1.11.1
     # via -r requirements.in
 psycopg2-binary==2.9.9
     # via -r requirements.in
+pycparser==2.21
+    # via cffi
 pydantic==2.6.1
     # via openai
 pydantic-core==2.16.2
     # via pydantic
 pyjwt==2.8.0
-    # via -r requirements.in
+    # via djangorestframework-simplejwt
 python-dotenv==1.0.1
     # via -r requirements.in
 pytz==2023.3.post1

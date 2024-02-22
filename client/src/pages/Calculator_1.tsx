@@ -14,7 +14,7 @@ const selectBefore = (
   </Select>
 );
 
-const Calculator_1: React.FC = () => {
+const Standard: React.FC = () => {
   const [inversion, setInversion] = useState(0);
   const [gananciaN, setGananciaN] = useState(0);
   const [gananciaB, setGananciaB] = useState(0);
@@ -84,7 +84,7 @@ const Calculator_1: React.FC = () => {
           },
         }}
       >
-        <Space >
+        <Space  size={'large'}>
           <Space.Compact direction="vertical">
             <InputNumber addonBefore="COSTO + IMPUESTOS " defaultValue={0} min={0} style={{ width: '100%' }} onChange={(value) => {
               if (value !== null) {
@@ -134,7 +134,7 @@ const Calculator_1: React.FC = () => {
             <Button type="dashed" style={{ marginTop: '2%' }} onClick={handleCalculate}> Calcular </Button>
           </Space.Compact>
 
-          <Space direction="vertical" style={{ marginLeft: '20%' }}>
+          <Space direction="vertical" >
             <Space.Compact direction="horizontal">
               <InputNumber addonBefore="Inversión " value={inversion} style={{ width: '50%' }} disabled />
               <InputNumber addonBefore="Ganancia Bruta" value={gananciaB} style={{ width: '60%' }} disabled />
@@ -181,4 +181,4 @@ const Calculator_1: React.FC = () => {
   );
 };
 
-export default Calculator_1;
+export default Standard;
