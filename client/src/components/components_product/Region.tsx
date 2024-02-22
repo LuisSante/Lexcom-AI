@@ -28,6 +28,7 @@ const Region: React.FC<TypeRegion> = ({ searchValue }) => {
     };
 
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
 
   return (
@@ -41,12 +42,6 @@ const Region: React.FC<TypeRegion> = ({ searchValue }) => {
               </option>
             ))}
           </select>
-          {/* {data.map((item, index) => (
-            <div key={index}>
-              <p>Geo: {item.geo}</p>
-              <p>Value: {item.value}</p>
-            </div>
-          ))} */}
         </div>
       )}
     </div>

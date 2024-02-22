@@ -2,17 +2,17 @@ import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 
 interface ValueData {
-    value: string;
+  value: string;
 }
 
-interface TimelineData  {
-    date: string;
-    values: ValueData[];
+interface TimelineData {
+  date: string;
+  values: ValueData[];
 }
 
 
 interface TrendsData {
-    timeline_data: TimelineData[];
+  timeline_data: TimelineData[];
 }
 
 interface TypeTrends {
@@ -35,6 +35,7 @@ const Trends: React.FC<TypeTrends> = ({ searchValue }) => {
     };
 
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
 
   return (
@@ -44,11 +45,11 @@ const Trends: React.FC<TypeTrends> = ({ searchValue }) => {
           {data.map((item, index) => (
             <div key={index}>
               <p>{item.date}</p>
-                {item.values.map((valueData, valueIndex) => (
-                  <li key={valueIndex}>
-                    <p>Value: {valueData.value}</p>
-                  </li>
-                ))}
+              {item.values.map((valueData, valueIndex) => (
+                <li key={valueIndex}>
+                  <p>Value: {valueData.value}</p>
+                </li>
+              ))}
             </div>
           ))}
         </div>

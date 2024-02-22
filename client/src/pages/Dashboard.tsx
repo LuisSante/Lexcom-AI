@@ -13,6 +13,7 @@ import logo from '../assets/lexcom.svg';
 import Product from './Product';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../components/axios';
+import OpenAI from './OpenAI';
 
 const { Header, Content, Sider } = Layout;
 //<Avatar src={<img src={url} alt="avatar" />} />
@@ -44,8 +45,8 @@ const items2: MenuProps['items'] = [
     icon: UserOutlined,
   },
   {
-    key: 'Promt Generator',
-    label: 'Promt Generator',
+    key: 'Prompt Generator',
+    label: 'Prompt Generator',
     icon: UserOutlined,
   },
   {
@@ -224,11 +225,12 @@ const Dashboard: React.FC = () => {
           }} className="lexcom-layout">
 
             <Content style={{ margin: '0 16px', padding: '0 24px', minHeight: 700 }} >
-              {/* Renderizar el componente según la selección actual */}
               {selectedMenu === 'Tutorial' && <Tutorial />}
               {selectedMenu === 'GeoTrend Lex' && <Product searchValue={searchValue} />}
               {selectedMenu === 'Calculator_1' && <Calculator_1 />}
               {selectedMenu === 'Calculator_2' && <Calculator_2 />}
+              {selectedMenu === 'Prompt Generator' && <OpenAI searchValue={searchValue}/>}
+              
             </Content>
           </Layout>
         </Layout >
