@@ -4,18 +4,17 @@ from dotenv import load_dotenv
 from rest_framework import viewsets
 from rest_framework.response import Response
 from api.BackendClient.serpapi import GoogleApiClient
-from rest_framework.exceptions import AuthenticationFailed
-import jwt
 
 load_dotenv()
 API_KEY = os.getenv("SERPAPI_KEY")
 
 class GoogleApiView(viewsets.ViewSet):
-    def get_serpapi_client(self, request):
+    def get_serpapi_client(self):
 
         # token = request.COOKIES.get('jwt')
 
         # if not token:
+        #     print("asdfadfad")
         #     raise AuthenticationFailed('Unauthenticated!')
 
         return GoogleApiClient(
@@ -23,8 +22,8 @@ class GoogleApiView(viewsets.ViewSet):
             api_key = API_KEY,
         )
 
-    def region_data(self, request, id):
-        serpapi_client = self.get_serpapi_client(request)
+    def region_data(self, request, id:str):
+        serpapi_client = self.get_serpapi_client()
         try:
             response = serpapi_client.get_google_region_data(id)
             response.raise_for_status()
@@ -32,8 +31,8 @@ class GoogleApiView(viewsets.ViewSet):
         except requests.RequestException as e:
             return Response({'error': str(e)}, status=500)
 
-    def trends_data(self, request, id):
-        serpapi_client = self.get_serpapi_client(request)
+    def trends_data(self, request, id:str):
+        serpapi_client = self.get_serpapi_client()
         try:
             response = serpapi_client.get_google_trends_data(id, 'US')
             response.raise_for_status()
@@ -42,11 +41,11 @@ class GoogleApiView(viewsets.ViewSet):
             return Response({'error': str(e)}, status=500)
 
 
-    def topics_data(self, request, id):
-        serpapi_client = self.get_serpapi_client(request)
+    def topics_data(self, request, id:str):
+        serpapi_client = self.get_serpapi_client()
         try: 
             response = serpapi_client.get_topics_relation(id)
             response.raise_for_status()
-            return Response(response.json()["interest_over_time"])
+            return Response(response.json()["related_topics"]["rising"])
         except requests.RequestException as e:
             return Response({'error': str(e)}, status=500)
