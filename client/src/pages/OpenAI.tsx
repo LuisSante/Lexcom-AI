@@ -51,6 +51,7 @@ const OpenAI: React.FC<TypeOpenAI> = ({ searchValue }) => {
             <div>{data.prompt.split('Testimonios:')[1].split('Final:')[0]}</div>
             <br></br>
             <div>{data.prompt.split('Final:')[1]}</div>
+            <br>Recuerda que tu video no debe durar mas de 30 a 40 segundos dependiendo de tu producto.</br>
         </div>
     )}
 </div>

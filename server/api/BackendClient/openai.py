@@ -8,7 +8,7 @@ class OpenAIClient:
 
     def get_recommend(self , product:str):
         prompt = f"Describe en español una estructura de video para promocionar el producto {product}. " \
-                "Asegúrate de incluir escenas realistas, diálogos interesantes y más detalles. " \
+                "Asegúrate de incluir escenas realistas, diálogos interesantes y más detalles. además Además, prioriza que se genere en los primeros 3 segundos una reaccion de interes para que el cliente siga viendo el video del producto " \
                 "La estructura es: click bait( donde se da la primera impresion y debe atraer al cliente), " \
                 "problema ( donde se  tocan puntos de dolor), " \
                 "solución ( donde sigue el concepto de: yo te ayudo, tu vida sera mas facil), " \
