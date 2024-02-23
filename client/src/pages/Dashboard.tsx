@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../components/axios';
 import OpenAI from './OpenAI';
 import Tiktok from './Tiktok';
+import LexcomAI from './LexcomAI';
 
 const { Header, Content, Sider } = Layout;
 //<Avatar src={<img src={url} alt="avatar" />} />
@@ -235,7 +236,7 @@ const Dashboard: React.FC = () => {
               {selectedMenu === 'CPA_CVU' && <CPA_CVU />}
               {selectedMenu === 'Prompt Generator' && <OpenAI searchValue={searchValue}/>}
               {selectedMenu === 'TikTok TrendFeed' && <Tiktok searchValue={searchValue}/>}
-              
+              {selectedMenu === 'Lex ProfitAI' && <LexcomAI/>}              
             </Content>
           </Layout>
         </Layout >
