@@ -23,6 +23,7 @@ const OpenAI: React.FC<TypeOpenAI> = ({ searchValue }) => {
             try {
                 const url = `http://localhost:8000/api/v1/openai/${searchValue}`
                 const response: AxiosResponse<OpenAIData> = await axios.get(url)
+                console.log(response.data);
                 setData(response.data);
 
             } catch (error) {
@@ -58,7 +59,7 @@ const OpenAI: React.FC<TypeOpenAI> = ({ searchValue }) => {
                     <div>{data.prompt.split('Testimonios:')[1].split('Final:')[0]}</div>
                     <br></br>
                     <div>{data.prompt.split('Final:')[1]}</div>
-            <br>Recuerda que tu video no debe durar mas de 30 a 40 segundos dependiendo de tu producto.</br>
+                    <h2>Recuerda que tu video no debe durar mas de 30 a 40 segundos dependiendo de tu producto.</h2>
                 </div>
             )}
         </div>

@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import OpenAI from './OpenAI';
 import Tiktok from './Tiktok';
 import { SmileOutlined, CloseOutlined } from '@ant-design/icons';
+import LexcomAI from './LexcomAI';
 
 
 const { Header, Content, Sider } = Layout;
@@ -87,7 +88,6 @@ const Dashboard: React.FC = () => {
 
   const [selectedMenu, setSelectedMenu] = useState<string | null>(null);
   const [marginL, setmarginL] = useState(250);
-
 
   // const handleLogout = async () => {
   //   try {
@@ -196,6 +196,12 @@ const Dashboard: React.FC = () => {
     });
   };
 
+  useEffect(() => {
+    if (selectedMenu === 'Lexcom Courses') {
+      window.location.href = 'https://home.upcommercelatam.com/login/?wppb_referer_url=https%3A%2F%2Fhome.upcommercelatam.com%2F';
+    }
+  }, [selectedMenu]);
+
   return (
     <ConfigProvider
       theme={{
@@ -278,10 +284,13 @@ const Dashboard: React.FC = () => {
               className="lexcom-menu"
               mode="inline"
               defaultSelectedKeys={['1']}
-
               items={items2}
               onSelect={(item) => {
-                if (searchValue.trim() === '') {
+                if (item.key === 'Guide Lexcom') {
+                  setSelectedMenu('Guide Lexcom');
+                } else if (item.key === 'Lexcom Courses') {
+                  setSelectedMenu('Lexcom Courses');
+                } else if (searchValue.trim() === '') {
                   emptyNotification();
                 } else {
                   setSelectedMenu(item.key as string);
@@ -297,14 +306,14 @@ const Dashboard: React.FC = () => {
           }} className="lexcom-layout">
 
             <Content style={{ margin: '0 16px', padding: '0 24px', minHeight: 700 }} >
-              {selectedMenu === 'Guide Lexcom' && <Tutorial />}
               {selectedMenu === 'GeoTrend Lex' && <Product searchValue={searchValue} />}
               {selectedMenu === 'Standard' && <Standard />}
               {selectedMenu === 'Precio_del_Producto' && <Precio_del_Producto />}
               {selectedMenu === 'CPA_CVU' && <CPA_CVU />}
-              {selectedMenu === 'Prompt Generator' && <OpenAI searchValue={searchValue} />}
+              {selectedMenu === 'Lex ProfitAI' && <LexcomAI />}
               {selectedMenu === 'TikTok TrendFeed' && <Tiktok searchValue={searchValue} />}
-
+              {selectedMenu === 'Prompt Generator' && <OpenAI searchValue={searchValue} />}
+              {selectedMenu === 'Guide Lexcom' && <Tutorial />}
             </Content>
           </Layout>
         </Layout >
