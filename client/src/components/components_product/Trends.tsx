@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import { Line } from 'react-chartjs-2';
 
 import Chart from 'chart.js/auto';
-import { ChartData } from 'chart.js';
+import { CategoryScale , ChartData } from 'chart.js';
+
+Chart.register(CategoryScale);
 
 interface ValueData {
   value: string;
