@@ -4,11 +4,11 @@ import Precio_del_Producto from './Calculator_3';
 import Tutorial from '../pages/Tutorial';
 import '../css/Dashboard.css';
 import React, { useEffect, useRef, useState } from 'react';
-import { Avatar, Space, Input,Divider, Button, notification } from 'antd';
-import { Dropdown, ConfigProvider, Layout, Menu, theme,Tour } from 'antd';
+import { Avatar, Space, Input, Divider, Button, notification } from 'antd';
+import { Dropdown, ConfigProvider, Layout, Menu, theme, Tour } from 'antd';
 import { DownOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { UserOutlined, CalculatorOutlined } from '@ant-design/icons';
-import type { MenuProps,TourProps } from 'antd';
+import type { MenuProps, TourProps } from 'antd';
 
 import About from '../components/components_home/About';
 import logo from '../assets/lexcom.svg';
@@ -17,12 +17,12 @@ import { useNavigate } from 'react-router-dom';
 // import axiosInstance from '../components/axios';
 import OpenAI from './OpenAI';
 import Tiktok from './Tiktok';
-import { SmileOutlined , CloseOutlined } from '@ant-design/icons';  
+import { SmileOutlined, CloseOutlined } from '@ant-design/icons';
 
 
 const { Header, Content, Sider } = Layout;
 //<Avatar src={<img src={url} alt="avatar" />} />
-const calculatorFunctions = [Standard, CPA_CVU,Precio_del_Producto];
+const calculatorFunctions = [Standard, CPA_CVU, Precio_del_Producto];
 
 const items2: MenuProps['items'] = [
   {
@@ -94,11 +94,11 @@ const Dashboard: React.FC = () => {
   //     await axiosInstance.post('logout/blacklist/', {
   //       refresh_token: localStorage.getItem('refresh_token'),
   //     });
-      
+
   //     localStorage.removeItem('access_token');
   //     localStorage.removeItem('refresh_token');
   //     axiosInstance.defaults.headers['Authorization'] = null;
-      
+
   //     navigate('/');
   //   } catch (error) {
   //     console.error('Error al cerrar sesión:', error);
@@ -151,7 +151,7 @@ const Dashboard: React.FC = () => {
 
   const [open, setOpen] = useState<boolean>(false);
 
- 
+
   const steps: TourProps['steps'] = [
     {
       title: 'Upload File',
@@ -244,8 +244,8 @@ const Dashboard: React.FC = () => {
               </a>
             </Dropdown>
             <Button type="primary" onClick={() => setOpen(true)}>
-        Begin Tour
-      </Button>
+              Begin Tour
+            </Button>
           </Space>
         </Header>
         <Layout >
@@ -280,9 +280,15 @@ const Dashboard: React.FC = () => {
               defaultSelectedKeys={['1']}
 
               items={items2}
-              onSelect={(item) => setSelectedMenu(item.key as string)}
+              onSelect={(item) => {
+                if (searchValue.trim() === '') {
+                  emptyNotification();
+                } else {
+                  setSelectedMenu(item.key as string);
+                }
+              }}
             />
-            
+
           </Sider>
           <Layout style={{
             padding: 24,
@@ -294,11 +300,11 @@ const Dashboard: React.FC = () => {
               {selectedMenu === 'Guide Lexcom' && <Tutorial />}
               {selectedMenu === 'GeoTrend Lex' && <Product searchValue={searchValue} />}
               {selectedMenu === 'Standard' && <Standard />}
-              {selectedMenu === 'Precio_del_Producto' && <Precio_del_Producto/>}
+              {selectedMenu === 'Precio_del_Producto' && <Precio_del_Producto />}
               {selectedMenu === 'CPA_CVU' && <CPA_CVU />}
-              {selectedMenu === 'Prompt Generator' && <OpenAI searchValue={searchValue}/>}
-              {selectedMenu === 'TikTok TrendFeed' && <Tiktok searchValue={searchValue}/>}
-              
+              {selectedMenu === 'Prompt Generator' && <OpenAI searchValue={searchValue} />}
+              {selectedMenu === 'TikTok TrendFeed' && <Tiktok searchValue={searchValue} />}
+
             </Content>
           </Layout>
         </Layout >
