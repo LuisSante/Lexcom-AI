@@ -26,9 +26,9 @@ const Product: React.FC<TypeProduct> = ({ searchValue }) => {
   
   return (
     <>
-      {/* <Region searchValue={searchValue}/> */}
+      <Region searchValue={searchValue}/>
       <Trends searchValue={searchValue}/>
-      {/* <Topics searchValue={searchValue}/> */}
+      <Topics searchValue={searchValue}/>
     </>
   );
 };
