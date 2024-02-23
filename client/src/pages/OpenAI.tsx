@@ -1,6 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react'
 import './../css/TimelineDemo.css';
+import Skeleton from '../components/Skeleton';
+
 interface OpenAIData {
     prompt: string;
 }
@@ -12,10 +14,12 @@ interface TypeOpenAI {
 const OpenAI: React.FC<TypeOpenAI> = ({ searchValue }) => {
 
     const [data, setData] = useState<OpenAIData | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [previousSearchValue, setPreviousSearchValue] = useState<string>("");
 
     useEffect(() => {
         const fetchData = async () => {
+            setIsLoading(true);
             try {
                 const url = `http://localhost:8000/api/v1/openai/${searchValue}`
                 const response: AxiosResponse<OpenAIData> = await axios.get(url)
@@ -23,6 +27,8 @@ const OpenAI: React.FC<TypeOpenAI> = ({ searchValue }) => {
 
             } catch (error) {
                 console.error('Error fetching data:', error);
+            } finally {
+                setIsLoading(false);
             }
         };
         if (searchValue !== previousSearchValue) {
@@ -34,27 +40,28 @@ const OpenAI: React.FC<TypeOpenAI> = ({ searchValue }) => {
 
     return (
         <div>
-    {data && (
-        <div className='tutorial'>
-            <h2>Introducción:</h2>
-            
-            <div>{data.prompt.split('Click Bait:')[1].split('Problema:')[0]}</div>
-            <h2>Problema:</h2>
-            <div>{data.prompt.split('Problema:')[1].split('Solución:')[0]}</div>
-            <h2>Solución:</h2>
-            <div>{data.prompt.split('Solución:')[1].split('Características:')[0]}</div>
-            <h2>Características:</h2>
-            <div>{data.prompt.split('Características:')[1].split('Beneficios:')[0]}</div>
-            <h2>Beneficios:</h2>
-            <div>{data.prompt.split('Beneficios:')[1].split('Testimonios:')[0]}</div>
-            <h2>Testimonios:</h2>
-            <div>{data.prompt.split('Testimonios:')[1].split('Final:')[0]}</div>
-            <br></br>
-            <div>{data.prompt.split('Final:')[1]}</div>
+            {isLoading && <Skeleton/>}
+            {data && !isLoading && (
+                <div className='tutorial'>
+                    <h2>Introducción:</h2>
+
+                    <div>{data.prompt.split('Click Bait:')[1].split('Problema:')[0]}</div>
+                    <h2>Problema:</h2>
+                    <div>{data.prompt.split('Problema:')[1].split('Solución:')[0]}</div>
+                    <h2>Solución:</h2>
+                    <div>{data.prompt.split('Solución:')[1].split('Características:')[0]}</div>
+                    <h2>Características:</h2>
+                    <div>{data.prompt.split('Características:')[1].split('Beneficios:')[0]}</div>
+                    <h2>Beneficios:</h2>
+                    <div>{data.prompt.split('Beneficios:')[1].split('Testimonios:')[0]}</div>
+                    <h2>Testimonios:</h2>
+                    <div>{data.prompt.split('Testimonios:')[1].split('Final:')[0]}</div>
+                    <br></br>
+                    <div>{data.prompt.split('Final:')[1]}</div>
             <br>Recuerda que tu video no debe durar mas de 30 a 40 segundos dependiendo de tu producto.</br>
+                </div>
+            )}
         </div>
-    )}
-</div>
 
     )
 }

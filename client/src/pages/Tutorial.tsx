@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { ConfigProvider, Card, Timeline, Descriptions, Button, Popover } from 'antd';
 import './../css/TimelineDemo.css';
 
