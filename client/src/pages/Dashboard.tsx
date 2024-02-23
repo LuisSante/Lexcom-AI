@@ -2,12 +2,13 @@ import Standard from './Calculator_1';
 import CPA_CVU from '../pages/Calculator_2';
 import Tutorial from '../pages/Tutorial';
 import '../css/Dashboard.css';
-import React, { useEffect, useState } from 'react';
-import { Avatar, Space, Input, Button } from 'antd';
-import { Dropdown, ConfigProvider, Layout, Menu, theme } from 'antd';
+import React, { useEffect, useRef, useState } from 'react';
+import { Avatar, Space, Input,Divider, Button } from 'antd';
+import { Dropdown, ConfigProvider, Layout, Menu, theme,Tour } from 'antd';
 import { DownOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { UserOutlined, CalculatorOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
+import type { MenuProps,TourProps } from 'antd';
+
 import About from '../components/components_home/About';
 import logo from '../assets/lexcom.svg';
 import Product from './Product';
@@ -142,7 +143,36 @@ const Dashboard: React.FC = () => {
   ];
 
   const [searchValue, setSearchValue] = useState<string>("");
+  const ref1 = useRef(null);
+  const ref2 = useRef(null);
+  const ref3 = useRef(null);
 
+  const [open, setOpen] = useState<boolean>(false);
+
+ 
+  const steps: TourProps['steps'] = [
+    {
+      title: 'Upload File',
+      description: 'Put your files here.',
+      cover: (
+        <img
+          alt="tour.png"
+          src="https://user-images.githubusercontent.com/5378891/197385811-55df8480-7ff4-44bd-9d43-a7dade598d70.png"
+        />
+      ),
+      target: () => ref1.current,
+    },
+    {
+      title: 'Save',
+      description: 'Save your changes.',
+      target: () => ref2.current,
+    },
+    {
+      title: 'Other Actions',
+      description: 'Click to see other actions.',
+      target: () => ref3.current,
+    },
+  ];
 
   return (
     <ConfigProvider
@@ -185,6 +215,9 @@ const Dashboard: React.FC = () => {
                 </Space>
               </a>
             </Dropdown>
+            <Button type="primary" onClick={() => setOpen(true)}>
+        Begin Tour
+      </Button>
           </Space>
         </Header>
         <Layout >
@@ -221,6 +254,7 @@ const Dashboard: React.FC = () => {
               items={items2}
               onSelect={(item) => setSelectedMenu(item.key as string)}
             />
+            
           </Sider>
           <Layout style={{
             padding: 24,
