@@ -153,6 +153,9 @@ const Dashboard: React.FC = () => {
             bodyBg: '#000',
           },
         },
+        token: {
+          fontFamily: "Poppins, sans-serif",
+        }
       }}
     >
       <Layout className="body-layout" style={{ minHeight: '100vh' }}>
