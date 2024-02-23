@@ -4,7 +4,7 @@ import Precio_del_Producto from './Calculator_3';
 import Tutorial from '../pages/Tutorial';
 import '../css/Dashboard.css';
 import React, { useEffect, useRef, useState } from 'react';
-import { Avatar, Space, Input,Divider, Button } from 'antd';
+import { Avatar, Space, Input,Divider, Button, notification } from 'antd';
 import { Dropdown, ConfigProvider, Layout, Menu, theme,Tour } from 'antd';
 import { DownOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { UserOutlined, CalculatorOutlined } from '@ant-design/icons';
@@ -14,9 +14,11 @@ import About from '../components/components_home/About';
 import logo from '../assets/lexcom.svg';
 import Product from './Product';
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../components/axios';
+// import axiosInstance from '../components/axios';
 import OpenAI from './OpenAI';
 import Tiktok from './Tiktok';
+import { SmileOutlined , CloseOutlined } from '@ant-design/icons';  
+
 
 const { Header, Content, Sider } = Layout;
 //<Avatar src={<img src={url} alt="avatar" />} />
@@ -143,7 +145,6 @@ const Dashboard: React.FC = () => {
     },
   ];
 
-  const [searchValue, setSearchValue] = useState<string>("");
   const ref1 = useRef(null);
   const ref2 = useRef(null);
   const ref3 = useRef(null);
@@ -175,6 +176,26 @@ const Dashboard: React.FC = () => {
     },
   ];
 
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [api, contextHolder] = notification.useNotification();
+  const Context = React.createContext({ name: 'Default' });
+
+  const emptyNotification = () => {
+    api.open({
+      message: "ERROR!!!",
+      description: <Context.Consumer>{() => "Error! Realiza una búsqueda"}</Context.Consumer>,
+      icon: <CloseOutlined style={{ color: '#108ee9' }} />,
+    });
+  };
+
+  const openNotification = () => {
+    api.open({
+      message: "LEXCOM CHECK!!!",
+      description: <Context.Consumer>{() => "Búsqueda realizada existósamente"}</Context.Consumer>,
+      icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+    });
+  };
+
   return (
     <ConfigProvider
       theme={{
@@ -189,6 +210,7 @@ const Dashboard: React.FC = () => {
         }
       }}
     >
+      {contextHolder}
       <Layout className="body-layout" style={{ minHeight: '100vh' }}>
         <Header style={{
           display: 'flex', alignItems: 'center', justifyItems: 'space-between', position: 'sticky',
@@ -202,7 +224,12 @@ const Dashboard: React.FC = () => {
             placeholder="Search"
             style={{ width: '400px', marginLeft: 'auto', marginRight: '160px' }}
             onSearch={(value) => {
-              setSearchValue(value);
+              if (value.trim() === '') {
+                emptyNotification();
+              } else {
+                setSearchValue(value);
+                openNotification();
+              }
             }}
           />
 

@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
-
+import { Select } from 'antd';
 
 interface RegionData {
   geo: string;
@@ -31,17 +31,37 @@ const Region: React.FC<TypeRegion> = ({ searchValue }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
 
+  const onChange = (value: string) => {
+    console.log(`selected ${value}`);
+  };
+
+  const onSearch = (value: string) => {
+    console.log('search:', value);
+  };
+
+  // Filter `option.label` match the user type `input`
+  const filterOption = (input: string, option?: { label: string; value: string }) =>
+    (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
+
+
   return (
     <div>
       {data && (
         <div>
-          <select>
+          <Select
+            showSearch
+            placeholder="Selecciona un país"
+            optionFilterProp="children"
+            onChange={onChange}
+            onSearch={onSearch}
+            filterOption={filterOption}
+          >
             {data.map((item, index) => (
-              <option key={index} value={item.location}>
+              <Select.Option key={index} value={item.location}>
                 {item.location}
-              </option>
+              </Select.Option>
             ))}
-          </select>
+          </Select>
         </div>
       )}
     </div>
