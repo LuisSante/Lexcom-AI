@@ -1,5 +1,6 @@
 import Standard from './Calculator_1';
 import CPA_CVU from '../pages/Calculator_2';
+import Precio_del_Producto from './Calculator_3';
 import Tutorial from '../pages/Tutorial';
 import '../css/Dashboard.css';
 import React, { useEffect, useRef, useState } from 'react';
@@ -16,11 +17,10 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../components/axios';
 import OpenAI from './OpenAI';
 import Tiktok from './Tiktok';
-import LexcomAI from './LexcomAI';
 
 const { Header, Content, Sider } = Layout;
 //<Avatar src={<img src={url} alt="avatar" />} />
-const calculatorFunctions = [Standard, CPA_CVU];
+const calculatorFunctions = [Standard, CPA_CVU,Precio_del_Producto];
 
 const items2: MenuProps['items'] = [
   {
@@ -267,10 +267,11 @@ const Dashboard: React.FC = () => {
               {selectedMenu === 'Guide Lexcom' && <Tutorial />}
               {selectedMenu === 'GeoTrend Lex' && <Product searchValue={searchValue} />}
               {selectedMenu === 'Standard' && <Standard />}
+              {selectedMenu === 'Precio_del_Producto' && <Precio_del_Producto/>}
               {selectedMenu === 'CPA_CVU' && <CPA_CVU />}
               {selectedMenu === 'Prompt Generator' && <OpenAI searchValue={searchValue}/>}
               {selectedMenu === 'TikTok TrendFeed' && <Tiktok searchValue={searchValue}/>}
-              {selectedMenu === 'Lex ProfitAI' && <LexcomAI/>}              
+              
             </Content>
           </Layout>
         </Layout >
