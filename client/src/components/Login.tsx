@@ -3,7 +3,7 @@ import { Button, Checkbox, Form, Input, notification, ConfigProvider } from 'ant
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import '../css/login.css'
-// import axiosInstance from './axios';
+import axiosInstance from './axios';
 
 interface FieldType {
   password: string;
@@ -13,53 +13,53 @@ interface FieldType {
 
 const Login: React.FC<FieldType> = () => {
   const [form] = Form.useForm();
-  // const [api, contextHolder] = notification.useNotification();
+  const [api, contextHolder] = notification.useNotification();
   const navigate = useNavigate();
 
-  // const onFinish = (values: FieldType) => {
-  //   console.log(values);
-  //   axiosInstance.post('token/', values)
-  //     .then(
-  //       res => {
-  //         if (res.status === 200) {
+  const onFinish = (values: FieldType) => {
+    console.log(values);
+    axiosInstance.post('token/', values)
+      .then(
+        res => {
+          if (res.status === 200) {
 
-  //           const access_token = res.data.access;
-  //           const refresh_token = res.data.refresh_token;
+            const access_token = res.data.access;
+            const refresh_token = res.data.refresh_token;
 
-  //           localStorage.setItem('access_token', access_token);
-  //           localStorage.setItem('refresh_token', refresh_token);
-  //           axiosInstance.defaults.headers['Authorization'] = 
-  //             'JWT ' + localStorage.getItem('access_token');
+            localStorage.setItem('access_token', access_token);
+            localStorage.setItem('refresh_token', refresh_token);
+            axiosInstance.defaults.headers['Authorization'] = 
+              'Bearer ' + localStorage.getItem('access_token');
             
               
-  //           api.success({
-  //             message: 'Inicio de sesión exitoso!',
-  //             description: 'Bienvenido de nuevo a LexCom',
-  //             duration: 1000
-  //           });
+            api.success({
+              message: 'Inicio de sesión exitoso!',
+              description: 'Bienvenido de nuevo a LexCom',
+              duration: 1000
+            });
             
-  //           navigate('/dashboard');
-  //         }
-  //       }
-  //     )
-  //     .catch(
-  //       err => {
-  //         api.error({
-  //           message: 'Error al iniciar sesión',
-  //           description: 'Por favor, revise su usuario o contraseña. ' + `${err.message}`,
-  //           duration: 1000
-  //         });
-  //       }
-  //     );
-  // }
-
-  const onFinish = () => {
-      navigate('/dashboard');
+            navigate('/dashboard');
+          }
+        }
+      )
+      .catch(
+        err => {
+          api.error({
+            message: 'Error al iniciar sesión',
+            description: 'Por favor, revise su usuario o contraseña. ' + `${err.message}`,
+            duration: 1000
+          });
+        }
+      );
   }
+
+  // const onFinish = () => {
+  //     navigate('/dashboard');
+  // }
 
   return (
     <>
-      {/* {contextHolder} */}
+      {contextHolder}
       <ConfigProvider
         theme={{
           components: {
