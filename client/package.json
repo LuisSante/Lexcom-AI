@@ -20,7 +20,8 @@
     "react-d3-library": "^1.1.8",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.3",
-    "react-simple-maps": "^3.0.0"
+    "react-simple-maps": "^3.0.0",
+    "react-tooltip": "^5.26.3"
   },
   "devDependencies": {
     "@types/d3-fetch": "^3.0.7",

@@ -62,10 +62,10 @@ const Precio_del_Producto: React.FC = () => {
         theme={{
           components: {
             InputNumber: {
-              colorText: '#fff',
-              colorBgContainer: '#000',
+              colorText: '#000',
+              colorBgContainer: '#fff',
               handleBorderColor: '#fff',
-              colorTextDisabled: '#fff',
+              colorTextDisabled: '#00',
 
             },
             Select:{
@@ -75,7 +75,7 @@ const Precio_del_Producto: React.FC = () => {
         }}
       >
       <Space direction='vertical'>
-      <Typography.Title level={3} style={{ color: '#fff', alignContent:'center' }}>CÁLCULO DEL PRECIO DEL PRODUCTO</Typography.Title>
+      <Typography.Title level={3} style={{ color: '#000', alignContent:'center' }}>CÁLCULO DEL PRECIO DEL PRODUCTO</Typography.Title>
          
           <Space align="start" size={'large'}>
               <Space direction='horizontal'>
@@ -103,7 +103,7 @@ const Precio_del_Producto: React.FC = () => {
           </Space>
           <Space align="start" size={'large'}>
             <Space direction="vertical" >
-              <Typography.Title level={5} style={{ color: '#fff' }}>RESULTADOS</Typography.Title>
+              <Typography.Title level={5} style={{ color: '#000' }}>RESULTADOS</Typography.Title>
               <Space.Compact direction="vertical">
                 <InputNumber addonBefore="Facebook PPC Proyectado" value={cpa*0.3} style={{ width: '100%' }} disabled />
                 <InputNumber addonBefore="Costo Devoluciones" value={cpa*0.1} style={{ width: '100%' }} disabled />

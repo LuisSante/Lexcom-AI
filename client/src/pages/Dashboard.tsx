@@ -238,10 +238,8 @@ const Dashboard: React.FC = () => {
               }
             }}
           />
-
-          <Space size={16} wrap>
             <p className="welcome">Bienvenido</p>
-            <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+            <Avatar style={{ backgroundColor: '#87d068' ,minWidth:'35px'}} icon={<UserOutlined />} />
             <Dropdown menu={{ items }} arrow={{ pointAtCenter: true }}>
               <a onClick={(e) => e.preventDefault()}>
                 <Space>
@@ -252,7 +250,6 @@ const Dashboard: React.FC = () => {
             <Button type="primary" onClick={() => setOpen(true)}>
               Begin Tour
             </Button>
-          </Space>
         </Header>
         <Layout >
           <Sider className="lexcom-sider"

@@ -19,10 +19,10 @@ const CPA_CVU: React.FC = () => {
         theme={{
           components: {
             InputNumber: {
-              colorText: '#fff',
-              colorBgContainer: '#000',
+              colorText: '#000',
+              colorBgContainer: '#fff',
               handleBorderColor: '#fff',
-              colorTextDisabled: '#fff',
+              colorTextDisabled: '#00',
 
             },
             Select: {
@@ -34,7 +34,7 @@ const CPA_CVU: React.FC = () => {
         <Space direction='vertical'>
           <Space align="start" size={'large'}>
             <Space direction='vertical' style={{ width: '80%' }} >
-              <Typography.Title level={4} style={{ color: '#fff' }}>CPA</Typography.Title>
+              <Typography.Title level={4} style={{ color: '#000' }}>CPA</Typography.Title>
 
 
               <InputNumber addonBefore="INVERSION " defaultValue={0} min={0} style={{ width: '100%' }} onChange={(value) => {
@@ -54,7 +54,7 @@ const CPA_CVU: React.FC = () => {
               }} />
             </Space>
             <Space direction='vertical' >
-              <Typography.Title level={5} style={{ color: '#fff' }}>RESULTADOS:</Typography.Title>
+              <Typography.Title level={5} style={{ color: '#000' }}>RESULTADOS:</Typography.Title>
               <Space.Compact direction="vertical">
                 <InputNumber addonBefore="IMPRESIONES" value={costo / precio} style={{ width: '100%' }} disabled />
                 <InputNumber addonBefore="CICKS EN EL ENLACE" value={(costo / precio) * (flete / 100.0)} style={{ width: '100%' }} disabled />
@@ -64,7 +64,7 @@ const CPA_CVU: React.FC = () => {
           </Space>
           <Space align="start" size={'large'}>
             <Space direction="vertical" >
-              <Typography.Title level={4} style={{ color: '#fff' }}>CVU</Typography.Title>
+              <Typography.Title level={4} style={{ color: '#000' }}>CVU</Typography.Title>
               <InputNumber addonBefore="AOV" defaultValue={0} min={0} style={{ width: '100%' }} onChange={(value) => {
                 if (value !== null) {
                   setfull(value);
@@ -92,7 +92,7 @@ const CPA_CVU: React.FC = () => {
               }} />
             </Space>
             <Space direction="vertical" >
-              <Typography.Title level={5} style={{ color: '#fff' }}>RESULTADOS</Typography.Title>
+              <Typography.Title level={5} style={{ color: '#000' }}>RESULTADOS</Typography.Title>
               <Space.Compact direction="vertical">
                 <InputNumber addonBefore="COSTO UNITARIO" value={cpa + units + delivery + personal} style={{ width: '100%' }} disabled />
                 <InputNumber addonBefore="GANANCIA " value={full - (cpa + units + delivery + personal)} style={{ width: '100%' }} disabled />
