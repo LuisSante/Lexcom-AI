@@ -5,11 +5,13 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from api.BackendClient.openai import OpenAIClient
 from api.serializers.openai import OpenAISerializer
+from rest_framework.permissions import IsAuthenticated
 
 load_dotenv()
 OPENAI_KEY = os.getenv("OPENAI_KEY")
 
 class OpenAIApiView(viewsets.ViewSet):
+    permission_classes = (IsAuthenticated, )
     def get_openai_client(self):
         client = OpenAI(
             api_key=OPENAI_KEY

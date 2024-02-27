@@ -5,21 +5,15 @@ from dotenv import load_dotenv
 from rest_framework import viewsets
 from rest_framework.response import Response
 from api.BackendClient.serpapi import GoogleApiClient
+from rest_framework.permissions import IsAuthenticated
 
 load_dotenv()
 API_KEY = os.getenv("SERPAPI_KEY")
 
 class GoogleApiView(viewsets.ViewSet):
+    permission_classes = (IsAuthenticated, )
     def get_serpapi_client(self):
-
-        # token = request.COOKIES.get('jwt')
-
-        # if not token:
-        #     print("asdfadfad")
-        #     raise AuthenticationFailed('Unauthenticated!')
-
         return GoogleApiClient(
-            # token = token,
             api_key = API_KEY,
         )
 
