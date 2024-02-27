@@ -11,12 +11,12 @@ const onFinish = () => {
 const LexcomAI: React.FC = () => {
     return (
         <div className='tutorial'>
-             <Typography.Title level={4} style={{ color: '#fff' }}>¡Vamos a calcular si tu producto es ganador!</Typography.Title>
+             <Typography.Title level={4} style={{ color: '#000' }}>¡Vamos a calcular si tu producto es ganador!</Typography.Title>
 
             <ConfigProvider
                 theme={{
                     token: {
-                        colorText: "#fff",
+                        colorText: "#000",
                     }
                 }}
             >

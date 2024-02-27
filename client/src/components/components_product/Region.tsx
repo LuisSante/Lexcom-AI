@@ -2,6 +2,8 @@ import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { Select } from 'antd';
 import { scaleLinear } from "d3-scale";
+import 'react-tooltip/dist/react-tooltip.css'
+import {Tooltip } from "react-tooltip";
 import {
   ComposableMap,
   Geographies,
@@ -22,7 +24,12 @@ interface RegionData {
   location: string;
   value: number;
 }
-
+interface RegionDataR{
+  geo: string;
+  location: string;
+  value: number;
+  originalValue:number;
+}
 interface TypeRegion {
   searchValue: string;
 }
@@ -30,7 +37,7 @@ interface TypeRegion {
 const Region: React.FC<TypeRegion> = ({ searchValue }) => {
   const [data, setData] = useState<RegionData[] | null>(null);
 
-  const [dataR, setDataR] = useState<RegionData[] | null>(null);
+  const [dataR, setDataR] = useState<RegionDataR[] | null>(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -52,7 +59,8 @@ const Region: React.FC<TypeRegion> = ({ searchValue }) => {
       const maximoValor = Math.max(...data.map(item => item.value));
       const dataActualizado = data.map(item => ({
         ...item,
-        value: item.value / maximoValor
+        value: item.value / maximoValor,
+        originalValue: item.value
       }));
       setDataR(dataActualizado);
     }
@@ -69,56 +77,74 @@ const Region: React.FC<TypeRegion> = ({ searchValue }) => {
   // Filter `option.label` match the user type `input`
   const filterOption = (input: string, option?: { label: string; value: string }) =>
     (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
-
-
-  return (
+  
+    const [content, setContent] = useState("");
+    return (
     <div>
-      {data &&dataR && (
-        <div>   
-          <ComposableMap
-            projectionConfig={{
-              rotate: [-10, 0, 0],
-              scale: 130
-            }}
-            style={{
-              marginTop: "-100px" 
-            }}
-          >
-            <Sphere stroke="#E4E5E6" strokeWidth={0.5} id={""} fill={""} />
-            <Graticule stroke="#E4E5E6" strokeWidth={0.5} />
-            {dataR.length > 0 && (
-              <Geographies geography={geoUrl}>
-                {({ geographies }) =>
-                  geographies.map((geo) => {
-                    const d = dataR.find((s) => s.location === geo.properties.name);
-                    return (
-                      <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        fill={d ? colorScale(d.value ) : "#F5F4F6"}
-                      />
-                    );
-                  })
-                }
-              </Geographies>
-            )}
-          </ComposableMap>
-          <Select
-            showSearch
-            placeholder="Selecciona un país"
-            optionFilterProp="children"
-            onChange={onChange}
-            onSearch={onSearch}
-            filterOption={filterOption}
-          >
-            {data.map((item, index) => (
-              <Select.Option key={index} value={item.location}>
-                {item.location}
-              </Select.Option>
-            ))}
-          </Select>
+      {data && dataR && (
+        <div>
+          <div>
+            <ComposableMap
+              projectionConfig={{
+                rotate: [-10, 0, 0],
+                scale: 100
+              }}
+              style={{
+                marginTop: "-150px",
+                marginBlockEnd:'-150px'
+              }}
+            >
+              <Sphere stroke="#E4E5E6" strokeWidth={0.5} id={""} fill={""} />
+              <Graticule stroke="#E4E5E6" strokeWidth={0.5} />
+              {dataR.length > 0 && (
+                <Geographies geography={geoUrl}>
+                  {({ geographies }) =>
+                    geographies.map((geo) => {
+                      const d = dataR.find((s) => s.location === geo.properties.name);
+                      return (
+                        <Geography
+                          key={geo.rsmKey}
+                          geography={geo}
+                          fill={d ? colorScale(d.value) : "#F5F4F6"}
+                          onMouseEnter={() => {
+                            setContent('Interés en '+`${geo.properties.name}`+': '+ `${d?.originalValue ?? 0}`);
+                          }}
+                          onMouseLeave={() => {
+                            setContent("");
+                          }}
+                          style={{
+                            hover: {
+                              fill: "#0EA5E9",
+                              outline: "none"
+                            }
+                          }}
+                          data-tooltip-id="my-tooltip-1"
+                        />
+                        );
+                      })
+                    }
+                </Geographies>
+              )}
+            </ComposableMap>   
+            <Tooltip id="my-tooltip-1">{content}</Tooltip>
+          </div>
+          <div>
+            <Select
+              showSearch
+              placeholder="Selecciona un país"
+              optionFilterProp="children"
+              onChange={onChange}
+              onSearch={onSearch}
+              filterOption={filterOption}
+            >
+              {data.map((item, index) => (
+                <Select.Option key={index} value={item.location}>
+                  {item.location}
+                </Select.Option>
+              ))}
+            </Select>
+          </div>
         </div>
-
 
       )}
 
