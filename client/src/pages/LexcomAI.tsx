@@ -11,7 +11,7 @@ const onFinish = () => {
 const LexcomAI: React.FC = () => {
     return (
         <div className='tutorial'>
-             <Typography.Title level={4} style={{ color: '#000' }}>¡Vamos a calcular si tu producto es ganador!</Typography.Title>
+            <Typography.Title level={4} style={{ color: '#000' }}>¡Vamos a calcular si tu producto es ganador!</Typography.Title>
 
             <ConfigProvider
                 theme={{
@@ -32,26 +32,31 @@ const LexcomAI: React.FC = () => {
                     <Form.Item
                         label="Cuánto es el interés que hay sobre el producto"
                         name="interest"
-                        rules={[{ required: true, message: 'Please input your username!' }]}
+                        tooltip = {
+                            <span>
+                                Este espacio de aquí lo sacas del módulo GeoTrend Lex
+                                <a> GeoTrend Lex</a>
+                            </span>
+                        }
+                        rules={[{ required: true, message: 'Por favor ingresa el interés sobre el producto!' }]}
                     >
-                        <br />
-                        <Input />
+                        <Input/>
                     </Form.Item>
                     <Row>
-                    {LexcomAI_Items.map((item, index) => (
-                        <Form.Item
-                            name={item.id}
-                            valuePropName="checked"
-                            wrapperCol={{ offset: 5, span: 25 }}
-                            rules={[{ required: true, message: 'Please input your username!' }]}
-                        >
-                          <Col span={15}>
-                            <Checkbox key={index}>
-                                {item.question}
-                            </Checkbox>
-                          </Col>
-                        </Form.Item>
-                    ))}    
+                        {LexcomAI_Items.map((item, index) => (
+                            <Form.Item
+                                name={item.id}
+                                valuePropName="checked"
+                                wrapperCol={{ offset: 5, span: 25 }}
+                                rules={[{ required: true, message: 'Please input your username!' }]}
+                            >
+                                <Col span={15}>
+                                    <Checkbox key={index}>
+                                        {item.question}
+                                    </Checkbox>
+                                </Col>
+                            </Form.Item>
+                        ))}
                     </Row>
 
 

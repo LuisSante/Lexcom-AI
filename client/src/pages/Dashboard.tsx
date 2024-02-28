@@ -278,6 +278,7 @@ const Dashboard: React.FC = () => {
               mode="inline"
               defaultSelectedKeys={['1']}
               items={items2}
+              // onSelect={(item) => setSelectedMenu(item.key as string)}
               onSelect={(item) => {
                 if (item.key === 'Guide Lexcom') {
                   setSelectedMenu('Guide Lexcom');

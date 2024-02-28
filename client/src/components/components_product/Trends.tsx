@@ -24,10 +24,11 @@ interface TrendsData {
 
 interface TypeTrends {
   searchValue: string;
+  idRegion: string;
 }
 
 
-const Trends: React.FC<TypeTrends> = ({ searchValue }) => {
+const Trends: React.FC<TypeTrends> = ({ searchValue, idRegion}) => {
   const [chartData, setChartData] = useState<ChartData<"line">>({
     labels: [],
     datasets: [{
@@ -42,9 +43,9 @@ const Trends: React.FC<TypeTrends> = ({ searchValue }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = `http://localhost:8000/api/v1/product/${searchValue}/trends_data`
-        const response: AxiosResponse<TrendsData> = await axiosInstance.get(url)
-        const data = response.data.timeline_data
+        const url = `http://localhost:8000/api/v1/product/value=${searchValue}/idregion=${idRegion}/trends_data`;
+        const response: AxiosResponse<TrendsData> = await axiosInstance.get(url);
+        const data = response.data.timeline_data;
 
         const labels = data.map(item => item.date);
         const value = data.map(item => parseInt(item.values[0].value));
@@ -71,7 +72,7 @@ const Trends: React.FC<TypeTrends> = ({ searchValue }) => {
 
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchValue]);
+  }, [searchValue, idRegion]);
 
   return (
     <>

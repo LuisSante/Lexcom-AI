@@ -26,10 +26,10 @@ class GoogleApiView(viewsets.ViewSet):
         except requests.RequestException as e:
             return Response({'error': str(e)}, status=500)
 
-    def trends_data(self, request, id:str):
+    def trends_data(self, request, id:str, id_region:str):
         serpapi_client = self.get_serpapi_client()
         try:
-            response = serpapi_client.get_google_trends_data(id, 'US')
+            response = serpapi_client.get_google_trends_data(id, id_region)
             response.raise_for_status()
             return Response(response.json()["interest_over_time"])
         except requests.RequestException as e:

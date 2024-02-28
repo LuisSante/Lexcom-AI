@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Region from "../components/components_product/Region";
-import Topics from "../components/components_product/Topics";
-import Trends from "../components/components_product/Trends";
+// import Topics from "../components/components_product/Topics";
 import Skeleton from "../components/Skeleton";
 
 interface TypeProduct {
@@ -27,13 +26,6 @@ const Product: React.FC<TypeProduct> = ({ searchValue }) => {
   return (
     <>
       <Region searchValue={searchValue} />
-      <div style={{ display: 'flex' }}>
-        <Trends searchValue={searchValue} />
-        <div style={{ marginLeft: '100px' }}>
-          <Topics searchValue={searchValue} />
-        </div>
-      </div>
-
     </>
   );
 };
