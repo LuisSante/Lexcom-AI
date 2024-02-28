@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Region from "../components/components_product/Region";
-// import Topics from "../components/components_product/Topics";
 import Skeleton from "../components/Skeleton";
 
 interface TypeProduct {
