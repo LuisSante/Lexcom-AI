@@ -68,7 +68,7 @@ const Tiktok: React.FC<TypeTikTok> = ({ searchValue }) => {
 
 
         // Mapeamos sobre los datos para obtener las URLs únicas de los videos y el valor unique_users_seen
-        data.forEach((item, index) => {
+        data.forEach((item) => {
             item.ad.videos.forEach(video => {
                 if (video.url) {
                     uniqueData[video.url] = item.ad.reach.unique_users_seen;

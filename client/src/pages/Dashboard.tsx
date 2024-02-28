@@ -1,23 +1,22 @@
+import logo from '../assets/lexcom.svg';
+import '../css/Dashboard.css';
+
+import { Avatar, Space, Input, Button, notification } from 'antd';
+import { Dropdown, ConfigProvider, Layout, Menu } from 'antd';
+import { UserOutlined, CalculatorOutlined , DownOutlined , MenuUnfoldOutlined , MenuFoldOutlined , SmileOutlined, CloseOutlined} from '@ant-design/icons';
+import type { MenuProps } from 'antd';
+
+import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+
 import Standard from './Calculator_1';
 import CPA_CVU from '../pages/Calculator_2';
 import Precio_del_Producto from './Calculator_3';
 import Tutorial from '../pages/Tutorial';
-import '../css/Dashboard.css';
-import React, { useEffect, useRef, useState } from 'react';
-import { Avatar, Space, Input, Button, notification } from 'antd';
-import { Dropdown, ConfigProvider, Layout, Menu, theme } from 'antd';
-import { DownOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
-import { UserOutlined, CalculatorOutlined } from '@ant-design/icons';
-import type { MenuProps, TourProps } from 'antd';
-
 import About from '../components/components_home/About';
-import logo from '../assets/lexcom.svg';
 import Product from './Product';
-import { useNavigate } from 'react-router-dom';
-// import axiosInstance from '../components/axios';
 import OpenAI from './OpenAI';
 import Tiktok from './Tiktok';
-import { SmileOutlined, CloseOutlined } from '@ant-design/icons';
 import LexcomAI from './LexcomAI';
 import axiosInstance from '../components/axios';
 
@@ -36,7 +35,7 @@ const items2: MenuProps['items'] = [
     key: 'BudgetControlPro',
     label: 'BudgetControlPro',
     icon: CalculatorOutlined,
-    children: calculatorFunctions.map((calculatorFunc, j) => ({
+    children: calculatorFunctions.map((calculatorFunc) => ({
       key: `${calculatorFunc.name}`,
       label: `${calculatorFunc.name}`,
     })),
@@ -66,7 +65,7 @@ const items2: MenuProps['items'] = [
     label: 'Guide Lexcom',
     icon: UserOutlined,
   }
-].map((page, index) => {
+].map((page) => {
   const key = page.key || page.label || page.name; // Usar key si está presente, de lo contrario, usar label
   console.log(page.name)
   const generateChildren = page.children && page.children.length > 0; // Páginas que tienen subnavegación
