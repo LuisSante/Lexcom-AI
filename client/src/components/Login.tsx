@@ -24,13 +24,11 @@ const Login: React.FC<FieldType> = () => {
           if (res.status === 200) {
 
             const access_token = res.data.access;
-            const refresh_token = res.data.refresh_token;
+            const refresh_token = res.data.refresh;
 
             localStorage.setItem('access_token', access_token);
             localStorage.setItem('refresh_token', refresh_token);
-            axiosInstance.defaults.headers['Authorization'] = 
-              'Bearer ' + localStorage.getItem('access_token');
-            
+            axiosInstance.defaults.headers['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
               
             api.success({
               message: 'Inicio de sesión exitoso!',
@@ -52,10 +50,6 @@ const Login: React.FC<FieldType> = () => {
         }
       );
   }
-
-  // const onFinish = () => {
-  //     navigate('/dashboard');
-  // }
 
   return (
     <>

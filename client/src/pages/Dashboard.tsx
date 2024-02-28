@@ -4,8 +4,8 @@ import Precio_del_Producto from './Calculator_3';
 import Tutorial from '../pages/Tutorial';
 import '../css/Dashboard.css';
 import React, { useEffect, useRef, useState } from 'react';
-import { Avatar, Space, Input, Divider, Button, notification } from 'antd';
-import { Dropdown, ConfigProvider, Layout, Menu, theme, Tour } from 'antd';
+import { Avatar, Space, Input, Button, notification } from 'antd';
+import { Dropdown, ConfigProvider, Layout, Menu, theme } from 'antd';
 import { DownOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { UserOutlined, CalculatorOutlined } from '@ant-design/icons';
 import type { MenuProps, TourProps } from 'antd';
@@ -19,6 +19,7 @@ import OpenAI from './OpenAI';
 import Tiktok from './Tiktok';
 import { SmileOutlined, CloseOutlined } from '@ant-design/icons';
 import LexcomAI from './LexcomAI';
+import axiosInstance from '../components/axios';
 
 
 const { Header, Content, Sider } = Layout;
@@ -81,33 +82,29 @@ const items2: MenuProps['items'] = [
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { borderRadiusLG },
-  } = theme.useToken();
+  // const {
+  //   token: { borderRadiusLG },
+  // } = theme.useToken();
   //const url = 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg';
 
-  const [selectedMenu, setSelectedMenu] = useState<string | null>(null);
+  const [selectedMenu, setSelectedMenu] = useState<string | null>('Guide Lexcom');
   const [marginL, setmarginL] = useState(250);
 
-  // const handleLogout = async () => {
-  //   try {
-  //     await axiosInstance.post('logout/blacklist/', {
-  //       refresh_token: localStorage.getItem('refresh_token'),
-  //     });
+  const handleLogout = async () => {
+    try {
+      await axiosInstance.post('logout/', {
+        refresh_token: localStorage.getItem('refresh_token'),
+      });
 
-  //     localStorage.removeItem('access_token');
-  //     localStorage.removeItem('refresh_token');
-  //     axiosInstance.defaults.headers['Authorization'] = null;
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      axiosInstance.defaults.headers['Authorization'] = null;
 
-  //     navigate('/');
-  //   } catch (error) {
-  //     console.error('Error al cerrar sesión:', error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   handleLogout();
-  // });
+      navigate('/');
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+    }
+  };
 
   const items: MenuProps['items'] = [
     {
@@ -138,43 +135,43 @@ const Dashboard: React.FC = () => {
       key: '4',
       danger: true,
       label: (
-        <a target="_blank" rel="noopener noreferrer">
+        <a target="_blank" rel="noopener noreferrer" onClick={handleLogout}>
           Logout
         </a>
       ),
     },
   ];
 
-  const ref1 = useRef(null);
-  const ref2 = useRef(null);
-  const ref3 = useRef(null);
+  // const ref1 = useRef(null);
+  // const ref2 = useRef(null);
+  // const ref3 = useRef(null);
 
-  const [open, setOpen] = useState<boolean>(false);
+  // const [open, setOpen] = useState<boolean>(false);
 
 
-  const steps: TourProps['steps'] = [
-    {
-      title: 'Upload File',
-      description: 'Put your files here.',
-      cover: (
-        <img
-          alt="tour.png"
-          src="https://user-images.githubusercontent.com/5378891/197385811-55df8480-7ff4-44bd-9d43-a7dade598d70.png"
-        />
-      ),
-      target: () => ref1.current,
-    },
-    {
-      title: 'Save',
-      description: 'Save your changes.',
-      target: () => ref2.current,
-    },
-    {
-      title: 'Other Actions',
-      description: 'Click to see other actions.',
-      target: () => ref3.current,
-    },
-  ];
+  // const steps: TourProps['steps'] = [
+  //   {
+  //     title: 'Upload File',
+  //     description: 'Put your files here.',
+  //     cover: (
+  //       <img
+  //         alt="tour.png"
+  //         src="https://user-images.githubusercontent.com/5378891/197385811-55df8480-7ff4-44bd-9d43-a7dade598d70.png"
+  //       />
+  //     ),
+  //     target: () => ref1.current,
+  //   },
+  //   {
+  //     title: 'Save',
+  //     description: 'Save your changes.',
+  //     target: () => ref2.current,
+  //   },
+  //   {
+  //     title: 'Other Actions',
+  //     description: 'Click to see other actions.',
+  //     target: () => ref3.current,
+  //   },
+  // ];
 
   const [searchValue, setSearchValue] = useState<string>("");
   const [api, contextHolder] = notification.useNotification();
@@ -238,18 +235,18 @@ const Dashboard: React.FC = () => {
               }
             }}
           />
-            <p className="welcome">Bienvenido</p>
-            <Avatar style={{ backgroundColor: '#87d068' ,minWidth:'35px'}} icon={<UserOutlined />} />
-            <Dropdown menu={{ items }} arrow={{ pointAtCenter: true }}>
-              <a onClick={(e) => e.preventDefault()}>
-                <Space>
-                  <DownOutlined />
-                </Space>
-              </a>
-            </Dropdown>
-            <Button type="primary" onClick={() => setOpen(true)}>
-              Begin Tour
-            </Button>
+          <p className="welcome">Bienvenido</p>
+          <Avatar style={{ backgroundColor: '#87d068', minWidth: '35px' }} icon={<UserOutlined />} />
+          <Dropdown menu={{ items }} arrow={{ pointAtCenter: true }}>
+            <a onClick={(e) => e.preventDefault()}>
+              <Space>
+                <DownOutlined />
+              </Space>
+            </a>
+          </Dropdown>
+          {/* <Button type="primary" onClick={() => setOpen(true)}>
+            Begin Tour
+          </Button> */}
         </Header>
         <Layout >
           <Sider className="lexcom-sider"
