@@ -1,9 +1,10 @@
-import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { Line } from 'react-chartjs-2';
 
 import Chart from 'chart.js/auto';
 import { CategoryScale , ChartData } from 'chart.js';
+import axiosInstance from "../axios";
 
 Chart.register(CategoryScale);
 
@@ -42,7 +43,7 @@ const Trends: React.FC<TypeTrends> = ({ searchValue }) => {
     const fetchData = async () => {
       try {
         const url = `http://localhost:8000/api/v1/product/${searchValue}/trends_data`
-        const response: AxiosResponse<TrendsData> = await axios.get(url)
+        const response: AxiosResponse<TrendsData> = await axiosInstance.get(url)
         const data = response.data.timeline_data
 
         const labels = data.map(item => item.date);

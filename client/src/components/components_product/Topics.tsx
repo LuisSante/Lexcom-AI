@@ -1,7 +1,7 @@
 import type { TableColumnsType, TableProps } from "antd";
-import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { Table } from 'antd';
+import axiosInstance from "../axios";
 
 
 interface TopicsData {
@@ -50,7 +50,7 @@ const Topics: React.FC<TypeTopics> = ({ searchValue }) => {
     const fetchData = async () => {
       try {
         const url = `http://localhost:8000/api/v1/product/${searchValue}/topics_data`
-        const response: AxiosResponse<TopicsData[]> = await axios.get(url)
+        const response = await axiosInstance.get(url)
         setData(response.data);
 
       } catch (error) {

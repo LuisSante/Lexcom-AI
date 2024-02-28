@@ -1,4 +1,3 @@
-import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { Select } from 'antd';
 import { scaleLinear } from "d3-scale";
@@ -11,6 +10,7 @@ import {
   Sphere,
   Graticule
 } from "react-simple-maps";
+import axiosInstance from "../axios";
 
 
 const geoUrl: string = "/features.json";
@@ -42,7 +42,7 @@ const Region: React.FC<TypeRegion> = ({ searchValue }) => {
     const fetchData = async () => {
       try {
         const url = `http://localhost:8000/api/v1/product/${searchValue}/region_data`
-        const response: AxiosResponse<RegionData[]> = await axios.get(url)
+        const response = await axiosInstance.get(url)
         setData(response.data);
 
       } catch (error) {

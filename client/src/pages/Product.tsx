@@ -21,19 +21,19 @@ const Product: React.FC<TypeProduct> = ({ searchValue }) => {
   }, []);
 
   if (loading) {
-    return <Skeleton/>;
+    return <Skeleton />;
   }
-  
+
   return (
     <>
-      <Region searchValue={searchValue}/>
-      <div style={{display:'flex'}}>
-      <Trends searchValue={searchValue}/>
-      <div style={{marginLeft:'100px'}}>
-        <Topics searchValue={searchValue} />
+      <Region searchValue={searchValue} />
+      <div style={{ display: 'flex' }}>
+        <Trends searchValue={searchValue} />
+        <div style={{ marginLeft: '100px' }}>
+          <Topics searchValue={searchValue} />
+        </div>
       </div>
-      </div>
-      
+
     </>
   );
 };
