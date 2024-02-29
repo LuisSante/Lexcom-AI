@@ -33,9 +33,4 @@ export const technical_analysis: QuestionType[] = [
         id: '19',
         question: "¿Depende su producto de una temporada específica?"
     },
-    {
-        id: '20',
-        question: "¿Es su producto de uso frecuente o constante?"
-    },
-
 ]
