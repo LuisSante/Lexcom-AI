@@ -1,18 +1,32 @@
 import React from 'react'
-// import LexcomAI_Items from '../components/logic/LexcomAI_Items';
-import { Checkbox, Col, ConfigProvider, Form, Row, Typography } from 'antd';
+import { Button, Checkbox, Col, ConfigProvider, Form, Row, Typography } from 'antd';
 import { Input } from 'antd';
 import './../css/TimelineDemo.css';
-import { visual_analysis } from '../components/logic/components_lexcomai/visual_analysis';
-import { technical_analysis } from '../components/logic/components_lexcomai/technical_analysis';
-import { strategic_analysis } from '../components/logic/components_lexcomai/strategic_analysis';
-import { financial_analysis } from '../components/logic/components_lexcomai/financial_analysis';
+import {
+    firstColumnItems_visual,
+    secondColumnItems_visual,
+    firstColumnItems_technical,
+    secondColumnItems_technical,
+    firstColumnItems_strategic,
+    secondColumnItems_strategic,
+    firstColumnItems_financial,
+    secondColumnItems_financial
+} from '../components/logic/components_lexcomai/questions';
+import axiosInstance from '../components/axios';
 
-const onFinish = () => {
-    console.log('asdf')
-}
+
 
 const LexcomAI: React.FC = () => {
+    const onFinish = (formData) => {
+        axiosInstance.post('lexcom/', formData)
+        .then(response => {
+            console.log('Respuesta del backend:', response.data);
+        })
+        .catch(error => {
+            console.error('Error al enviar los datos:', error);
+        });
+    }
+
     return (
         <div className='tutorial'>
             <Typography.Title level={4} style={{ color: '#000' }}>¡Vamos a calcular si tu producto es ganador!</Typography.Title>
@@ -33,38 +47,52 @@ const LexcomAI: React.FC = () => {
                     onFinish={onFinish}
                     autoComplete="off"
                 >
-                    <Form.Item
-                        label="Cuánto es el interés que hay sobre el producto"
-                        name="interest"
-                        tooltip={
-                            <span>
-                                Este espacio de aquí lo sacas del módulo GeoTrend Lex
-                                <a> GeoTrend Lex</a>
-                            </span>
-                        }
-                        rules={[{ required: true , message: 'Por favor ingresa el interés sobre el producto!' }]}
-                    >
-                        <Input />
-                    </Form.Item>
                     <div>
                         <div>
                             <h2>Análisis Visual</h2>
                         </div>
+                        <Form.Item
+                            label="¿Cuál es el nivel de interés de su producto entre el público objetivo?"
+                            name="interest"
+                            tooltip={
+                                <span>
+                                    Este espacio de aquí lo sacas del módulo GeoTrend Lex
+                                    <a> GeoTrend Lex</a>
+                                </span>
+                            }
+                            rules={[{ required: true, message: 'Por favor ingresa el interés sobre el producto!' }]}
+                        >
+                            <Input />
+                        </Form.Item>
                         <Row>
-                            {visual_analysis.map((item, index) => (
-                                <Form.Item
-                                    name={item.id}
-                                    valuePropName="checked"
-                                    wrapperCol={{ offset: 5, span: 25 }}
-                                    rules={[{ required: true }]}
-                                >
-                                    <Col span={15}>
-                                        <Checkbox key={index}>
+                            <Col span={12}>
+                                {firstColumnItems_visual.map((item, index) => (
+                                    <Form.Item
+                                        key={index}
+                                        name={item.id}
+                                        valuePropName="checked"
+                                        rules={[{ required: true }]}
+                                    >
+                                        <Checkbox>
                                             {item.question}
                                         </Checkbox>
-                                    </Col>
-                                </Form.Item>
-                            ))}
+                                    </Form.Item>
+                                ))}
+                            </Col>
+                            <Col span={12}>
+                                {secondColumnItems_visual.map((item, index) => (
+                                    <Form.Item
+                                        key={index}
+                                        name={item.id}
+                                        valuePropName="checked"
+                                        rules={[{ required: true }]}
+                                    >
+                                        <Checkbox>
+                                            {item.question}
+                                        </Checkbox>
+                                    </Form.Item>
+                                ))}
+                            </Col>
                         </Row>
                     </div>
                     <div>
@@ -72,20 +100,34 @@ const LexcomAI: React.FC = () => {
                             <h2>Análisis Técnico</h2>
                         </div>
                         <Row>
-                            {technical_analysis.map((item, index) => (
-                                <Form.Item
-                                    name={item.id}
-                                    valuePropName="checked"
-                                    wrapperCol={{ offset: 5, span: 25 }}
-                                    rules={[{ required: true }]}
-                                >
-                                    <Col span={15}>
-                                        <Checkbox key={index}>
+                            <Col span={12}>
+                                {firstColumnItems_technical.map((item, index) => (
+                                    <Form.Item
+                                        key={index}
+                                        name={item.id}
+                                        valuePropName="checked"
+                                        rules={[{ required: true }]}
+                                    >
+                                        <Checkbox>
                                             {item.question}
                                         </Checkbox>
-                                    </Col>
-                                </Form.Item>
-                            ))}
+                                    </Form.Item>
+                                ))}
+                            </Col>
+                            <Col span={12}>
+                                {secondColumnItems_technical.map((item, index) => (
+                                    <Form.Item
+                                        key={index}
+                                        name={item.id}
+                                        valuePropName="checked"
+                                        rules={[{ required: true }]}
+                                    >
+                                        <Checkbox>
+                                            {item.question}
+                                        </Checkbox>
+                                    </Form.Item>
+                                ))}
+                            </Col>
                         </Row>
                     </div>
                     <div>
@@ -93,20 +135,34 @@ const LexcomAI: React.FC = () => {
                             <h2>Análisis Estratégico</h2>
                         </div>
                         <Row>
-                            {strategic_analysis.map((item, index) => (
-                                <Form.Item
-                                    name={item.id}
-                                    valuePropName="checked"
-                                    wrapperCol={{ offset: 5, span: 25 }}
-                                    rules={[{ required: true }]}
-                                >
-                                    <Col span={15}>
-                                        <Checkbox key={index}>
+                            <Col span={12}>
+                                {firstColumnItems_strategic.map((item, index) => (
+                                    <Form.Item
+                                        key={index}
+                                        name={item.id}
+                                        valuePropName="checked"
+                                        rules={[{ required: true }]}
+                                    >
+                                        <Checkbox>
                                             {item.question}
                                         </Checkbox>
-                                    </Col>
-                                </Form.Item>
-                            ))}
+                                    </Form.Item>
+                                ))}
+                            </Col>
+                            <Col span={12}>
+                                {secondColumnItems_strategic.map((item, index) => (
+                                    <Form.Item
+                                        key={index}
+                                        name={item.id}
+                                        valuePropName="checked"
+                                        rules={[{ required: true }]}
+                                    >
+                                        <Checkbox>
+                                            {item.question}
+                                        </Checkbox>
+                                    </Form.Item>
+                                ))}
+                            </Col>
                         </Row>
                     </div>
                     <div>
@@ -114,23 +170,41 @@ const LexcomAI: React.FC = () => {
                             <h2>Análisis Financiero</h2>
                         </div>
                         <Row>
-                            {financial_analysis.map((item, index) => (
-                                <Form.Item
-                                    name={item.id}
-                                    valuePropName="checked"
-                                    wrapperCol={{ offset: 5, span: 25 }}
-                                    rules={[{ required: true }]}
-                                >
-                                    <Col span={15}>
-                                        <Checkbox key={index}>
+                            <Col span={12}>
+                                {firstColumnItems_financial.map((item, index) => (
+                                    <Form.Item
+                                        key={index}
+                                        name={item.id}
+                                        valuePropName="checked"
+                                        rules={[{ required: true }]}
+                                    >
+                                        <Checkbox>
                                             {item.question}
                                         </Checkbox>
-                                    </Col>
-                                </Form.Item>
-                            ))}
+                                    </Form.Item>
+                                ))}
+                            </Col>
+                            <Col span={12}>
+                                {secondColumnItems_financial.map((item, index) => (
+                                    <Form.Item
+                                        key={index}
+                                        name={item.id}
+                                        valuePropName="checked"
+                                        rules={[{ required: true }]}
+                                    >
+                                        <Checkbox>
+                                            {item.question}
+                                        </Checkbox>
+                                    </Form.Item>
+                                ))}
+                            </Col>
                         </Row>
                     </div>
-
+                    <Form.Item wrapperCol={{ offset: 20 }}>
+                        <Button type="primary" htmlType="submit">
+                            Enviar
+                        </Button>
+                    </Form.Item>
 
                 </Form>
 

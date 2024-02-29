@@ -2,39 +2,39 @@ import { QuestionType } from "./interface"
 
 export const technical_analysis: QuestionType[] = [
     {
-        id: '1',  
+        id: '12',  
         question: "¿Es fácil encontrar el producto en el mercado objetivo?"
     },
     {
-        id: '2',
+        id: '13',
         question: "¿Evita productos saturados?"
     },
     {
-        id: '3',
+        id: '14',
         question: "¿Tiene buenas valoraciones en marketplaces?"
     },
     {
-        id: '4',
+        id: '15',
         question: "¿Ofrece resultados realistas?"
     },
     {
-        id: '5',
+        id: '16',
         question: "¿Tiene proveedores exclusivos y en grandes cantidades?"
     },
     {
-        id: '6',
+        id: '17',
         question: "¿Se comercializa en otros mercados?"
     },
     {
-        id: '7',
+        id: '18',
         question: "¿Es innovador el producto que se va a vender?"
     },
     {
-        id: '8',
+        id: '19',
         question: "¿Depende su producto de una temporada específica?"
     },
     {
-        id: '9',
+        id: '20',
         question: "¿Es su producto de uso frecuente o constante?"
     },
 
