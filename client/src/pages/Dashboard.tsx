@@ -41,8 +41,8 @@ const items2: MenuProps['items'] = [
     })),
   } as any,
   {
-    key: 'Lex ProfitAI',
-    label: 'Lex ProfitAI',
+    key: 'LexIA Determination',
+    label: 'LexIA Determination',
     icon: UserOutlined,
   },
   {
@@ -51,8 +51,8 @@ const items2: MenuProps['items'] = [
     icon: UserOutlined,
   },
   {
-    key: 'Prompt Generator',
-    label: 'Prompt Generator',
+    key: 'Prompt Generator Video',
+    label: 'Prompt Generator Video',
     icon: UserOutlined,
   },
   {
@@ -304,9 +304,9 @@ const Dashboard: React.FC = () => {
               {selectedMenu === 'Standard' && <Standard />}
               {selectedMenu === 'Precio_del_Producto' && <Precio_del_Producto />}
               {selectedMenu === 'CPA_CVU' && <CPA_CVU />}
-              {selectedMenu === 'Lex ProfitAI' && <LexcomAI />}
+              {selectedMenu === 'LexIA Determination' && <LexcomAI />}
               {selectedMenu === 'TikTok TrendFeed' && <Tiktok searchValue={searchValue} />}
-              {selectedMenu === 'Prompt Generator' && <OpenAI searchValue={searchValue} />}
+              {selectedMenu === 'Prompt Generator Video' && <OpenAI searchValue={searchValue} />}
               {selectedMenu === 'Guide Lexcom' && <Tutorial />}
             </Content>
           </Layout>
