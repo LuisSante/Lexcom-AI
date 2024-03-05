@@ -1,6 +1,6 @@
 import React from 'react'
 import LexcomAI_Items from '../components/logic/LexcomAI_Items';
-import { Checkbox, Col, ConfigProvider, Form, Row, Space, Typography } from 'antd';
+import { Checkbox, Col, ConfigProvider, Form, Row, Typography } from 'antd';
 import { Input } from 'antd';
 import './../css/TimelineDemo.css';
 

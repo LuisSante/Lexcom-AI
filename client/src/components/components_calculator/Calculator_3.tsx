@@ -1,60 +1,14 @@
 import React, { useState } from 'react';
 import {  InputNumber, Space, Typography } from 'antd';
 
-import { ConfigProvider, Button } from 'antd';
+import { ConfigProvider } from 'antd';
 import './../css/TimelineDemo.css';
 
 const Precio_del_Producto: React.FC = () => {
-  const [inversion, setInversion] = useState(0);
-  const [gananciaN, setGananciaN] = useState(0);
-  const [gananciaB, setGananciaB] = useState(0);
-  const [gananciaF, setGananciaF] = useState(0);
-  const [facturacion, setFacturacion] = useState(0);
-  const [dev25, setDev25] = useState(0);
-  const [dev25Ext, setDev25Ext] = useState(0);
-  const [dev30, setDev30] = useState(0);
-  const [dev30Ext, setDev30Ext] = useState(0);
-  const [dev40, setDev40] = useState(0);
-  const [dev40Ext, setDev40Ext] = useState(0);
-  const [dev50, setDev50] = useState(0);
-  const [dev50Ext, setDev50Ext] = useState(0);
   const [costo, setcosto] = useState(0);
   const [precio, setprecio] = useState(0);
   const [flete, setflete] = useState(0);
-  const [full, setfull] = useState(0);
-  const [dev, setdev] = useState(0);
   const [cpa, setcpa] = useState(0);
-  const [units, setunits] = useState(0);
-  const [delivery, setdelivery] = useState(0);
-  const [personal,setpersonal] =useState(0);
-
-  const handleCalculate = () => {
-      const totalinv = costo*units;
-      const ganB= precio*units;
-      const ganN=precio-costo-flete-cpa-dev-full;
-      const ganF=ganN*units;
-      const fact=units*precio;
-
-      const devo25=ganF*0.25 ;
-      const devo30=ganF*0.30 ;
-      const devo40=ganF*0.40 ;
-      const devo50=ganF*0.5 ;
-      setInversion(totalinv);
-      setGananciaB(ganB);
-      setGananciaN(ganN);
-      setGananciaF(ganF);
-      setFacturacion(fact);
-      setDev25(devo25);
-      setDev30(devo30);
-      setDev40(devo40);
-      setDev50(devo50);
-      
-      setDev25Ext(devo25/1000);
-      setDev30Ext(devo30/1000);
-      setDev40Ext(devo40/1000);
-      setDev50Ext(devo50/1000);
-
-  };
 
   return (
     <div className='tutorial'>

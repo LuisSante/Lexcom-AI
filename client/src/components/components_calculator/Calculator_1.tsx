@@ -1,18 +1,8 @@
-import React, { useState,useEffect } from 'react';
-import { Input, InputNumber, Space, Typography,Select } from 'antd';
-
-import { ConfigProvider, Descriptions, Button } from 'antd';
-import type { DescriptionsProps } from 'antd';
+import React, { useState } from 'react';
+import { InputNumber, Space, Typography } from 'antd';
+import { ConfigProvider, Button } from 'antd';
 import './../css/TimelineDemo.css';
-const { Option } = Select;
-const selectBefore = (
-  <Select defaultValue="DEV25">
-    <Option value="DEV25">DEVOLUCIÓNES 25%</Option>
-    <Option value="DEV30">DEVOLUCIÓNES 30%</Option>
-    <Option value="DEV40">DEVOLUCIÓNES 40%</Option>
-    <Option value="DEV50">DEVOLUCIÓNES 50%</Option>
-  </Select>
-);
+
 
 const Standard: React.FC = () => {
   const [inversion, setInversion] = useState(0);
@@ -35,7 +25,6 @@ const Standard: React.FC = () => {
   const [dev, setdev] = useState(0);
   const [cpa, setcpa] = useState(0);
   const [units, setunits] = useState(0);
-  const [delivery, setdelivery] = useState(0);
   const [personal,setpersonal] =useState(0);
 
   const handleCalculate = () => {
@@ -121,11 +110,6 @@ const Standard: React.FC = () => {
                 setunits(value);
               }
             }} />
-            <InputNumber addonBefore="DELIVERY " defaultValue={0} min={0} style={{ width: '100%' }} onChange={(value) => {
-              if (value !== null) {
-                setdelivery(value);
-              }
-            }} />
             <InputNumber addonBefore="PERSONAL " defaultValue={0} min={0} style={{ width: '100%' }} onChange={(value) => {
               if (value !== null) {
                 setpersonal(value);
@@ -167,11 +151,11 @@ const Standard: React.FC = () => {
             <Typography.Title level={5} style={{ color: '#000' }}>COSTOS OPERATIVOS</Typography.Title>
             <Space.Compact direction="vertical">
               
-              <InputNumber addonBefore="DELIVERY/PRODUCTO" value={delivery*units} style={{ width: '100%' }} disabled />
+              <InputNumber addonBefore="DELIVERY/PRODUCTO" value={flete*units} style={{ width: '100%' }} disabled />
               <InputNumber addonBefore="CPA (C*COMPRA) " value={cpa*units} style={{ width: '100%' }} disabled />
               <InputNumber addonBefore="DEVOLUCIONES 25%" value={dev25} style={{ width: '100%' }} disabled />
               <InputNumber addonBefore="PERSONAL" value={personal} style={{ width: '100%' }} disabled />
-              <InputNumber addonBefore="TOTAL " value={(delivery*units)+(cpa*units)+dev25+personal} style={{ width: '100%' }} disabled />
+              <InputNumber addonBefore="TOTAL " value={(flete*units)+(cpa*units)+dev25+personal} style={{ width: '100%' }} disabled />
             </Space.Compact>
 
           </Space>

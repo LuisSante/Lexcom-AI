@@ -1,11 +1,11 @@
-import Standard from './Calculator_1';
-import CPA_CVU from '../pages/Calculator_2';
-import Precio_del_Producto from './Calculator_3';
+import Standard from '../components/components_calculator/Calculator_1';
+import CPA_CVU from '../components/components_calculator/Calculator_2';
+import Precio_del_Producto from '../components/components_calculator/Calculator_3';
 import Tutorial from '../pages/Tutorial';
 import '../css/Dashboard.css';
 import React, { useEffect, useRef, useState } from 'react';
-import { Avatar, Space, Input, Divider, Button, notification } from 'antd';
-import { Dropdown, ConfigProvider, Layout, Menu, theme, Tour } from 'antd';
+import { Avatar, Space, Input, Button, notification } from 'antd';
+import { Dropdown, ConfigProvider, Layout, Menu, theme } from 'antd';
 import { DownOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { UserOutlined, CalculatorOutlined } from '@ant-design/icons';
 import type { MenuProps, TourProps } from 'antd';
