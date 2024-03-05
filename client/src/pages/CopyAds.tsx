@@ -42,6 +42,7 @@ const CopyAI: React.FC<TypeCopyAds> = ({ searchValue }) => {
 
     return (
         <div>
+            <h1>Copy Generada</h1> {/* Aquí se agrega el título */}
             {isLoading && <Skeleton />}
             {data && !isLoading && (
                 <div className='tutorial'>
