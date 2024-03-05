@@ -16,6 +16,7 @@ import Tutorial from '../pages/Tutorial';
 import About from '../components/components_home/About';
 import Product from './Product';
 import OpenAI from './OpenAI';
+import CopyAds from './CopyAds';
 import Tiktok from './Tiktok';
 import LexcomAI from './LexcomAI';
 import axiosInstance from '../components/axios';
@@ -24,6 +25,8 @@ import axiosInstance from '../components/axios';
 const { Header, Content, Sider } = Layout;
 //<Avatar src={<img src={url} alt="avatar" />} />
 const calculatorFunctions = [Standard, CPA_CVU, Precio_del_Producto];
+const promptFunctions = ['Prompt Generator Video', 'Prompt Generator Copys'];
+
 
 const items2: MenuProps['items'] = [
   {
@@ -51,9 +54,13 @@ const items2: MenuProps['items'] = [
     icon: UserOutlined,
   },
   {
-    key: 'Prompt Generator Video',
-    label: 'Prompt Generator Video',
+    key: 'PromptGenerators',
+    label: 'Prompt Generators',
     icon: UserOutlined,
+    children: promptFunctions.map((promptFunc) => ({
+      key: promptFunc,
+      label: promptFunc,
+    })),
   },
   {
     key: 'Lexcom Courses',
@@ -307,6 +314,7 @@ const Dashboard: React.FC = () => {
               {selectedMenu === 'LexIA Determination' && <LexcomAI />}
               {selectedMenu === 'TikTok TrendFeed' && <Tiktok searchValue={searchValue} />}
               {selectedMenu === 'Prompt Generator Video' && <OpenAI searchValue={searchValue} />}
+              {selectedMenu === 'Prompt Generator Copys' && <CopyAds searchValue={searchValue} />}
               {selectedMenu === 'Guide Lexcom' && <Tutorial />}
             </Content>
           </Layout>
