@@ -8,3 +8,5 @@ google-search-results
 djangorestframework-oauth
 djangorestframework-simplejwt
 djangorestframework-simplejwt[crypto]
+scikit-learn
+joblib

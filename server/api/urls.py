@@ -14,6 +14,7 @@ urlpatterns = [
     path(r'product/value=<str:id>/idregion=<str:id_region>/trends_data' , serpapi.GoogleApiView.as_view({'get': 'trends_data'}), name="product_trends"),
     path(r'product/<str:id>/topics_data' , serpapi.GoogleApiView.as_view({'get': 'topics_data'}), name="topics_data"),
     path(r'openai/<str:id>' , openai.OpenAIApiView.as_view({'get': 'recommend_video'}), name="recommend_video"),
+    path(r'copy_ads/<str:id>' , openai.OpenAIApiView.as_view({'get': 'recommend_copy'}), name="recommend_copy"),
     path(r'tiktok/<str:id>' , tiktok.TiktTokApiView.as_view({'get': 'video_interest'}), name="video_interest"),
     path(r'lexcom/' , lexcomia.LexcomIA_ApiView.as_view(), name="lexcom"),
 ]

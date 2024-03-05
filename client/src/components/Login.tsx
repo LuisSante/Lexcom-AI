@@ -17,7 +17,6 @@ const Login: React.FC<FieldType> = () => {
   const navigate = useNavigate();
 
   const onFinish = (values: FieldType) => {
-    console.log(values);
     axiosInstance.post('token/', values)
       .then(
         res => {
