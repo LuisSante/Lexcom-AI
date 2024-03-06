@@ -39,11 +39,12 @@ const Services: React.FC<ComponentProps> = ({ id }) => {
                 <h3 className="heading">Standard</h3>
                 <div className="price-value">19
                   <span className="currency">$</span>
-                  <span className="month"> /5búsquedas</span>
+                  {/* <span className="month"> /5búsquedas</span> */}
                 </div>
               </div>
               <ul className="pricing-content">
-                <li>5 consultas diarias</li>
+                <li>Primera vez usando: 2 búsquedas gratuitas </li>
+                <li>5 búsquedas </li>
                 <li>Porcentaje de exito</li>
                 <li>Recomendacion de ventas</li>
                 <li>-</li>
@@ -59,11 +60,12 @@ const Services: React.FC<ComponentProps> = ({ id }) => {
                 <h3 className="heading">Business</h3>
                 <div className="price-value">36
                   <span className="currency">$</span>
-                  <span className="month">/mes</span>
+                  {/* <span className="month">/mes</span> */}
                 </div>
               </div>
               <ul className="pricing-content">
-                <li>15 consultas diarias</li>
+                <li>Primera vez usando: 2 búsquedas gratuitas </li>
+                <li>10 búsquedas</li>
                 <li>Porcentaje y estadísticas</li>
                 <li> Recomendación de ventas</li>
                 <li>- </li>
@@ -77,14 +79,15 @@ const Services: React.FC<ComponentProps> = ({ id }) => {
                 <h3 className="heading">Premium</h3>
                 <div className="price-value">70
                   <span className="currency">$</span>
-                  <span className="month">/mes</span>
+                  {/* <span className="month">/mes</span> */}
                 </div>
               </div>
               <ul className="pricing-content">
-                <li>Consultas ilimitadas</li>
+                <li>Primera vez usando: 2 búsquedas gratuitas </li>
+                <li>20 búsquedas</li>
                 <li>Porcentaje y estadísticas</li>
                 <li>Recomendacion de ventas</li>
-                <li>Trends</li>
+                <li>-</li>
               </ul>
               <div className={clicked ? "read active" : "read "}>
                 <ButtonComponent {...types} />
