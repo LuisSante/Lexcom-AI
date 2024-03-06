@@ -14,37 +14,16 @@ class LexcomIA_ApiView(APIView):
     def post(self, request):
 
         data = request.data
-        print(data)
-        # return Response({'message': 'Datos recibidos correctamente'}, status=200)
-    
         lexcom_client = self.get_lexcom_client()
-        response = lexcom_client.get_copy(data)
-        recommendation_text = response.choices[0].text.strip()
-        serializer = LexcomSerializer(data={'prompt': recommendation_text})
-
+        response = lexcom_client.get_prediction(data)
+        serializer = LexcomSerializer(data={'very_good': response[0][0],
+                                            'good': response[0][1],
+                                            'normal':response[0][2],
+                                            'bad': response[0][3],
+                                            'very_bad':response[0][4]})
         if serializer.is_valid():
             serialized_data = serializer.data
+            # print(serialized_data)
             return Response(serialized_data)
         else:
             return Response(serializer.errors, status=400)
-
-'''
-    model_path = os.path.join(settings.STATIC_ROOT, 'IAmodels', 'svm_model.joblib')
-    
-    if request.method == 'POST':
-        questions = ['interes_producto', 'soluciona_problema', 'facil_de_usar', 'liviano', 'facil_transporte', 'depende_temporada', 'uso_constante', 'novedoso', 'buen_material']
-        response_ = [request.POST.get(question) for question in questions]
-
-
-        if error_input not in vector_features[0]:
-            vector_features = logic.convert_language(vector_features)
-            loaded_svm_model = joblib.load(model_path)
-
-            svm_probabilities = loaded_svm_model.predict_proba(vector_features)
-
-            fig = image.probability_clasification_product(svm_probabilities)
-
-            fig_clasification = fig.to_html(full_html=False)
-        else:
-            message_error = "Error: Responde a todas las preguntas"
-'''

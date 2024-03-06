@@ -1,21 +1,20 @@
 import joblib  
 import os
 from django.conf import settings
-import requests
+
 
 class LexComIA_Client:        
-    def get_predictin(self , data):
+
+    def transformers(self, data):
+        values_array = [int(data[0])]  
+        values_array.extend(1 if value else 0 for value in data[1:])
+        return values_array
+
+    def get_prediction(self , data):
         rf_path = os.path.join(settings.STATIC_ROOT, 'IAmodels', 'random_forest_model.joblib')
-        lr_path = os.path.join(settings.STATIC_ROOT, 'IAmodels', 'logistic_regression_model.joblib')
-        
-        vector_features = [data]
-        # vector_features = logic.convert_language(vector_features)
+        values_array = list(data.values())
+        transformer_array = self.transformers(values_array)
+        vector_features = [transformer_array]
         loaded_rf_model = joblib.load(rf_path)
-        loaded_lr_model = joblib.load(lr_path)
-
         loaded_rf_probabilities = loaded_rf_model.predict_proba(vector_features)
-        loaded_lr_probabilities = loaded_lr_model.predict_proba(vector_features)
-
-        print(loaded_rf_probabilities)
-        print(loaded_lr_probabilities)
-        return
+        return loaded_rf_probabilities

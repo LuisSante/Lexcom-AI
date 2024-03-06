@@ -2,20 +2,20 @@ import { QuestionType } from "./interface"
 
 export const strategic_analysis: QuestionType[] = [
     {
-        id: '20',  
-        question: "¿Se puede vender en paquetes o bundles?"
+        id: 'percepcion_valor',  
+        question: "¿Tiene una percepción de valor alta?"
     },
     {
-        id: '21',
-        question: "¿Es de uso frecuente?"
-    },
-    {
-        id: '22',
+        id: 'tamano',
         question: "¿El producto es grande en tamaño?"
     },
     {
-        id: '23',
-        question: "¿Tiene una percepción de valor alta?"
+        id: 'frecuencia_estrategica',
+        question: "¿Es de uso frecuente?"
+    },
+    {
+        id: 'agrupamiento',
+        question: "¿Se puede vender en paquetes o bundles?"
     },
 
 ]
