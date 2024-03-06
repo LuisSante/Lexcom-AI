@@ -295,7 +295,7 @@ const LexcomAI: React.FC = () => {
                 </Form>
                 {chartData && (
                     <div>
-                        <h2>Gráfico de Pastel</h2>
+                        <h2>Diagrama sectorial del producto buscado</h2>
                         <Pie data={chartData} />
                     </div>
                 )}
