@@ -61,6 +61,9 @@ const Login: React.FC<FieldType> = () => {
               colorBgContainer: '#f6ffed',
               controlOutline: '#000000',
             },
+            Checkbox: {
+
+            }
           },
         }}
       >
@@ -96,7 +99,7 @@ const Login: React.FC<FieldType> = () => {
               valuePropName="checked"
               wrapperCol={{ offset: 8, span: 16 }}
             >
-              <Checkbox>Recuerdame</Checkbox>
+              <Checkbox style={{ color: '#f6ffed' }}>Recuerdame</Checkbox>
               <br />
               <a className="p-10px login-form-forgot" href="">
                 ¿Olvidaste tu contraseña?

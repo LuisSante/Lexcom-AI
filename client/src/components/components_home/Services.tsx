@@ -37,9 +37,9 @@ const Services: React.FC<ComponentProps> = ({ id }) => {
             <div className="pricingTable">
               <div className="pricingTable-header">
                 <h3 className="heading">Standard</h3>
-                <div className="price-value">15
+                <div className="price-value">19
                   <span className="currency">$</span>
-                  <span className="month"> /mes</span>
+                  <span className="month"> /5búsquedas</span>
                 </div>
               </div>
               <ul className="pricing-content">
@@ -57,7 +57,7 @@ const Services: React.FC<ComponentProps> = ({ id }) => {
             <div className="pricingTable">
               <div className="pricingTable-header">
                 <h3 className="heading">Business</h3>
-                <div className="price-value">23
+                <div className="price-value">36
                   <span className="currency">$</span>
                   <span className="month">/mes</span>
                 </div>
@@ -75,7 +75,7 @@ const Services: React.FC<ComponentProps> = ({ id }) => {
             <div className="pricingTable">
               <div className="pricingTable-header">
                 <h3 className="heading">Premium</h3>
-                <div className="price-value">30
+                <div className="price-value">70
                   <span className="currency">$</span>
                   <span className="month">/mes</span>
                 </div>
