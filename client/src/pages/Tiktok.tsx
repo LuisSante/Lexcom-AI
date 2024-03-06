@@ -1,9 +1,8 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Space, Card ,ConfigProvider} from 'antd';
-import { Col, Row } from 'antd';
+import { Col } from 'antd';
 import Skeleton from '../components/Skeleton';
-const { Meta } = Card;
+import axiosInstance from '../components/axios';
 interface AdData {
     id: number;
     first_shown_date: string;
@@ -47,7 +46,7 @@ const Tiktok: React.FC<TypeTikTok> = ({ searchValue }) => {
             setIsLoading(true);
             try {
                 const url = `http://localhost:8000/api/v1/tiktok/${searchValue}`
-                const response = await axios.get<TiktokData[]>(url)
+                const response = await axiosInstance.get<TiktokData[]>(url)
                 setData(response.data);
 
             } catch (error) {
@@ -69,7 +68,7 @@ const Tiktok: React.FC<TypeTikTok> = ({ searchValue }) => {
 
 
         // Mapeamos sobre los datos para obtener las URLs únicas de los videos y el valor unique_users_seen
-        data.forEach((item, index) => {
+        data.forEach((item) => {
             item.ad.videos.forEach(video => {
                 if (video.url) {
                     uniqueData[video.url] = item.ad.reach.unique_users_seen;
@@ -90,7 +89,9 @@ const Tiktok: React.FC<TypeTikTok> = ({ searchValue }) => {
         setDataSR(uniqueDataArray);
         console.log('termino', data);
         console.log('termino', dataSR);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
+    
     const responsiveGrid = {
         xs: 1,
         sm: 2,

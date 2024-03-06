@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import Region from "../components/components_product/Region";
-import Topics from "../components/components_product/Topics";
-import Trends from "../components/components_product/Trends";
 import Skeleton from "../components/Skeleton";
 
 interface TypeProduct {
@@ -21,14 +19,12 @@ const Product: React.FC<TypeProduct> = ({ searchValue }) => {
   }, []);
 
   if (loading) {
-    return <Skeleton/>;
+    return <Skeleton />;
   }
-  
+
   return (
     <>
-      <Region searchValue={searchValue}/>
-      <Trends searchValue={searchValue}/>
-      <Topics searchValue={searchValue}/>
+      <Region searchValue={searchValue} />
     </>
   );
 };

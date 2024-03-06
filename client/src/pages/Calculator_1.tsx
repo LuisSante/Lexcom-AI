@@ -72,10 +72,10 @@ const Standard: React.FC = () => {
         theme={{
           components: {
             InputNumber: {
-              colorText: '#fff',
-              colorBgContainer: '#000',
+              colorText: '#000',
+              colorBgContainer: '#fff',
               handleBorderColor: '#fff',
-              colorTextDisabled: '#fff',
+              colorTextDisabled: '#00',
 
             },
             Select:{
@@ -145,7 +145,7 @@ const Standard: React.FC = () => {
               <InputNumber addonBefore="Facturación" value={facturacion} style={{ width: '70%' }} disabled />
             </Space.Compact>
 
-            <Typography.Title level={5} style={{ color: '#fff' }}>DEVOLUCIONES</Typography.Title>
+            <Typography.Title level={5} style={{ color: '#000' }}>DEVOLUCIONES</Typography.Title>
 
             <Space.Compact direction="horizontal">
               <InputNumber addonBefore="25% " value={dev25} style={{ width: '55%' }} disabled />
@@ -164,7 +164,7 @@ const Standard: React.FC = () => {
               <InputNumber addonBefore="Extra x Devolucion (50%/1000) " value={dev50Ext} style={{ width: '100%' }} disabled />
             </Space.Compact>
 
-            <Typography.Title level={5} style={{ color: '#fff' }}>COSTOS OPERATIVOS</Typography.Title>
+            <Typography.Title level={5} style={{ color: '#000' }}>COSTOS OPERATIVOS</Typography.Title>
             <Space.Compact direction="vertical">
               
               <InputNumber addonBefore="DELIVERY/PRODUCTO" value={delivery*units} style={{ width: '100%' }} disabled />

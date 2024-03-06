@@ -7,8 +7,9 @@
 }
 
 .tutorial{
-    background-color: #0c0c0c95;
+    background-color: #ffffff95;
     margin-top: 2%;
     padding: 5%;
     padding-inline: 10%;
+    border-radius: 40px;
 }
