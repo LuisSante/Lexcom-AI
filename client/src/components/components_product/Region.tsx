@@ -1,9 +1,8 @@
-import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { Select } from 'antd';
 import { scaleLinear } from "d3-scale";
 import 'react-tooltip/dist/react-tooltip.css'
-import {Tooltip } from "react-tooltip";
+import { Tooltip } from "react-tooltip";
 import {
   ComposableMap,
   Geographies,
@@ -11,6 +10,9 @@ import {
   Sphere,
   Graticule
 } from "react-simple-maps";
+import axiosInstance from "../axios";
+import Trends from "./Trends";
+import Topics from "./Topics";
 
 
 const geoUrl: string = "/features.json";
@@ -24,11 +26,11 @@ interface RegionData {
   location: string;
   value: number;
 }
-interface RegionDataR{
+interface RegionDataR {
   geo: string;
   location: string;
   value: number;
-  originalValue:number;
+  originalValue: number;
 }
 interface TypeRegion {
   searchValue: string;
@@ -36,13 +38,14 @@ interface TypeRegion {
 
 const Region: React.FC<TypeRegion> = ({ searchValue }) => {
   const [data, setData] = useState<RegionData[] | null>(null);
-
   const [dataR, setDataR] = useState<RegionDataR[] | null>(null);
+  const [selectedRegion, setSelectedRegion] = useState<string>("");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const url = `http://localhost:8000/api/v1/product/${searchValue}/region_data`
-        const response: AxiosResponse<RegionData[]> = await axios.get(url)
+        const response = await axiosInstance.get(url)
         setData(response.data);
 
       } catch (error) {
@@ -67,7 +70,7 @@ const Region: React.FC<TypeRegion> = ({ searchValue }) => {
   }, [data]);
 
   const onChange = (value: string) => {
-    console.log(`selected ${value}`);
+    setSelectedRegion(value);
   };
 
   const onSearch = (value: string) => {
@@ -77,9 +80,9 @@ const Region: React.FC<TypeRegion> = ({ searchValue }) => {
   // Filter `option.label` match the user type `input`
   const filterOption = (input: string, option?: { label: string; value: string }) =>
     (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
-  
-    const [content, setContent] = useState("");
-    return (
+
+  const [content, setContent] = useState("");
+  return (
     <div>
       {data && dataR && (
         <div>
@@ -91,7 +94,7 @@ const Region: React.FC<TypeRegion> = ({ searchValue }) => {
               }}
               style={{
                 marginTop: "-150px",
-                marginBlockEnd:'-150px'
+                marginBlockEnd: '-150px'
               }}
             >
               <Sphere stroke="#E4E5E6" strokeWidth={0.5} id={""} fill={""} />
@@ -107,7 +110,7 @@ const Region: React.FC<TypeRegion> = ({ searchValue }) => {
                           geography={geo}
                           fill={d ? colorScale(d.value) : "#F5F4F6"}
                           onMouseEnter={() => {
-                            setContent('Interés en '+`${geo.properties.name}`+': '+ `${d?.originalValue ?? 0}`);
+                            setContent('Interés en ' + `${geo.properties.name}` + ': ' + `${d?.originalValue ?? 0}`);
                           }}
                           onMouseLeave={() => {
                             setContent("");
@@ -120,12 +123,12 @@ const Region: React.FC<TypeRegion> = ({ searchValue }) => {
                           }}
                           data-tooltip-id="my-tooltip-1"
                         />
-                        );
-                      })
-                    }
+                      );
+                    })
+                  }
                 </Geographies>
               )}
-            </ComposableMap>   
+            </ComposableMap>
             <Tooltip id="my-tooltip-1">{content}</Tooltip>
           </div>
           <div>
@@ -138,11 +141,17 @@ const Region: React.FC<TypeRegion> = ({ searchValue }) => {
               filterOption={filterOption}
             >
               {data.map((item, index) => (
-                <Select.Option key={index} value={item.location}>
+                <Select.Option key={index} value={item.geo}>
                   {item.location}
                 </Select.Option>
               ))}
             </Select>
+            <div style={{ display: 'flex' }}>
+              <Trends searchValue={searchValue} idRegion={selectedRegion} />
+              <div style={{ marginLeft: '100px' }}>
+                <Topics searchValue={searchValue} />
+              </div>
+            </div>
           </div>
         </div>
 

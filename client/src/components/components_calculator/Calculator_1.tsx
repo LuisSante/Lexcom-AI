@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { InputNumber, Space, Typography } from 'antd';
 import { ConfigProvider, Button } from 'antd';
-import './../css/TimelineDemo.css';
+import '../../css/TimelineDemo.css';
 
 
 const Standard: React.FC = () => {

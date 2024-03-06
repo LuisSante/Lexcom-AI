@@ -4,10 +4,10 @@ const baseURL = 'http://localhost:8000/api/v1/';
 
 const axiosInstance = axios.create({
 	baseURL: baseURL,
-	timeout: 5000,
+	timeout: 100000,
 	headers: {
 		Authorization: localStorage.getItem('access_token')
-			? 'JWT ' + localStorage.getItem('access_token')
+			? 'Bearer ' + localStorage.getItem('access_token')
 			: null,
 		'Content-Type': 'application/json',
 		accept: 'application/json',
@@ -20,13 +20,16 @@ axiosInstance.interceptors.response.use(
 	},
 	async function (error) {
         const originalRequest = error.config;
-
+		console.log("LUIS SANTE" , originalRequest);
+		
 		if (typeof error.response === 'undefined') {
+			console.log(error.response);
 			alert(
 				'A server/network error occurred. ' +
-					'Looks like CORS might be the problem. ' +
-					'Sorry about this - we will get it fixed shortly.'
+				'Looks like CORS might be the problem. ' +
+				'Sorry about this - we will get it fixed shortly.'
 			);
+			console.log("ERROR", error);
 			return Promise.reject(error);
 		}
 
@@ -60,9 +63,9 @@ axiosInstance.interceptors.response.use(
 							localStorage.setItem('refresh_token', response.data.refresh);
 
 							axiosInstance.defaults.headers['Authorization'] =
-								'JWT ' + response.data.access;
+								'Bearer ' + response.data.access;
 							originalRequest.headers['Authorization'] =
-								'JWT ' + response.data.access;
+								'Bearer ' + response.data.access;
 
 							return axiosInstance(originalRequest);
 						})

@@ -1,7 +1,8 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react'
 import './../css/TimelineDemo.css';
 import Skeleton from '../components/Skeleton';
+import axiosInstance from '../components/axios';
 
 interface OpenAIData {
     prompt: string;
@@ -22,7 +23,8 @@ const OpenAI: React.FC<TypeOpenAI> = ({ searchValue }) => {
             setIsLoading(true);
             try {
                 const url = `http://localhost:8000/api/v1/openai/${searchValue}`
-                const response: AxiosResponse<OpenAIData> = await axios.get(url)
+                const response: AxiosResponse<OpenAIData> = await axiosInstance.get(url)
+                axiosInstance.defaults.headers['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
                 console.log(response.data);
                 setData(response.data);
 

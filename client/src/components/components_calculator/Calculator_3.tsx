@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {  InputNumber, Space, Typography } from 'antd';
 
 import { ConfigProvider } from 'antd';
-import './../css/TimelineDemo.css';
+import '../../css/TimelineDemo.css';
 
 const Precio_del_Producto: React.FC = () => {
   const [costo, setcosto] = useState(0);

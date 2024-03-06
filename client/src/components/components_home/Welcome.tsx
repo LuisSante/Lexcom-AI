@@ -12,9 +12,9 @@ const Welcome = () => {
     const [registerModalVisible, setRegisternModalVisible] = useState(false);
 
     const initialFormData = {
-        user: "",
         password: "",
         remember: "",
+        email: "",
     };
 
     const showLoginModal = () => {

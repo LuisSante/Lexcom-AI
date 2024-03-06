@@ -3,27 +3,75 @@ import CPA_CVU from '../components/components_calculator/Calculator_2';
 import Precio_del_Producto from '../components/components_calculator/Calculator_3';
 import Tutorial from '../pages/Tutorial';
 import '../css/Dashboard.css';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Avatar, Space, Input, Button, notification } from 'antd';
-import { Dropdown, ConfigProvider, Layout, Menu, theme } from 'antd';
-import { DownOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
+import { Dropdown, ConfigProvider, Layout, Menu} from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 import { UserOutlined, CalculatorOutlined } from '@ant-design/icons';
-import type { MenuProps, TourProps } from 'antd';
+import type { MenuProps } from 'antd';
 
-import About from '../components/components_home/About';
 import logo from '../assets/lexcom.svg';
-import Product from './Product';
+import '../css/Dashboard.css';
+import {SmileOutlined, CloseOutlined} from '@ant-design/icons';
+import {
+  AppstoreOutlined,
+  ContainerOutlined,
+  DesktopOutlined,
+  MailOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  PieChartOutlined,
+} from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-// import axiosInstance from '../components/axios';
+import About from '../components/components_home/About';
+import Product from './Product';
 import OpenAI from './OpenAI';
 import Tiktok from './Tiktok';
-import { SmileOutlined, CloseOutlined } from '@ant-design/icons';
 import LexcomAI from './LexcomAI';
+import axiosInstance from '../components/axios';
 
 
 const { Header, Content, Sider } = Layout;
 //<Avatar src={<img src={url} alt="avatar" />} />
 const calculatorFunctions = [Standard, CPA_CVU, Precio_del_Producto];
+
+
+type MenuItem = Required<MenuProps>['items'][number];
+function getItem(
+  label: React.ReactNode,
+  key: React.Key,
+  icon?: React.ReactNode,
+  children?: MenuItem[],
+  type?: 'group',
+): MenuItem {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type,
+  } as MenuItem;
+}
+
+
+
+const itemsM: MenuItem[] = [
+  getItem('GeoTrend Lex', 'GeoTrend Lex', <PieChartOutlined />),
+  getItem('Budget Control Pro', 'BudgetControlPro', <MailOutlined />, [
+    getItem('Standard', '3'),
+    getItem('CPA CVU', '4'),
+    getItem('Precio del Producto', '5'),
+  ]),
+
+  getItem('LexIA Determination', 'LexIA Determination', <DesktopOutlined />),
+  getItem('TikTok TrendFeed', 'TikTok TrendFeed', <ContainerOutlined />),
+  getItem('Prompt Generator Video', 'Prompt Generator Video', <AppstoreOutlined />),
+  getItem('Lexcom Courses', 'Lexcom Courses', <ContainerOutlined />),
+  getItem('Guide Lexcom', 'Guide Lexcom', <AppstoreOutlined />),
+
+];
+
+
 
 const items2: MenuProps['items'] = [
   {
@@ -35,14 +83,14 @@ const items2: MenuProps['items'] = [
     key: 'BudgetControlPro',
     label: 'BudgetControlPro',
     icon: CalculatorOutlined,
-    children: calculatorFunctions.map((calculatorFunc, j) => ({
+    children: calculatorFunctions.map((calculatorFunc) => ({
       key: `${calculatorFunc.name}`,
       label: `${calculatorFunc.name}`,
     })),
   } as any,
   {
-    key: 'Lex ProfitAI',
-    label: 'Lex ProfitAI',
+    key: 'LexIA Determination',
+    label: 'LexIA Determination',
     icon: UserOutlined,
   },
   {
@@ -51,8 +99,8 @@ const items2: MenuProps['items'] = [
     icon: UserOutlined,
   },
   {
-    key: 'Prompt Generator',
-    label: 'Prompt Generator',
+    key: 'Prompt Generator Video',
+    label: 'Prompt Generator Video',
     icon: UserOutlined,
   },
   {
@@ -65,7 +113,7 @@ const items2: MenuProps['items'] = [
     label: 'Guide Lexcom',
     icon: UserOutlined,
   }
-].map((page, index) => {
+].map((page) => {
   const key = page.key || page.label || page.name; // Usar key si está presente, de lo contrario, usar label
   console.log(page.name)
   const generateChildren = page.children && page.children.length > 0; // Páginas que tienen subnavegación
@@ -81,33 +129,29 @@ const items2: MenuProps['items'] = [
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { borderRadiusLG },
-  } = theme.useToken();
+  // const {
+  //   token: { borderRadiusLG },
+  // } = theme.useToken();
   //const url = 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg';
 
-  const [selectedMenu, setSelectedMenu] = useState<string | null>(null);
+  const [selectedMenu, setSelectedMenu] = useState<string | null>('Guide Lexcom');
   const [marginL, setmarginL] = useState(250);
 
-  // const handleLogout = async () => {
-  //   try {
-  //     await axiosInstance.post('logout/blacklist/', {
-  //       refresh_token: localStorage.getItem('refresh_token'),
-  //     });
+  const handleLogout = async () => {
+    try {
+      await axiosInstance.post('logout/', {
+        refresh_token: localStorage.getItem('refresh_token'),
+      });
 
-  //     localStorage.removeItem('access_token');
-  //     localStorage.removeItem('refresh_token');
-  //     axiosInstance.defaults.headers['Authorization'] = null;
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      axiosInstance.defaults.headers['Authorization'] = null;
 
-  //     navigate('/');
-  //   } catch (error) {
-  //     console.error('Error al cerrar sesión:', error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   handleLogout();
-  // });
+      navigate('/');
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+    }
+  };
 
   const items: MenuProps['items'] = [
     {
@@ -138,43 +182,43 @@ const Dashboard: React.FC = () => {
       key: '4',
       danger: true,
       label: (
-        <a target="_blank" rel="noopener noreferrer">
+        <a target="_blank" rel="noopener noreferrer" onClick={handleLogout}>
           Logout
         </a>
       ),
     },
   ];
 
-  const ref1 = useRef(null);
-  const ref2 = useRef(null);
-  const ref3 = useRef(null);
+  // const ref1 = useRef(null);
+  // const ref2 = useRef(null);
+  // const ref3 = useRef(null);
 
-  const [open, setOpen] = useState<boolean>(false);
+  // const [open, setOpen] = useState<boolean>(false);
 
 
-  const steps: TourProps['steps'] = [
-    {
-      title: 'Upload File',
-      description: 'Put your files here.',
-      cover: (
-        <img
-          alt="tour.png"
-          src="https://user-images.githubusercontent.com/5378891/197385811-55df8480-7ff4-44bd-9d43-a7dade598d70.png"
-        />
-      ),
-      target: () => ref1.current,
-    },
-    {
-      title: 'Save',
-      description: 'Save your changes.',
-      target: () => ref2.current,
-    },
-    {
-      title: 'Other Actions',
-      description: 'Click to see other actions.',
-      target: () => ref3.current,
-    },
-  ];
+  // const steps: TourProps['steps'] = [
+  //   {
+  //     title: 'Upload File',
+  //     description: 'Put your files here.',
+  //     cover: (
+  //       <img
+  //         alt="tour.png"
+  //         src="https://user-images.githubusercontent.com/5378891/197385811-55df8480-7ff4-44bd-9d43-a7dade598d70.png"
+  //       />
+  //     ),
+  //     target: () => ref1.current,
+  //   },
+  //   {
+  //     title: 'Save',
+  //     description: 'Save your changes.',
+  //     target: () => ref2.current,
+  //   },
+  //   {
+  //     title: 'Other Actions',
+  //     description: 'Click to see other actions.',
+  //     target: () => ref3.current,
+  //   },
+  // ];
 
   const [searchValue, setSearchValue] = useState<string>("");
   const [api, contextHolder] = notification.useNotification();
@@ -238,18 +282,18 @@ const Dashboard: React.FC = () => {
               }
             }}
           />
-            <p className="welcome">Bienvenido</p>
-            <Avatar style={{ backgroundColor: '#87d068' ,minWidth:'35px'}} icon={<UserOutlined />} />
-            <Dropdown menu={{ items }} arrow={{ pointAtCenter: true }}>
-              <a onClick={(e) => e.preventDefault()}>
-                <Space>
-                  <DownOutlined />
-                </Space>
-              </a>
-            </Dropdown>
-            <Button type="primary" onClick={() => setOpen(true)}>
-              Begin Tour
-            </Button>
+          <p className="welcome">Bienvenido</p>
+          <Avatar style={{ backgroundColor: '#87d068', minWidth: '35px' }} icon={<UserOutlined />} />
+          <Dropdown menu={{ items }} arrow={{ pointAtCenter: true }}>
+            <a onClick={(e) => e.preventDefault()}>
+              <Space>
+                <DownOutlined />
+              </Space>
+            </a>
+          </Dropdown>
+          {/* <Button type="primary" onClick={() => setOpen(true)}>
+            Begin Tour
+          </Button> */}
         </Header>
         <Layout >
           <Sider className="lexcom-sider"
@@ -281,7 +325,9 @@ const Dashboard: React.FC = () => {
               className="lexcom-menu"
               mode="inline"
               defaultSelectedKeys={['1']}
-              items={items2}
+              theme="dark"
+              items={itemsM}
+              // onSelect={(item) => setSelectedMenu(item.key as string)}
               onSelect={(item) => {
                 if (item.key === 'Guide Lexcom') {
                   setSelectedMenu('Guide Lexcom');
@@ -307,9 +353,9 @@ const Dashboard: React.FC = () => {
               {selectedMenu === 'Standard' && <Standard />}
               {selectedMenu === 'Precio_del_Producto' && <Precio_del_Producto />}
               {selectedMenu === 'CPA_CVU' && <CPA_CVU />}
-              {selectedMenu === 'Lex ProfitAI' && <LexcomAI />}
+              {selectedMenu === 'LexIA Determination' && <LexcomAI />}
               {selectedMenu === 'TikTok TrendFeed' && <Tiktok searchValue={searchValue} />}
-              {selectedMenu === 'Prompt Generator' && <OpenAI searchValue={searchValue} />}
+              {selectedMenu === 'Prompt Generator Video' && <OpenAI searchValue={searchValue} />}
               {selectedMenu === 'Guide Lexcom' && <Tutorial />}
             </Content>
           </Layout>
