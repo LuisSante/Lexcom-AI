@@ -50,6 +50,10 @@ const Login: React.FC<FieldType> = () => {
       );
   }
 
+  const recoverpassword = () =>{
+    navigate('/recoverpassword');
+  }
+
   return (
     <>
       {contextHolder}
@@ -101,7 +105,7 @@ const Login: React.FC<FieldType> = () => {
             >
               <Checkbox style={{ color: '#f6ffed' }}>Recuerdame</Checkbox>
               <br />
-              <a className="p-10px login-form-forgot" href="">
+              <a className="p-10px login-form-forgot" onClick={recoverpassword}>
                 ¿Olvidaste tu contraseña?
               </a>
             </Form.Item>
