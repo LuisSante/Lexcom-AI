@@ -1,20 +1,40 @@
-from django.urls import path
+from django.urls import path, include
 from .views import user
 from .views import serpapi, openai, tiktok, lexcomia
 
 from rest_framework_simplejwt import views as jwt_views
 
 urlpatterns = [
+    # Test token
+    path(r'home/', user.HomeView.as_view(), name ='home'),
+    
+    # Registro
     path(r'register' , user.RegisterView.as_view(), name="register"),
+    
+    # Create token access and token refresh for uptade the token access
     path(r'token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path(r'token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+
+    # Delete token access and add to the blacklist the token 
     path(r'logout/', user.LogoutView.as_view(), name='logout'),
-    path(r'home/', user.HomeView.as_view(), name ='home'),
+    
+    # Endpoints for SerpApi
     path(r'product/<str:id>/region_data' , serpapi.GoogleApiView.as_view({'get': 'region_data'}), name="region_data"),
     path(r'product/value=<str:id>/idregion=<str:id_region>/trends_data' , serpapi.GoogleApiView.as_view({'get': 'trends_data'}), name="product_trends"),
     path(r'product/<str:id>/topics_data' , serpapi.GoogleApiView.as_view({'get': 'topics_data'}), name="topics_data"),
+    
+    # Endpoints for  OpenAI
     path(r'openai/<str:id>' , openai.OpenAIApiView.as_view({'get': 'recommend_video'}), name="recommend_video"),
     path(r'copy_ads/<str:id>' , openai.OpenAIApiView.as_view({'get': 'recommend_copy'}), name="recommend_copy"),
+    
+    # Endpoint for TikTok Api
     path(r'tiktok/<str:id>' , tiktok.TiktTokApiView.as_view({'get': 'video_interest'}), name="video_interest"),
+
+    # Endpoint for predictions Lexcom
     path(r'lexcom/' , lexcomia.LexcomIA_ApiView.as_view(), name="lexcom"),
+
+    # Endpoint for reset password
+    path(r'password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset'))
+    
+
 ]
