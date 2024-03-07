@@ -20,12 +20,10 @@ const RecoverPassword = () => {
     }
 
     const onFinish = async (email: FieldType) => {
-        console.log(email)
         axios.post('http://localhost:8000/api/v1/password_reset/', email)
             .then(
                 res => {
                     if (res.status === 200) {
-                        console.log(res.data)
                         api.success({
                             message: 'Envío exitoso!',
                             description: 'Revise su correo electrónico',

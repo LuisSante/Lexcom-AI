@@ -14,7 +14,7 @@ const App: React.FC = () => {
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/recoverpassword" element={<RecoverPassword />} />
-        <Route path="/reset-password-form/" element={<ResetPassword />} />
+        <Route path="/reset-password-form/:token" element={<ResetPassword />} />
       </Routes>
     </BrowserRouter>
   )
