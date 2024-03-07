@@ -38,7 +38,6 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolling }) => {
 
     const scrollToSection = (id: string) => {
         const section = document.getElementById(id);
-        console.log(section);
         if (section) {
             section.scrollIntoView({
                 behavior: 'smooth',

@@ -61,12 +61,10 @@ const Register: React.FC = () => {
     const [api, contextHolder] = notification.useNotification();  
 
     const onFinish = (values: FormValues) => {
-        console.log(values)
         axios.post('http://localhost:8000/api/v1/register', values)
             .then(
                 res => {
                     if (res.status === 201) {
-                        console.log(res.data)
                         setUser([...user, res.data])
                         api.success({
                             message: 'Registro exitoso!',

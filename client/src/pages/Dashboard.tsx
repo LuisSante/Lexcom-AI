@@ -74,7 +74,6 @@ const items2: MenuProps['items'] = [
   }
 ].map((page) => {
   const key = page.key || page.label || page.name; // Usar key si está presente, de lo contrario, usar label
-  console.log(page.name)
   const generateChildren = page.children && page.children.length > 0; // Páginas que tienen subnavegación
 
   return {

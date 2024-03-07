@@ -25,7 +25,6 @@ const ResetPassword: React.FC = () => {
             .then(
                 res => {
                     if (res.status === 200) {
-                        console.log(res.data)
                         api.success({
                             message: 'Cambio de contraseña exitoso!',
                             duration: 1000
@@ -36,8 +35,6 @@ const ResetPassword: React.FC = () => {
             )
             .catch(
                 err => {
-                    console.log(updatedValues);
-                    console.log(updatedValues.token);
                     api.error({
                         message: 'Error al cambiar  la contraseña',
                         description: `${err.response.data.password}`,

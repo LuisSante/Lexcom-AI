@@ -87,8 +87,6 @@ const Tiktok: React.FC<TypeTikTok> = ({ searchValue }) => {
         }));
         // Asignamos el array de objetos de datos únicos a setDataSR
         setDataSR(uniqueDataArray);
-        console.log('termino', data);
-        console.log('termino', dataSR);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
     
