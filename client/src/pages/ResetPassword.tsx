@@ -5,7 +5,8 @@ import About from '../components/components_home/About';
 import '../css/recoverpassword.css'
 import logo from '../assets/lexcom.svg';
 import axios from 'axios';
-import { strongPasswordRegex } from '../components/logic/password_strong/password_strong';
+import { strongPasswordRegex } from '../components/logic/components_form/password_strong';
+import { formItemLayout, tailFormItemLayout } from '../components/logic/components_form/position_form';
 
 interface FormValues {
     password: string;
@@ -28,7 +29,7 @@ const ResetPassword: React.FC = () => {
                     if (res.status === 200) {
                         api.success({
                             message: 'Cambio de contraseña exitoso!',
-                            duration: 1000
+                            duration: 4
                         })
                     }
                     // navigate('/');
@@ -39,7 +40,7 @@ const ResetPassword: React.FC = () => {
                     api.error({
                         message: 'Error al cambiar  la contraseña',
                         description: `${err.response.data.password}`,
-                        duration: 1000
+                        duration: 4
                     })
                 }
             )
@@ -61,25 +62,19 @@ const ResetPassword: React.FC = () => {
                                 components: {
                                     Form: {
                                         labelColor: '#fff',
-                                        colorBgContainer: '#f6ffed',
-                                        controlOutline: '#000000',
                                     },
-                                    Checkbox: {
-
-                                    }
                                 },
                             }}
                         >
                             <div  >
                                 <span className='recover-subtitle'>Introduzca su nueva contraseña</span>
                                 <Form
-                                    name="resetpassword"
+                                    {...formItemLayout}
                                     form={form}
-                                    style={{ maxWidth: 600 }}
+                                    name="resetpassword"
                                     onFinish={onFinish}
-                                    labelCol={{ span: 50 }}
-                                    initialValues={{ remember: true }}
-                                    autoComplete="off"
+                                    style={{ maxWidth: 600 }}
+                                    scrollToFirstError
                                 >
                                     <Form.Item
                                         name="password"
@@ -87,7 +82,7 @@ const ResetPassword: React.FC = () => {
                                         rules={[
                                             {
                                                 required: true,
-                                                message: 'Please input your password!',
+                                                message: '¡Por favor ingrese su contraseña!',
                                             },
                                             {
                                                 validator: (_, value) =>
@@ -98,18 +93,18 @@ const ResetPassword: React.FC = () => {
                                         ]}
                                         hasFeedback
                                     >
-                                        <Input.Password />
+                                        <Input.Password/>
                                     </Form.Item>
 
                                     <Form.Item
                                         name="confirm"
-                                        label="Confirm Password"
+                                        label="Confirmar Password"
                                         dependencies={['password']}
                                         hasFeedback
                                         rules={[
                                             {
                                                 required: true,
-                                                message: 'Please confirm your password!',
+                                                message: '¡Por favor, confirme su contraseña!',
                                             },
                                             ({ getFieldValue }) => ({
                                                 validator(_, value) {
@@ -126,10 +121,10 @@ const ResetPassword: React.FC = () => {
 
                                     <Divider className="custom-divider" />
 
-                                    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                                    <Form.Item {...tailFormItemLayout}>
                                         <div className="recover-form-buttons">
                                             <Button className='recover-submit' type="primary" htmlType="submit">
-                                                Buscar
+                                                Cambiar
                                             </Button>
                                         </div>
                                     </Form.Item>

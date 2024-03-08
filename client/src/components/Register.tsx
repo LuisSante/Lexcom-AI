@@ -10,7 +10,8 @@ import {
 } from 'antd';
 import axios from 'axios';
 import { useState } from 'react';
-import { strongPasswordRegex } from './logic/password_strong/password_strong';
+import { strongPasswordRegex } from './logic/components_form/password_strong';
+import { formItemLayout, tailFormItemLayout } from './logic/components_form/position_form';
 
 interface FormValues {
     title: string;
@@ -32,29 +33,6 @@ interface FormValues {
 
 const { Option } = Select;
 
-const formItemLayout = {
-    labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 },
-    },
-    wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 },
-    },
-};
-
-const tailFormItemLayout = {
-    wrapperCol: {
-        xs: {
-            span: 24,
-            offset: 0,
-        },
-        sm: {
-            span: 16,
-            offset: 8,
-        },
-    },
-};
 
 const Register: React.FC = () => {
     const [form] = Form.useForm();
@@ -269,7 +247,7 @@ const Register: React.FC = () => {
                             He leído el <a href="">acuerdo</a>
                         </Checkbox>
                     </Form.Item>
-                    <Form.Item {...tailFormItemLayout}>
+                    <Form.Item >
                         <Button type="primary" htmlType="submit">
                             Register
                         </Button>
