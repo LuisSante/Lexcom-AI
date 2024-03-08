@@ -17,7 +17,7 @@ export const NavbarItems: NavbarItem[] = [
     {
         key: '2',
         id_ : 'services',
-        title: 'Services',
+        title: 'Servicios',
         url: '/services',
     },
     {

@@ -5,6 +5,7 @@ import About from '../components/components_home/About';
 import '../css/recoverpassword.css'
 import logo from '../assets/lexcom.svg';
 import axios from 'axios';
+import { strongPasswordRegex } from '../components/logic/password_strong/password_strong';
 
 interface FormValues {
     password: string;
@@ -27,7 +28,7 @@ const ResetPassword: React.FC = () => {
                     if (res.status === 200) {
                         api.success({
                             message: 'Cambio de contraseña exitoso!',
-                            duration: 4
+                            duration: 1000
                         })
                     }
                     // navigate('/');
@@ -38,7 +39,7 @@ const ResetPassword: React.FC = () => {
                     api.error({
                         message: 'Error al cambiar  la contraseña',
                         description: `${err.response.data.password}`,
-                        duration: 4
+                        duration: 1000
                     })
                 }
             )
@@ -88,6 +89,12 @@ const ResetPassword: React.FC = () => {
                                                 required: true,
                                                 message: 'Please input your password!',
                                             },
+                                            {
+                                                validator: (_, value) =>
+                                                    value && strongPasswordRegex.test(value)
+                                                        ? Promise.resolve()
+                                                        : Promise.reject(new Error('Contraseña débil!!! debe contener minúsculas, mayúsculas, números y símbolos (!*)')),
+                                            },
                                         ]}
                                         hasFeedback
                                     >
@@ -109,7 +116,7 @@ const ResetPassword: React.FC = () => {
                                                     if (!value || getFieldValue('password') === value) {
                                                         return Promise.resolve();
                                                     }
-                                                    return Promise.reject(new Error('The new password that you entered do not match!'));
+                                                    return Promise.reject(new Error('¡La nueva contraseña que ingresó no coincide!'));
                                                 },
                                             }),
                                         ]}

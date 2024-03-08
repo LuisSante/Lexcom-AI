@@ -10,6 +10,7 @@ import {
 } from 'antd';
 import axios from 'axios';
 import { useState } from 'react';
+import { strongPasswordRegex } from './logic/password_strong/password_strong';
 
 interface FormValues {
     title: string;
@@ -58,7 +59,7 @@ const tailFormItemLayout = {
 const Register: React.FC = () => {
     const [form] = Form.useForm();
     const [user, setUser] = useState<FormValues[]>([])
-    const [api, contextHolder] = notification.useNotification();  
+    const [api, contextHolder] = notification.useNotification();
 
     const onFinish = (values: FormValues) => {
         axios.post('http://localhost:8000/api/v1/register', values)
@@ -85,189 +86,195 @@ const Register: React.FC = () => {
             )
     }
 
-  
+
 
     return (
         <>
             {contextHolder}
             <ConfigProvider
-         theme={{
-           components: {
-             Form: {
-                     labelColor:'#fff',
-                     colorBgContainer: '#f6ffed',
-                     controlOutline:'#000000',
-             },
-           },
-         }}
-       >
-            <Form
-                {...formItemLayout}
-                form={form}
-                name="register"
-                onFinish={onFinish}
-                style={{ maxWidth: 600 }}
-                scrollToFirstError
+                theme={{
+                    components: {
+                        Form: {
+                            labelColor: '#fff',
+                            colorBgContainer: '#f6ffed',
+                            controlOutline: '#000000',
+                        },
+                    },
+                }}
             >
-
-                <Form.Item
-                    name="name"
-                    label="Name"
-                    tooltip=""
-                    rules={[{ required: true, message: 'Please input your name!', whitespace: true }]}
+                <Form
+                    {...formItemLayout}
+                    form={form}
+                    name="register"
+                    onFinish={onFinish}
+                    style={{ maxWidth: 600 }}
+                    scrollToFirstError
                 >
-                    <Input />
-                </Form.Item>
-                <Form.Item
-                    name="surname"
-                    label="Surname"
-                    tooltip=""
-                    rules={[{ required: true, message: 'Please input your surname!', whitespace: true }]}
-                >
-                    <Input />
-                </Form.Item>
-                <Form.Item
-                    name="phone"
-                    label="Phone Number"
-                    rules={[{ required: true, message: 'Please input your phone number!' }]}
-                >
-                    <Input style={{ width: '100%' }} />
-                </Form.Item>
 
-                <Form.Item
-                    name="country"
-                    label="Country"
-                    tooltip=""
-                    rules={[{ required: true, message: 'Please input your country!', whitespace: true }]}
-                >
-                    <Input />
-                </Form.Item>
+                    <Form.Item
+                        name="name"
+                        label="Nombres"
+                        tooltip=""
+                        rules={[{ required: true, message: '¡Por favor ingresa tu nombre!', whitespace: true }]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        name="surname"
+                        label="Apellidos"
+                        tooltip=""
+                        rules={[{ required: true, message: '¡Por favor ingresa tu apellido!', whitespace: true }]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        name="phone"
+                        label="Número de teléfono"
+                        rules={[{ required: true, message: '¡Por favor ingrese su número de teléfono!' }]}
+                    >
+                        <Input style={{ width: '100%' }} />
+                    </Form.Item>
 
-                <Form.Item
-                    name="city"
-                    label="City"
-                    tooltip=""
-                    rules={[{ required: true, message: 'Please input your city!', whitespace: true }]}
-                >
-                    <Input />
+                    <Form.Item
+                        name="country"
+                        label="País"
+                        tooltip=""
+                        rules={[{ required: true, message: '¡Por favor ingresa tu país!', whitespace: true }]}
+                    >
+                        <Input />
+                    </Form.Item>
 
-                </Form.Item>
+                    <Form.Item
+                        name="city"
+                        label="Ciudad"
+                        tooltip=""
+                        rules={[{ required: true, message: '¡Por favor ingresa tu ciudad!', whitespace: true }]}
+                    >
+                        <Input />
 
-                <Form.Item
-                    name="address"
-                    label="Address"
-                    tooltip=""
-                    rules={[{ required: true, message: 'Please input your address!', whitespace: true }]}
-                >
-                    <Input />
-                </Form.Item>
+                    </Form.Item>
 
-                <Form.Item
-                    name="email"
-                    label="E-mail"
-                    rules={[
-                        {
-                            type: 'email',
-                            message: 'The input is not valid E-mail!',
-                        },
-                        {
-                            required: true,
-                            message: 'Please input your E-mail!',
-                        },
-                    ]}
-                >
-                    <Input />
-                </Form.Item>
+                    <Form.Item
+                        name="address"
+                        label="Dirección"
+                        tooltip=""
+                        rules={[{ required: true, message: '¡Por favor ingrese su dirección!', whitespace: true }]}
+                    >
+                        <Input />
+                    </Form.Item>
 
-                <Form.Item
-                    name="password"
-                    label="Password"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your password!',
-                        },
-                    ]}
-                    hasFeedback
-                >
-                    <Input.Password />
-                </Form.Item>
-
-                <Form.Item
-                    name="confirm"
-                    label="Confirm Password"
-                    dependencies={['password']}
-                    hasFeedback
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please confirm your password!',
-                        },
-                        ({ getFieldValue }) => ({
-                            validator(_, value) {
-                                if (!value || getFieldValue('password') === value) {
-                                    return Promise.resolve();
-                                }
-                                return Promise.reject(new Error('The new password that you entered do not match!'));
+                    <Form.Item
+                        name="email"
+                        label="E-mail"
+                        rules={[
+                            {
+                                type: 'email',
+                                message: '¡La entrada no es un correo electrónico válido!',
                             },
-                        }),
-                    ]}
-                >
-                    <Input.Password />
-                </Form.Item>
+                            {
+                                required: true,
+                                message: '¡Por favor ingrese su correo electrónico!',
+                            },
+                        ]}
+                    >
+                        <Input />
+                    </Form.Item>
 
-                <Form.Item
-                    name="username"
-                    label="Username"
-                    tooltip="What do you want others to call you?"
-                    rules={[{ required: true, message: 'Please input your nickname!', whitespace: true }]}
-                >
-                    <Input />
-                </Form.Item>
+                    <Form.Item
+                        name="password"
+                        label="Password"
+                        rules={[
+                            {
+                                required: true,
+                                message: '¡Por favor ingrese su contraseña!',
+                            },
+                            {
+                                validator: (_, value) =>
+                                    value && strongPasswordRegex.test(value)
+                                        ? Promise.resolve()
+                                        : Promise.reject(new Error('Contraseña débil!!! debe contener minúsculas, mayúsculas, números y símbolos (!*)')),
+                            },
+                        ]}
+                        hasFeedback
+                    >
+                        <Input.Password />
+                    </Form.Item>
+
+                    <Form.Item
+                        name="confirm"
+                        label="Confirmar Password"
+                        dependencies={['password']}
+                        hasFeedback
+                        rules={[
+                            {
+                                required: true,
+                                message: '¡Por favor, confirme su contraseña!',
+                            },
+                            ({ getFieldValue }) => ({
+                                validator(_, value) {
+                                    if (!value || getFieldValue('password') === value) {
+                                        return Promise.resolve();
+                                    }
+                                    return Promise.reject(new Error('¡La nueva contraseña que ingresó no coincide!'));
+                                },
+                            }),
+                        ]}
+                    >
+                        <Input.Password />
+                    </Form.Item>
+
+                    <Form.Item
+                        name="username"
+                        label="Username"
+                        tooltip="¿Cómo quieres que te llamen los demás?"
+                        rules={[{ required: true, message: '¡Por favor ingresa tu usuario!', whitespace: true }]}
+                    >
+                        <Input />
+                    </Form.Item>
 
 
-                <Form.Item
-                    name="gender"
-                    label="Gender"
-                    rules={[{ required: true, message: 'Please select gender!' }]}
-                >
-                    <Select placeholder="select your gender">
-                        <Option value="male">Male</Option>
-                        <Option value="female">Female</Option>
-                        <Option value="other">Other</Option>
-                    </Select>
-                </Form.Item>
+                    <Form.Item
+                        name="gender"
+                        label="Género"
+                        rules={[{ required: true, message: '¡Por favor seleccione el género!' }]}
+                    >
+                        <Select placeholder="Selecciona tu género">
+                            <Option value="male">Male</Option>
+                            <Option value="female">Female</Option>
+                            <Option value="other">Other</Option>
+                        </Select>
+                    </Form.Item>
 
-                <Form.Item
-                    name="date_of_birth"
-                    label="Date of Birth"
-                    rules={[{ required: true, message: 'Please select gender!' }]}
-                >
+                    <Form.Item
+                        name="date_of_birth"
+                        label="Fecha de nacimiento"
+                        rules={[{ required: true, message: '¡Por favor seleccione la fecha de su cumpleaños!' }]}
+                    >
 
-                    <DatePicker />
-                </Form.Item>
+                        <DatePicker />
+                    </Form.Item>
 
-                <Form.Item
-                    name="agreement"
-                    valuePropName="checked"
-                    rules={[
-                        {
-                            validator: (_, value) =>
-                                value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
-                        },
-                    ]}
-                    {...tailFormItemLayout}
-                >
-                    <Checkbox>
-                        I have read the <a href="">agreement</a>
-                    </Checkbox>
-                </Form.Item>
-                <Form.Item {...tailFormItemLayout}>
-                    <Button type="primary" htmlType="submit">
-                        Register
-                    </Button>
-                </Form.Item>
-            </Form>
+                    <Form.Item
+                        name="agreement"
+                        valuePropName="checked"
+                        rules={[
+                            {
+                                validator: (_, value) =>
+                                    value ? Promise.resolve() : Promise.reject(new Error('Debe aceptar el acuerdo')),
+                            },
+                        ]}
+                        {...tailFormItemLayout}
+                    >
+                        <Checkbox style={{ color: '#f6ffed' }}>
+                            He leído el <a href="">acuerdo</a>
+                        </Checkbox>
+                    </Form.Item>
+                    <Form.Item {...tailFormItemLayout}>
+                        <Button type="primary" htmlType="submit">
+                            Register
+                        </Button>
+                    </Form.Item>
+                </Form>
             </ConfigProvider>
         </>
     );
