@@ -247,7 +247,7 @@ const Register: React.FC = () => {
                             He leído el <a href="">acuerdo</a>
                         </Checkbox>
                     </Form.Item>
-                    <Form.Item >
+                    <Form.Item {...tailFormItemLayout}>
                         <Button type="primary" htmlType="submit">
                             Register
                         </Button>
