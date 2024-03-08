@@ -69,7 +69,7 @@ const Register: React.FC = () => {
                         api.success({
                             message: 'Registro exitoso!',
                             description: 'Usuario registrado correctamente',
-                            duration: 1000
+                            duration: 4
                         })
                     }
                 }
@@ -79,7 +79,7 @@ const Register: React.FC = () => {
                     api.error({
                         message: 'Error al registrar usuario',
                         description: `${err.message}`,
-                        duration: 1000
+                        duration: 4
                     })
                 }
             )
