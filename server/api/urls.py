@@ -1,6 +1,5 @@
 from django.urls import path, include
-from .views import user
-from .views import serpapi, openai, tiktok, lexcomia
+from .views import user, serpapi, openai, tiktok, lexcomia, usersettings
 
 from rest_framework_simplejwt import views as jwt_views
 
@@ -17,6 +16,9 @@ urlpatterns = [
 
     # Delete token access and add to the blacklist the token 
     path(r'logout/', user.LogoutView.as_view(), name='logout'),
+
+    # Update perfil 
+    path(r'update/', usersettings.UserSettingsView.as_view(), name='settings'),
     
     # Endpoints for SerpApi
     path(r'product/<str:id>/region_data' , serpapi.GoogleApiView.as_view({'get': 'region_data'}), name="region_data"),
