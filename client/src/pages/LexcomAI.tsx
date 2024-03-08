@@ -298,7 +298,7 @@ const LexcomAI: React.FC = () => {
                     </Form.Item>
 
                 </Form>
-                {isLoading && <Skeleton/>}
+                {isLoading && <Skeleton active/>}
                 {chartData && !isLoading && (
                     <div>
                         <h2>Diagrama sectorial del producto buscado</h2>
