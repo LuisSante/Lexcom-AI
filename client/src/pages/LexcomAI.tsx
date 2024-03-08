@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Checkbox, Col, ConfigProvider, Form, Row, Typography } from 'antd';
+import { Button, Checkbox, Col, ConfigProvider, Form, Row, Skeleton, Typography } from 'antd';
 import { Input } from 'antd';
 import './../css/TimelineDemo.css';
 import {
@@ -15,6 +15,7 @@ import {
 import axiosInstance from '../components/axios';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
+import { formItemLayout } from '../components/logic/components_form/position_form';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 interface attibute_bool {
@@ -96,8 +97,10 @@ const LexcomAI: React.FC = () => {
     });
 
     const [chartData, setChartData] = useState<TypePrediction | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     
     const onFinish = (formData: FormValues) => {
+        setIsLoading(true);
         axiosInstance.post('lexcom/', formData)
         .then(response => {
             const data = response.data;
@@ -126,6 +129,9 @@ const LexcomAI: React.FC = () => {
         })
         .catch(error => {
             console.error('Error al enviar los datos:', error);
+        })
+        .finally(() => {
+            setIsLoading(false);
         });
     }
 
@@ -141,13 +147,12 @@ const LexcomAI: React.FC = () => {
                 }}
             >
                 <Form
-                    name="basic"
+                    {...formItemLayout}
+                    name="lexcom"
                     labelCol={{ span: 20 }}
-                    wrapperCol={{ span: 8 }}
                     style={{ maxWidth: '100%' }}
                     initialValues={{ ...initialFormValues }}
                     onFinish={onFinish}
-                    autoComplete="off"
                 >
                     <div>
                         <div>
@@ -288,12 +293,13 @@ const LexcomAI: React.FC = () => {
                     </div>
                     <Form.Item wrapperCol={{ offset: 20 }}>
                         <Button type="primary" htmlType="submit">
-                            Enviar
+                            Predecir
                         </Button>
                     </Form.Item>
 
                 </Form>
-                {chartData && (
+                {isLoading && <Skeleton/>}
+                {chartData && !isLoading && (
                     <div>
                         <h2>Diagrama sectorial del producto buscado</h2>
                         <Pie data={chartData} />
