@@ -94,7 +94,7 @@ const ResetPassword: React.FC = () => {
                                         <Input.Password />
                                     </Form.Item>
 
-                                    {/* <Form.Item
+                                    <Form.Item
                                         name="confirm"
                                         label="Confirm Password"
                                         dependencies={['password']}
@@ -115,7 +115,7 @@ const ResetPassword: React.FC = () => {
                                         ]}
                                     >
                                         <Input.Password />
-                                    </Form.Item> */}
+                                    </Form.Item>
 
                                     <Divider className="custom-divider" />
 

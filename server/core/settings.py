@@ -19,6 +19,7 @@ from datetime import timedelta
 load_dotenv()
 
 DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')
+PASSWORD_GMAIL = os.getenv('PASSWORD_GMAIL')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -194,8 +195,8 @@ SIMPLE_JWT = {
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "lsantet@unsa.edu.com"
-EMAIL_HOST_PASSWORD = "LFsanteT"
+EMAIL_HOST_USER = "lexcomsoporte@gmail.com"
+EMAIL_HOST_PASSWORD = f"{PASSWORD_GMAIL}"
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
