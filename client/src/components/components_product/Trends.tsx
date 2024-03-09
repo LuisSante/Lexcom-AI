@@ -1,10 +1,10 @@
-import { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { Line } from 'react-chartjs-2';
 
 import Chart from 'chart.js/auto';
-import { CategoryScale , ChartData } from 'chart.js';
+import { CategoryScale, ChartData } from 'chart.js';
 import axiosInstance from "../axios";
+import { notification } from "antd";
 
 Chart.register(CategoryScale);
 
@@ -28,7 +28,7 @@ interface TypeTrends {
 }
 
 
-const Trends: React.FC<TypeTrends> = ({ searchValue, idRegion}) => {
+const Trends: React.FC<TypeTrends> = ({ searchValue, idRegion }) => {
   const [chartData, setChartData] = useState<ChartData<"line">>({
     labels: [],
     datasets: [{
@@ -39,45 +39,60 @@ const Trends: React.FC<TypeTrends> = ({ searchValue, idRegion}) => {
       tension: 0
     }]
   });
+  const [api, contextHolder] = notification.useNotification();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const url = `http://localhost:8000/api/v1/product/value=${searchValue}/idregion=${idRegion}/trends_data`;
-        const response: AxiosResponse<TrendsData> = await axiosInstance.get(url);
-        const data = response.data.timeline_data;
+    const fetchData = () => {
+      const url = `product/value=${searchValue}/idregion=${idRegion}/trends_data`;
+      axiosInstance.get<TrendsData>(url)
+        .then(response => {
+          const data = response.data.timeline_data;
+          const labels = data.map(item => item.date);
+          const value = data.map(item => parseInt(item.values[0].value));
 
-        const labels = data.map(item => item.date);
-        const value = data.map(item => parseInt(item.values[0].value));
+          const new_chartData: ChartData<"line"> = {
+            labels: labels,
+            datasets: [
+              {
+                label: `Valores de ${searchValue}`,
+                data: value,
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+              }
+            ]
+          };
 
-        const new_chartData: ChartData<"line"> = {
-          labels: labels,
-          datasets: [
-            {
-              label: `Valores de ${searchValue}`,
-              data: value,
-              fill: false,
-              borderColor: 'rgb(75, 192, 192)',
-              tension: 0.1
-            }
-          ]
-        };
+          setChartData(new_chartData);
 
-        setChartData(new_chartData);
+          api.success({
+            message: 'Paises identificados',
+            description: 'Espere por favor',
+            duration: 4
+          });
 
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+        })
+        .catch(err => {
+          api.error({
+            message: 'Error al buscar paise',
+            duration: 4
+          });
+          api.error({
+            message: 'Error al realizar la operación',
+            description: `${err.message}`,
+            duration: 4
+          });
+        })
     };
 
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchValue, idRegion]);
+  }, [searchValue, idRegion, api]);
 
   return (
     <>
+      {contextHolder}
       <div style={{ height: '400px', width: '600px' }}>
-      <Line data={chartData} options={{ scales: { x: { type: 'category' } } }} />
+        <Line data={chartData} options={{ scales: { x: { type: 'category' } } }} />
       </div>
     </>
   );

@@ -96,9 +96,9 @@ const Dashboard: React.FC = () => {
     },
   ];
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     try {
-      await axiosInstance.post('logout/', {
+      axiosInstance.post('logout/', {
         refresh_token: localStorage.getItem('refresh_token'),
       });
 
@@ -112,7 +112,7 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const handleSettings = async () => {
+  const handleSettings = async() => {
     navigate('/settings');
   }
 
