@@ -38,7 +38,6 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolling }) => {
 
     const scrollToSection = (id: string) => {
         const section = document.getElementById(id);
-        console.log(section);
         if (section) {
             section.scrollIntoView({
                 behavior: 'smooth',
@@ -80,7 +79,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolling }) => {
                 ))}
                 <div className={clicked ? "button-container active" : "button-container"}>
                     <Button className="login-btn" onClick={showLoginModal}>Login</Button>
-                    <Button className="register-btn" onClick={showRegisterModal}>Register</Button>
+                    <Button className="register-btn" onClick={showRegisterModal}>Regístrate</Button>
                 </div>
                 <ConfigProvider
                   theme={{
@@ -109,7 +108,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolling }) => {
                 </Modal>
                 
                 <Modal
-                    title="Register"
+                    title="Registrate en LexCom"
                     className="login-container"
                     open={registerModalVisible}
                     onCancel={handleRegisterModalCancel}

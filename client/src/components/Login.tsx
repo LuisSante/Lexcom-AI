@@ -32,7 +32,7 @@ const Login: React.FC<FieldType> = () => {
             api.success({
               message: 'Inicio de sesión exitoso!',
               description: 'Bienvenido de nuevo a LexCom',
-              duration: 1000
+              duration: 4
             });
             
             navigate('/dashboard');
@@ -44,10 +44,14 @@ const Login: React.FC<FieldType> = () => {
           api.error({
             message: 'Error al iniciar sesión',
             description: 'Por favor, revise su usuario o contraseña. ' + `${err.message}`,
-            duration: 1000
+            duration: 4
           });
         }
       );
+  }
+
+  const recoverpassword = () =>{
+    navigate('/recoverpassword');
   }
 
   return (
@@ -101,7 +105,7 @@ const Login: React.FC<FieldType> = () => {
             >
               <Checkbox style={{ color: '#f6ffed' }}>Recuerdame</Checkbox>
               <br />
-              <a className="p-10px login-form-forgot" href="">
+              <a className="p-10px login-form-forgot" onClick={recoverpassword}>
                 ¿Olvidaste tu contraseña?
               </a>
             </Form.Item>

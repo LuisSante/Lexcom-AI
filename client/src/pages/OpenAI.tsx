@@ -25,7 +25,6 @@ const OpenAI: React.FC<TypeOpenAI> = ({ searchValue }) => {
                 const url = `http://localhost:8000/api/v1/openai/${searchValue}`
                 const response: AxiosResponse<OpenAIData> = await axiosInstance.get(url)
                 axiosInstance.defaults.headers['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
-                console.log(response.data);
                 setData(response.data);
 
             } catch (error) {

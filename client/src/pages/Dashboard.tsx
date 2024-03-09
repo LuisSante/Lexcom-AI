@@ -112,6 +112,10 @@ const Dashboard: React.FC = () => {
     }
   };
 
+  const handleSettings = async () => {
+    navigate('/settings');
+  }
+
   const items: MenuProps['items'] = [
     {
       key: '1',
@@ -132,7 +136,7 @@ const Dashboard: React.FC = () => {
     {
       key: '3',
       label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
+        <a target="_blank" rel="noopener noreferrer" onClick={handleSettings}>
           Configuraciones
         </a>
       ),

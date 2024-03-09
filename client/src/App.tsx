@@ -2,8 +2,9 @@ import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
-// import Product from './pages/Product';
-
+import RecoverPassword from './pages/RecoverPassword';
+import ResetPassword from './pages/ResetPassword';
+import Settings from './pages/Settings';
 
 const App: React.FC = () => {
 
@@ -13,7 +14,9 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        {/* <Route path="/product" element={<Product />} /> */}
+        <Route path="/recoverpassword" element={<RecoverPassword />} />
+        <Route path="/reset-password-form/:token" element={<ResetPassword />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </BrowserRouter>
   )

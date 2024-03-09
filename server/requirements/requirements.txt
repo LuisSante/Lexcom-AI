@@ -37,6 +37,8 @@ django==5.0.1
     #   djangorestframework-simplejwt
 django-cors-headers==4.3.1
     # via -r requirements.in
+django-rest-passwordreset==1.4.0
+    # via -r requirements.in
 djangorestframework==3.14.0
     # via
     #   -r requirements.in
@@ -61,9 +63,7 @@ idna==3.6
     #   httpx
     #   requests
 joblib==1.3.2
-    # via
-    #   -r requirements.in
-    #   scikit-learn
+    # via scikit-learn
 numpy==1.26.4
     # via
     #   scikit-learn
@@ -86,7 +86,7 @@ pytz==2023.3.post1
     # via djangorestframework
 requests==2.31.0
     # via google-search-results
-scikit-learn==1.4.1.post1
+scikit-learn==1.3.2
     # via -r requirements.in
 scipy==1.12.0
     # via scikit-learn

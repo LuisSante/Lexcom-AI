@@ -20,16 +20,13 @@ axiosInstance.interceptors.response.use(
 	},
 	async function (error) {
         const originalRequest = error.config;
-		console.log("LUIS SANTE" , originalRequest);
 		
 		if (typeof error.response === 'undefined') {
-			console.log(error.response);
 			alert(
 				'A server/network error occurred. ' +
 				'Looks like CORS might be the problem. ' +
 				'Sorry about this - we will get it fixed shortly.'
 			);
-			console.log("ERROR", error);
 			return Promise.reject(error);
 		}
 
@@ -53,7 +50,6 @@ axiosInstance.interceptors.response.use(
 
 				// exp date in token is expressed in seconds, while now() returns milliseconds:
 				const now = Math.ceil(Date.now() / 1000);
-				console.log(tokenParts.exp);
 
 				if (tokenParts.exp > now) {
 					return axiosInstance
@@ -73,11 +69,11 @@ axiosInstance.interceptors.response.use(
 							console.log(err);
 						});
 				} else {
-					console.log('Refresh token is expired', tokenParts.exp, now);
+					// console.log('Refresh token is expired', tokenParts.exp, now);
 					window.location.href = '/';
 				}
 			} else {
-				console.log('Refresh token not available.');
+				// console.log('Refresh token not available.');
 				window.location.href = '/';
 			}
 		}

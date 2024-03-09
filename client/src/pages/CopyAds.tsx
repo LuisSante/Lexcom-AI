@@ -25,7 +25,6 @@ const CopyAI: React.FC<TypeCopyAds> = ({ searchValue }) => {
                 const url = `http://localhost:8000/api/v1/copy_ads/${searchValue}`
                 const response: AxiosResponse<CopyAds> = await axiosInstance.get(url)
                 axiosInstance.defaults.headers['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
-                console.log(response.data);
                 setData(response.data);
 
             } catch (error) {
