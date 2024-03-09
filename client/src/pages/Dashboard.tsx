@@ -3,24 +3,23 @@ import CPA_CVU from '../components/components_calculator/Calculator_2';
 import Precio_del_Producto from '../components/components_calculator/Calculator_3';
 import Tutorial from '../pages/Tutorial';
 import '../css/Dashboard.css';
-import React, { useEffect, useState } from 'react';
-import { Avatar, Space, Input, Button, notification } from 'antd';
-import { Dropdown, ConfigProvider, Layout, Menu} from 'antd';
+import React, { useEffect, useRef, useState } from 'react';
+import { Avatar, Space, Input, Button, notification, Tour } from 'antd';
+import { Dropdown, ConfigProvider, Layout, Menu } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import { UserOutlined, CalculatorOutlined } from '@ant-design/icons';
+import { UserOutlined, CalculatorOutlined, TikTokOutlined, TrophyOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 
 import logo from '../assets/lexcom.svg';
 import '../css/Dashboard.css';
-import {SmileOutlined, CloseOutlined} from '@ant-design/icons';
+import { SmileOutlined, CloseOutlined } from '@ant-design/icons';
 import {
-  AppstoreOutlined,
-  ContainerOutlined,
+  QuestionCircleOutlined,
+  BookOutlined,
   DesktopOutlined,
-  MailOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  PieChartOutlined,
+  LineChartOutlined,
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import About from '../components/components_home/About';
@@ -30,119 +29,72 @@ import CopyAds from './CopyAds';
 import Tiktok from './Tiktok';
 import LexcomAI from './LexcomAI';
 import axiosInstance from '../components/axios';
-
-
-const { Header, Content, Sider } = Layout;
-//<Avatar src={<img src={url} alt="avatar" />} />
-const calculatorFunctions = [Standard, CPA_CVU, Precio_del_Producto];
-const promptFunctions = ['Prompt Generator Video', 'Prompt Generator Copys'];
-
-
-
-type MenuItem = Required<MenuProps>['items'][number];
-function getItem(
-  label: React.ReactNode,
-  key: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[],
-  type?: 'group',
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    type,
-  } as MenuItem;
-}
-
-
-
-const itemsM: MenuItem[] = [
-  getItem('GeoTrend Lex', 'GeoTrend Lex', <PieChartOutlined />),
-  getItem('Budget Control Pro', 'BudgetControlPro', <MailOutlined />, [
-    getItem('Standard', '3'),
-    getItem('CPA CVU', '4'),
-    getItem('Precio del Producto', '5'),
-  ]),
-
-  getItem('LexIA Determination', 'LexIA Determination', <DesktopOutlined />),
-  getItem('TikTok TrendFeed', 'TikTok TrendFeed', <ContainerOutlined />),
-  getItem('Prompt Generator Video', 'Prompt Generator Video', <AppstoreOutlined />),
-  getItem('Lexcom Courses', 'Lexcom Courses', <ContainerOutlined />),
-  getItem('Guide Lexcom', 'Guide Lexcom', <AppstoreOutlined />),
-
-];
-
-
-
-const items2: MenuProps['items'] = [
-  {
-    key: 'GeoTrend Lex',
-    label: 'GeoTrend Lex',
-    icon: UserOutlined,
-  },
-  {
-    key: 'BudgetControlPro',
-    label: 'BudgetControlPro',
-    icon: CalculatorOutlined,
-    children: calculatorFunctions.map((calculatorFunc) => ({
-      key: `${calculatorFunc.name}`,
-      label: `${calculatorFunc.name}`,
-    })),
-  } as any,
-  {
-    key: 'LexIA Determination',
-    label: 'LexIA Determination',
-    icon: UserOutlined,
-  },
-  {
-    key: 'TikTok TrendFeed',
-    label: 'TikTok TrendFeed',
-    icon: UserOutlined,
-  },
-  {
-    key: 'PromptGenerators',
-    label: 'Prompt Generators',
-    icon: UserOutlined,
-    children: promptFunctions.map((promptFunc) => ({
-      key: promptFunc,
-      label: promptFunc,
-    })),
-  },
-  {
-    key: 'Lexcom Courses',
-    label: 'Lexcom Courses',
-    icon: UserOutlined,
-  },
-  {
-    key: 'Guide Lexcom',
-    label: 'Guide Lexcom',
-    icon: UserOutlined,
-  }
-].map((page) => {
-  const key = page.key || page.label || page.name; // Usar key si está presente, de lo contrario, usar label
-  console.log(page.name)
-  const generateChildren = page.children && page.children.length > 0; // Páginas que tienen subnavegación
-
-  return {
-    key: key,
-    label: key,
-    children: generateChildren ? page.children : undefined,
-  };
-});
-
+import type { TourProps } from 'antd';
 
 const Dashboard: React.FC = () => {
+  const { Header, Content, Sider } = Layout;
+  const ref1 = useRef(null);
+  const ref2 = useRef(null);
+  const ref3 = useRef(null);
+  const ref4 = useRef(null);
+  const ref5 = useRef(null);
+  const ref6 = useRef(null);
+  const ref7 = useRef(null);
+
+  const [open, setOpen] = useState<boolean>(false);
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
-  // const {
-  //   token: { borderRadiusLG },
-  // } = theme.useToken();
-  //const url = 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg';
-
   const [selectedMenu, setSelectedMenu] = useState<string | null>('Guide Lexcom');
   const [marginL, setmarginL] = useState(250);
+
+
+  const steps: TourProps['steps'] = [
+    {
+      title: 'Upload File',
+      description: 'Put your files here.',
+      placement: 'right',
+      //cover: (
+      //  <img
+      //    alt="tour.png"
+      //    src="https://user-images.githubusercontent.com/5378891/197385811-55df8480-7ff4-44bd-9d43-a7dade598d70.png"
+      //  />
+      //),
+      target: () => ref1.current,
+    },
+    {
+      title: 'Save',
+      description: 'Save your changes.',
+      placement: 'right',
+      target: () => ref2.current,
+    },
+    {
+      title: 'Other Actions',
+      description: 'Click to see other actions.',
+      placement: 'right',
+      target: () => ref3.current,
+    },
+    {
+      title: 'Other Actions',
+      description: 'Click to see other actions.',
+      placement: 'right',
+      target: () => ref4.current,
+    }, {
+      title: 'Other Actions',
+      description: 'Click to see other actions.',
+      placement: 'right',
+      target: () => ref5.current,
+    }, {
+      title: 'Other Actions',
+      description: 'Click to see other actions.',
+      placement: 'right',
+      target: () => ref6.current,
+    }, {
+      title: 'Other Actions',
+      description: 'Click to see other actions.',
+      placement: 'right',
+      target: () => ref7.current,
+    },
+  ];
 
   const handleLogout = async () => {
     try {
@@ -196,37 +148,6 @@ const Dashboard: React.FC = () => {
     },
   ];
 
-  // const ref1 = useRef(null);
-  // const ref2 = useRef(null);
-  // const ref3 = useRef(null);
-
-  // const [open, setOpen] = useState<boolean>(false);
-
-
-  // const steps: TourProps['steps'] = [
-  //   {
-  //     title: 'Upload File',
-  //     description: 'Put your files here.',
-  //     cover: (
-  //       <img
-  //         alt="tour.png"
-  //         src="https://user-images.githubusercontent.com/5378891/197385811-55df8480-7ff4-44bd-9d43-a7dade598d70.png"
-  //       />
-  //     ),
-  //     target: () => ref1.current,
-  //   },
-  //   {
-  //     title: 'Save',
-  //     description: 'Save your changes.',
-  //     target: () => ref2.current,
-  //   },
-  //   {
-  //     title: 'Other Actions',
-  //     description: 'Click to see other actions.',
-  //     target: () => ref3.current,
-  //   },
-  // ];
-
   const [searchValue, setSearchValue] = useState<string>("");
   const [api, contextHolder] = notification.useNotification();
   const Context = React.createContext({ name: 'Default' });
@@ -265,6 +186,7 @@ const Dashboard: React.FC = () => {
         token: {
           fontFamily: "Poppins, sans-serif",
         }
+
       }}
     >
       {contextHolder}
@@ -298,9 +220,6 @@ const Dashboard: React.FC = () => {
               </Space>
             </a>
           </Dropdown>
-          {/* <Button type="primary" onClick={() => setOpen(true)}>
-            Begin Tour
-          </Button> */}
         </Header>
         <Layout >
           <Sider className="lexcom-sider"
@@ -322,7 +241,6 @@ const Dashboard: React.FC = () => {
                   className="menu-button"
                   icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                   onClick={() => setCollapsed(!collapsed)}
-
                 />
               </div>
             }
@@ -333,8 +251,6 @@ const Dashboard: React.FC = () => {
               mode="inline"
               defaultSelectedKeys={['1']}
               theme="dark"
-              items={itemsM}
-              // onSelect={(item) => setSelectedMenu(item.key as string)}
               onSelect={(item) => {
                 if (item.key === 'Guide Lexcom') {
                   setSelectedMenu('Guide Lexcom');
@@ -346,9 +262,49 @@ const Dashboard: React.FC = () => {
                   setSelectedMenu(item.key as string);
                 }
               }}
-            />
+            >
+              <Menu.Item key={'GeoTrend Lex'} icon={<LineChartOutlined ref={ref1} />}> {/* Utilizamos el ref aquí */}
+                {'GeoTrend Lex'}
+              </Menu.Item>
+              <Menu.SubMenu icon={<CalculatorOutlined ref={ref2} />} key={'BudgetControlPro'} title={'Budget Control Pro'}>
+                <Menu.ItemGroup key={'BudgetControlPro'}>
+                  <Menu.Item key={'Standard'}>
+                    {'Standard'}
+                  </Menu.Item>
+                  <Menu.Item key={'CPA_CVU'}>
+                    {'CPA CVU'}
+                  </Menu.Item>
+                  <Menu.Item key={'Precio_del_Producto'}>
+                    {'Precio del Producto'}
+                  </Menu.Item>
+                </Menu.ItemGroup>
+              </Menu.SubMenu>
+              <Menu.Item key={'LexIA Determination'} icon={<TrophyOutlined ref={ref3} />}> {/* Utilizamos el ref aquí */}
+                {'LexIA Determination'}
+              </Menu.Item>
+              <Menu.Item key={'TikTok TrendFeed'} icon={<TikTokOutlined ref={ref4} />}> {/* Utilizamos el ref aquí */}
+                {'TikTok TrendFeed'}
+              </Menu.Item>
+              <Menu.SubMenu icon={<DesktopOutlined ref={ref5} />} key={'Prompt Generators'} title={'Prompt Generators'}>
+                <Menu.ItemGroup key={'Prompt Generators'} >
+                  <Menu.Item key={'Prompt Generator Video'}>
+                    {'Prompt Generator Video'}
+                  </Menu.Item>
+                  <Menu.Item key={'Prompt Generator Copys'}>
+                    {'Prompt Generator Copys'}
+                  </Menu.Item>
+                </Menu.ItemGroup>
+              </Menu.SubMenu>
+              <Menu.Item key={'Lexcom Courses'} icon={<BookOutlined ref={ref6} />}> {/* Utilizamos el ref aquí */}
+                {'Lexcom Courses'}
+              </Menu.Item>
+              <Menu.Item key={'Guide Lexcom'} icon={<QuestionCircleOutlined ref={ref7} />} onClick={() => setOpen(true)}> {/* Utilizamos el ref aquí */}
+                {'Guide Lexcom'}
+              </Menu.Item>
+            </Menu>
 
           </Sider>
+          <Tour open={open} onClose={() => setOpen(false)} steps={steps} />
           <Layout style={{
             padding: 24,
             minHeight: 360,
