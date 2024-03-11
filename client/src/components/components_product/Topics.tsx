@@ -1,6 +1,6 @@
 import type { TableColumnsType, TableProps } from "antd";
 import { useEffect, useState } from "react";
-import { Table } from 'antd';
+import { Table, notification } from 'antd';
 import axiosInstance from "../axios";
 
 
@@ -45,22 +45,35 @@ const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter,
 
 const Topics: React.FC<TypeTopics> = ({ searchValue }) => {
   const [data, setData] = useState<TopicsData[] | null>(null);
+  const [api, contextHolder] = notification.useNotification();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const url = `http://localhost:8000/api/v1/product/${searchValue}/topics_data`
-        const response = await axiosInstance.get(url)
-        setData(response.data);
-
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+    const fetchData = () => {
+      const url = `product/${searchValue}/topics_data`
+      axiosInstance.get(url)
+        .then(response => {
+          setData(response.data);
+          api.success({
+            message: 'Operación realizada',
+            description: 'Espere por favor',
+            duration: 4
+          });
+        })
+        .catch(err => {
+          api.error({
+            message: 'No hay productos relacionados',
+            duration: 4
+          });
+          api.error({
+            message: 'Error al realizar la operación',
+            description: `${err.message}`,
+            duration: 4
+          });
+        })
     };
 
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchValue]);
+  }, [searchValue, api]);
 
   const transformData = (topicsData: TopicsData[] | null): DataType[] => {
     if (!topicsData) return [];
@@ -75,6 +88,7 @@ const Topics: React.FC<TypeTopics> = ({ searchValue }) => {
 
   return (
     <div>
+      {contextHolder}
       <Table columns={columns} dataSource={transformData(data)} onChange={onChange} pagination={{ pageSize: 5 }} />
     </div>
   );
