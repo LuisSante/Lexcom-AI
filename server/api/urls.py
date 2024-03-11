@@ -18,7 +18,7 @@ urlpatterns = [
     path(r'logout/', user.LogoutView.as_view(), name='logout'),
 
     # Update perfil 
-    path(r'update/', usersettings.UserSettingsView.as_view(), name='settings'),
+    path(r'update/', usersettings.UserDetailView.as_view(), name='settings'),
     
     # Endpoints for SerpApi
     path(r'product/<str:id>/region_data' , serpapi.GoogleApiView.as_view({'get': 'region_data'}), name="region_data"),

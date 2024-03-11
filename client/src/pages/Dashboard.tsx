@@ -50,8 +50,8 @@ const Dashboard: React.FC = () => {
 
   const steps: TourProps['steps'] = [
     {
-      title: 'Upload File',
-      description: 'Put your files here.',
+      title: 'GeoTrend Lex',
+      description: 'Explora la pestaña de ranking de ventas en la parte izquierda de tu pantalla. Con esta pestaña podrás conocer si tu producto tiene un buen interés y en que países es el más buscado.',
       placement: 'right',
       //cover: (
       //  <img
@@ -62,35 +62,35 @@ const Dashboard: React.FC = () => {
       target: () => ref1.current,
     },
     {
-      title: 'Save',
-      description: 'Save your changes.',
+      title: 'Budget Control Pro',
+      description: 'Te ofrecemos tres calculadoras para que de esta forma puedas saber que precio debe tener tu producto, el CPA y CPU asi como estadisticas generales.',
       placement: 'right',
       target: () => ref2.current,
     },
     {
-      title: 'Other Actions',
-      description: 'Click to see other actions.',
+      title: 'LexIA Determination',
+      description: 'Aquí conocerás si tu producto tendrá éxito o no a la hora de vender. Completa el formulario y no olvides poner el interés que anotaste anteriormente.',
       placement: 'right',
       target: () => ref3.current,
     },
     {
-      title: 'Other Actions',
-      description: 'Click to see other actions.',
+      title: 'TikTok TrendFeed',
+      description: 'Visualizar a la competencia es clave del éxito, ya que podrás conocer sus puntos débiles y usarlo a tu favor. Con esta ventana tendrás los tiktoks más populares de tu producto, úsalos de inspiración para elaborar tu propio video ganador.',
       placement: 'right',
       target: () => ref4.current,
     }, {
-      title: 'Other Actions',
-      description: 'Click to see other actions.',
+      title: 'Prompt Generators',
+      description: '¿Tu producto es ganador, pero no sabes como estructurar tu video para que sea una venta segura? En esta pestaña obtendrás ideas de como hacerlo, te brindamos una estructura ganadora para que puedas estructurar tu video y generar tus copys.',
       placement: 'right',
       target: () => ref5.current,
     }, {
-      title: 'Other Actions',
-      description: 'Click to see other actions.',
+      title: 'Lexcom Courses',
+      description: '¿No sabes como continuar vendiendo? Te ofrecemos una amplia variedad de cursos que te permitiran continuar tu camino al exito.',
       placement: 'right',
       target: () => ref6.current,
     }, {
-      title: 'Other Actions',
-      description: 'Click to see other actions.',
+      title: 'Guide Lexcom',
+      description: 'Ver el tutorial',
       placement: 'right',
       target: () => ref7.current,
     },
@@ -117,23 +117,7 @@ const Dashboard: React.FC = () => {
   }
 
   const items: MenuProps['items'] = [
-    {
-      key: '1',
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-          Perfil
-        </a>
-      ),
-    },
-    {
-      key: '2',
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-          Mi Plan
-        </a>
-      ),
-    },
-    {
+        {
       key: '3',
       label: (
         <a target="_blank" rel="noopener noreferrer" onClick={handleSettings}>
@@ -308,7 +292,7 @@ const Dashboard: React.FC = () => {
             </Menu>
 
           </Sider>
-          <Tour open={open} onClose={() => setOpen(false)} steps={steps} />
+          <Tour open={open} onClose={() => setOpen(false)} steps={steps}  />
           <Layout style={{
             padding: 24,
             minHeight: 360,
