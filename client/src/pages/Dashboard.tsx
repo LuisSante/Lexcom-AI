@@ -116,10 +116,6 @@ const Dashboard: React.FC = () => {
     navigate('/settings');
   }
   
-  const handleHome = async() => {
-    navigate('/');
-  }
-
   const items: MenuProps['items'] = [
     {
       key: '1',
@@ -182,6 +178,11 @@ const Dashboard: React.FC = () => {
     }
   }, [selectedMenu]);
 
+  const handleHome =  () => {
+    setSearchValue("");
+    setSelectedMenu('Guide Lexcom');
+  }
+
   return (
     <ConfigProvider
       theme={{
@@ -210,8 +211,11 @@ const Dashboard: React.FC = () => {
             size="large"
             placeholder="Search"
             style={{ width: '400px', marginLeft: 'auto', marginRight: '160px' }}
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
             onSearch={(value) => {
               if (value.trim() === '') {
+                // setSelectedMenu('Guide Lexcom');
                 emptyNotification();
               } else {
                 setSearchValue(value);
@@ -264,7 +268,7 @@ const Dashboard: React.FC = () => {
                   setSelectedMenu('Guide Lexcom');
                 } else if (item.key === 'Lexcom Courses') {
                   setSelectedMenu('Lexcom Courses');
-                } else if (searchValue.trim() === '') {
+                } else if (searchValue.trim() === '') { 
                   emptyNotification();
                 } else {
                   setSelectedMenu(item.key as string);
@@ -306,7 +310,7 @@ const Dashboard: React.FC = () => {
               <Menu.Item key={'Lexcom Courses'} icon={<BookOutlined ref={ref6} />}> {/* Utilizamos el ref aquí */}
                 {'Lexcom Courses'}
               </Menu.Item>
-              <Menu.Item key={'Guide Lexcom'} icon={<QuestionCircleOutlined ref={ref7} />} onClick={() => setOpen(true)}> {/* Utilizamos el ref aquí */}
+              <Menu.Item key={'Guide Lexcom'} icon={<QuestionCircleOutlined ref={ref7} />} onClick={() => setOpen(true) }> {/* Utilizamos el ref aquí */}
                 {'Guide Lexcom'}
               </Menu.Item>
             </Menu>
