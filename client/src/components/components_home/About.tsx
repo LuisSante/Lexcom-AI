@@ -9,8 +9,8 @@ const About: React.FC<ComponentProps> = ({ id }) => {
   return (
     <div id={id}>
       <Footer style={{ background: 'black', color: 'white', textAlign: 'center' }}>
-        <a href='mailto:lsantet@unsa.edu.pe'> Legal </a>
-        <a href='mailto:lsantet@unsa.edu.pe'> Support </a>
+        <a href='mailto:lexcomsoporte@gmail.com'> Legal </a>
+        <a href='mailto:lexcomsoporte@gmail.com'> Support </a>
         <br />
         Lexcom ©{new Date().getFullYear()} Created by Lexcom
       </Footer>
