@@ -27,7 +27,7 @@ const Login: React.FC<FieldType> = () => {
 
             localStorage.setItem('access_token', access_token);
             localStorage.setItem('refresh_token', refresh_token);
-            axiosInstance.defaults.headers['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
+            axiosInstance.defaults.headers['Authorization'] = 'JWT ' + localStorage.getItem('access_token');
               
             api.success({
               message: 'Inicio de sesión exitoso!',

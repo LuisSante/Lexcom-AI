@@ -20,7 +20,7 @@ const CopyAI: React.FC<TypeCopyAds> = ({ searchValue }) => {
 
     useEffect(() => {
         setIsLoading(true);
-        const fetchData = () => {
+        const fetchData = async() => {
             const url = `copy_ads/${searchValue}`
             axiosInstance.get<CopyAds>(url)
                 .then(response => {
@@ -43,7 +43,7 @@ const CopyAI: React.FC<TypeCopyAds> = ({ searchValue }) => {
         };
         fetchData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [searchValue]);
+    }, []);
 
     return (
         <>

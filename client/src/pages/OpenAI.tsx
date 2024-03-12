@@ -20,7 +20,7 @@ const OpenAI: React.FC<TypeOpenAI> = ({ searchValue }) => {
 
     useEffect(() => {
         setIsLoading(true);
-        const fetchData = () => {
+        const fetchData = async () => {
             const url = `openai/${searchValue}`
             axiosInstance.get<OpenAIData>(url)
                 .then(response => {

@@ -4,13 +4,13 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  server: {
-    proxy: {
-      '/api/v1/': {
-        target: 'http://localhost:8000', // La URL de tu servidor de Django
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/v1\//, '/api/v1/'),
-      },
-    },
-  },
+  // server: {
+  //   proxy: {
+  //     '/api/v1/': {
+  //       target: 'http://localhost:8000', // La URL de tu servidor de Django
+  //       changeOrigin: true,
+  //       rewrite: (path) => path.replace(/^\/api\/v1\//, '/api/v1/'),
+  //     },
+  //   },
+  // },
 })

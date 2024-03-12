@@ -114,12 +114,12 @@ const LexcomAI: React.FC = () => {
                 api.error({
                     message: 'Error al realizar la operación',
                     description: 'Es obligatorio que llene el primer campo',
-                    duration: 4
+                    duration: 6
                 });
                 api.error({
                     message: 'Error al realizar la operación',
                     description: `${err.message}`,
-                    duration: 4
+                    duration: 6
                 });
             })
             .finally(() => {
@@ -302,11 +302,11 @@ const LexcomAI: React.FC = () => {
                         <div>
 
                             <h2>Diagrama sectorial del producto buscado</h2>
-                            <div style={{}}>
-                                <div>
+                            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                                <div style={{ width: '50%', height: '300px' }}>
                                     <Pie data={chartData} />
                                 </div>
-                                <div>
+                                <div style={{ width: '50%', height: '300px' }}>
                                     <PolarArea data={chartData} />
                                 </div>
                             </div>

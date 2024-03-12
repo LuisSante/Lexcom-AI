@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Select, notification } from 'antd';
+import { Select, Skeleton, notification } from 'antd';
 import { scaleLinear } from "d3-scale";
 import 'react-tooltip/dist/react-tooltip.css'
 import { Tooltip } from "react-tooltip";
@@ -13,6 +13,7 @@ import {
 import axiosInstance from "../axios";
 import Trends from "./Trends";
 import Topics from "./Topics";
+import { Carousel_Product } from "./Carousel";
 
 
 const geoUrl: string = "/features.json";
@@ -41,34 +42,28 @@ const Region: React.FC<TypeRegion> = ({ searchValue }) => {
   const [dataR, setDataR] = useState<RegionDataR[] | null>(null);
   const [selectedRegion, setSelectedRegion] = useState<string>("");
   const [api, contextHolder] = notification.useNotification();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    const fetchData = () => {
-      const url = `product/${searchValue}/region_data`
-      axiosInstance.get(url)
-        .then(response => {
-          setData(response.data);
-          api.success({
-            message: 'Paises identificados',
-            description: 'Espere por favor',
-            duration: 4
-          });
-        })
-        .catch(err => {
-          api.error({
-            message: 'Error al buscar paises',
-            duration: 4
-          });
-          api.error({
-            message: 'Error al realizar la operación',
-            description: `${err.message}`,
-            duration: 4
-          });
-        })
-    };
-
-    fetchData();
-  }, [searchValue, api]);
+    setIsLoading(true);
+    const url = `product/${searchValue}/region_data`
+    axiosInstance.get(url)
+      .then(response => {
+        setData(response.data);
+        api.success({
+          message: 'Paises identificados',
+          description: 'Espere por favor',
+          duration: 8
+        });
+      })
+      .catch(err => {
+        console.error(err.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (data) {
@@ -98,17 +93,20 @@ const Region: React.FC<TypeRegion> = ({ searchValue }) => {
   return (
     <>
       {contextHolder}
+      <Carousel_Product />
       <div>
+        {isLoading && <Skeleton active/>}
         {data && dataR && (
           <div>
             <div>
+              <div  style={{ textAlign: 'center', color: '#333', fontSize: '24px', marginTop: '40px' }}>GeoTrend Lex Map</div>
               <ComposableMap
                 projectionConfig={{
                   rotate: [-10, 0, 0],
                   scale: 100
                 }}
                 style={{
-                  marginTop: "-150px",
+                  marginTop: "-200px",
                   marginBlockEnd: '-150px'
                 }}
               >
@@ -162,8 +160,12 @@ const Region: React.FC<TypeRegion> = ({ searchValue }) => {
                 ))}
               </Select>
               <div style={{ display: 'flex' }}>
-                <Trends searchValue={searchValue} idRegion={selectedRegion} />
+                <div>
+                  <div style={{ textAlign: 'center', color: '#333', fontSize: '24px', marginBottom: '30px' , marginTop:'30px'}}>GeoTrend Lex Trends</div>
+                  <Trends searchValue={searchValue} idRegion={selectedRegion} />
+                </div>
                 <div style={{ marginLeft: '100px' }}>
+                  <div style={{ textAlign: 'center', color: '#333', fontSize: '24px', marginBottom: '30px' , marginTop:'30px' }}>GeoTrend Lex Topics</div>
                   <Topics searchValue={searchValue} />
                 </div>
               </div>
@@ -171,8 +173,6 @@ const Region: React.FC<TypeRegion> = ({ searchValue }) => {
           </div>
 
         )}
-
-
       </div>
     </>
   );

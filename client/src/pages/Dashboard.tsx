@@ -115,6 +115,10 @@ const Dashboard: React.FC = () => {
   const handleSettings = async() => {
     navigate('/settings');
   }
+  
+  const handleHome = async() => {
+    navigate('/');
+  }
 
   const items: MenuProps['items'] = [
     {
@@ -201,7 +205,7 @@ const Dashboard: React.FC = () => {
           zIndex: 1,
           width: '100%'
         }}>
-          <img src={logo} alt="Lexcom Logo" className="navbar_logo_" />
+          <img src={logo} alt="Lexcom Logo" className="navbar_logo_" onClick={handleHome}/>
           <Input.Search
             size="large"
             placeholder="Search"
