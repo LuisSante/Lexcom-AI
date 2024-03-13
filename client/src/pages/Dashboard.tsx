@@ -47,7 +47,6 @@ const Dashboard: React.FC = () => {
   const [selectedMenu, setSelectedMenu] = useState<string | null>('Guide Lexcom');
   const [marginL, setmarginL] = useState(250);
 
-
   const steps: TourProps['steps'] = [
     {
       title: 'Upload File',
@@ -112,10 +111,10 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const handleSettings = async() => {
+  const handleSettings = async () => {
     navigate('/settings');
   }
-  
+
   const items: MenuProps['items'] = [
     {
       key: '1',
@@ -178,10 +177,12 @@ const Dashboard: React.FC = () => {
     }
   }, [selectedMenu]);
 
-  const handleHome =  () => {
+  const handleHome = () => {
     setSearchValue("");
     setSelectedMenu('Guide Lexcom');
-  }
+  } 
+
+  // const [selectedMenuItem, setSelectedMenuItem] = useState<string | null>(null);
 
   return (
     <ConfigProvider
@@ -206,7 +207,7 @@ const Dashboard: React.FC = () => {
           zIndex: 1,
           width: '100%'
         }}>
-          <img src={logo} alt="Lexcom Logo" className="navbar_logo_" onClick={handleHome}/>
+          <img src={logo} alt="Lexcom Logo" className="navbar_logo_" onClick={handleHome} />
           <Input.Search
             size="large"
             placeholder="Search"
@@ -257,6 +258,7 @@ const Dashboard: React.FC = () => {
               </div>
             }
             style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 60, bottom: 0 }}
+            // key={selectedMenuItem}
           >
             <Menu
               className="lexcom-menu"
@@ -268,11 +270,17 @@ const Dashboard: React.FC = () => {
                   setSelectedMenu('Guide Lexcom');
                 } else if (item.key === 'Lexcom Courses') {
                   setSelectedMenu('Lexcom Courses');
-                } else if (searchValue.trim() === '') { 
+                } else if (searchValue.trim() === '') {
                   emptyNotification();
                 } else {
                   setSelectedMenu(item.key as string);
                 }
+
+                // if (item.key === selectedMenuItem) {
+                //   setSelectedMenuItem(item.key); // Si se hace clic en el ítem seleccionado, lo deselecciona
+                // } else {
+                //   setSelectedMenuItem(item.key as string); // Si se hace clic en un ítem diferente, lo selecciona
+                // }
               }}
             >
               <Menu.Item key={'GeoTrend Lex'} icon={<LineChartOutlined ref={ref1} />}> {/* Utilizamos el ref aquí */}
@@ -310,7 +318,7 @@ const Dashboard: React.FC = () => {
               <Menu.Item key={'Lexcom Courses'} icon={<BookOutlined ref={ref6} />}> {/* Utilizamos el ref aquí */}
                 {'Lexcom Courses'}
               </Menu.Item>
-              <Menu.Item key={'Guide Lexcom'} icon={<QuestionCircleOutlined ref={ref7} />} onClick={() => setOpen(true) }> {/* Utilizamos el ref aquí */}
+              <Menu.Item key={'Guide Lexcom'} icon={<QuestionCircleOutlined ref={ref7} />} onClick={() => setOpen(true)}> {/* Utilizamos el ref aquí */}
                 {'Guide Lexcom'}
               </Menu.Item>
             </Menu>
@@ -324,8 +332,8 @@ const Dashboard: React.FC = () => {
           }} className="lexcom-layout">
 
             <Content style={{ margin: '0 16px', padding: '0 24px', minHeight: 700 }} >
-              {selectedMenu === 'GeoTrend Lex' && <Product searchValue={searchValue} />}
-              {selectedMenu === 'Standard' && <Standard />}
+              {selectedMenu === 'GeoTrend Lex' && <Product searchValue={searchValue}/>}
+              {selectedMenu === 'Standard' && <Standard/>}
               {selectedMenu === 'Precio_del_Producto' && <Precio_del_Producto />}
               {selectedMenu === 'CPA_CVU' && <CPA_CVU />}
               {selectedMenu === 'LexIA Determination' && <LexcomAI />}
