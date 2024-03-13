@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework import status
 from django.contrib.auth import get_user_model  # Importa la función get_user_model para obtener el modelo de usuario personalizado
-
+from api.serializers.user import UserSerializer
 User = get_user_model()  # Obtén el modelo de usuario personalizado
 
 class UserDetailView(APIView):
@@ -26,8 +26,21 @@ class UserDetailView(APIView):
                 'city':user.city,
                 'address':user.address,
                 'gender':user.gender,
-                'date_of_birth':user.date_of_birth
+                'date_of_birth':user.date_of_birth,
+                'password':user.password
             }
             return Response(user_data)
+        except User.DoesNotExist:
+            return Response({'error': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+        
+    def put(self, request):
+        user_id = request.user.id
+        try:
+            user = User.objects.get(id=user_id)
+            serializer = UserSerializer(user, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except User.DoesNotExist:
             return Response({'error': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)

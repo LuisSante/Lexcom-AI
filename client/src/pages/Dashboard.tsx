@@ -4,7 +4,7 @@ import Precio_del_Producto from '../components/components_calculator/Calculator_
 import Tutorial from '../pages/Tutorial';
 import '../css/Dashboard.css';
 import React, { useEffect, useRef, useState } from 'react';
-import { Avatar, Space, Input, Button, notification, Tour } from 'antd';
+import { Avatar, Space, Input, Button, notification, Tour, Drawer, Row, Col, Divider } from 'antd';
 import { Dropdown, ConfigProvider, Layout, Menu } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { UserOutlined, CalculatorOutlined, TikTokOutlined, TrophyOutlined } from '@ant-design/icons';
@@ -31,6 +31,29 @@ import LexcomAI from './LexcomAI';
 import axiosInstance from '../components/axios';
 import type { TourProps } from 'antd';
 
+interface UserType{
+  id: number,
+  username: string,
+  email: string,
+  name: string,
+  surname: string,
+  phone: string,
+  country: string,
+  city: string,
+  address: string,
+  gender: string,
+  date_of_birth: string
+}
+interface DescriptionItemProps {
+  title: string;
+  content: React.ReactNode;
+}
+const DescriptionItem = ({ title, content }: DescriptionItemProps) => (
+  <div className="site-description-item-profile-wrapper">
+    <p className="site-description-item-profile-p-label">{title}:</p>
+    {content}
+  </div>
+);
 const Dashboard: React.FC = () => {
   const { Header, Content, Sider } = Layout;
   const ref1 = useRef(null);
@@ -47,18 +70,21 @@ const Dashboard: React.FC = () => {
   const [selectedMenu, setSelectedMenu] = useState<string | null>('Guide Lexcom');
   const [marginL, setmarginL] = useState(250);
 
+  const [openD, setOpenD] = useState(false);
 
+  const showDrawer = () => {
+    setOpenD(true);
+  };
+
+  const onCloseD = () => {
+    setOpenD(false);
+  };
+  
   const steps: TourProps['steps'] = [
     {
       title: 'GeoTrend Lex',
       description: 'Explora la pestaña de ranking de ventas en la parte izquierda de tu pantalla. Con esta pestaña podrás conocer si tu producto tiene un buen interés y en que países es el más buscado.',
       placement: 'right',
-      //cover: (
-      //  <img
-      //    alt="tour.png"
-      //    src="https://user-images.githubusercontent.com/5378891/197385811-55df8480-7ff4-44bd-9d43-a7dade598d70.png"
-      //  />
-      //),
       target: () => ref1.current,
     },
     {
@@ -117,7 +143,15 @@ const Dashboard: React.FC = () => {
   }
 
   const items: MenuProps['items'] = [
-        {
+    {
+      key: '2',
+      label: (
+        <a target="_blank" rel="noopener noreferrer" onClick={showDrawer}>
+          Perfil
+        </a>
+      ),
+    },  
+    {
       key: '3',
       label: (
         <a target="_blank" rel="noopener noreferrer" onClick={handleSettings}>
@@ -155,13 +189,33 @@ const Dashboard: React.FC = () => {
       icon: <SmileOutlined style={{ color: '#108ee9' }} />,
     });
   };
-
+  
   useEffect(() => {
     if (selectedMenu === 'Lexcom Courses') {
       window.location.href = 'https://home.upcommercelatam.com/login/?wppb_referer_url=https%3A%2F%2Fhome.upcommercelatam.com%2F';
     }
   }, [selectedMenu]);
 
+  const [data, setData] = useState<UserType | null>(null);
+   
+  useEffect(() => {
+    const fetchData = () => {
+      const url = `update/`
+      axiosInstance.get<UserType>(url)
+        .then(response => {
+          setData(response.data);
+          console.log(response.data);
+        })
+        .catch(err => {
+  
+        })
+        .finally(() => {
+  
+        })
+    };
+    fetchData();
+  },[]);
+  
   return (
     <ConfigProvider
       theme={{
@@ -199,8 +253,9 @@ const Dashboard: React.FC = () => {
               }
             }}
           />
-          <p className="welcome">Bienvenido</p>
-          <Avatar style={{ backgroundColor: '#87d068', minWidth: '35px' }} icon={<UserOutlined />} />
+          
+          <p className="welcome">Bienvenido {data?.name }</p>
+          <Avatar style={{ backgroundColor: '#87d068', minWidth: '35px' , marginLeft:'20px',marginRight:'10px' }} icon={<UserOutlined />} onClick={showDrawer} />
           <Dropdown menu={{ items }} arrow={{ pointAtCenter: true }}>
             <a onClick={(e) => e.preventDefault()}>
               <Space>
@@ -238,6 +293,7 @@ const Dashboard: React.FC = () => {
               className="lexcom-menu"
               mode="inline"
               defaultSelectedKeys={['1']}
+              selectedKeys={selectedMenu ? [selectedMenu] : []}
               theme="dark"
               onSelect={(item) => {
                 if (item.key === 'Guide Lexcom') {
@@ -246,6 +302,7 @@ const Dashboard: React.FC = () => {
                   setSelectedMenu('Lexcom Courses');
                 } else if (searchValue.trim() === '') {
                   emptyNotification();
+                  setSelectedMenu('');
                 } else {
                   setSelectedMenu(item.key as string);
                 }
@@ -309,14 +366,57 @@ const Dashboard: React.FC = () => {
               {selectedMenu === 'Prompt Generator Video' && <OpenAI searchValue={searchValue} />}
               {selectedMenu === 'Prompt Generator Copys' && <CopyAds searchValue={searchValue} />}
               {selectedMenu === 'Guide Lexcom' && <Tutorial />}
+              {selectedMenu === '' && <Tutorial />}
             </Content>
           </Layout>
         </Layout >
         <Layout style={{ marginLeft: marginL }}>
-
           <About id='about' />
         </Layout>
       </Layout>
+      <Drawer width={640} placement="right" closable={false} onClose={onCloseD} open={openD}>
+        <p className="site-description-item-profile-p" style={{ marginBottom: 24 }}>
+          Perfil
+        </p>
+        <Divider />
+        <p className="site-description-item-profile-p">Personal</p>
+        <Row>
+          <Col span={12}>
+            <DescriptionItem title="Nombres" content={data?.name} />
+          </Col>
+          <Col span={12}>
+            <DescriptionItem title="Apellidos" content={data?.surname} />
+          </Col>
+        </Row>
+        <Row>
+          <Col span={12}>
+            <DescriptionItem title="Ciudad" content={data?.city} />
+          </Col>
+          <Col span={12}>
+            <DescriptionItem title="Pais" content={data?.country} />
+          </Col>
+        </Row>
+        <Row>
+          <Col span={12}>
+          <DescriptionItem title="Cumpleaños" content={data?.date_of_birth ? new Date(data.date_of_birth).toISOString().split('T')[0] : ''} />
+
+          </Col>
+          <Col span={12}>
+            <DescriptionItem title="Usuario" content={data?.username} />
+          </Col>
+        </Row>
+        
+        <Divider />
+        <p className="site-description-item-profile-p">Contacto</p>
+        <Row>
+          <Col span={12}>
+            <DescriptionItem title="Email" content={data?.email} />
+          </Col>
+          <Col span={12}>
+            <DescriptionItem title="Telefono" content={data?.phone} />
+          </Col>
+        </Row>
+      </Drawer>
     </ConfigProvider>
 
   );
