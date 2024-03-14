@@ -203,7 +203,7 @@ EMAIL_HOST_USER = "lexcomsoporte@gmail.com"
 EMAIL_HOST_PASSWORD = f"{PASSWORD_APP}"
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-CELERY_BROKER_URL = 'redis://localhost:6379' 
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+# CELERY_BROKER_URL = 'redis://localhost:6379' 
+# CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
