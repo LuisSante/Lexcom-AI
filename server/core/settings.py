@@ -19,6 +19,8 @@ from datetime import timedelta
 load_dotenv()
 
 DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')
+PASSWORD_GMAIL = os.getenv('PASSWORD_GMAIL')
+PASSWORD_APP = os.getenv('PASSWORD_APP')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -173,7 +175,7 @@ SIMPLE_JWT = {
     "JWK_URL": None,
     "LEEWAY": 0,
 
-    "AUTH_HEADER_TYPES": ("Bearer",),
+    "AUTH_HEADER_TYPES": ("JWT",),
     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
     "USER_ID_FIELD": "id",
     "USER_ID_CLAIM": "user_id",
@@ -190,12 +192,15 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
 }
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "lsantet@unsa.edu.com"
-EMAIL_HOST_PASSWORD = "LFsanteT"
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST_USER = "lexcomsoporte@gmail.com"
+EMAIL_HOST_PASSWORD = f"{PASSWORD_APP}"
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+CELERY_BROKER_URL = 'redis://localhost:6379' 
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
