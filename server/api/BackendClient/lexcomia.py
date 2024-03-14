@@ -11,7 +11,7 @@ class LexComIA_Client:
         return values_array
 
     def get_prediction(self , data):
-        rf_path = os.path.join(settings.STATIC_ROOT, 'IAmodels', 'random_forest_model.joblib')
+        rf_path = os.path.join(settings.STATIC_ROOT, 'IAmodels', 'random_forest_model-001.joblib')
         values_array = list(data.values())
         transformer_array = self.transformers(values_array)
         vector_features = [transformer_array]
