@@ -3,11 +3,9 @@ import { Collapse, ConfigProvider } from 'antd';
 import FAQItems from '../logic/FAQItems';
 import React from "react";
 
-
 interface ComponentProps {
   id: string;
 }
-
 
 const Faq: React.FC<ComponentProps> = ({ id }) => {
 

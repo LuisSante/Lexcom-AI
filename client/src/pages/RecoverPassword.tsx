@@ -27,11 +27,11 @@ const RecoverPassword = () => {
                         api.success({
                             message: 'Envío exitoso!',
                             description: 'Revise su correo electrónico',
-                            duration: 2000
+                            duration: 4
                         })
                         api.success({
                             message: 'Puedes cerrar esta pestaña',
-                            duration: 2000
+                            duration: 4
                         })
                     }
                 }
@@ -41,7 +41,7 @@ const RecoverPassword = () => {
                     api.error({
                         message: 'Error al registrar usuario',
                         description: `${err.message}`,
-                        duration: 1000
+                        duration: 4
                     })
                 }
             )

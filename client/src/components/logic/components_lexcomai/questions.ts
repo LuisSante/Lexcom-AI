@@ -4,6 +4,37 @@ import { technical_analysis } from './technical_analysis';
 import { strategic_analysis } from "./strategic_analysis";
 import { financial_analysis } from "./financial_analysis";
 
+export interface attibute_bool {
+    usabilidad: boolean;
+    innovacion: boolean;
+    diversificacion: boolean;
+    conformidad: boolean;
+    necesidad: boolean;
+    pasion: boolean;
+    calidad: boolean;
+    portabilidad: boolean;
+    complementariedad: boolean;
+    reconocimiento: boolean;
+    disponibilidad: boolean;
+    competencia: boolean;
+    frecuencia: boolean;
+    perdurabilidad: boolean;
+    innovacion_tecnica: boolean;
+    valoraciones: boolean;
+    realismo: boolean;
+    internacionalizacion: boolean;
+    estacionalidad: boolean;
+    abastecimiento: boolean;
+    percepcion_valor: boolean;
+    tamano: boolean;
+    frecuencia_estrategica: boolean;
+    agrupamiento: boolean;
+    rentabilidad: boolean;
+    analisis_ventas: boolean;
+    gastos_fijos: boolean;
+    publicidad: boolean;
+}
+
 function splitArrayInHalf(array: QuestionType[]) {
     const halfLength = Math.ceil(array.length / 2);
     return {

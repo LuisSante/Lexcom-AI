@@ -1,6 +1,5 @@
 from django.urls import path, include
-from .views import user
-from .views import serpapi, openai, tiktok, lexcomia
+from .views import user, serpapi, openai, tiktok, lexcomia, usersettings
 
 from rest_framework_simplejwt import views as jwt_views
 
@@ -17,6 +16,9 @@ urlpatterns = [
 
     # Delete token access and add to the blacklist the token 
     path(r'logout/', user.LogoutView.as_view(), name='logout'),
+
+    # Update perfil 
+    path(r'update/', usersettings.UserDetailView.as_view(), name='settings'),
     
     # Endpoints for SerpApi
     path(r'product/<str:id>/region_data' , serpapi.GoogleApiView.as_view({'get': 'region_data'}), name="region_data"),
@@ -34,7 +36,10 @@ urlpatterns = [
     path(r'lexcom/' , lexcomia.LexcomIA_ApiView.as_view(), name="lexcom"),
 
     # Endpoint for reset password
-    path(r'password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset'))
-    
+    path(r'password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
 
+    # Endpoint for progress
+    path(r'update_plan/', user.UpdateSearchPlanView.as_view(), name='update_plan'),
+    path(r'user_info/', user.UserInfoView.as_view(), name='user_info'),
+    path(r'increment_search_count/', user.IncrementSearchCountView.as_view(), name='increment_search_count')
 ]

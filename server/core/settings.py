@@ -21,6 +21,8 @@ load_dotenv()
 DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')
 PASSWORD_GMAIL = os.getenv('PASSWORD_GMAIL')
 PASSWORD_APP = os.getenv('PASSWORD_APP')
+PASSWORD_GMAIL = os.getenv('PASSWORD_GMAIL')
+PASSWORD_APP = os.getenv('PASSWORD_APP')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -176,6 +178,7 @@ SIMPLE_JWT = {
     "LEEWAY": 0,
 
     "AUTH_HEADER_TYPES": ("JWT",),
+    "AUTH_HEADER_TYPES": ("JWT",),
     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
     "USER_ID_FIELD": "id",
     "USER_ID_CLAIM": "user_id",
@@ -192,6 +195,7 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
 }
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True

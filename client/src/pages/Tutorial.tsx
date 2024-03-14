@@ -12,23 +12,34 @@ const Tutorial: React.FC = () => {
 
   const content1 = (
     <div>
-      <p>Al explorar el mapamundi, anota el porcentaje de interés</p>
-      <p> del país en el que venderás tu producto. </p>
+      <p>La primera calculadora te ofrecerá cosas estandares</p>
+      <p> Además podras calcular el cpa y cvu y el precio de tus productos</p>
     </div>
   )
 
 
   const content2 = (
     <div>
-      <p>Al explorar el mapamundi, anota el porcentaje de interés</p>
-      <p> del país en el que venderás tu producto. </p>
+      <p>Recuerda que el éxito de tu producto tambien</p>
+      <p> se ve influido de si esta quemado o no</p>
     </div>
   )
 
   const content3 = (
     <div>
-      <p>Al explorar el mapamundi, anota el porcentaje de interés</p>
-      <p> del país en el que venderás tu producto. </p>
+      <p>Recuerda hacer búsquedas en el idioma</p>
+      <p> de tu público objetivo</p>
+    </div>
+  )  
+  const content4 = (
+    <div>
+      <p>Cada estructura  generada puede variar</p>
+      <p> por lo que te sugerimos guardarlos</p>
+    </div>
+  )  
+  const content5 = (
+    <div>
+      <p>Tenemos cupones y descuentos disponibles</p>
     </div>
   )  
   return (
@@ -50,7 +61,7 @@ const Tutorial: React.FC = () => {
               color: 'green',
               children: (
                 <>
-                  <Card title="RANKING DE VENTAS" bordered={false} style={{ width: '100%' }}>
+                  <Card title="GeoTrend Lex" bordered={false} style={{ width: '100%' }}>
                     <p>Explora la pestaña de ranking de ventas en la parte izquierda de tu pantalla. Con esta pestaña podrás conocer si tu producto tiene un buen interés y en que países es el más buscado.</p>
                     <Popover content={content}>
                       <Button type="dashed" danger>¡Vamos!</Button>
@@ -62,8 +73,8 @@ const Tutorial: React.FC = () => {
             {
               children: (
                 <>
-                  <Card title="PREDICCIÓN DE ÉXITO" bordered={false} style={{ width: '100%' }}>
-                    <Descriptions.Item label="UserName">Aquí conocerás si tu producto tendrá éxito o no a la hora de vender. Completa el formulario y no olvides poner el interés que anotaste anteriormente.</Descriptions.Item>
+                  <Card title="Budget Control Pro" bordered={false} style={{ width: '100%' }}>
+                    <Descriptions.Item label="UserName">Te ofrecemos tres calculadoras para que de esta forma puedas saber que precio debe tener tu producto, el CPA y CPU asi como estadisticas generales.</Descriptions.Item>
                     <p></p>
                     <Popover content={content1}>
                       <Button type="dashed"danger>¡Vamos!</Button>
@@ -73,15 +84,13 @@ const Tutorial: React.FC = () => {
               ),
             },
             {
-              color: 'red',
               children: (
                 <>
-                  <Card title="PROMPT GENERATOR" bordered={false} style={{ width: '100%' }}>
-                    <Descriptions.Item label="UserName">¿Tu producto es ganador, pero no sabes como estructurar tu video para que sea una venta segura?
-                      En esta pestaña obtendrás ideas de como hacerlo, te brindamos una estructura ganadora.</Descriptions.Item>
+                  <Card title="LexIA Determination" bordered={false} style={{ width: '100%' }}>
+                    <Descriptions.Item label="UserName">Aquí conocerás si tu producto tendrá éxito o no a la hora de vender. Completa el formulario y no olvides poner el interés que anotaste anteriormente.</Descriptions.Item>
                     <p></p>
                     <Popover content={content2}>
-                      <Button type="dashed" danger>¡Vamos!</Button>
+                      <Button type="dashed"danger>¡Vamos!</Button>
                     </Popover>
                   </Card>
                 </>
@@ -91,7 +100,7 @@ const Tutorial: React.FC = () => {
               color: 'blue',
               children: (
                 <>
-                  <Card title="TIKTOK TRENDS" bordered={false} style={{ width: '100%' }}>
+                  <Card title="TikTok TrendFeed" bordered={false} style={{ width: '100%' }}>
                     <Descriptions.Item label="UserName">Visualizar a la competencia es clave del éxito, ya que podrás conocer sus puntos débiles y usarlo a tu favor.
                       Con esta ventana tendrás los tiktoks más populares de tu producto, úsalos de inspiración para elaborar tu propio video ganador.</Descriptions.Item>
                     <p></p>
@@ -102,6 +111,36 @@ const Tutorial: React.FC = () => {
                 </>
               ),
             },
+            {
+              color: 'red',
+              children: (
+                <>
+                  <Card title="Prompt Generators" bordered={false} style={{ width: '100%' }}>
+                    <Descriptions.Item label="UserName">¿Tu producto es ganador, pero no sabes como estructurar tu video para que sea una venta segura?
+                      En esta pestaña obtendrás ideas de como hacerlo, te brindamos una estructura ganadora para que puedas estructurar tu video y generar tus copys.</Descriptions.Item>
+                    <p></p>
+                    <Popover content={content4}>
+                      <Button type="dashed" danger>¡Vamos!</Button>
+                    </Popover>
+                  </Card>
+                </>
+              ),
+            },
+            {
+              color: 'red',
+              children: (
+                <>
+                  <Card title="Lexcom Courses" bordered={false} style={{ width: '100%' }}>
+                    <Descriptions.Item label="UserName">¿No sabes como continuar vendiendo? Te ofrecemos una amplia variedad de cursos que te permitirán continuar tu camino al éxito.</Descriptions.Item>
+                    <p></p>
+                    <Popover content={content5}>
+                      <Button type="dashed" danger>¡Vamos!</Button>
+                    </Popover>
+                  </Card>
+                </>
+              ),
+            },
+            
           ]}
         />
       </ConfigProvider>
