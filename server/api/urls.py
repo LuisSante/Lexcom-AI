@@ -36,7 +36,10 @@ urlpatterns = [
     path(r'lexcom/' , lexcomia.LexcomIA_ApiView.as_view(), name="lexcom"),
 
     # Endpoint for reset password
-    path(r'password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset'))
-    
+    path(r'password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
 
+    # Endpoint for progress
+    path(r'update_plan/', user.UpdateSearchPlanView.as_view(), name='update_plan'),
+    path(r'user_info/', user.UserInfoView.as_view(), name='user_info'),
+    path(r'increment_search_count/', user.IncrementSearchCountView.as_view(), name='increment_search_count')
 ]
