@@ -42,8 +42,16 @@ const Trends: React.FC<TypeTrends> = ({ searchValue, idRegion }) => {
   const [api, contextHolder] = notification.useNotification();
 
   useEffect(() => {
-    const fetchData = () => {
-      const url = `product/value=${searchValue}/idregion=${idRegion}/trends_data`;
+    const url = `product/value=${searchValue}/idregion=${idRegion}/trends_data`;
+
+    if (idRegion) {
+      api.success({
+        message: 'País identificado',
+        description: 'Espere por favor',
+        duration: 8,
+        placement: 'bottomLeft'
+      });
+
       axiosInstance.get<TrendsData>(url)
         .then(response => {
           const data = response.data.timeline_data;
@@ -62,31 +70,33 @@ const Trends: React.FC<TypeTrends> = ({ searchValue, idRegion }) => {
               }
             ]
           };
-
           setChartData(new_chartData);
-
-          api.success({
-            message: 'Paises identificados',
-            description: 'Espere por favor',
-            duration: 4
-          });
-
         })
         .catch(err => {
           api.error({
-            message: 'Error al buscar paise',
-            duration: 4
+            message: 'Error al buscar paises',
+            description: `Por favor, seleccione una país en el desplegable`,
+            duration: 4,
+            placement: 'bottomLeft'
           });
           api.error({
             message: 'Error al realizar la operación',
             description: `${err.message}`,
-            duration: 4
+            duration: 4,
+            placement: 'bottomLeft'
           });
         })
-    };
+    } else {
+      api.error({
+        message: 'Por favor, seleccione una país en el desplegable',
+        duration: 4,
+        placement: 'bottomLeft'
+      });
+    }
 
-    fetchData();
-  }, [searchValue, idRegion, api]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [idRegion]);
 
   return (
     <>

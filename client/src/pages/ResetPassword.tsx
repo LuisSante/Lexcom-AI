@@ -88,7 +88,7 @@ const ResetPassword: React.FC = () => {
                                                 validator: (_, value) =>
                                                     value && strongPasswordRegex.test(value)
                                                         ? Promise.resolve()
-                                                        : Promise.reject(new Error('Contraseña débil!!! debe contener minúsculas, mayúsculas, números y símbolos (!*)')),
+                                                        : Promise.reject(new Error('Contraseña débil!!! debe contener mínimo 8 caracteres, minúsculas, mayúsculas, números y símbolos (!*)')),
                                             },
                                         ]}
                                         hasFeedback

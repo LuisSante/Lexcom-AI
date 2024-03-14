@@ -138,7 +138,7 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const handleSettings = async() => {
+  const handleSettings = async () => {
     navigate('/settings');
   }
 
@@ -216,6 +216,13 @@ const Dashboard: React.FC = () => {
     fetchData();
   },[]);
   
+  const handleHome = () => {
+    setSearchValue("");
+    setSelectedMenu('Guide Lexcom');
+  } 
+
+  // const [selectedMenuItem, setSelectedMenuItem] = useState<string | null>(null);
+
   return (
     <ConfigProvider
       theme={{
@@ -239,13 +246,16 @@ const Dashboard: React.FC = () => {
           zIndex: 1,
           width: '100%'
         }}>
-          <img src={logo} alt="Lexcom Logo" className="navbar_logo_" />
+          <img src={logo} alt="Lexcom Logo" className="navbar_logo_" onClick={handleHome} />
           <Input.Search
             size="large"
             placeholder="Search"
             style={{ width: '400px', marginLeft: 'auto', marginRight: '160px' }}
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
             onSearch={(value) => {
               if (value.trim() === '') {
+                // setSelectedMenu('Guide Lexcom');
                 emptyNotification();
               } else {
                 setSearchValue(value);
@@ -288,6 +298,7 @@ const Dashboard: React.FC = () => {
               </div>
             }
             style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 60, bottom: 0 }}
+            // key={selectedMenuItem}
           >
             <Menu
               className="lexcom-menu"
@@ -306,6 +317,12 @@ const Dashboard: React.FC = () => {
                 } else {
                   setSelectedMenu(item.key as string);
                 }
+
+                // if (item.key === selectedMenuItem) {
+                //   setSelectedMenuItem(item.key); // Si se hace clic en el ítem seleccionado, lo deselecciona
+                // } else {
+                //   setSelectedMenuItem(item.key as string); // Si se hace clic en un ítem diferente, lo selecciona
+                // }
               }}
             >
               <Menu.Item key={'GeoTrend Lex'} icon={<LineChartOutlined ref={ref1} />}> {/* Utilizamos el ref aquí */}
@@ -357,8 +374,8 @@ const Dashboard: React.FC = () => {
           }} className="lexcom-layout">
 
             <Content style={{ margin: '0 16px', padding: '0 24px', minHeight: 700 }} >
-              {selectedMenu === 'GeoTrend Lex' && <Product searchValue={searchValue} />}
-              {selectedMenu === 'Standard' && <Standard />}
+              {selectedMenu === 'GeoTrend Lex' && <Product searchValue={searchValue}/>}
+              {selectedMenu === 'Standard' && <Standard/>}
               {selectedMenu === 'Precio_del_Producto' && <Precio_del_Producto />}
               {selectedMenu === 'CPA_CVU' && <CPA_CVU />}
               {selectedMenu === 'LexIA Determination' && <LexcomAI />}

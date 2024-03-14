@@ -40,31 +40,28 @@ const Tiktok: React.FC<TypeTikTok> = ({ searchValue }) => {
     const [api, contextHolder] = notification.useNotification();
 
     useEffect(() => {
-        const fetchData = () => {
-            setIsLoading(true);
-            const url = `tiktok/${searchValue}`
-            axiosInstance.get<TiktokData[]>(url)
-                .then(response => {
-                    api.success({
-                        message: 'Videos relacionados a su producto',
-                        duration: 4
-                    });
-                    setData(response.data);
-                })
-                .catch(err => {
-                    api.error({
-                        message: 'No hay videos relacionados a tu producto, lo lamentamos',
-                        description: `${err.message}`,
-                        duration: 4
-                    });
-                })
-                .finally(() => {
-                    setIsLoading(false);
-                })
-        };
-        fetchData();
+        setIsLoading(true);
+        const url = `tiktok/${searchValue}`
+        axiosInstance.get<TiktokData[]>(url)
+            .then(response => {
+                api.success({
+                    message: 'Videos relacionados a su producto',
+                    duration: 4
+                });
+                setData(response.data);
+            })
+            .catch(err => {
+                api.error({
+                    message: 'No hay videos relacionados a tu producto, lo lamentamos',
+                    description: `${err.message}`,
+                    duration: 4
+                });
+            })
+            .finally(() => {
+                setIsLoading(false);
+            })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [searchValue]);
+    }, []);
 
 
     useEffect(() => {
@@ -109,7 +106,7 @@ const Tiktok: React.FC<TypeTikTok> = ({ searchValue }) => {
         <>
             {contextHolder}
             <div>
-                {isLoading && <Skeleton />}
+                {isLoading && <Skeleton/>}
                 {data && dataSR && !isLoading && (
                     <Space style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
                         {dataSR.map((item, index) => (
