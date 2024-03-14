@@ -62,7 +62,7 @@ const Settings: React.FC = () => {
   };
 
   const handleOk = async (email: FieldType) => {
-    axios.post('http://localhost:8000/api/v1/password_reset/', email)
+    axiosInstance.post('password_reset/', email)
       .then(
         res => {
           if (res.status === 200) {
