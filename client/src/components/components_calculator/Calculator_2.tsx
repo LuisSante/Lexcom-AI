@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {  InputNumber, Space, Typography } from 'antd';
 
 import { ConfigProvider } from 'antd';
-import './../css/TimelineDemo.css';
+import '../../css/TimelineDemo.css';
 
 const CPA_CVU: React.FC = () => {
   const [costo, setcosto] = useState(0);
@@ -70,7 +70,7 @@ const CPA_CVU: React.FC = () => {
                   setfull(value);
                 }
               }} />
-              <InputNumber addonBefore="COSTO UNITARIO DE INTERMEDIACIÒN " defaultValue={0} min={0} style={{ width: '100%' }} onChange={(value) => {
+              <InputNumber addonBefore="COSTO UNITARIO DE INTERMEDIACIÓN " defaultValue={0} min={0} style={{ width: '100%' }} onChange={(value) => {
                 if (value !== null) {
                   setcpa(value);
                 }

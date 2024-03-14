@@ -37,6 +37,8 @@ django==5.0.1
     #   djangorestframework-simplejwt
 django-cors-headers==4.3.1
     # via -r requirements.in
+django-rest-passwordreset==1.4.0
+    # via -r requirements.in
 djangorestframework==3.14.0
     # via
     #   -r requirements.in
@@ -60,6 +62,12 @@ idna==3.6
     #   anyio
     #   httpx
     #   requests
+joblib==1.3.2
+    # via scikit-learn
+numpy==1.26.4
+    # via
+    #   scikit-learn
+    #   scipy
 openai==1.11.1
     # via -r requirements.in
 psycopg2-binary==2.9.9
@@ -78,6 +86,10 @@ pytz==2023.3.post1
     # via djangorestframework
 requests==2.31.0
     # via google-search-results
+scikit-learn==1.3.2
+    # via -r requirements.in
+scipy==1.12.0
+    # via scikit-learn
 sniffio==1.3.0
     # via
     #   anyio
@@ -85,6 +97,8 @@ sniffio==1.3.0
     #   openai
 sqlparse==0.4.4
     # via django
+threadpoolctl==3.3.0
+    # via scikit-learn
 tqdm==4.66.1
     # via openai
 typing-extensions==4.9.0

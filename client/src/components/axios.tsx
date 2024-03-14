@@ -1,4 +1,9 @@
-import axios from 'axios';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+
+interface TokenResponse {
+	access: string;
+	refresh: string;
+}
 
 const baseURL = 'http://localhost:8000/api/v1/';
 
@@ -7,29 +12,26 @@ const axiosInstance = axios.create({
 	timeout: 100000,
 	headers: {
 		Authorization: localStorage.getItem('access_token')
-			? 'Bearer ' + localStorage.getItem('access_token')
+			? 'JWT ' + localStorage.getItem('access_token')
 			: null,
 		'Content-Type': 'application/json',
 		accept: 'application/json',
-	}, 
+	},
 });
 
 axiosInstance.interceptors.response.use(
 	(response) => {
-        return response;
+		return response;
 	},
-	async function (error) {
-        const originalRequest = error.config;
-		console.log("LUIS SANTE" , originalRequest);
-		
+	async function (error: AxiosError) {
+		const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
+
 		if (typeof error.response === 'undefined') {
-			console.log(error.response);
 			alert(
 				'A server/network error occurred. ' +
 				'Looks like CORS might be the problem. ' +
 				'Sorry about this - we will get it fixed shortly.'
 			);
-			console.log("ERROR", error);
 			return Promise.reject(error);
 		}
 
@@ -41,44 +43,54 @@ axiosInstance.interceptors.response.use(
 			return Promise.reject(error);
 		}
 
+		const responseData = error.response.data;
 		if (
-			error.response.data.code === 'token_not_valid' &&
-			error.response.status === 401 &&
-			error.response.statusText === 'Unauthorized'
+			responseData &&
+			typeof responseData === 'object' &&
+			'code' in responseData &&
+			'status' in error.response &&
+			'statusText' in error.response
 		) {
-			const refreshToken = localStorage.getItem('refresh_token');
+			if (
+				responseData.code === 'token_not_valid' &&
+				error.response.status === 401 &&
+				error.response.statusText === 'Unauthorized'
+			) {
+				const refreshToken = localStorage.getItem('refresh_token');
 
-			if (refreshToken) {
-				const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
+				if (refreshToken) {
+					const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
 
-				// exp date in token is expressed in seconds, while now() returns milliseconds:
-				const now = Math.ceil(Date.now() / 1000);
-				console.log(tokenParts.exp);
+					// exp date in token is expressed in seconds, while now() returns milliseconds:
+					const now = Math.ceil(Date.now() / 1000);
 
-				if (tokenParts.exp > now) {
-					return axiosInstance
-						.post('token/refresh/', { refresh: refreshToken })
-						.then((response) => {
-							localStorage.setItem('access_token', response.data.access);
-							localStorage.setItem('refresh_token', response.data.refresh);
+					if (tokenParts.exp > now) {
+						return axiosInstance
+							.post<TokenResponse>('token/refresh/', { refresh: refreshToken })
+							.then((response) => {
+								localStorage.setItem('access_token', response.data.access);
+								localStorage.setItem('refresh_token', response.data.refresh);
 
-							axiosInstance.defaults.headers['Authorization'] =
-								'Bearer ' + response.data.access;
-							originalRequest.headers['Authorization'] =
-								'Bearer ' + response.data.access;
+								axiosInstance.defaults.headers['Authorization'] =
+									'JWT ' + response.data.access;
+								originalRequest.headers =
+									originalRequest.headers || {}; // Ensure headers is defined
+								originalRequest.headers['Authorization'] =
+									'JWT ' + response.data.access;
 
-							return axiosInstance(originalRequest);
-						})
-						.catch((err) => {
-							console.log(err);
-						});
+								return axiosInstance(originalRequest);
+							})
+							.catch((err) => {
+								console.log(err);
+							});
+					} else {
+						// console.log('Refresh token is expired', tokenParts.exp, now);
+						window.location.href = '/';
+					}
 				} else {
-					console.log('Refresh token is expired', tokenParts.exp, now);
+					// console.log('Refresh token not available.');
 					window.location.href = '/';
 				}
-			} else {
-				console.log('Refresh token not available.');
-				window.location.href = '/';
 			}
 		}
 
