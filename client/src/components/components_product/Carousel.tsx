@@ -1,6 +1,6 @@
 import React from 'react';
 import { Carousel } from 'antd';
-import { GlobalOutlined, LineChartOutlined, RiseOutlined } from '@ant-design/icons'; // Importar los iconos necesarios
+import { GlobalOutlined, LineChartOutlined, RiseOutlined , WarningOutlined} from '@ant-design/icons'; // Importar los iconos necesarios
 
 const contentStyle: React.CSSProperties = {
     height: '160px',
@@ -37,6 +37,10 @@ export const Carousel_Product: React.FC = () => (
         <div>
             <RiseOutlined style={iconStyle} />
             <div style={contentStyle}>GeoTrend Lex Topics muestra temas relacionados con tu producto y los que están en alza</div>
+        </div>
+        <div>
+            <WarningOutlined style={iconStyle} />
+            <div style={contentStyle}>Recuerda hacer tu búsqueda en el idioma del país de tu público objetivo</div>
         </div>
     </Carousel>
 );

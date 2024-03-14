@@ -259,6 +259,7 @@ const Dashboard: React.FC = () => {
                 emptyNotification();
               } else {
                 setSearchValue(value);
+                setSelectedMenu('Guide Lexcom');
                 openNotification();
               }
             }}
