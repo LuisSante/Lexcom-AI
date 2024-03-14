@@ -193,31 +193,31 @@ const Dashboard: React.FC = () => {
   const searchLimited = () => {
     let newPlan = 'standard';
     Modal.confirm({
-        title: 'LEXCOM WARNING!!!',
-        content: (
-            <div>
-                <p>Se ha excedido el límite de búsquedas permitidas. Selecciona un nuevo plan para continuar.</p>
-                <Radio.Group defaultValue="standard" onChange={(e) => newPlan = e.target.value}>
-                    <Radio.Button value="standard">Standard (5 búsquedas más)</Radio.Button>
-                    <Radio.Button value="business">Business (10 búsquedas más)</Radio.Button>
-                    <Radio.Button value="premium">Premium (20 búsquedas más)</Radio.Button>
-                </Radio.Group>
-            </div>
-        ),
-        icon: <WarningOutlined style={{ color: '#108ee9' }} />,
-        onOk() {
-          axiosInstance.post('update_plan/', { new_plan: newPlan })
-            .then(response => {
-              const { new_max_searches, new_search_count, new_progress_count } = response.data;
-              setMaxSearches(new_max_searches); 
-              setSearchCount(new_search_count);
-              setProgress(new_progress_count);
-              location.reload();
-            })
-            .catch(error => {
-              console.error('Error updating search plan:', error);
-            });
-        }
+      title: 'LEXCOM WARNING!!!',
+      content: (
+        <div>
+          <p>Se ha excedido el límite de búsquedas permitidas. Selecciona un nuevo plan para continuar.</p>
+          <Radio.Group defaultValue="standard" onChange={(e) => newPlan = e.target.value}>
+            <Radio.Button value="standard">Standard (5 búsquedas más)</Radio.Button>
+            <Radio.Button value="business">Business (10 búsquedas más)</Radio.Button>
+            <Radio.Button value="premium">Premium (20 búsquedas más)</Radio.Button>
+          </Radio.Group>
+        </div>
+      ),
+      icon: <WarningOutlined style={{ color: '#108ee9' }} />,
+      onOk() {
+        axiosInstance.post('update_plan/', { new_plan: newPlan })
+          .then(response => {
+            const { new_max_searches, new_search_count, new_progress_count } = response.data;
+            setMaxSearches(new_max_searches);
+            setSearchCount(new_search_count);
+            setProgress(new_progress_count);
+            location.reload();
+          })
+          .catch(error => {
+            console.error('Error updating search plan:', error);
+          });
+      }
     });
   };
 
@@ -247,7 +247,7 @@ const Dashboard: React.FC = () => {
         console.error('Error al recuperar la información del usuario:', error);
       }
     };
-  
+
     fetchUserInfo();
   }, []);
 
@@ -284,6 +284,11 @@ const Dashboard: React.FC = () => {
             headerBg: '#000',
             bodyBg: '#000',
           },
+          Divider: {
+            lineWidth: 1.5,
+            marginLG: 0,
+
+          }
         },
         token: {
           fontFamily: "Poppins, sans-serif",
@@ -311,20 +316,20 @@ const Dashboard: React.FC = () => {
                 // setSelectedMenu('Guide Lexcom');
                 emptyNotification();
               } else if (searchCount == maxSearches) {
-                searchLimited();                
+                searchLimited();
               } else {
                 setSearchValue(value);
                 setSelectedMenu('Guide Lexcom');
                 openNotification();
                 axiosInstance.post('increment_search_count/')
                   .then(response => {
-                    const { new_search_count, new_progress_count} = response.data;
+                    const { new_search_count, new_progress_count } = response.data;
                     setSearchCount(new_search_count);
                     setProgress(new_progress_count);
                   })
                   .catch(error => {
                     console.error('Error al actualizar el contador de búsquedas:', error);
-                });
+                  });
               }
             }}
           />
@@ -365,20 +370,6 @@ const Dashboard: React.FC = () => {
             style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 60, bottom: 0 }}
           // key={selectedMenuItem}
           >
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px', backgroundColor: '#000000' }}>
-                <Progress 
-                  type="circle" 
-                  percent={progress} 
-                  width={80} 
-                  strokeColor='#108ee9' 
-                  trailColor="#ffffff"
-                  format={() => (
-                    <span style={{ color: progress === 100 ? '#108ee9' : '#108ee9' }}>
-                      {searchCount} / {maxSearches}
-                    </span>
-                  )}
-                />
-            </div>
             <Menu
               className="lexcom-menu"
               mode="inline"
@@ -398,7 +389,7 @@ const Dashboard: React.FC = () => {
                 }
               }}
             >
-              <Menu.Item key={'GeoTrend Lex'} icon={<LineChartOutlined ref={ref1} />}> {/* Utilizamos el ref aquí */}
+              <Menu.Item key={'GeoTrend Lex'} icon={<LineChartOutlined ref={ref1} />}>
                 {'GeoTrend Lex'}
               </Menu.Item>
               <Menu.SubMenu icon={<CalculatorOutlined ref={ref2} />} key={'BudgetControlPro'} title={'Budget Control Pro'}>
@@ -436,7 +427,27 @@ const Dashboard: React.FC = () => {
               <Menu.Item key={'Guide Lexcom'} icon={<QuestionCircleOutlined ref={ref7} />} onClick={() => setOpen(true)}> {/* Utilizamos el ref aquí */}
                 {'Guide Lexcom'}
               </Menu.Item>
+
+              <Divider className="custom-divider_dashboard" />
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px', backgroundColor: 'black' }}>
+                <Progress
+                  type="circle"
+                  percent={progress}
+                  width={80}
+                  strokeColor='#108ee9'
+                  trailColor="#ffffff"
+                  format={() => (
+                    <span style={{ color: progress === 100 ? '#108ee9' : '#108ee9' }}>
+                      {searchCount} / {maxSearches}
+                    </span>
+                  )}
+                />
+              </div>
+
             </Menu>
+
+
+
 
           </Sider>
           <Tour open={open} onClose={() => setOpen(false)} steps={steps} />
