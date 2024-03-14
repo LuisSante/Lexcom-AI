@@ -37,8 +37,6 @@ django-cors-headers==4.3.1
     # via -r requirements.in
 django-rest-passwordreset==1.4.0
     # via -r requirements.in
-django-rest-passwordreset==1.4.0
-    # via -r requirements.in
 djangorestframework==3.14.0
     # via
     #   -r requirements.in
