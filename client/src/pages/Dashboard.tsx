@@ -31,7 +31,7 @@ import LexcomAI from './LexcomAI';
 import axiosInstance from '../components/axios';
 import type { TourProps } from 'antd';
 
-interface UserType{
+interface UserType {
   id: number,
   username: string,
   email: string,
@@ -44,16 +44,19 @@ interface UserType{
   gender: string,
   date_of_birth: string
 }
+
 interface DescriptionItemProps {
   title: string;
   content: React.ReactNode;
 }
+
 const DescriptionItem = ({ title, content }: DescriptionItemProps) => (
   <div className="site-description-item-profile-wrapper">
     <p className="site-description-item-profile-p-label">{title}:</p>
     {content}
   </div>
 );
+
 const Dashboard: React.FC = () => {
   const { Header, Content, Sider } = Layout;
   const ref1 = useRef(null);
@@ -79,7 +82,7 @@ const Dashboard: React.FC = () => {
   const onCloseD = () => {
     setOpenD(false);
   };
-  
+
   const steps: TourProps['steps'] = [
     {
       title: 'GeoTrend Lex',
@@ -150,7 +153,7 @@ const Dashboard: React.FC = () => {
           Perfil
         </a>
       ),
-    },  
+    },
     {
       key: '3',
       label: (
@@ -189,7 +192,7 @@ const Dashboard: React.FC = () => {
       icon: <SmileOutlined style={{ color: '#108ee9' }} />,
     });
   };
-  
+
   useEffect(() => {
     if (selectedMenu === 'Lexcom Courses') {
       window.location.href = 'https://home.upcommercelatam.com/login/?wppb_referer_url=https%3A%2F%2Fhome.upcommercelatam.com%2F';
@@ -197,29 +200,26 @@ const Dashboard: React.FC = () => {
   }, [selectedMenu]);
 
   const [data, setData] = useState<UserType | null>(null);
-   
+
   useEffect(() => {
-    const fetchData = () => {
-      const url = `update/`
-      axiosInstance.get<UserType>(url)
-        .then(response => {
-          setData(response.data);
-          console.log(response.data);
-        })
-        .catch(err => {
-  
-        })
-        .finally(() => {
-  
-        })
-    };
-    fetchData();
-  },[]);
-  
+    const url = `update/`
+    axiosInstance.get<UserType>(url)
+      .then(response => {
+        setData(response.data);
+        console.log(response.data);
+      })
+      .catch(err => {
+        console.error(err.message);
+      })
+      .finally(() => {
+
+      })
+  }, []);
+
   const handleHome = () => {
     setSearchValue("");
     setSelectedMenu('Guide Lexcom');
-  } 
+  }
 
   // const [selectedMenuItem, setSelectedMenuItem] = useState<string | null>(null);
 
@@ -263,9 +263,9 @@ const Dashboard: React.FC = () => {
               }
             }}
           />
-          
-          <p className="welcome">Bienvenido {data?.name }</p>
-          <Avatar style={{ backgroundColor: '#87d068', minWidth: '35px' , marginLeft:'20px',marginRight:'10px' }} icon={<UserOutlined />} onClick={showDrawer} />
+
+          <p className="welcome">Bienvenido {data?.name}</p>
+          <Avatar style={{ backgroundColor: '#87d068', minWidth: '35px', marginLeft: '20px', marginRight: '10px' }} icon={<UserOutlined />} onClick={showDrawer} />
           <Dropdown menu={{ items }} arrow={{ pointAtCenter: true }}>
             <a onClick={(e) => e.preventDefault()}>
               <Space>
@@ -298,7 +298,7 @@ const Dashboard: React.FC = () => {
               </div>
             }
             style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 60, bottom: 0 }}
-            // key={selectedMenuItem}
+          // key={selectedMenuItem}
           >
             <Menu
               className="lexcom-menu"
@@ -317,12 +317,6 @@ const Dashboard: React.FC = () => {
                 } else {
                   setSelectedMenu(item.key as string);
                 }
-
-                // if (item.key === selectedMenuItem) {
-                //   setSelectedMenuItem(item.key); // Si se hace clic en el ítem seleccionado, lo deselecciona
-                // } else {
-                //   setSelectedMenuItem(item.key as string); // Si se hace clic en un ítem diferente, lo selecciona
-                // }
               }}
             >
               <Menu.Item key={'GeoTrend Lex'} icon={<LineChartOutlined ref={ref1} />}> {/* Utilizamos el ref aquí */}
@@ -366,7 +360,7 @@ const Dashboard: React.FC = () => {
             </Menu>
 
           </Sider>
-          <Tour open={open} onClose={() => setOpen(false)} steps={steps}  />
+          <Tour open={open} onClose={() => setOpen(false)} steps={steps} />
           <Layout style={{
             padding: 24,
             minHeight: 360,
@@ -374,8 +368,8 @@ const Dashboard: React.FC = () => {
           }} className="lexcom-layout">
 
             <Content style={{ margin: '0 16px', padding: '0 24px', minHeight: 700 }} >
-              {selectedMenu === 'GeoTrend Lex' && <Product searchValue={searchValue}/>}
-              {selectedMenu === 'Standard' && <Standard/>}
+              {selectedMenu === 'GeoTrend Lex' && <Product searchValue={searchValue} />}
+              {selectedMenu === 'Standard' && <Standard />}
               {selectedMenu === 'Precio_del_Producto' && <Precio_del_Producto />}
               {selectedMenu === 'CPA_CVU' && <CPA_CVU />}
               {selectedMenu === 'LexIA Determination' && <LexcomAI />}
@@ -410,19 +404,19 @@ const Dashboard: React.FC = () => {
             <DescriptionItem title="Ciudad" content={data?.city} />
           </Col>
           <Col span={12}>
-            <DescriptionItem title="Pais" content={data?.country} />
+            <DescriptionItem title="País" content={data?.country} />
           </Col>
         </Row>
         <Row>
           <Col span={12}>
-          <DescriptionItem title="Cumpleaños" content={data?.date_of_birth ? new Date(data.date_of_birth).toISOString().split('T')[0] : ''} />
+            <DescriptionItem title="Cumpleaños" content={data?.date_of_birth ? new Date(data.date_of_birth).toISOString().split('T')[0] : ''} />
 
           </Col>
           <Col span={12}>
             <DescriptionItem title="Usuario" content={data?.username} />
           </Col>
         </Row>
-        
+
         <Divider />
         <p className="site-description-item-profile-p">Contacto</p>
         <Row>
@@ -430,7 +424,7 @@ const Dashboard: React.FC = () => {
             <DescriptionItem title="Email" content={data?.email} />
           </Col>
           <Col span={12}>
-            <DescriptionItem title="Telefono" content={data?.phone} />
+            <DescriptionItem title="Teléfono" content={data?.phone} />
           </Col>
         </Row>
       </Drawer>

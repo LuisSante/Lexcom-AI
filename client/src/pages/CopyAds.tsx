@@ -20,28 +20,25 @@ const CopyAI: React.FC<TypeCopyAds> = ({ searchValue }) => {
 
     useEffect(() => {
         setIsLoading(true);
-        const fetchData = async() => {
-            const url = `copy_ads/${searchValue}`
-            axiosInstance.get<CopyAds>(url)
-                .then(response => {
-                    api.success({
-                        message: 'Prompt generado',
-                        duration: 4
-                    });
-                    setData(response.data);
-                })
-                .catch(err => {
-                    api.error({
-                        message: 'Error al generar prompt',
-                        description: `${err.message}`,
-                        duration: 4
-                    });
-                })
-                .finally(() => {
-                    setIsLoading(false);
-                })
-        };
-        fetchData();
+        const url = `copy_ads/${searchValue}`
+        axiosInstance.get<CopyAds>(url)
+            .then(response => {
+                api.success({
+                    message: 'Prompt generado',
+                    duration: 4
+                });
+                setData(response.data);
+            })
+            .catch(err => {
+                api.error({
+                    message: 'Error al generar prompt',
+                    description: `${err.message}`,
+                    duration: 4
+                });
+            })
+            .finally(() => {
+                setIsLoading(false);
+            })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import {useParams } from 'react-router-dom';
+import {useNavigate, useParams } from 'react-router-dom';
 import { Button, ConfigProvider, Divider, Form, Input, notification } from 'antd';
 import About from '../components/components_home/About';
 import '../css/recoverpassword.css'
@@ -14,6 +14,8 @@ interface FormValues {
 }
 
 const ResetPassword: React.FC = () => {
+
+    const navigate = useNavigate();
 
     const { token } = useParams<{ token: string }>();
     const tokenParam = token ?? '';
@@ -32,7 +34,7 @@ const ResetPassword: React.FC = () => {
                             duration: 4
                         })
                     }
-                    // navigate('/');
+                    navigate('/');
                 }
             )
             .catch(

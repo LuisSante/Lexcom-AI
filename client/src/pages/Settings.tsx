@@ -9,7 +9,6 @@ import logo from '../assets/lexcom.svg';
 import '../css/Dashboard.css';
 import About from '../components/components_home/About';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 interface UserType {
   id: number,
@@ -88,9 +87,7 @@ const Settings: React.FC = () => {
   };
 
 
-
-
-  const emailValidator = (_: any, value: string) => {
+  const emailValidator = (_:any , value: string) => {
     if (value !== data?.email) {
       return Promise.reject(new Error('El correo es incorrecto'));
     }
@@ -134,7 +131,6 @@ const Settings: React.FC = () => {
   } = theme.useToken();
 
   useEffect(() => {
-    const fetchData = () => {
       const url = `update/`
       axiosInstance.get<UserType>(url)
         .then(response => {
@@ -151,13 +147,8 @@ const Settings: React.FC = () => {
 
         })
         .catch(err => {
-
+          console.error(err.message);
         })
-        .finally(() => {
-
-        })
-    };
-    fetchData();
   }, []);
 
 
@@ -279,19 +270,19 @@ const Settings: React.FC = () => {
                         <Input value={surname} disabled={!isEditing} onChange={(e) => handleChange(e, setSurname)} />
                         <Typography.Title level={5}>Email</Typography.Title>
                         <Input value={email} disabled={!isEditing} onChange={(e) => handleChange(e, setEmail)} />
-                        <Typography.Title level={5}>Telefono</Typography.Title>
+                        <Typography.Title level={5}>Teléfono</Typography.Title>
                         <Input value={phone} disabled={!isEditing} onChange={(e) => handleChange(e, setPhone)} />
                         <Typography.Title level={5}>Usuario</Typography.Title>
                         <Input value={username} disabled={!isEditing} onChange={(e) => handleChange(e, setUsername)} />
                       </div>
                       <div style={{ width: '48%' }}>
-                        <Typography.Title level={5}>Pais</Typography.Title>
+                        <Typography.Title level={5}>País</Typography.Title>
                         <Input value={country} disabled={!isEditing} onChange={(e) => handleChange(e, setCountry)} />
                         <Typography.Title level={5}>Ciudad</Typography.Title>
                         <Input value={city} disabled={!isEditing} onChange={(e) => handleChange(e, setCity)} />
                         <Typography.Title level={5}>Dirección</Typography.Title>
                         <Input value={address} disabled={!isEditing} onChange={(e) => handleChange(e, setAddress)} />
-                        <Typography.Title level={5}>Genero</Typography.Title>
+                        <Typography.Title level={5}>Género</Typography.Title>
                         <Input value={gender} disabled={!isEditing} onChange={(e) => handleChange(e, setGender)} />
                         <Typography.Title level={5}>Otros ajustes: </Typography.Title>
                         <Button onClick={handleEditPassword}>Cambiar Contraseña</Button>
@@ -333,13 +324,6 @@ const Settings: React.FC = () => {
           </Layout>
         </Layout>
       </ConfigProvider>
-
-    /*<div>{data && (
-        <div>
-          {data.name}
-        </div>
-      )}
-      </div> */
     </>
   )
 }
