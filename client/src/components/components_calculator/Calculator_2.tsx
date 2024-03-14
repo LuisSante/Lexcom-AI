@@ -70,7 +70,7 @@ const CPA_CVU: React.FC = () => {
                   setfull(value);
                 }
               }} />
-              <InputNumber addonBefore="COSTO UNITARIO DE INTERMEDIACIÒN " defaultValue={0} min={0} style={{ width: '100%' }} onChange={(value) => {
+              <InputNumber addonBefore="COSTO UNITARIO DE INTERMEDIACIÓN " defaultValue={0} min={0} style={{ width: '100%' }} onChange={(value) => {
                 if (value !== null) {
                   setcpa(value);
                 }

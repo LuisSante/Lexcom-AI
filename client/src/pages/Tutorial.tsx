@@ -131,7 +131,7 @@ const Tutorial: React.FC = () => {
               children: (
                 <>
                   <Card title="Lexcom Courses" bordered={false} style={{ width: '100%' }}>
-                    <Descriptions.Item label="UserName">¿No sabes como continuar vendiendo? Te ofrecemos una amplia variedad de cursos que te permitiran continuar tu camino al exito.</Descriptions.Item>
+                    <Descriptions.Item label="UserName">¿No sabes como continuar vendiendo? Te ofrecemos una amplia variedad de cursos que te permitirán continuar tu camino al éxito.</Descriptions.Item>
                     <p></p>
                     <Popover content={content5}>
                       <Button type="dashed" danger>¡Vamos!</Button>

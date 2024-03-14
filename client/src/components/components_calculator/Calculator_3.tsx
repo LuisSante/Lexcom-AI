@@ -38,7 +38,7 @@ const Precio_del_Producto: React.FC = () => {
                   setcosto(value);
                 }
               }} />
-              <InputNumber addonBefore="Costo Envio Nacional" defaultValue={0} min={0} style={{ width: '100%' }} onChange={(value) => {
+              <InputNumber addonBefore="Costo Envío Nacional" defaultValue={0} min={0} style={{ width: '100%' }} onChange={(value) => {
                 if (value !== null) {
                   setprecio(value);
                 }
