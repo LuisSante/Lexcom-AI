@@ -20,9 +20,8 @@ load_dotenv()
 
 DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')
 PASSWORD_GMAIL = os.getenv('PASSWORD_GMAIL')
-PASSWORD_APP = os.getenv('PASSWORD_APP')
-PASSWORD_GMAIL = os.getenv('PASSWORD_GMAIL')
-PASSWORD_APP = os.getenv('PASSWORD_APP')
+# PASSWORD_APP = os.getenv('PASSWORD_APP')
+PASSWORD_APP_LEXCOM_SUPPORT = os.getenv('PASSWORD_APP_LEXCOM_SUPPORT')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,9 +34,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-*^c5mb8jnz%pbg)qb5f*c2k)-=30p04k78tr1ub1%6_fu8yp^@"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -199,8 +198,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "lexcomsoporte@gmail.com"
-EMAIL_HOST_PASSWORD = f"{PASSWORD_APP}"
+EMAIL_HOST_USER = "suptechlexcom1@gmail.com"
+EMAIL_HOST_PASSWORD = f"{PASSWORD_APP_LEXCOM_SUPPORT}"
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # CELERY_BROKER_URL = 'redis://localhost:6379' 

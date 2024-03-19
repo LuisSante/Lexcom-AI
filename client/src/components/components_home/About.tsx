@@ -11,7 +11,7 @@ const About: React.FC<ComponentProps> = ({ id }) => {
     <div id={id}>
       <Footer style={{ background: 'black', color: 'white', textAlign: 'center' }}>
         <a onClick={termofUse}> Legal </a>
-        <a href='mailto:lexcomsoporte@gmail.com'> Support </a>
+        <a href='mailto:suptechlexcom1@gmail.com'> Support </a>
         <br />
         Lexcom ©{new Date().getFullYear()} Created by Lexcom
       </Footer>
