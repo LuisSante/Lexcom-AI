@@ -23,6 +23,8 @@ PASSWORD_GMAIL = os.getenv('PASSWORD_GMAIL')
 PASSWORD_APP_LEXCOM_SUPPORT = os.getenv('PASSWORD_APP_LEXCOM_SUPPORT')
 PASSWORD_INSTANCE = os.getenv('PASSWORD_INSTANCE')
 PASSWORD_DATABASE = os.getenv('PASSWORD_DATABASE')
+PASSWORD_INSTANCE = os.getenv('PASSWORD_INSTANCE')
+PASSWORD_DATABASE = os.getenv('PASSWORD_DATABASE')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,9 +35,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
+SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 RENDER_EXTERNAL = os.environ.get('RENDER_EXTERNAL')
@@ -43,6 +46,8 @@ RENDER_EXTERNAL = os.environ.get('RENDER_EXTERNAL')
 if RENDER_EXTERNAL:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL)
 
+if EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(EXTERNAL_HOSTNAME)
 
 # Application definition
 
@@ -114,6 +119,17 @@ WSGI_APPLICATION = "core.wsgi.application"
 #     }
 # }
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         "HOST": os.environ.get("DB_HOST", "localhost"),
+#         "PORT": os.environ.get("DB_PORT", "5432"),
+#         "NAME": os.environ.get("DB_NAME", "lexcom_db"),
+#         "USER": os.environ.get("DB_USER", "lexcom"),
+#         "PASSWORD": os.environ.get("DB_PASSWORD", f"{DATABASE_PASSWORD}"),
+#     }
+# }
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
@@ -152,6 +168,9 @@ CORS_ORIGIN_ALLOW_ALL = True
 # CORS_ALLOWED_ORIGINS = [
 #     "http://localhost:5173"
 # ]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:5173"
+# ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -184,7 +203,7 @@ if not DEBUG:
 AUTH_USER_MODEL = "core.User"
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=120),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=240),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
