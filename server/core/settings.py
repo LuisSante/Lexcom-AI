@@ -20,8 +20,9 @@ load_dotenv()
 
 DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')
 PASSWORD_GMAIL = os.getenv('PASSWORD_GMAIL')
-# PASSWORD_APP = os.getenv('PASSWORD_APP')
 PASSWORD_APP_LEXCOM_SUPPORT = os.getenv('PASSWORD_APP_LEXCOM_SUPPORT')
+PASSWORD_INSTANCE = os.getenv('PASSWORD_INSTANCE')
+PASSWORD_DATABASE = os.getenv('PASSWORD_DATABASE')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,12 +32,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-*^c5mb8jnz%pbg)qb5f*c2k)-=30p04k78tr1ub1%6_fu8yp^@"
+SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
+RENDER_EXTERNAL = os.environ.get('RENDER_EXTERNAL')
+
+if RENDER_EXTERNAL:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL)
 
 
 # Application definition
@@ -53,12 +58,12 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     'django_rest_passwordreset',
-    # 'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -72,9 +77,6 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.AllowAny'
-    # ],
 }
 
 ROOT_URLCONF = "core.urls"
@@ -101,17 +103,27 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         "HOST": os.environ.get("DB_HOST", "localhost"),
+#         "PORT": os.environ.get("DB_PORT", "5432"),
+#         "NAME": os.environ.get("DB_NAME", "lexcom_db"),
+#         "USER": os.environ.get("DB_USER", "lexcom"),
+#         "PASSWORD": os.environ.get("DB_PASSWORD", f"{DATABASE_PASSWORD}"),
+#     }
+# }
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "HOST": os.environ.get("DB_HOST", "localhost"),
+        "ENGINE": "django.db.backends.postgresql",
+        "HOST": os.environ.get("DB_HOST", "34.172.231.217"),
         "PORT": os.environ.get("DB_PORT", "5432"),
-        "NAME": os.environ.get("DB_NAME", "lexcom_db"),
-        "USER": os.environ.get("DB_USER", "lexcom"),
-        "PASSWORD": os.environ.get("DB_PASSWORD", f"{DATABASE_PASSWORD}"),
+        "NAME": os.environ.get("DB_NAME", "lexcomdb"),
+        "USER": os.environ.get("DB_USER", "lexcomdb"),
+        "PASSWORD": os.environ.get("DB_PASSWORD", f"{PASSWORD_DATABASE}"),
     }
 }
-
 
 
 # Password validation
@@ -137,9 +149,9 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173"
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:5173"
+# ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -157,7 +169,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = os.path.join(BASE_DIR, 'api')
+STATIC_MODELS_IA = os.path.join(BASE_DIR, 'api')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+if not DEBUG:
+        # Tell Django to copy statics to the `staticfiles` directory
+    # in your application directory on Render.
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # Turn on WhiteNoise storage backend that takes care of compressing static files
+    # and creating unique names for each version so they can safely be cached forever.
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 AUTH_USER_MODEL = "core.User"
 
