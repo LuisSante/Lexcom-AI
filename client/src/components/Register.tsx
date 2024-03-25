@@ -41,7 +41,8 @@ const Register: React.FC = () => {
     const [api, contextHolder] = notification.useNotification();
 
     const onFinish = (values: FormValues) => {
-        axios.post('http://localhost:8000/api/v1/register', values)
+        // axios.post('http://localhost:8000/api/v1/register', values)
+        axios.post('http://34.42.26.12:8080/api/v1/register', values)
             .then(
                 res => {
                     if (res.status === 201) {

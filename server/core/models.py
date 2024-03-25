@@ -37,7 +37,7 @@ class User(AbstractUser):
 @receiver(reset_password_token_created)
 def password_reset_token_created(sender, instance, reset_password_token, *args, **kwargs):
 
-    email_plaintext_message = "Hola" + "\n" + "Gracias por comunicarte con Lexcom" + "\n" + "Abra el enlace para restablecer su contraseña" + " " + "{}{}".format(instance.request.build_absolute_uri("http://localhost:5173/reset-password-form/"), reset_password_token.key)
+    email_plaintext_message = "Hola" + "\n" + "Gracias por comunicarte con Lexcom" + "\n" + "Abra el enlace para restablecer su contraseña" + " " + "{}{}".format(instance.request.build_absolute_uri("http://lexcom.tech/reset-password-form/"), reset_password_token.key)
     
     """
         this below line is the django default sending email function, 

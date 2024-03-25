@@ -21,8 +21,8 @@ load_dotenv()
 DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')
 PASSWORD_GMAIL = os.getenv('PASSWORD_GMAIL')
 PASSWORD_APP_LEXCOM_SUPPORT = os.getenv('PASSWORD_APP_LEXCOM_SUPPORT')
-PASSWORD_INSTANCE = os.getenv('PASSWORD_INSTANCE')
-PASSWORD_DATABASE = os.getenv('PASSWORD_DATABASE')
+# PASSWORD_INSTANCE = os.getenv('PASSWORD_INSTANCE')
+# PASSWORD_DATABASE = os.getenv('PASSWORD_DATABASE')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -102,6 +102,17 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "HOST": os.environ.get("DB_HOST", "172.17.0.1"),
+        "PORT": os.environ.get("DB_PORT", "5432"),
+        "NAME": os.environ.get("DB_NAME", "lexcom_db"),
+        "USER": os.environ.get("DB_USER", "lexcom"),
+        "PASSWORD": os.environ.get("DB_PASSWORD", f"{DATABASE_PASSWORD}"),
+    }
+}
+
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.postgresql_psycopg2",
@@ -113,16 +124,16 @@ WSGI_APPLICATION = "core.wsgi.application"
 #     }
 # }
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "HOST": os.environ.get("DB_HOST", "34.172.231.217"),
-        "PORT": os.environ.get("DB_PORT", "5432"),
-        "NAME": os.environ.get("DB_NAME", "lexcomdb"),
-        "USER": os.environ.get("DB_USER", "lexcomdb"),
-        "PASSWORD": os.environ.get("DB_PASSWORD", f"{PASSWORD_DATABASE}"),
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "HOST": os.environ.get("DB_HOST", "34.172.231.217"),
+#         "PORT": os.environ.get("DB_PORT", "5432"),
+#         "NAME": os.environ.get("DB_NAME", "lexcomdb"),
+#         "USER": os.environ.get("DB_USER", "lexcomdb"),
+#         "PASSWORD": os.environ.get("DB_PASSWORD", f"{PASSWORD_DATABASE}"),
+#     }
+# }
 
 
 # Password validation

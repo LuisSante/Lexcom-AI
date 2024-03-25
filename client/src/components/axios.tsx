@@ -5,7 +5,8 @@ interface TokenResponse {
 	refresh: string;
 }
 
-const baseURL = 'http://localhost:8000/api/v1/';
+// const baseURL = 'http://localhost:8000/api/v1/';
+const baseURL = 'http://34.42.26.12:8080/api/v1/';
 
 const axiosInstance = axios.create({
 	baseURL: baseURL,

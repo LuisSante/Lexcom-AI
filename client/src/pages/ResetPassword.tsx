@@ -24,7 +24,8 @@ const ResetPassword: React.FC = () => {
 
     const onFinish = (values: FormValues) => {
         const updatedValues = { ...values, token: token };
-        const url = `http://localhost:8000/api/v1/password_reset/confirm/?token=${encodeURIComponent(tokenParam)}`;
+        // const url = `http://localhost:8000/api/v1/password_reset/confirm/?token=${encodeURIComponent(tokenParam)}`;
+        const url = `http://34.42.26.12:8080/api/v1/password_reset/confirm/?token=${encodeURIComponent(tokenParam)}`;
         axios.post(url, updatedValues)
             .then(
                 res => {
