@@ -16,41 +16,36 @@ const Login: React.FC<FieldType> = () => {
   const [api, contextHolder] = notification.useNotification();
   const navigate = useNavigate();
 
-  const onFinish = (values: FieldType) => {
-    axiosInstance.post('token/', values)
-      .then(
-        res => {
-          if (res.status === 200) {
+  const onFinish = async (values: FieldType) => {
+    try {
+      const res = await axiosInstance.post('token/', values);
 
-            const access_token = res.data.access;
-            const refresh_token = res.data.refresh;
+      if (res.status === 200) {
+        const access_token = res.data.access;
+        const refresh_token = res.data.refresh;
 
-            localStorage.setItem('access_token', access_token);
-            localStorage.setItem('refresh_token', refresh_token);
-            axiosInstance.defaults.headers['Authorization'] = 'JWT ' + localStorage.getItem('access_token');
-              
-            api.success({
-              message: 'Inicio de sesión exitoso!',
-              description: 'Bienvenido de nuevo a LexCom',
-              duration: 4
-            });
-            
-            navigate('/dashboard');
-          }
-        }
-      )
-      .catch(
-        err => {
-          api.error({
-            message: 'Error al iniciar sesión',
-            description: 'Por favor, revise su usuario o contraseña. ' + `${err.message}`,
-            duration: 4
-          });
-        }
-      );
-  }
+        localStorage.setItem('access_token', access_token);
+        localStorage.setItem('refresh_token', refresh_token);
+        axiosInstance.defaults.headers['Authorization'] = 'JWT ' + localStorage.getItem('access_token');
 
-  const recoverpassword = () =>{
+        api.success({
+          message: 'Inicio de sesión exitoso!',
+          description: 'Bienvenido de nuevo a LexCom',
+          duration: 4
+        });
+
+        navigate('/dashboard');
+      }
+    } catch (err) {
+      api.error({
+        message: 'Error al iniciar sesión',
+        description: 'Por favor, revise su usuario o contraseña',
+        duration: 4
+      });
+    }
+  };
+
+  const recoverpassword = () => {
     navigate('/recoverpassword');
   }
 

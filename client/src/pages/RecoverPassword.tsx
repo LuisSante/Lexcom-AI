@@ -4,7 +4,7 @@ import About from '../components/components_home/About';
 import '../css/recoverpassword.css'
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/lexcom.svg';
-import axios from 'axios';
+import { axiosInstancewithoutPermissions } from '../components/axios';
 
 interface FieldType {
     email: string
@@ -20,8 +20,8 @@ const RecoverPassword = () => {
     }
 
     const onFinish = async (email: FieldType) => {
-        // axios.post('http://localhost:8000/api/v1/password_reset/', email)
-        axios.post('http://34.42.26.12:8080/api/v1/password_reset/', email)
+        const url = 'password_reset/'
+        axiosInstancewithoutPermissions.post(url, email)
             .then(
                 res => {
                     if (res.status === 200) {

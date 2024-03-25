@@ -42,61 +42,58 @@ const Trends: React.FC<TypeTrends> = ({ searchValue, idRegion }) => {
   const [api, contextHolder] = notification.useNotification();
 
   useEffect(() => {
-    const url = `product/value=${searchValue}/idregion=${idRegion}/trends_data`;
+    const fetchData = async () => {
+        if (idRegion) {
+            try {
+                const url = `product/value=${searchValue}/idregion=${idRegion}/trends_data`;
 
-    if (idRegion) {
-      api.success({
-        message: 'País identificado',
-        description: 'Espere por favor',
-        duration: 8,
-        placement: 'bottomLeft'
-      });
+                api.success({
+                    message: 'País identificado',
+                    description: 'Espere por favor',
+                    duration: 8,
+                    placement: 'bottomLeft'
+                });
 
-      axiosInstance.get<TrendsData>(url)
-        .then(response => {
-          const data = response.data.timeline_data;
-          const labels = data.map(item => item.date);
-          const value = data.map(item => parseInt(item.values[0].value));
+                const response = await axiosInstance.get<TrendsData>(url);
+                const data = response.data.timeline_data;
+                const labels = data.map(item => item.date);
+                const value = data.map(item => parseInt(item.values[0].value));
 
-          const new_chartData: ChartData<"line"> = {
-            labels: labels,
-            datasets: [
-              {
-                label: `Valores de ${searchValue}`,
-                data: value,
-                fill: false,
-                borderColor: 'rgb(75, 192, 192)',
-                tension: 0.1
-              }
-            ]
-          };
-          setChartData(new_chartData);
-        })
-        .catch(err => {
-          api.error({
-            message: 'Error al buscar paises',
-            description: `Por favor, seleccione una país en el desplegable`,
-            duration: 4,
-            placement: 'bottomLeft'
-          });
-          api.error({
-            message: 'Error al realizar la operación',
-            description: `${err.message}`,
-            duration: 4,
-            placement: 'bottomLeft'
-          });
-        })
-    } else {
-      api.error({
-        message: 'Por favor, seleccione una país en el desplegable',
-        duration: 4,
-        placement: 'bottomLeft'
-      });
-    }
+                const new_chartData: ChartData<"line"> = {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: `Valores de ${searchValue}`,
+                            data: value,
+                            fill: false,
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1
+                        }
+                    ]
+                };
+                setChartData(new_chartData);
+            } catch (err) {
+                api.error({
+                    message: 'Error al buscar países.',
+                    description: `Por favor, seleccione un país en el desplegable`,
+                    duration: 4,
+                    placement: 'bottomLeft'
+                });
+            }
+        } else {
+            api.error({
+                message: 'Por favor, seleccione un país en el desplegable',
+                duration: 4,
+                placement: 'bottomLeft'
+            });
+        }
+    };
 
+    fetchData();
 
+    // Limpieza, en este caso no es necesario, pero si se agregan dependencias, deberían ir aquí
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [idRegion]);
+}, [idRegion]);
 
   return (
     <>

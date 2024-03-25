@@ -6,7 +6,13 @@ interface TokenResponse {
 }
 
 // const baseURL = 'http://localhost:8000/api/v1/';
-const baseURL = 'http://34.42.26.12:8080/api/v1/';
+// const baseURL = 'http://34.42.26.12:8000/api/v1/';
+const baseURL = import.meta.env.VITE_API_URL;
+
+export const axiosInstancewithoutPermissions = axios.create({
+	baseURL: baseURL,
+	timeout: 100000,
+});
 
 const axiosInstance = axios.create({
 	baseURL: baseURL,
@@ -22,6 +28,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.response.use(
 	(response) => {
+		console.log('baseurl', baseURL)
 		return response;
 	},
 	async function (error: AxiosError) {

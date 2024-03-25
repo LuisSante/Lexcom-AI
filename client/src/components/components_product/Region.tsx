@@ -45,23 +45,30 @@ const Region: React.FC<TypeRegion> = ({ searchValue }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsLoading(true);
-    const url = `product/${searchValue}/region_data`
-    axiosInstance.get(url)
-      .then(response => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const url = `product/${searchValue}/region_data`;
+        const response = await axiosInstance.get(url);
         setData(response.data);
         api.success({
           message: 'Paises identificados',
           description: 'Espere por favor',
           duration: 8
         });
-      })
-      .catch(err => {
-        console.error(err.message);
-      })
-      .finally(() => {
+      } catch (err) {
+        api.error({
+          message: 'No hay paises identificados',
+          duration: 8
+        });
+      } finally {
         setIsLoading(false);
-    })
+      }
+    };
+
+    fetchData();
+
+    // Limpieza, en este caso no es necesario, pero si se agregan dependencias, deberían ir aquí
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -95,11 +102,11 @@ const Region: React.FC<TypeRegion> = ({ searchValue }) => {
       {contextHolder}
       <Carousel_Product />
       <div>
-        {isLoading && <Skeleton active/>}
+        {isLoading && <Skeleton active />}
         {data && dataR && (
           <div>
             <div>
-              <div  style={{ textAlign: 'center', color: '#333', fontSize: '24px', marginTop: '40px' }}>GeoTrend Lex Map</div>
+              <div style={{ textAlign: 'center', color: '#333', fontSize: '24px', marginTop: '40px' }}>GeoTrend Lex Map</div>
               <ComposableMap
                 projectionConfig={{
                   rotate: [-10, 0, 0],
@@ -161,11 +168,11 @@ const Region: React.FC<TypeRegion> = ({ searchValue }) => {
               </Select>
               <div style={{ display: 'flex' }}>
                 <div>
-                  <div style={{ textAlign: 'center', color: '#333', fontSize: '24px', marginBottom: '30px' , marginTop:'30px'}}>GeoTrend Lex Trends</div>
+                  <div style={{ textAlign: 'center', color: '#333', fontSize: '24px', marginBottom: '30px', marginTop: '30px' }}>GeoTrend Lex Trends</div>
                   <Trends searchValue={searchValue} idRegion={selectedRegion} />
                 </div>
                 <div style={{ marginLeft: '100px' }}>
-                  <div style={{ textAlign: 'center', color: '#333', fontSize: '24px', marginBottom: '30px' , marginTop:'30px' }}>GeoTrend Lex Topics</div>
+                  <div style={{ textAlign: 'center', color: '#333', fontSize: '24px', marginBottom: '30px', marginTop: '30px' }}>GeoTrend Lex Topics</div>
                   <Topics searchValue={searchValue} />
                 </div>
               </div>

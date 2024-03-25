@@ -61,33 +61,27 @@ const Settings: React.FC = () => {
   };
 
   const handleOk = async (email: FieldType) => {
-    axiosInstance.post('password_reset/', email)
-      .then(
-        res => {
-          if (res.status === 200) {
-            api.success({
-              message: 'Envío exitoso!',
-              description: 'Revise su correo electrónico',
-              duration: 4
-            })
-          }
-        }
-      )
-      .catch(
-        err => {
-          api.error({
-            message: 'Error al registrar usuario',
-            description: `${err.message}`,
-            duration: 4
-          })
-        }
-      )
-    setIsModalVisible(false);
+    try {
+      const res = await axiosInstance.post('password_reset/', email);
 
+      if (res.status === 200) {
+        api.success({
+          message: 'Envío exitoso!',
+          description: 'Revise su correo electrónico',
+          duration: 4
+        });
+      }
+    } catch (err) {
+      api.error({
+        message: 'Error al registrar usuario',
+        duration: 4
+      });
+    }
+
+    setIsModalVisible(false);
   };
 
-
-  const emailValidator = (_:any , value: string) => {
+  const emailValidator = (_: any, value: string) => {
     if (value !== data?.email) {
       return Promise.reject(new Error('El correo es incorrecto'));
     }
@@ -96,8 +90,8 @@ const Settings: React.FC = () => {
 
   const [form] = Form.useForm();
 
-  const handleSaveClick = () => {
-    const url = `update/`
+  const handleSaveClick = async () => {
+    const url = `update/`;
 
     const userData = {
       name: name,
@@ -114,47 +108,51 @@ const Settings: React.FC = () => {
       password: data?.password
     };
 
-    axiosInstance.put(url, userData)
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(err => {
-        console.log('error:', err);
-      })
-      .finally(() => {
+    try {
+      const response = await axiosInstance.put(url, userData);
+      console.log(response.data);
+    } catch (err) {
+      console.error('error:', err);
+    }
 
-      })
     setIsEditing(false);
   };
+
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
   useEffect(() => {
-      const url = `update/`
-      axiosInstance.get<UserType>(url)
-        .then(response => {
-          setData(response.data);
-          setName(response.data.name);
-          setSurname(response.data.surname);
-          setEmail(response.data.email);
-          setUsername(response.data.username);
-          setPhone(response.data.phone);
-          setCountry(response.data.country);
-          setCity(response.data.city)
-          setAddress(response.data.address);
-          setGender(response.data.gender);
+    const fetchData = async () => {
+      const url = `update/`;
+      try {
+        const response = await axiosInstance.get<UserType>(url);
+        const userData = response.data;
+        setData(userData);
+        setName(userData.name);
+        setSurname(userData.surname);
+        setEmail(userData.email);
+        setUsername(userData.username);
+        setPhone(userData.phone);
+        setCountry(userData.country);
+        setCity(userData.city);
+        setAddress(userData.address);
+        setGender(userData.gender);
+      } catch (err) {
+        console.error(err.message);
+      }
+    };
 
-        })
-        .catch(err => {
-          console.error(err.message);
-        })
+    fetchData();
+
+    // Limpieza, en este caso no es necesario, pero si se agregan dependencias, deberían ir aquí
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     try {
-      axiosInstance.post('logout/', {
+      await axiosInstance.post('logout/', {
         refresh_token: localStorage.getItem('refresh_token'),
       });
 

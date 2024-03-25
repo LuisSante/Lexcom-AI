@@ -35,7 +35,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 RENDER_EXTERNAL = os.environ.get('RENDER_EXTERNAL')
@@ -102,27 +102,27 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "HOST": os.environ.get("DB_HOST", "172.17.0.1"),
-        "PORT": os.environ.get("DB_PORT", "5432"),
-        "NAME": os.environ.get("DB_NAME", "lexcom_db"),
-        "USER": os.environ.get("DB_USER", "lexcom"),
-        "PASSWORD": os.environ.get("DB_PASSWORD", f"{DATABASE_PASSWORD}"),
-    }
-}
-
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.postgresql_psycopg2",
-#         "HOST": os.environ.get("DB_HOST", "localhost"),
+#         "HOST": os.environ.get("DB_HOST", "172.17.0.1"),
 #         "PORT": os.environ.get("DB_PORT", "5432"),
 #         "NAME": os.environ.get("DB_NAME", "lexcom_db"),
 #         "USER": os.environ.get("DB_USER", "lexcom"),
 #         "PASSWORD": os.environ.get("DB_PASSWORD", f"{DATABASE_PASSWORD}"),
 #     }
 # }
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "HOST": os.environ.get("DB_HOST", "localhost"),
+        "PORT": os.environ.get("DB_PORT", "5432"),
+        "NAME": os.environ.get("DB_NAME", "lexcom_db"),
+        "USER": os.environ.get("DB_USER", "lexcom"),
+        "PASSWORD": os.environ.get("DB_PASSWORD", f"{DATABASE_PASSWORD}"),
+    }
+}
 
 # DATABASES = {
 #     "default": {
@@ -179,8 +179,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_MODELS_IA = os.path.join(BASE_DIR, 'api')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
+STATIC_MODELS_IA = os.path.join(BASE_DIR, 'api')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 if not DEBUG:
@@ -190,6 +190,7 @@ if not DEBUG:
     # Turn on WhiteNoise storage backend that takes care of compressing static files
     # and creating unique names for each version so they can safely be cached forever.
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    STATIC_MODELS_IA = os.path.join(BASE_DIR, 'api')
 
 AUTH_USER_MODEL = "core.User"
 
