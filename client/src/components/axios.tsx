@@ -5,8 +5,6 @@ interface TokenResponse {
 	refresh: string;
 }
 
-// const baseURL = 'http://localhost:8000/api/v1/';
-// const baseURL = 'http://34.42.26.12:8000/api/v1/';
 const baseURL = import.meta.env.VITE_API_URL;
 
 export const axiosInstancewithoutPermissions = axios.create({
@@ -16,7 +14,7 @@ export const axiosInstancewithoutPermissions = axios.create({
 
 const axiosInstance = axios.create({
 	baseURL: baseURL,
-	timeout: 100000,
+	timeout: 300000,
 	headers: {
 		Authorization: localStorage.getItem('access_token')
 			? 'JWT ' + localStorage.getItem('access_token')

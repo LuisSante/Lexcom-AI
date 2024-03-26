@@ -184,7 +184,7 @@ const Settings: React.FC = () => {
       key: '3',
       label: (
         <a target="_blank" rel="noopener noreferrer" onClick={handleSettings}>
-          Nueva Busqueda
+          Nueva Búsqueda
         </a>
       ),
     },

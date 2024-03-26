@@ -7,7 +7,7 @@ const Healtz = () => {
     useEffect(() => {
         const fetchHealthStatus = async () => {
             try {
-                const response = await axiosInstancewithoutPermissions.get('healthz/');
+                const response = await axiosInstancewithoutPermissions.get('test/');
                 if (response.status === 200) {
                     setHealthStatus('200');
                 } else {

@@ -44,5 +44,5 @@ urlpatterns = [
     path(r'increment_search_count/', user.IncrementSearchCountView.as_view(), name='increment_search_count'),
 
     # Endpoint for test
-    path(r'healthz/', healthz.HealthzView.as_view(), name='healthz')
+    path(r'test/', healthz.TestView.as_view(), name='healthz')
 ]

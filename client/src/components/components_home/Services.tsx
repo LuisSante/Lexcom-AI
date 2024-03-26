@@ -44,8 +44,8 @@ const Services: React.FC<ComponentProps> = ({ id }) => {
               </div>
               <ul className="pricing-content">
                 <li>Primera vez usando: 2 búsquedas gratuitas </li>
-                <li>10 búsquedas </li>
-                <li>Porcentaje de exito</li>
+                <li>5 búsquedas </li>
+                <li>Porcentaje de éxito</li>
                 <li>Recomendacion de ventas</li>
                 <li>-</li>
               </ul>
@@ -65,7 +65,7 @@ const Services: React.FC<ComponentProps> = ({ id }) => {
               </div>
               <ul className="pricing-content">
                 <li>Primera vez usando: 2 búsquedas gratuitas </li>
-                <li>15 búsquedas</li>
+                <li>10 búsquedas</li>
                 <li>Porcentaje y estadísticas</li>
                 <li> Recomendación de ventas</li>
                 <li>- </li>

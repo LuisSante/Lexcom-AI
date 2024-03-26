@@ -18,4 +18,6 @@ RUN pip install gunicorn==21.2.0
 
 ENV DJANGO_SETTINGS_MODULE=core.settings
 
+RUN python manage.py collectstatic --noinput
+
 CMD ["gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "1", "--threads", "8", "--timeout", "0"]
