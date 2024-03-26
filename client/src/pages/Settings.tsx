@@ -138,8 +138,17 @@ const Settings: React.FC = () => {
         setCity(userData.city);
         setAddress(userData.address);
         setGender(userData.gender);
+
+        api.success({
+          message: 'Actualización realizada',
+          duration: 4
+        });
+
       } catch (err) {
-        console.error(err.message);
+        api.error({
+          message: 'Error en la actualizacion',
+          duration: 4
+        });
       }
     };
 
