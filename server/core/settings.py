@@ -35,7 +35,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 RENDER_EXTERNAL = os.environ.get('RENDER_EXTERNAL')
@@ -102,16 +102,6 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql_psycopg2",
-#         "HOST": os.environ.get("DB_HOST", "172.17.0.1"),
-#         "PORT": os.environ.get("DB_PORT", "5432"),
-#         "NAME": os.environ.get("DB_NAME", "lexcom_db"),
-#         "USER": os.environ.get("DB_USER", "lexcom"),
-#         "PASSWORD": os.environ.get("DB_PASSWORD", f"{DATABASE_PASSWORD}"),
-#     }
-# }
 
 DATABASES = {
     "default": {
@@ -133,6 +123,17 @@ DATABASES = {
 #         "USER": os.environ.get("DB_USER", "lexcomdb"),
 #         "PASSWORD": os.environ.get("DB_PASSWORD", f"{PASSWORD_DATABASE}"),
 #     }
+# }
+
+# DATABASES = {
+    # "default": {
+        # "ENGINE": "django.db.backends.postgresql_psycopg2",
+        # "HOST": os.environ.get("DB_HOST", "172.17.0.1"),
+        # "PORT": os.environ.get("DB_PORT", "5432"),
+        # "NAME": os.environ.get("DB_NAME", "lexcom_db"),
+        # "USER": os.environ.get("DB_USER", "lexcom"),
+        # "PASSWORD": os.environ.get("DB_PASSWORD", f"{DATABASE_PASSWORD}"),
+    # }
 # }
 
 
@@ -179,12 +180,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_MODELS_IA = os.path.join(BASE_DIR, 'api')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 if not DEBUG:
-        # Tell Django to copy statics to the `staticfiles` directory
+    print("ASDFADFADF", DEBUG)
+    # Tell Django to copy statics to the `staticfiles` directory
     # in your application directory on Render.
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     # Turn on WhiteNoise storage backend that takes care of compressing static files
@@ -200,7 +202,7 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
     "UPDATE_LAST_LOGIN": False,
-    
+
     "ALGORITHM": "HS256",
 
     "VERIFYING_KEY": None,
@@ -235,7 +237,7 @@ EMAIL_HOST_USER = "suptechlexcom1@gmail.com"
 EMAIL_HOST_PASSWORD = f"{PASSWORD_APP_LEXCOM_SUPPORT}"
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# CELERY_BROKER_URL = 'redis://localhost:6379' 
+# CELERY_BROKER_URL = 'redis://localhost:6379'
 # CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import user, serpapi, openai, tiktok, lexcomia, usersettings
+from .views import user, serpapi, openai, tiktok, lexcomia, usersettings, healthz
 
 from rest_framework_simplejwt import views as jwt_views
 
@@ -41,5 +41,8 @@ urlpatterns = [
     # Endpoint for progress
     path(r'update_plan/', user.UpdateSearchPlanView.as_view(), name='update_plan'),
     path(r'user_info/', user.UserInfoView.as_view(), name='user_info'),
-    path(r'increment_search_count/', user.IncrementSearchCountView.as_view(), name='increment_search_count')
+    path(r'increment_search_count/', user.IncrementSearchCountView.as_view(), name='increment_search_count'),
+
+    # Endpoint for test
+    path(r'healthz/', healthz.HealthzView.as_view(), name='healthz')
 ]

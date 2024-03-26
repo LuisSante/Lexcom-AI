@@ -18,4 +18,4 @@ RUN pip install gunicorn==21.2.0
 
 ENV DJANGO_SETTINGS_MODULE=core.settings
 
-CMD ["gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8080", "--workers", "1", "--threads", "8", "--timeout", "0"]
+CMD ["gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "1", "--threads", "8", "--timeout", "0"]
