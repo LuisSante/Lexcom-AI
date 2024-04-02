@@ -1,14 +1,13 @@
 import { Button, Modal } from 'antd';
 import React, { useState } from 'react'
-
+import Register from './Register';
 
 interface ButtonType {
   name: string;
-  ButtonForm: React.ComponentType<{ onSubmit: () => void; }>;
   styleButton: React.CSSProperties;
 }
 
-const ButtonComponent: React.FC<ButtonType> = ({ name, ButtonForm, styleButton }) => {
+const ButtonComponent: React.FC<ButtonType> = ({ name, styleButton }) => {
 
 
   const [buttonModalVisible, setButtonModalVisible] = useState(false);
@@ -30,12 +29,12 @@ const ButtonComponent: React.FC<ButtonType> = ({ name, ButtonForm, styleButton }
         {name}
       </Button>
       <Modal
-        title="Pruebelo_gratis"
+        title="Regístrate ahora"
         open={buttonModalVisible}
         onCancel={handleRegisterModalCancel}
         footer={null}
       >
-        {ButtonForm && <ButtonForm onSubmit={handleRegisterModalCancel} />}
+        <Register/>
       </Modal>
     </>
 
