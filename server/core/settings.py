@@ -21,8 +21,8 @@ load_dotenv()
 DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')
 PASSWORD_GMAIL = os.getenv('PASSWORD_GMAIL')
 PASSWORD_APP_LEXCOM_SUPPORT = os.getenv('PASSWORD_APP_LEXCOM_SUPPORT')
-PASSWORD_INSTANCE = os.getenv('PASSWORD_INSTANCE')
-PASSWORD_DATABASE = os.getenv('PASSWORD_DATABASE')
+# PASSWORD_INSTANCE = os.getenv('PASSWORD_INSTANCE')
+# PASSWORD_DATABASE = os.getenv('PASSWORD_DATABASE')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -102,27 +102,39 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql_psycopg2",
-#         "HOST": os.environ.get("DB_HOST", "localhost"),
-#         "PORT": os.environ.get("DB_PORT", "5432"),
-#         "NAME": os.environ.get("DB_NAME", "lexcom_db"),
-#         "USER": os.environ.get("DB_USER", "lexcom"),
-#         "PASSWORD": os.environ.get("DB_PASSWORD", f"{DATABASE_PASSWORD}"),
-#     }
-# }
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "HOST": os.environ.get("DB_HOST", "34.172.231.217"),
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "HOST": os.environ.get("DB_HOST", "localhost"),
         "PORT": os.environ.get("DB_PORT", "5432"),
-        "NAME": os.environ.get("DB_NAME", "lexcomdb"),
-        "USER": os.environ.get("DB_USER", "lexcomdb"),
-        "PASSWORD": os.environ.get("DB_PASSWORD", f"{PASSWORD_DATABASE}"),
+        "NAME": os.environ.get("DB_NAME", "lexcom_db"),
+        "USER": os.environ.get("DB_USER", "lexcom"),
+        "PASSWORD": os.environ.get("DB_PASSWORD", f"{DATABASE_PASSWORD}"),
     }
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "HOST": os.environ.get("DB_HOST", "34.172.231.217"),
+#         "PORT": os.environ.get("DB_PORT", "5432"),
+#         "NAME": os.environ.get("DB_NAME", "lexcomdb"),
+#         "USER": os.environ.get("DB_USER", "lexcomdb"),
+#         "PASSWORD": os.environ.get("DB_PASSWORD", f"{PASSWORD_DATABASE}"),
+#     }
+# }
+
+# DATABASES = {
+    # "default": {
+        # "ENGINE": "django.db.backends.postgresql_psycopg2",
+        # "HOST": os.environ.get("DB_HOST", "172.17.0.1"),
+        # "PORT": os.environ.get("DB_PORT", "5432"),
+        # "NAME": os.environ.get("DB_NAME", "lexcom_db"),
+        # "USER": os.environ.get("DB_USER", "lexcom"),
+        # "PASSWORD": os.environ.get("DB_PASSWORD", f"{DATABASE_PASSWORD}"),
+    # }
+# }
 
 
 # Password validation
@@ -168,17 +180,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_MODELS_IA = os.path.join(BASE_DIR, 'api')
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 if not DEBUG:
-        # Tell Django to copy statics to the `staticfiles` directory
+    # Tell Django to copy statics to the `staticfiles` directory
     # in your application directory on Render.
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     # Turn on WhiteNoise storage backend that takes care of compressing static files
     # and creating unique names for each version so they can safely be cached forever.
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    STATIC_MODELS_IA = os.path.join(BASE_DIR, 'api')
 
 AUTH_USER_MODEL = "core.User"
 
@@ -188,7 +201,7 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
     "UPDATE_LAST_LOGIN": False,
-    
+
     "ALGORITHM": "HS256",
 
     "VERIFYING_KEY": None,
@@ -223,7 +236,7 @@ EMAIL_HOST_USER = "suptechlexcom1@gmail.com"
 EMAIL_HOST_PASSWORD = f"{PASSWORD_APP_LEXCOM_SUPPORT}"
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# CELERY_BROKER_URL = 'redis://localhost:6379' 
+# CELERY_BROKER_URL = 'redis://localhost:6379'
 # CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

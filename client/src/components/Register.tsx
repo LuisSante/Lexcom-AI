@@ -8,11 +8,11 @@ import {
     notification,
     ConfigProvider,
 } from 'antd';
-import axios from 'axios';
 import { useState } from 'react';
 import { strongPasswordRegex } from './logic/components_form/password_strong';
 import { formItemLayout, tailFormItemLayout } from './logic/components_form/position_form';
 import { termofUse } from './components_home/Legal';
+import { axiosInstancewithoutPermissions } from './axios';
 
 interface FormValues {
     title: string;
@@ -41,7 +41,8 @@ const Register: React.FC = () => {
     const [api, contextHolder] = notification.useNotification();
 
     const onFinish = (values: FormValues) => {
-        axios.post('http://localhost:8000/api/v1/register', values)
+        const url = 'register/';
+        axiosInstancewithoutPermissions.post(url, values)
             .then(
                 res => {
                     if (res.status === 201) {
@@ -58,9 +59,10 @@ const Register: React.FC = () => {
                 err => {
                     api.error({
                         message: 'Error al registrar usuario',
-                        description: `${err.message}`,
+                        description: 'El correo registrado ya existe',
                         duration: 4
                     })
+                    console.log(err.message)
                 }
             )
     }

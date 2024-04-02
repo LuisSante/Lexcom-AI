@@ -125,21 +125,21 @@ const Dashboard: React.FC = () => {
     },
   ];
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     try {
-      axiosInstance.post('logout/', {
-        refresh_token: localStorage.getItem('refresh_token'),
-      });
+        await axiosInstance.post('logout/', {
+            refresh_token: localStorage.getItem('refresh_token'),
+        });
 
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('refresh_token');
-      axiosInstance.defaults.headers['Authorization'] = null;
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        axiosInstance.defaults.headers['Authorization'] = null;
 
-      navigate('/');
+        navigate('/');
     } catch (error) {
-      console.error('Error al cerrar sesión:', error);
+        console.error('Error al cerrar sesión:', error);
     }
-  };
+};
 
   const handleSettings = async () => {
     navigate('/settings');

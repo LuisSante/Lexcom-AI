@@ -49,25 +49,33 @@ const Topics: React.FC<TypeTopics> = ({ searchValue }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsLoading(true);
-    const url = `product/${searchValue}/topics_data`
-    axiosInstance.get(url)
-      .then(response => {
-        setData(response.data);
-        api.success({
-          message: 'Operación realizada',
-          description: 'Espere por favor',
-          duration: 4
-        });
-      })
-      .catch(err => {
-        console.error(err.message);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      })
+    const fetchData = async () => {
+        setIsLoading(true);
+        try {
+            const url = `product/${searchValue}/topics_data`;
+            const response = await axiosInstance.get(url);
+            setData(response.data);
+            api.success({
+                message: 'Operación realizada',
+                description: 'Espere por favor',
+                duration: 4
+            });
+        } catch (err) {
+            api.error({
+                message: 'No hay temas relacionados a tu producto',
+                description: 'Es probable que tu producto no esté en tendencia',
+                duration: 4
+            });
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    fetchData();
+
+    // Limpieza, en este caso no es necesario, pero si se agregan dependencias, deberían ir aquí
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+}, []);
 
   const transformData = (topicsData: TopicsData[] | null): DataType[] => {
     if (!topicsData) return [];

@@ -19,29 +19,29 @@ const OpenAI: React.FC<TypeOpenAI> = ({ searchValue }) => {
     const [api, contextHolder] = notification.useNotification();
 
     useEffect(() => {
-        setIsLoading(true);
         const fetchData = async () => {
-            const url = `openai/${searchValue}`
-            axiosInstance.get<OpenAIData>(url)
-                .then(response => {
-                    api.success({
-                        message: 'Prompt generado',
-                        duration: 4
-                    });
-                    setData(response.data);
-                })
-                .catch(err => {
-                    api.error({
-                        message: 'Error al generar prompt',
-                        description: `${err.message}`,
-                        duration: 4
-                    });
-                })
-                .finally(() => {
-                    setIsLoading(false);
-                })
+            setIsLoading(true);
+            try {
+                const url = `openai/${searchValue}`;
+                const response = await axiosInstance.get<OpenAIData>(url);
+                setData(response.data);
+                api.success({
+                    message: 'Prompt generado',
+                    duration: 4
+                });
+            } catch (err) {
+                api.error({
+                    message: 'Error al generar prompt',
+                    duration: 4
+                });
+            } finally {
+                setIsLoading(false);
+            }
         };
+    
         fetchData();
+    
+        // Limpieza, en este caso no es necesario, pero si se agregan dependencias, deberían ir aquí
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchValue]);
 

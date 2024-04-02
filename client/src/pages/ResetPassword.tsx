@@ -4,9 +4,9 @@ import { Button, ConfigProvider, Divider, Form, Input, notification } from 'antd
 import About from '../components/components_home/About';
 import '../css/recoverpassword.css'
 import logo from '../assets/lexcom.svg';
-import axios from 'axios';
 import { strongPasswordRegex } from '../components/logic/components_form/password_strong';
 import { formItemLayout, tailFormItemLayout } from '../components/logic/components_form/position_form';
+import { axiosInstancewithoutPermissions } from '../components/axios';
 
 interface FormValues {
     password: string;
@@ -24,8 +24,8 @@ const ResetPassword: React.FC = () => {
 
     const onFinish = (values: FormValues) => {
         const updatedValues = { ...values, token: token };
-        const url = `http://localhost:8000/api/v1/password_reset/confirm/?token=${encodeURIComponent(tokenParam)}`;
-        axios.post(url, updatedValues)
+        const url = `password_reset/confirm/?token=${encodeURIComponent(tokenParam)}`;
+        axiosInstancewithoutPermissions.post(url, updatedValues)
             .then(
                 res => {
                     if (res.status === 200) {

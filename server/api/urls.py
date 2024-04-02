@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import user, serpapi, openai, tiktok, lexcomia, usersettings
+from .views import user, serpapi, openai, tiktok, lexcomia, usersettings, healthz
 
 from rest_framework_simplejwt import views as jwt_views
 
@@ -8,7 +8,7 @@ urlpatterns = [
     path(r'home/', user.HomeView.as_view(), name ='home'),
     
     # Registro
-    path(r'register' , user.RegisterView.as_view(), name="register"),
+    path(r'register/' , user.RegisterView.as_view(), name="register"),
     
     # Create token access and token refresh for uptade the token access
     path(r'token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -41,5 +41,8 @@ urlpatterns = [
     # Endpoint for progress
     path(r'update_plan/', user.UpdateSearchPlanView.as_view(), name='update_plan'),
     path(r'user_info/', user.UserInfoView.as_view(), name='user_info'),
-    path(r'increment_search_count/', user.IncrementSearchCountView.as_view(), name='increment_search_count')
+    path(r'increment_search_count/', user.IncrementSearchCountView.as_view(), name='increment_search_count'),
+
+    # Endpoint for test
+    path(r'test/', healthz.TestView.as_view(), name='healthz')
 ]

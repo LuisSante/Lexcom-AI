@@ -19,26 +19,29 @@ const CopyAI: React.FC<TypeCopyAds> = ({ searchValue }) => {
     const [api, contextHolder] = notification.useNotification();
 
     useEffect(() => {
-        setIsLoading(true);
-        const url = `copy_ads/${searchValue}`
-        axiosInstance.get<CopyAds>(url)
-            .then(response => {
+        const fetchData = async () => {
+            setIsLoading(true);
+            try {
+                const url = `copy_ads/${searchValue}`;
+                const response = await axiosInstance.get<CopyAds>(url);
+                setData(response.data);
                 api.success({
                     message: 'Prompt generado',
                     duration: 4
                 });
-                setData(response.data);
-            })
-            .catch(err => {
+            } catch (err) {
                 api.error({
                     message: 'Error al generar prompt',
-                    description: `${err.message}`,
                     duration: 4
                 });
-            })
-            .finally(() => {
+            } finally {
                 setIsLoading(false);
-            })
+            }
+        };
+    
+        fetchData();
+    
+        // Limpieza, en este caso no es necesario, pero si se agregan dependencias, deberían ir aquí
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

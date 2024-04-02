@@ -72,60 +72,52 @@ const LexcomAI: React.FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [api, contextHolder] = notification.useNotification();
 
-    const onFinish = (formData: FormValues) => {
+    const onFinish = async (formData: FormValues) => {
         setIsLoading(true);
-
-        axiosInstance.post('lexcom/', formData)
-            .then(response => {
-                const data = response.data;
-                const newChartData: TypePrediction = {
-                    labels: ['Muy Bueno', 'Bueno', 'Normal', 'Malo', 'Muy malo'],
-                    datasets: [{
-                        data: Object.values(data),
-                        backgroundColor: [
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(255, 159, 64, 0.2)',
-                            'rgba(255, 205, 86, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                        ],
-                        borderColor: [
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(255, 159, 64, 1)',
-                            'rgba(255, 205, 86, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(153, 102, 255, 1)',
-                        ],
-
-                        borderWidth: 2.5,
-                    }]
-                };
-
-                api.success({
-                    message: 'Operación realizada',
-                    description: 'Espere por favor',
-                    duration: 4
-                });
-
-                setChartData(newChartData);
-
-            })
-            .catch(err => {
-                api.error({
-                    message: 'Error al realizar la operación',
-                    description: 'Es obligatorio que llene el primer campo',
-                    duration: 6
-                });
-                api.error({
-                    message: 'Error al realizar la operación',
-                    description: `${err.message}`,
-                    duration: 6
-                });
-            })
-            .finally(() => {
-                setIsLoading(false);
+    
+        try {
+            const response = await axiosInstance.post('lexcom/', formData);
+            const data = response.data;
+            const newChartData: TypePrediction = {
+                labels: ['Muy Bueno', 'Bueno', 'Normal', 'Malo', 'Muy malo'],
+                datasets: [{
+                    data: Object.values(data),
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 205, 86, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(153, 102, 255, 1)',
+                    ],
+    
+                    borderWidth: 2.5,
+                }]
+            };
+    
+            api.success({
+                message: 'Operación realizada',
+                description: 'Espere por favor',
+                duration: 4
             });
-    }
+    
+            setChartData(newChartData);
+        } catch (err) {
+            api.error({
+                message: 'Error al realizar la operación',
+                description:'Es obligatorio que llene el primer campo',
+                duration: 6
+            });
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     return (
         <>

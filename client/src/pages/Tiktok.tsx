@@ -40,26 +40,27 @@ const Tiktok: React.FC<TypeTikTok> = ({ searchValue }) => {
     const [api, contextHolder] = notification.useNotification();
 
     useEffect(() => {
-        setIsLoading(true);
-        const url = `tiktok/${searchValue}`
-        axiosInstance.get<TiktokData[]>(url)
-            .then(response => {
+        const fetchData = async () => {
+            try {
+                setIsLoading(true);
+                const url = `tiktok/${searchValue}`;
+                const response = await axiosInstance.get<TiktokData[]>(url);
+                setData(response.data);
                 api.success({
                     message: 'Videos relacionados a su producto',
                     duration: 4
                 });
-                setData(response.data);
-            })
-            .catch(err => {
+            } catch (err) {
                 api.error({
                     message: 'No hay videos relacionados a tu producto, lo lamentamos',
-                    description: `${err.message}`,
                     duration: 4
                 });
-            })
-            .finally(() => {
+            } finally {
                 setIsLoading(false);
-            })
+            }
+        };
+
+        fetchData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

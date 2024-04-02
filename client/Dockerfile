@@ -19,6 +19,7 @@ RUN npm run build
 FROM nginx:latest
 
 # Copy the built React app from the builder stage to the Nginx server
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Expose port 80

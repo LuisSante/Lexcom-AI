@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import RecoverPassword from './pages/RecoverPassword';
 import ResetPassword from './pages/ResetPassword';
 import Settings from './pages/Settings';
+import Healtz from './pages/Healtz';
 
 const App: React.FC = () => {
 
@@ -17,6 +18,7 @@ const App: React.FC = () => {
         <Route path="/recoverpassword" element={<RecoverPassword />} />
         <Route path="/reset-password-form/:token" element={<ResetPassword />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/test" element={<Healtz />} />
       </Routes>
     </BrowserRouter>
   )
