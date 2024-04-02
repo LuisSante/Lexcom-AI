@@ -26,7 +26,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.response.use(
 	(response) => {
-		console.log('baseurl', baseURL)
+		// console.log('baseurl', baseURL)
 		return response;
 	},
 	async function (error: AxiosError) {

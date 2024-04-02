@@ -8,7 +8,7 @@ urlpatterns = [
     path(r'home/', user.HomeView.as_view(), name ='home'),
     
     # Registro
-    path(r'register' , user.RegisterView.as_view(), name="register"),
+    path(r'register/' , user.RegisterView.as_view(), name="register"),
     
     # Create token access and token refresh for uptade the token access
     path(r'token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),

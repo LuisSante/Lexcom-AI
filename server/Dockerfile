@@ -20,4 +20,4 @@ ENV DJANGO_SETTINGS_MODULE=core.settings
 
 RUN python manage.py collectstatic --noinput
 
-CMD ["gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "1", "--threads", "8", "--timeout", "0"]
+CMD ["gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "2", "--threads", "4", "--timeout", "300"]

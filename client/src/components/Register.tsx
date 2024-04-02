@@ -41,7 +41,7 @@ const Register: React.FC = () => {
     const [api, contextHolder] = notification.useNotification();
 
     const onFinish = (values: FormValues) => {
-        const url = '/register';
+        const url = 'register/';
         axiosInstancewithoutPermissions.post(url, values)
             .then(
                 res => {
