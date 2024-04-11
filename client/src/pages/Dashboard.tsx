@@ -192,7 +192,7 @@ const Dashboard: React.FC = () => {
   };
 
   const searchLimited = () => {
-    let newPlan = 'standard';
+    // let newPlan = 'standard';
     Modal.confirm({
 
       title: 'LEXCOM WARNING!!!',
@@ -209,22 +209,21 @@ const Dashboard: React.FC = () => {
         </div>
       ),
       icon: <WarningOutlined style={{ color: '#108ee9' }} />,
-
-      onOk() {
-        axiosInstance.post('update_plan/', { new_plan: newPlan })
-          .then(response => {
-            const { new_max_searches, new_search_count, new_progress_count } = response.data;
-            setMaxSearches(new_max_searches);
-            setSearchCount(new_search_count);
-            setProgress(new_progress_count);
-            location.reload();
-          })
-          .catch(error => {
-            console.error('Error updating search plan:', error);
-          });
-      }
-
-
+      onOk() { },
+      // onOk() {
+      //   axiosInstance.post('update_plan/', { new_plan: newPlan })
+      //     .then(response => {
+      //       const { new_max_searches, new_search_count, new_progress_count } = response.data;
+      //       setMaxSearches(new_max_searches);
+      //       setSearchCount(new_search_count);
+      //       setProgress(new_progress_count);
+      //       location.reload();
+      //     })
+      //     .catch(error => {
+      //       console.error('Error updating search plan:', error);
+      //     });
+      // },
+      width: '50%',
     });
   };
 

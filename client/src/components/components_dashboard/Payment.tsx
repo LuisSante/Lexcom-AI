@@ -5,7 +5,7 @@ import { ButtonPlan } from './ButtonPlan';
 const styleButton = {
     background: 'transparent',
     border: 'none',
-    color: 'white',
+    color: 'black',
     fontSize: '15px',
     height: 0,
     fontWeight: 'bold',
@@ -36,66 +36,66 @@ export const Payment = () => {
             <div className="grip-pricing">
 
                 <div className="pricingTable">
-                    <div className="pricingTable-header">
+                    <div className="pricingTable-header" style={{color: 'black' }}>
                         <h3 className="heading">Standard</h3>
                         <div className="price-value">19
                             <span className="currency">$</span>
                         </div>
                     </div>
                     <ul className="pricing-content">
-                        <li>Primera vez usando: 2 búsquedas gratuitas </li>
                         <li>5 búsquedas </li>
                         <li>Porcentaje de éxito</li>
                         <li>Recomendacion de ventas</li>
-                        <li>-</li>
                     </ul>
-                    <div className={clicked ? "read active" : "read "}>
-                    <ButtonPlan
-                            name="Regístrate ahora"
+                    <div className={clicked? "read active" : "read "}>
+                        <ButtonPlan
+                            type="Standard"
+                            name="Comprar Plan"
+                            price={19}
                             styleButton={styleButton}
                         />
                     </div>
                 </div>
 
                 <div className="pricingTable">
-                    <div className="pricingTable-header">
+                    <div className="pricingTable-header" style={{color: 'black' }}>
                         <h3 className="heading">Business</h3>
                         <div className="price-value">36
                             <span className="currency">$</span>
                         </div>
                     </div>
                     <ul className="pricing-content">
-                        <li>Primera vez usando: 2 búsquedas gratuitas </li>
                         <li>10 búsquedas</li>
                         <li>Porcentaje y estadísticas</li>
-                        <li> Recomendación de ventas</li>
-                        <li>- </li>
+                        <li>Recomendación de ventas</li>
                     </ul>
-                    <div className={clicked ? "read active" : "read "}>
+                    <div className={clicked? "read active" : "read "}>
                         <ButtonPlan
-                            name="Regístrate ahora"
+                            type="Business"
+                            name="Comprar Plan"
+                            price = {36}
                             styleButton={styleButton}
                         />
                     </div>
                 </div>
 
                 <div className="pricingTable">
-                    <div className="pricingTable-header">
+                    <div className="pricingTable-header" style={{color: 'black' }}>
                         <h3 className="heading">Premium</h3>
                         <div className="price-value">70
                             <span className="currency">$</span>
                         </div>
                     </div>
                     <ul className="pricing-content">
-                        <li>Primera vez usando: 2 búsquedas gratuitas </li>
                         <li>20 búsquedas</li>
                         <li>Porcentaje y estadísticas</li>
                         <li>Recomendacion de ventas</li>
-                        <li>-</li>
                     </ul>
-                    <div className={clicked ? "read active" : "read "}>
+                    <div className={clicked? "read active" : "read "}>
                         <ButtonPlan
-                            name="Regístrate ahora"
+                            type="Premium"
+                            name="Comprar Plan"
+                            price={70}
                             styleButton={styleButton}
                         />
                     </div>
