@@ -4,7 +4,7 @@ import Precio_del_Producto from '../components/components_calculator/Calculator_
 import Tutorial from '../pages/Tutorial';
 import '../css/Dashboard.css';
 import React, { useEffect, useRef, useState } from 'react';
-import { Avatar, Space, Input, Button, notification, Tour, Drawer, Row, Col, Divider, Modal, Radio } from 'antd';
+import { Avatar, Space, Input, Button, notification, Tour, Drawer, Row, Col, Divider, Modal } from 'antd';
 import { Dropdown, ConfigProvider, Layout, Menu, Progress } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { UserOutlined, CalculatorOutlined, TikTokOutlined, TrophyOutlined, WarningOutlined } from '@ant-design/icons';
@@ -30,6 +30,7 @@ import Tiktok from './Tiktok';
 import LexcomAI from './LexcomAI';
 import axiosInstance from '../components/axios';
 import type { TourProps } from 'antd';
+import { Payment } from '../components/components_dashboard/Payment';
 
 interface UserType {
   id: number,
@@ -127,19 +128,19 @@ const Dashboard: React.FC = () => {
 
   const handleLogout = async () => {
     try {
-        await axiosInstance.post('logout/', {
-            refresh_token: localStorage.getItem('refresh_token'),
-        });
+      await axiosInstance.post('logout/', {
+        refresh_token: localStorage.getItem('refresh_token'),
+      });
 
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
-        axiosInstance.defaults.headers['Authorization'] = null;
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      axiosInstance.defaults.headers['Authorization'] = null;
 
-        navigate('/');
+      navigate('/');
     } catch (error) {
-        console.error('Error al cerrar sesión:', error);
+      console.error('Error al cerrar sesión:', error);
     }
-};
+  };
 
   const handleSettings = async () => {
     navigate('/settings');
@@ -191,33 +192,38 @@ const Dashboard: React.FC = () => {
   };
 
   const searchLimited = () => {
-    let newPlan = 'standard';
+    // let newPlan = 'standard';
     Modal.confirm({
+
       title: 'LEXCOM WARNING!!!',
+
       content: (
         <div>
           <p>Se ha excedido el límite de búsquedas permitidas. Selecciona un nuevo plan para continuar.</p>
-          <Radio.Group defaultValue="standard" onChange={(e) => newPlan = e.target.value}>
+          {/* <Radio.Group defaultValue="standard" onChange={(e) => newPlan = e.target.value}>
             <Radio.Button value="standard">Standard (5 búsquedas más)</Radio.Button>
             <Radio.Button value="business">Business (10 búsquedas más)</Radio.Button>
             <Radio.Button value="premium">Premium (20 búsquedas más)</Radio.Button>
-          </Radio.Group>
+          </Radio.Group> */}
+          <Payment />
         </div>
       ),
       icon: <WarningOutlined style={{ color: '#108ee9' }} />,
-      onOk() {
-        axiosInstance.post('update_plan/', { new_plan: newPlan })
-          .then(response => {
-            const { new_max_searches, new_search_count, new_progress_count } = response.data;
-            setMaxSearches(new_max_searches);
-            setSearchCount(new_search_count);
-            setProgress(new_progress_count);
-            location.reload();
-          })
-          .catch(error => {
-            console.error('Error updating search plan:', error);
-          });
-      }
+      onOk() { },
+      // onOk() {
+      //   axiosInstance.post('update_plan/', { new_plan: newPlan })
+      //     .then(response => {
+      //       const { new_max_searches, new_search_count, new_progress_count } = response.data;
+      //       setMaxSearches(new_max_searches);
+      //       setSearchCount(new_search_count);
+      //       setProgress(new_progress_count);
+      //       location.reload();
+      //     })
+      //     .catch(error => {
+      //       console.error('Error updating search plan:', error);
+      //     });
+      // },
+      width: '50%',
     });
   };
 
