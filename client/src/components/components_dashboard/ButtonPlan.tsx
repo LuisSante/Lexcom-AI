@@ -1,15 +1,9 @@
 import { Button, Modal } from 'antd';
 import React, { useState } from 'react'
 import { FormPay } from './FormPay';
+import { ButtonPlanType } from '../../interface/dashboard';
 
-interface ButtonPlanType {
-  type?: string;
-  name: string;
-  price: number;
-  styleButton: React.CSSProperties;
-}
-
-export const ButtonPlan: React.FC<ButtonPlanType> = ({ type, name, price, styleButton }) => {
+export const ButtonPlan: React.FC<ButtonPlanType> = ({ type, value_plan, name, styleButton }) => {
 
   const [buttonModalVisible, setButtonModalVisible] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<string>("");
@@ -34,7 +28,7 @@ export const ButtonPlan: React.FC<ButtonPlanType> = ({ type, name, price, styleB
 
   return (
     <>
-      <Button value={type} onClick={handleButtonClick} style={styleButton}>
+      <Button value={value_plan} onClick={handleButtonClick} style={styleButton}>
         {name}
       </Button>
       <Modal
@@ -45,7 +39,7 @@ export const ButtonPlan: React.FC<ButtonPlanType> = ({ type, name, price, styleB
       >
         <FormPay
           plan={selectedPlan}
-          totalPrice={price}
+          totalPrice={value_plan}
           onOkClick={handleOkClick}
         />
       </Modal>

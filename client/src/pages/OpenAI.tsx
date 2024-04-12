@@ -3,14 +3,7 @@ import './../css/TimelineDemo.css';
 import Skeleton from '../components/Skeleton';
 import axiosInstance from '../components/axios';
 import { notification } from 'antd';
-
-interface OpenAIData {
-    prompt: string;
-}
-
-interface TypeOpenAI {
-    searchValue: string;
-}
+import { OpenAIData, TypeOpenAI } from '../interface/openai';
 
 const OpenAI: React.FC<TypeOpenAI> = ({ searchValue }) => {
 

@@ -1,15 +1,9 @@
 import { Button, Modal } from 'antd';
 import React, { useState } from 'react'
 import Register from './Register';
-
-interface ButtonType {
-  name: string;
-  styleButton: React.CSSProperties;
-}
+import { ButtonType } from '../../interface/buttoncomponent';
 
 const ButtonComponent: React.FC<ButtonType> = ({ name, styleButton }) => {
-
-
   const [buttonModalVisible, setButtonModalVisible] = useState(false);
 
 

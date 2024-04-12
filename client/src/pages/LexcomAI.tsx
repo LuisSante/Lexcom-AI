@@ -11,7 +11,6 @@ import {
     secondColumnItems_strategic,
     firstColumnItems_financial,
     secondColumnItems_financial,
-    attibute_bool
 } from '../components/logic/components_lexcomai/questions';
 import axiosInstance from '../components/axios';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
@@ -20,21 +19,7 @@ import { formItemLayout } from '../components/logic/components_form/position_for
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 import "../css/lexcomai.css"
-
-interface FormValues {
-    relevancia: number;
-    check: attibute_bool;
-}
-
-interface TypePrediction {
-    labels: string[];
-    datasets: {
-        data: number[];
-        backgroundColor: string[];
-        borderColor: string[];
-        borderWidth: number;
-    }[];
-}
+import { FormValues, TypePrediction, attibute_bool } from '../interface/lexcomai';
 
 const LexcomAI: React.FC = () => {
     const [initialFormValues] = useState<attibute_bool>({

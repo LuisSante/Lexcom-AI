@@ -10,10 +10,7 @@ import number_three from '../../assets/number_three.svg'
 import michael from '../../assets/michael_lexcom.svg'
 import woman from '../../assets/woman.svg'
 import mostache from '../../assets/mostache_lexcom.svg'
-
-interface ComponentProps {
-  id: string;
-}
+import { ComponentProps } from '../../interface/home'
 
 const How_work: React.FC<ComponentProps> = ({ id }) => {
 

@@ -1,10 +1,7 @@
 import { Footer } from 'antd/es/layout/layout';
 import React from 'react'
 import { termofUse } from './Legal';
-
-interface ComponentProps {
-  id?: string
-}
+import { ComponentProps } from '../../interface/home';
 
 const About: React.FC<ComponentProps> = ({ id }) => {
   return (

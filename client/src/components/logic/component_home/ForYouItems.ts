@@ -1,8 +1,4 @@
-interface ForYouItemsType {
-    id: string,
-    key: number,
-    text: string,
-}
+import { ForYouItemsType } from "../../../interface/home"
 
 const ForYouItems: ForYouItemsType[] = [
     {

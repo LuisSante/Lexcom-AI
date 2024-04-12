@@ -1,11 +1,5 @@
-import '../../css/navbar.css'
-
-interface NavbarItem {
-    key: string;
-    title: string;
-    url: string;
-    id_ : string;
-}
+import { NavbarItem } from '../../../interface/home';
+import '../../../css/navbar.css'
 
 export const NavbarItems: NavbarItem[] = [
     {

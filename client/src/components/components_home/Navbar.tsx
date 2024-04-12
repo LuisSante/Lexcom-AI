@@ -1,25 +1,20 @@
 import { Button, Modal,ConfigProvider } from "antd";
-import { NavbarItems } from "./logic/NavbarItems";
+import { NavbarItems } from "../logic/component_home/NavbarItems";
 import { useState } from "react";
 import { Bars3Icon } from "@heroicons/react/24/outline";
-import '../css/navbar.css'
+import '../../css/navbar.css'
 import { Link } from 'react-router-dom';
 import Login from "./Login";
 import Register from "./Register";
-import logo from '../assets/lexcom.svg';
+import logo from '../../assets/lexcom.svg';
 import React from 'react';
-
-
-interface NavbarProps {
-    isScrolling: number;
-}
+import { NavbarProps } from "../../interface/home";
 
 const Navbar: React.FC<NavbarProps> = ({ isScrolling }) => {
 
     const [clicked, setClicked] = useState(false);
     const [loginModalVisible, setLoginModalVisible] = useState(false);
     const [registerModalVisible, setRegisternModalVisible] = useState(false);
-
 
     const initialFormData = {
         email: "",
@@ -108,7 +103,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolling }) => {
                 </Modal>
                 
                 <Modal
-                    title="Registrate en LexCom"
+                    title="Regístrate en LexCom"
                     className="login-container"
                     open={registerModalVisible}
                     onCancel={handleRegisterModalCancel}

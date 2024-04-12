@@ -1,4 +1,4 @@
-import { QuestionType } from "./interface" 
+import { QuestionType } from "../../../interface/lexcomai";
 
 export const financial_analysis: QuestionType[] = [
     {

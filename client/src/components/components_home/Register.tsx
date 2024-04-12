@@ -9,31 +9,13 @@ import {
     ConfigProvider,
 } from 'antd';
 import { useState } from 'react';
-import { strongPasswordRegex } from './logic/components_form/password_strong';
-import { formItemLayout, tailFormItemLayout } from './logic/components_form/position_form';
-import { termofUse } from './components_home/Legal';
-import { axiosInstancewithoutPermissions } from './axios';
-
-interface FormValues {
-    title: string;
-    description: string;
-    completed: boolean;
-    key: string;
-    name: string;
-    surname: string;
-    phone: string;
-    country: string;
-    city: string;
-    address: string;
-    email: string;
-    password: string;
-    user: string;
-    gender: string;
-    date_of_birth: Date;
-}
+import { strongPasswordRegex } from '../logic/components_form/password_strong';
+import { formItemLayout, tailFormItemLayout } from '../logic/components_form/position_form';
+import { termofUse } from './Legal';
+import { axiosInstancewithoutPermissions } from '../axios';
+import { FormValues } from '../../interface/home';
 
 const { Option } = Select;
-
 
 const Register: React.FC = () => {
     const [form] = Form.useForm();

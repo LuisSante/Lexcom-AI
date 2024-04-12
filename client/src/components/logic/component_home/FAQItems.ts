@@ -1,9 +1,4 @@
-interface FAQItemsType {
-    key: string,
-    question?: string,
-    answer?: string
-
-}
+import { FAQItemsType } from "../../../interface/home";
 
 const FAQItems: FAQItemsType[] = [
 

@@ -3,14 +3,7 @@ import './../css/TimelineDemo.css';
 import Skeleton from '../components/Skeleton';
 import axiosInstance from '../components/axios';
 import { notification } from 'antd';
-
-interface CopyAds {
-    prompt: string;
-}
-
-interface TypeCopyAds {
-    searchValue: string;
-}
+import { CopyAds, TypeCopyAds } from '../interface/copyads';
 
 const CopyAI: React.FC<TypeCopyAds> = ({ searchValue }) => {
 

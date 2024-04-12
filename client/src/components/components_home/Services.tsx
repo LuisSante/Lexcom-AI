@@ -1,9 +1,6 @@
 import '../../css/styles_home/services.css'
+import { ComponentProps } from '../../interface/home';
 import Pricing from './Pricing';
-
-interface ComponentProps {
-  id: string;
-}
 
 const Services: React.FC<ComponentProps> = ({ id }) => {
 

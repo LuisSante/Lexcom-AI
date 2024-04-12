@@ -1,11 +1,8 @@
 import '../../css/styles_home/faq.css';
 import { Collapse, ConfigProvider } from 'antd';
-import FAQItems from '../logic/FAQItems';
+import FAQItems from '../logic/component_home/FAQItems';
 import React from "react";
-
-interface ComponentProps {
-  id: string;
-}
+import { ComponentProps } from '../../interface/home';
 
 const Faq: React.FC<ComponentProps> = ({ id }) => {
 

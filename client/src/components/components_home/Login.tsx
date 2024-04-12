@@ -2,14 +2,9 @@ import React from 'react';
 import { Button, Checkbox, Form, Input, notification, ConfigProvider } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import '../css/login.css'
-import axiosInstance from './axios';
-
-interface FieldType {
-  password: string;
-  remember: string;
-  email: string;
-}
+import '../../css/login.css'
+import axiosInstance from '../axios';
+import { FieldType } from '../../interface/home';
 
 const Login: React.FC<FieldType> = () => {
   const [form] = Form.useForm();

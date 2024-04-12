@@ -7,11 +7,8 @@ import logo from '../assets/lexcom.svg';
 import { strongPasswordRegex } from '../components/logic/components_form/password_strong';
 import { formItemLayout, tailFormItemLayout } from '../components/logic/components_form/position_form';
 import { axiosInstancewithoutPermissions } from '../components/axios';
+import { ReserFormValues } from '../interface/recover';
 
-interface FormValues {
-    password: string;
-    token: string;
-}
 
 const ResetPassword: React.FC = () => {
 
@@ -22,7 +19,7 @@ const ResetPassword: React.FC = () => {
     const [form] = Form.useForm();
     const [api, contextHolder] = notification.useNotification();
 
-    const onFinish = (values: FormValues) => {
+    const onFinish = (values: ReserFormValues) => {
         const updatedValues = { ...values, token: token };
         const url = `password_reset/confirm/?token=${encodeURIComponent(tokenParam)}`;
         axiosInstancewithoutPermissions.post(url, updatedValues)

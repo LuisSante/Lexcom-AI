@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { ConfigProvider } from 'antd';
 import { ButtonPlan } from './ButtonPlan';
+import { PlanPayment } from '../logic/components_dashboard/plan';
+import { PaymentPlan } from '../../interface/dashboard';
 
 const styleButton = {
     background: 'transparent',
@@ -12,7 +14,7 @@ const styleButton = {
     padding: '0'
 }
 
-export const Payment = () => {
+export const Payment: React.FC<PaymentPlan> = ({defaultValue , onChange}) => {
 
     const [clicked] = useState(false);
 
@@ -33,73 +35,31 @@ export const Payment = () => {
                 },
             }}
         >
-            <div className="grip-pricing">
+            <div className="grip-pricing-modal">
 
-                <div className="pricingTable">
-                    <div className="pricingTable-header" style={{color: 'black' }}>
-                        <h3 className="heading">Standard</h3>
-                        <div className="price-value">19
-                            <span className="currency">$</span>
+                {PlanPayment.map((item, index) => (
+                    <div className="pricingTable" key={index}>
+                        <div className="pricingTable-header" style={{ color: 'black' }}>
+                            <h3 className="heading">{item.title}</h3>
+                            <div className="price-value">{item.value}
+                                <span className="currency">$</span>
+                            </div>
+                        </div>
+                        <ul className="pricing-content">
+                            <li>{item.n_search}</li>
+                            <li>{item.benefits1}</li>
+                            <li>{item.benefits2}</li>
+                        </ul>
+                        <div className={clicked ? "read active" : "read "}>
+                            <ButtonPlan
+                                type= {item.title}
+                                value_plan={item.value_plan}
+                                name="Comprar Plan"
+                                styleButton={styleButton}
+                            />
                         </div>
                     </div>
-                    <ul className="pricing-content">
-                        <li>5 búsquedas </li>
-                        <li>Porcentaje de éxito</li>
-                        <li>Recomendacion de ventas</li>
-                    </ul>
-                    <div className={clicked? "read active" : "read "}>
-                        <ButtonPlan
-                            type="Standard"
-                            name="Comprar Plan"
-                            price={19}
-                            styleButton={styleButton}
-                        />
-                    </div>
-                </div>
-
-                <div className="pricingTable">
-                    <div className="pricingTable-header" style={{color: 'black' }}>
-                        <h3 className="heading">Business</h3>
-                        <div className="price-value">36
-                            <span className="currency">$</span>
-                        </div>
-                    </div>
-                    <ul className="pricing-content">
-                        <li>10 búsquedas</li>
-                        <li>Porcentaje y estadísticas</li>
-                        <li>Recomendación de ventas</li>
-                    </ul>
-                    <div className={clicked? "read active" : "read "}>
-                        <ButtonPlan
-                            type="Business"
-                            name="Comprar Plan"
-                            price = {36}
-                            styleButton={styleButton}
-                        />
-                    </div>
-                </div>
-
-                <div className="pricingTable">
-                    <div className="pricingTable-header" style={{color: 'black' }}>
-                        <h3 className="heading">Premium</h3>
-                        <div className="price-value">70
-                            <span className="currency">$</span>
-                        </div>
-                    </div>
-                    <ul className="pricing-content">
-                        <li>20 búsquedas</li>
-                        <li>Porcentaje y estadísticas</li>
-                        <li>Recomendacion de ventas</li>
-                    </ul>
-                    <div className={clicked? "read active" : "read "}>
-                        <ButtonPlan
-                            type="Premium"
-                            name="Comprar Plan"
-                            price={70}
-                            styleButton={styleButton}
-                        />
-                    </div>
-                </div>
+                ))}
             </div>
         </ConfigProvider>
     )

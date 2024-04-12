@@ -1,12 +1,7 @@
 // FormPay.tsx
 import React from 'react';
 import { Button, Flex } from 'antd';
-
-interface FormPayProps {
-    plan: string;
-    totalPrice: number;
-    onOkClick: () => void;
-}
+import { FormPayProps } from '../../interface/dashboard';
 
 export const FormPay: React.FC<FormPayProps> = ({ plan, totalPrice, onOkClick }) => {
     const handlePagarClick = () => {

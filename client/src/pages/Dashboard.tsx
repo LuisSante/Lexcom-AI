@@ -31,25 +31,7 @@ import LexcomAI from './LexcomAI';
 import axiosInstance from '../components/axios';
 import type { TourProps } from 'antd';
 import { Payment } from '../components/components_dashboard/Payment';
-
-interface UserType {
-  id: number,
-  username: string,
-  email: string,
-  name: string,
-  surname: string,
-  phone: string,
-  country: string,
-  city: string,
-  address: string,
-  gender: string,
-  date_of_birth: string
-}
-
-interface DescriptionItemProps {
-  title: string;
-  content: React.ReactNode;
-}
+import { DescriptionItemProps, UserType } from '../interface/dashboard';
 
 const DescriptionItem = ({ title, content }: DescriptionItemProps) => (
   <div className="site-description-item-profile-wrapper">
@@ -192,24 +174,28 @@ const Dashboard: React.FC = () => {
   };
 
   const searchLimited = () => {
-    // let newPlan = 'standard';
+    // const newPlan = 'standard';
     Modal.confirm({
 
-      title: 'LEXCOM WARNING!!!',
+      title: 'Se ha excedido el límite de búsquedas permitidas. ',
 
       content: (
         <div>
-          <p>Se ha excedido el límite de búsquedas permitidas. Selecciona un nuevo plan para continuar.</p>
+          <p>Selecciona un nuevo plan para continuar.</p>
           {/* <Radio.Group defaultValue="standard" onChange={(e) => newPlan = e.target.value}>
             <Radio.Button value="standard">Standard (5 búsquedas más)</Radio.Button>
             <Radio.Button value="business">Business (10 búsquedas más)</Radio.Button>
             <Radio.Button value="premium">Premium (20 búsquedas más)</Radio.Button>
           </Radio.Group> */}
-          <Payment />
+          {/* <Payment defaultValue="standard" onChange={(e) => newPlan = e.target.value}/> */}
+          <Payment/>
         </div>
       ),
       icon: <WarningOutlined style={{ color: '#108ee9' }} />,
-      onOk() { },
+      onOk() { 
+
+        console.log("asdf")
+      },
       // onOk() {
       //   axiosInstance.post('update_plan/', { new_plan: newPlan })
       //     .then(response => {
@@ -265,7 +251,7 @@ const Dashboard: React.FC = () => {
     axiosInstance.get<UserType>(url)
       .then(response => {
         setData(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch(err => {
         console.error(err.message);

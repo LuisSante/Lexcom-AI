@@ -1,9 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
-
-interface TokenResponse {
-	access: string;
-	refresh: string;
-}
+import { TokenResponse } from '../interface/axios';
 
 const baseURL = import.meta.env.VITE_API_URL;
 

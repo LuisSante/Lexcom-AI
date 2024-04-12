@@ -16,7 +16,14 @@
 
 .grip-pricing {
     display: grid;
-    grid-template-columns: repeat(3, calc(30% - 1rem));
+    grid-template-columns: repeat(2, calc(30% - 1rem));
+    gap: 10px;
+    justify-content: center;
+}
+
+.grip-pricing-modal {
+    display: grid;
+    grid-template-columns: repeat(2, calc(45% - 1rem));
     gap: 10px;
     justify-content: center;
 }

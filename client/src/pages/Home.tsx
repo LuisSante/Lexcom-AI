@@ -1,6 +1,6 @@
 import '../css/styles_home/home.css'
 import { useEffect, useState } from 'react';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/components_home/Navbar';
 import How_work from '../components/components_home/How_work';
 import Services from '../components/components_home/Services';
 import Faq from '../components/components_home/FAQ';
