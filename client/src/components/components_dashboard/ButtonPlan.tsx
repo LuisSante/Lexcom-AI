@@ -1,17 +1,12 @@
-import { Button, Modal } from 'antd';
+import { Button, Modal, Radio } from 'antd';
 import React, { useState } from 'react'
 import { FormPay } from './FormPay';
 import { ButtonPlanType } from '../../interface/dashboard';
 
-export const ButtonPlan: React.FC<ButtonPlanType> = ({ type, value_plan, name, styleButton }) => {
+export const ButtonPlan: React.FC<ButtonPlanType> = ({ type, value, styleButton, onOkClick }) => {
 
   const [buttonModalVisible, setButtonModalVisible] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<string>("");
-
-  const showRegisterModal = (planType: string) => {
-    setSelectedPlan(planType);
-    setButtonModalVisible(true);
-  };
 
   const handleRegisterModalCancel = () => {
     setButtonModalVisible(false);
@@ -23,13 +18,18 @@ export const ButtonPlan: React.FC<ButtonPlanType> = ({ type, value_plan, name, s
   };
 
   const handleButtonClick = () => {
-    showRegisterModal(type || "");
+    console.log("handleButtonClick" , onOkClick);
+    if (onOkClick) {
+      onOkClick(); // asegúrate de que esto actualiza el estado correctamente en el padre
+    }
+    setSelectedPlan(type);
+    setButtonModalVisible(true);
   };
 
   return (
     <>
-      <Button value={value_plan} onClick={handleButtonClick} style={styleButton}>
-        {name}
+      <Button value={value} onClick={handleButtonClick} style={styleButton}>
+        Comprar Plan {value}
       </Button>
       <Modal
         title="Finaliza tu compra"
@@ -39,9 +39,12 @@ export const ButtonPlan: React.FC<ButtonPlanType> = ({ type, value_plan, name, s
       >
         <FormPay
           plan={selectedPlan}
-          totalPrice={value_plan}
-          onOkClick={handleOkClick}
+          totalPrice={value}
+          onClick={handleOkClick}
         />
+        <Radio.Button>
+
+        </Radio.Button>
       </Modal>
     </>
   )

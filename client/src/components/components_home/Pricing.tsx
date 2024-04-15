@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import ButtonComponent from './ButtonComponent';
 import { ConfigProvider } from 'antd';
+import { PlanPayment } from '../logic/components_dashboard/plan';
 
 const styleButton = {
     background: 'transparent',
@@ -34,19 +35,20 @@ const Pricing = () => {
             }}
         >
             <div className="grip-pricing">
-                <div className="pricingTable">
+                {PlanPayment.map((item, index) => (
+                    <div className="pricingTable" key={index}>
                     <div className="pricingTable-header">
-                        <h3 className="heading">Standard Plan</h3>
-                        <div className="price-value">17.90
+                        <h3 className="heading">{item.title}</h3>
+                        <div className="price-value">{item.value}
                             <span className="currency">$</span>
                         </div>
                     </div>
                     <ul className="pricing-content">
                         <li>Primera vez usando: 5 búsquedas gratuitas </li>
-                        <li>35 búsquedas </li>
-                        <li>Porcentaje de éxito</li>
-                        <li>Recomendacion de ventas</li>
-                        <li>-</li>
+                        <li>{item.n_search}</li>
+                        <li>{item.benefits1}</li>
+                        <li>{item.benefits2}</li>
+                        {/* <li>-</li> */}
                     </ul>
                     <div className={clicked ? "read active" : "read "}>
                     <ButtonComponent
@@ -54,30 +56,8 @@ const Pricing = () => {
                             styleButton={styleButton}
                         />
                     </div>
-
                 </div>
-
-                <div className="pricingTable">
-                    <div className="pricingTable-header">
-                        <h3 className="heading">Business</h3>
-                        <div className="price-value">24.90
-                            <span className="currency">$</span>
-                        </div>
-                    </div>
-                    <ul className="pricing-content">
-                        <li>Primera vez usando: 5 búsquedas gratuitas </li>
-                        <li>50 búsquedas</li>
-                        <li>Porcentaje y estadísticas</li>
-                        <li> Recomendación de ventas</li>
-                        <li>- </li>
-                    </ul>
-                    <div className={clicked ? "read active" : "read "}>
-                        <ButtonComponent
-                            name="Regístrate ahora"
-                            styleButton={styleButton}
-                        />
-                    </div>
-                </div>
+                ))}
             </div>
         </ConfigProvider>
     )

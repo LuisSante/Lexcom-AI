@@ -4,7 +4,7 @@ import Precio_del_Producto from '../components/components_calculator/Calculator_
 import Tutorial from '../pages/Tutorial';
 import '../css/Dashboard.css';
 import React, { useEffect, useRef, useState } from 'react';
-import { Avatar, Space, Input, Button, notification, Tour, Drawer, Row, Col, Divider, Modal } from 'antd';
+import { Avatar, Space, Input, Button, notification, Tour, Divider, Modal, Drawer } from 'antd';
 import { Dropdown, ConfigProvider, Layout, Menu, Progress } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { UserOutlined, CalculatorOutlined, TikTokOutlined, TrophyOutlined, WarningOutlined } from '@ant-design/icons';
@@ -30,15 +30,25 @@ import Tiktok from './Tiktok';
 import LexcomAI from './LexcomAI';
 import axiosInstance from '../components/axios';
 import type { TourProps } from 'antd';
-import { Payment } from '../components/components_dashboard/Payment';
-import { DescriptionItemProps, UserType } from '../interface/dashboard';
+import { UserType } from '../interface/dashboard';
+import { PlanPayment } from '../components/logic/components_dashboard/plan';
+import { ButtonPlan } from '../components/components_dashboard/ButtonPlan';
+import { styleButton } from '../components/logic/components_dashboard/style_antd';
+import { ShowData } from '../components/components_dashboard/ShowData';
 
-const DescriptionItem = ({ title, content }: DescriptionItemProps) => (
-  <div className="site-description-item-profile-wrapper">
-    <p className="site-description-item-profile-p-label">{title}:</p>
-    {content}
-  </div>
-);
+const defaultUserData: UserType = {
+  id: 0,
+  username: '',
+  email: '',
+  name: '',
+  surname: '',
+  phone: '',
+  country: '',
+  city: '',
+  address: '',
+  gender: '',
+  date_of_birth: ''
+};
 
 const Dashboard: React.FC = () => {
   const { Header, Content, Sider } = Layout;
@@ -57,6 +67,15 @@ const Dashboard: React.FC = () => {
   const [marginL, setmarginL] = useState(250);
 
   const [openD, setOpenD] = useState(false);
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [api, contextHolder] = notification.useNotification();
+  const Context = React.createContext({ name: 'Default' });
+
+  // To Progress
+  const [progress, setProgress] = useState(0);
+  const [searchCount, setSearchCount] = useState(0);
+  const [maxSearches, setMaxSearches] = useState(0);
+  const [data, setData] = useState<UserType>(defaultUserData);
 
   const showDrawer = () => {
     setOpenD(true);
@@ -156,15 +175,6 @@ const Dashboard: React.FC = () => {
     },
   ];
 
-  const [searchValue, setSearchValue] = useState<string>("");
-  const [api, contextHolder] = notification.useNotification();
-  const Context = React.createContext({ name: 'Default' });
-
-  // To Progress
-  const [progress, setProgress] = useState(0);
-  const [searchCount, setSearchCount] = useState(0);
-  const [maxSearches, setMaxSearches] = useState(0);
-
   const emptyNotification = () => {
     api.open({
       message: "ERROR!!!",
@@ -173,42 +183,79 @@ const Dashboard: React.FC = () => {
     });
   };
 
+  const [clicked, setClicked] = useState(false);
+  const [newPlan, setNewPlan] = useState('standard');
+
   const searchLimited = () => {
-    // const newPlan = 'standard';
+    // let newPlan = 'standard';
     Modal.confirm({
-
-      title: 'Se ha excedido el límite de búsquedas permitidas. ',
-
+      title: 'Se ha excedido el límite de búsquedas permitidas.',
       content: (
         <div>
           <p>Selecciona un nuevo plan para continuar.</p>
-          {/* <Radio.Group defaultValue="standard" onChange={(e) => newPlan = e.target.value}>
-            <Radio.Button value="standard">Standard (5 búsquedas más)</Radio.Button>
-            <Radio.Button value="business">Business (10 búsquedas más)</Radio.Button>
-            <Radio.Button value="premium">Premium (20 búsquedas más)</Radio.Button>
-          </Radio.Group> */}
-          {/* <Payment defaultValue="standard" onChange={(e) => newPlan = e.target.value}/> */}
-          <Payment/>
+          <ConfigProvider
+            theme={{
+              components: {
+                Modal: {
+                  titleColor: '#fff',
+                  colorBgContainer: '#f6ffed',
+                  controlOutline: '#000000',
+                  contentBg: '#000000',
+                  titleFontSize: 25,
+                  headerBg: '#000000',
+                  colorIcon: '#fff',
+                  colorIconHover: '#ecb6ff'
+                },
+              },
+            }}
+          >
+            <div className="grip-pricing-modal">
+              {PlanPayment.map((item, index) => (
+                <div className="pricingTable" key={index}>
+                  <div className="pricingTable-header" style={{ color: 'black' }}>
+                    <h3 className="heading">{item.title}</h3>
+                    <div className="price-value">{item.value}
+                      <span className="currency">$</span>
+                    </div>
+                  </div>
+                  <ul className="pricing-content">
+                    <li>{item.n_search}</li>
+                    <li>{item.benefits1}</li>
+                    <li>{item.benefits2}</li>
+                  </ul>
+                  <div className={clicked ? "read active" : "read "}>
+                    <ButtonPlan
+                      type={item.title}
+                      value={item.plan}
+                      styleButton={styleButton}
+                      onOkClick={() => {
+                        setNewPlan(item.value_plan.toString());
+                        setClicked(true);
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </ConfigProvider>
         </div>
       ),
       icon: <WarningOutlined style={{ color: '#108ee9' }} />,
-      onOk() { 
-
-        console.log("asdf")
+      onOk() {
+        console.log("el plan es ", newPlan);
+        axiosInstance.post('update_plan/', { new_plan: newPlan })
+          .then(response => {
+            console.log("entro la respuesta");
+            const { new_max_searches, new_search_count, new_progress_count } = response.data;
+            setMaxSearches(new_max_searches);
+            setSearchCount(new_search_count);
+            setProgress(new_progress_count);
+            location.reload();
+          })
+          .catch(error => {
+            console.error('Error updating search plan:', error);
+          });
       },
-      // onOk() {
-      //   axiosInstance.post('update_plan/', { new_plan: newPlan })
-      //     .then(response => {
-      //       const { new_max_searches, new_search_count, new_progress_count } = response.data;
-      //       setMaxSearches(new_max_searches);
-      //       setSearchCount(new_search_count);
-      //       setProgress(new_progress_count);
-      //       location.reload();
-      //     })
-      //     .catch(error => {
-      //       console.error('Error updating search plan:', error);
-      //     });
-      // },
       width: '50%',
     });
   };
@@ -243,9 +290,6 @@ const Dashboard: React.FC = () => {
     fetchUserInfo();
   }, []);
 
-
-  const [data, setData] = useState<UserType | null>(null);
-
   useEffect(() => {
     const url = `update/`
     axiosInstance.get<UserType>(url)
@@ -265,8 +309,6 @@ const Dashboard: React.FC = () => {
     setSearchValue("");
     setSelectedMenu('Guide Lexcom');
   }
-
-  // const [selectedMenuItem, setSelectedMenuItem] = useState<string | null>(null);
 
   return (
     <ConfigProvider
@@ -325,7 +367,7 @@ const Dashboard: React.FC = () => {
               }
             }}
           />
-
+        
           <p className="welcome">Bienvenido {data?.name}</p>
           <Avatar style={{ backgroundColor: '#87d068', minWidth: '35px', marginLeft: '20px', marginRight: '10px' }} icon={<UserOutlined />} onClick={showDrawer} />
           <Dropdown menu={{ items }} arrow={{ pointAtCenter: true }}>
@@ -360,7 +402,6 @@ const Dashboard: React.FC = () => {
               </div>
             }
             style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 60, bottom: 0 }}
-          // key={selectedMenuItem}
           >
             <Menu
               className="lexcom-menu"
@@ -437,10 +478,6 @@ const Dashboard: React.FC = () => {
               </div>
 
             </Menu>
-
-
-
-
           </Sider>
           <Tour open={open} onClose={() => setOpen(false)} steps={steps} />
           <Layout style={{
@@ -467,48 +504,8 @@ const Dashboard: React.FC = () => {
           <About id='about' />
         </Layout>
       </Layout>
-      <Drawer width={640} placement="right" closable={false} onClose={onCloseD} open={openD}>
-        <p className="site-description-item-profile-p" style={{ marginBottom: 24 }}>
-          Perfil
-        </p>
-        <Divider />
-        <p className="site-description-item-profile-p">Personal</p>
-        <Row>
-          <Col span={12}>
-            <DescriptionItem title="Nombres" content={data?.name} />
-          </Col>
-          <Col span={12}>
-            <DescriptionItem title="Apellidos" content={data?.surname} />
-          </Col>
-        </Row>
-        <Row>
-          <Col span={12}>
-            <DescriptionItem title="Ciudad" content={data?.city} />
-          </Col>
-          <Col span={12}>
-            <DescriptionItem title="País" content={data?.country} />
-          </Col>
-        </Row>
-        <Row>
-          <Col span={12}>
-            <DescriptionItem title="Cumpleaños" content={data?.date_of_birth ? new Date(data.date_of_birth).toISOString().split('T')[0] : ''} />
-
-          </Col>
-          <Col span={12}>
-            <DescriptionItem title="Usuario" content={data?.username} />
-          </Col>
-        </Row>
-
-        <Divider />
-        <p className="site-description-item-profile-p">Contacto</p>
-        <Row>
-          <Col span={12}>
-            <DescriptionItem title="Email" content={data?.email} />
-          </Col>
-          <Col span={12}>
-            <DescriptionItem title="Teléfono" content={data?.phone} />
-          </Col>
-        </Row>
+      <Drawer key={data?.id} width={640} placement="right" closable={false} onClose={onCloseD} open={openD}>
+        <ShowData data={data}/>      
       </Drawer>
     </ConfigProvider>
 

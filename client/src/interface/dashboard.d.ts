@@ -1,6 +1,7 @@
 export interface PlanType {
     id: string;
     title: string;
+    plan: string;
     value: string;
     n_search: string;
     benefits1: string;
@@ -9,24 +10,24 @@ export interface PlanType {
 }
 
 export interface ButtonPlanType {
-    type?: string;
-    value_plan: number;
-    name: string;
+    type: string;
+    value: string;
     styleButton: React.CSSProperties;
+    onOkClick?: () => void;
 }
 
 export interface FormPayProps {
     plan: string;
-    totalPrice: number;
-    onOkClick: () => void;
+    totalPrice: string;
+    onClick: () => void;
 }
 
 export interface PaymentPlan {
-    defaultValue: string;
-    onChange?: (e: string) => void;
+    defaultValue?: string;
+    onChange?: (value: string) => void;
 }
 
-export interface UserType {
+export interface UserType {     
     id: number,
     username: string,
     email: string,
