@@ -90,6 +90,10 @@
   justify-content: flex-end;
 }
 
+.login-btn-li {
+  margin-left: 100px;
+}
+
 .button-container .login-btn,
 .button-container .register-btn {
   width: 100px;
