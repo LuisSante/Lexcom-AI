@@ -4,12 +4,11 @@ import Precio_del_Producto from '../components/components_calculator/Calculator_
 import Tutorial from '../pages/Tutorial';
 import '../css/Dashboard.css';
 import React, { useEffect, useRef, useState } from 'react';
-import { Avatar, Space, Input, Button, notification, Tour, Divider, Modal, Drawer } from 'antd';
+import { Avatar, Space, Input, Button, notification, Tour, Divider, Drawer } from 'antd';
 import { Dropdown, ConfigProvider, Layout, Menu, Progress } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import { UserOutlined, CalculatorOutlined, TikTokOutlined, TrophyOutlined, WarningOutlined } from '@ant-design/icons';
+import { UserOutlined, CalculatorOutlined, TikTokOutlined, TrophyOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-
 import logo from '../assets/lexcom.svg';
 import '../css/Dashboard.css';
 import { SmileOutlined, CloseOutlined } from '@ant-design/icons';
@@ -31,9 +30,6 @@ import LexcomAI from './LexcomAI';
 import axiosInstance from '../components/axios';
 import type { TourProps } from 'antd';
 import { UserType } from '../interface/dashboard';
-import { PlanPayment } from '../components/logic/components_dashboard/plan';
-import { ButtonPlan } from '../components/components_dashboard/ButtonPlan';
-import { styleButton } from '../components/logic/components_dashboard/style_antd';
 import { ShowData } from '../components/components_dashboard/ShowData';
 
 const defaultUserData: UserType = {
@@ -183,83 +179,6 @@ const Dashboard: React.FC = () => {
     });
   };
 
-  const [clicked, setClicked] = useState(false);
-  const [newPlan, setNewPlan] = useState('standard');
-
-  const searchLimited = () => {
-    // let newPlan = 'standard';
-    Modal.confirm({
-      title: 'Se ha excedido el límite de búsquedas permitidas.',
-      content: (
-        <div>
-          <p>Selecciona un nuevo plan para continuar.</p>
-          <ConfigProvider
-            theme={{
-              components: {
-                Modal: {
-                  titleColor: '#fff',
-                  colorBgContainer: '#f6ffed',
-                  controlOutline: '#000000',
-                  contentBg: '#000000',
-                  titleFontSize: 25,
-                  headerBg: '#000000',
-                  colorIcon: '#fff',
-                  colorIconHover: '#ecb6ff'
-                },
-              },
-            }}
-          >
-            <div className="grip-pricing-modal">
-              {PlanPayment.map((item, index) => (
-                <div className="pricingTable" key={index}>
-                  <div className="pricingTable-header" style={{ color: 'black' }}>
-                    <h3 className="heading">{item.title}</h3>
-                    <div className="price-value">{item.value}
-                      <span className="currency">$</span>
-                    </div>
-                  </div>
-                  <ul className="pricing-content">
-                    <li>{item.n_search}</li>
-                    <li>{item.benefits1}</li>
-                    <li>{item.benefits2}</li>
-                  </ul>
-                  <div className={clicked ? "read active" : "read "}>
-                    <ButtonPlan
-                      type={item.title}
-                      value={item.plan}
-                      styleButton={styleButton}
-                      onOkClick={() => {
-                        setNewPlan(item.value_plan.toString());
-                        setClicked(true);
-                      }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </ConfigProvider>
-        </div>
-      ),
-      icon: <WarningOutlined style={{ color: '#108ee9' }} />,
-      onOk() {
-        console.log("el plan es ", newPlan);
-        axiosInstance.post('update_plan/', { new_plan: newPlan })
-          .then(response => {
-            console.log("entro la respuesta");
-            const { new_max_searches, new_search_count, new_progress_count } = response.data;
-            setMaxSearches(new_max_searches);
-            setSearchCount(new_search_count);
-            setProgress(new_progress_count);
-            location.reload();
-          })
-          .catch(error => {
-            console.error('Error updating search plan:', error);
-          });
-      },
-      width: '50%',
-    });
-  };
-
   const openNotification = () => {
     api.open({
       message: "LEXCOM CHECK!!!",
@@ -347,10 +266,9 @@ const Dashboard: React.FC = () => {
             onChange={(e) => setSearchValue(e.target.value)}
             onSearch={(value) => {
               if (value.trim() === '') {
-                // setSelectedMenu('Guide Lexcom');
                 emptyNotification();
               } else if (searchCount == maxSearches) {
-                searchLimited();
+                navigate('/pricing')
               } else {
                 setSearchValue(value);
                 setSelectedMenu('Guide Lexcom');
@@ -367,7 +285,7 @@ const Dashboard: React.FC = () => {
               }
             }}
           />
-        
+
           <p className="welcome">Bienvenido {data?.name}</p>
           <Avatar style={{ backgroundColor: '#87d068', minWidth: '35px', marginLeft: '20px', marginRight: '10px' }} icon={<UserOutlined />} onClick={showDrawer} />
           <Dropdown menu={{ items }} arrow={{ pointAtCenter: true }}>
@@ -466,7 +384,7 @@ const Dashboard: React.FC = () => {
                 <Progress
                   type="circle"
                   percent={progress}
-                  width={80}
+                  size={80}
                   strokeColor='#108ee9'
                   trailColor="#ffffff"
                   format={() => (
@@ -505,7 +423,7 @@ const Dashboard: React.FC = () => {
         </Layout>
       </Layout>
       <Drawer key={data?.id} width={640} placement="right" closable={false} onClose={onCloseD} open={openD}>
-        <ShowData data={data}/>      
+        <ShowData data={data} />
       </Drawer>
     </ConfigProvider>
 

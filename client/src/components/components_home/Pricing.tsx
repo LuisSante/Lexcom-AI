@@ -37,26 +37,29 @@ const Pricing = () => {
             <div className="grip-pricing">
                 {PlanPayment.map((item, index) => (
                     <div className="pricingTable" key={index}>
-                    <div className="pricingTable-header">
-                        <h3 className="heading">{item.title}</h3>
-                        <div className="price-value">{item.value}
-                            <span className="currency">$</span>
+                        <div className="pricingTable-header">
+                            <h3 className="heading">{item.title}</h3>
+                            <div className="price-value">{item.value}
+                                <span className="currency">$</span>
+                            </div>
+                        </div>
+                        <ul className="pricing-content">
+                            <li>Primera vez usando: 5 búsquedas gratuitas </li>
+                            <li>{item.n_search}</li>
+                            <li>GeoTrend Lex: Recomendación de ventas</li>
+                            <li>AutoFinance Pro: Calculadora de precios</li>
+                            <li>LexIA Determination: Porcentaje de éxito</li>
+                            <li>TikTok TrendFeed: Videos de tiktok</li>
+                            <li>Lex Generator</li>
+                            <li>Lexcom Courses: E-Commerce</li>
+                        </ul>
+                        <div className={clicked ? "read active" : "read "}>
+                            <ButtonComponent
+                                name="Regístrate ahora"
+                                styleButton={styleButton}
+                            />
                         </div>
                     </div>
-                    <ul className="pricing-content">
-                        <li>Primera vez usando: 5 búsquedas gratuitas </li>
-                        <li>{item.n_search}</li>
-                        <li>{item.benefits1}</li>
-                        <li>{item.benefits2}</li>
-                        {/* <li>-</li> */}
-                    </ul>
-                    <div className={clicked ? "read active" : "read "}>
-                    <ButtonComponent
-                            name="Regístrate ahora"
-                            styleButton={styleButton}
-                        />
-                    </div>
-                </div>
                 ))}
             </div>
         </ConfigProvider>

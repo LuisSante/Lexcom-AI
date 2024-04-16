@@ -4,16 +4,13 @@ export interface PlanType {
     plan: string;
     value: string;
     n_search: string;
-    benefits1: string;
-    benefits2: string;
     value_plan: number;
 }
 
 export interface ButtonPlanType {
-    type: string;
+    plan: string;
     value: string;
     styleButton: React.CSSProperties;
-    onOkClick?: () => void;
 }
 
 export interface FormPayProps {
@@ -27,7 +24,7 @@ export interface PaymentPlan {
     onChange?: (value: string) => void;
 }
 
-export interface UserType {     
+export interface UserType {
     id: number,
     username: string,
     email: string,

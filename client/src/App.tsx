@@ -6,6 +6,7 @@ import RecoverPassword from './pages/RecoverPassword';
 import ResetPassword from './pages/ResetPassword';
 import Settings from './pages/Settings';
 import Healtz from './pages/Healtz';
+import Pay from './components/components_dashboard/Pay';
 
 const App: React.FC = () => {
 
@@ -18,6 +19,7 @@ const App: React.FC = () => {
         <Route path="/recoverpassword" element={<RecoverPassword />} />
         <Route path="/reset-password-form/:token" element={<ResetPassword />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/pricing" element={<Pay/>} />
         <Route path="/test" element={<Healtz />} />
       </Routes>
     </BrowserRouter>
