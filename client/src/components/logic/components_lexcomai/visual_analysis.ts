@@ -1,6 +1,10 @@
 import { QuestionType } from "../../../interface/lexcomai";
 
 export const visual_analysis: QuestionType[] = [
+    { 
+        id: 'relevancia',
+        question: '¿Considera que su producto despierta interés entre el público objetivo?'
+    },
     {
         id: 'usabilidad',
         question: "¿Es fácil de usar o instalar?"

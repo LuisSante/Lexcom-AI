@@ -22,7 +22,7 @@ export const PlanPayment: PlanType[] = [
         id: '2',
         title: "Premium Plan",
         plan: "premium",
-        value: "40.90",
+        value: "49.90",
         n_search: "100 búsquedas", 
         value_plan: 49.90
     }

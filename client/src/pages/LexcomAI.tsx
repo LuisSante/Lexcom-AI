@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Button, Checkbox, Col, ConfigProvider, Form, Row, Skeleton, Typography, notification } from 'antd';
-import { Input } from 'antd';
 import './../css/TimelineDemo.css';
 import {
     firstColumnItems_visual,
@@ -20,6 +19,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 import "../css/lexcomai.css"
 import { FormValues, TypePrediction, attibute_bool } from '../interface/lexcomai';
+import UploadProduct from '../components/components_lexcomai/UploadProduct';
 
 const LexcomAI: React.FC = () => {
     const [initialFormValues] = useState<attibute_bool>({
@@ -109,7 +109,9 @@ const LexcomAI: React.FC = () => {
             {contextHolder}
             <div className='tutorial'>
                 <Typography.Title level={4} style={{ color: '#000' }}>¡Vamos a calcular si tu producto es ganador!</Typography.Title>
-
+                <div className="upload-product-container">
+                    <UploadProduct/>
+                </div>
                 <ConfigProvider
                     theme={{
                         token: {
@@ -129,24 +131,6 @@ const LexcomAI: React.FC = () => {
                             <div>
                                 <h2>Análisis Visual</h2>
                             </div>
-                            <Form.Item
-                                label="¿Cuál es el nivel de interés de su producto entre el público objetivo?"
-                                name="relevancia"
-                                tooltip={
-                                    <span>
-                                        Este espacio de aquí lo sacas del módulo GeoTrend Lex
-                                        <a> GeoTrend Lex</a>
-                                    </span>
-                                }
-                                rules={[
-                                    { 
-                                        required: false, 
-                                        message: 'Por favor ingresa el interés sobre el producto!' 
-                                    }
-                                ]}
-                            >
-                                <Input />
-                            </Form.Item>
                             <Row>
                                 <Col span={12}>
                                     {firstColumnItems_visual.map((item, index) => (
