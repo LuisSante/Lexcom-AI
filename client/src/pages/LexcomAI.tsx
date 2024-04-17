@@ -20,6 +20,8 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 import "../css/lexcomai.css"
 import { FormValues, TypePrediction, attibute_bool } from '../interface/lexcomai';
 import UploadProduct from '../components/components_lexcomai/UploadProduct';
+import { Grid } from '../components/components_lexcomai/Grid';
+import { CircleLoader } from '../components/components_lexcomai/CircleLoader';
 
 const LexcomAI: React.FC = () => {
     const [initialFormValues] = useState<attibute_bool>({
@@ -59,7 +61,7 @@ const LexcomAI: React.FC = () => {
 
     const onFinish = async (formData: FormValues) => {
         setIsLoading(true);
-    
+
         try {
             const response = await axiosInstance.post('lexcom/', formData);
             const data = response.data;
@@ -81,22 +83,22 @@ const LexcomAI: React.FC = () => {
                         'rgba(54, 162, 235, 1)',
                         'rgba(153, 102, 255, 1)',
                     ],
-    
+
                     borderWidth: 2.5,
                 }]
             };
-    
+
             api.success({
                 message: 'Operación realizada',
                 description: 'Espere por favor',
                 duration: 4
             });
-    
+
             setChartData(newChartData);
         } catch (err) {
             api.error({
                 message: 'Error al realizar la operación',
-                description:'Es obligatorio que llene el primer campo',
+                description: 'Es obligatorio que llene el primer campo',
                 duration: 6
             });
         } finally {
@@ -110,7 +112,12 @@ const LexcomAI: React.FC = () => {
             <div className='tutorial'>
                 <Typography.Title level={4} style={{ color: '#000' }}>¡Vamos a calcular si tu producto es ganador!</Typography.Title>
                 <div className="upload-product-container">
-                    <UploadProduct/>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <UploadProduct />
+                        <Grid>
+                            <CircleLoader />
+                        </Grid>
+                    </div>
                 </div>
                 <ConfigProvider
                     theme={{

@@ -48,3 +48,7 @@ export interface TypePrediction {
         borderWidth: number;
     }[];
 }
+
+export interface ChildrenProps {
+    children: ReactNode;
+}
