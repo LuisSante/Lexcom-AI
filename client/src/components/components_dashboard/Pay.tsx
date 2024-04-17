@@ -30,7 +30,7 @@ const Pay: React.FC = () => {
         <>
             <NavbarPricing isScrolling={scrollHeight} />
             <div className='container-page-services'>
-                <h1 style={{ marginTop: '100px', textAlign: 'center' }}>Elige el plan de Colab adecuado para ti</h1>
+                <h1 style={{ marginTop: '100px', textAlign: 'center' }}>Elige el plan de Lexcom adecuado para ti</h1>
                 <p style={{ textAlign: 'center' }}>LexCom te ofrece 5 búsquedas gratuitas al comenzar. <br/> Sin embargo, cuando estas acaben, dispones de opciones de pago aumentar tus búsuedas</p>
                 <ConfigProvider
                     theme={{

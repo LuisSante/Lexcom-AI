@@ -40,7 +40,7 @@ const UploadProduct: React.FC = () => {
     <>
       <Upload
         action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
-        listType="picture-circle"
+        listType="picture-card"
         fileList={fileList}
         onPreview={handlePreview}
         onChange={handleChange}
