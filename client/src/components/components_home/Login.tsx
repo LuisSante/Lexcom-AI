@@ -55,9 +55,9 @@ const Login: React.FC<FieldType> = () => {
               colorBgContainer: '#f6ffed',
               controlOutline: '#000000',
             },
-            Checkbox: {
-
-            }
+          },
+          token: {
+            fontFamily: "Poppins, sans-serif",
           },
         }}
       >

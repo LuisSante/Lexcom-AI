@@ -1,8 +1,6 @@
 .container-page-how-work {
     font-family: "Poppins", sans-serif;
-
 }
-
 
 .div-27 {
     align-self: stretch;
@@ -48,11 +46,13 @@
     }
 }
 
-.div-30 {
+.div-section {
     align-self: center;
-    display: flex;
-    width: 100%;
     max-width: 1150px;
+}
+
+.div-30 {
+    display: flex;
     flex-direction: column;
 }
 
@@ -85,7 +85,6 @@
     justify-content: center;
     color: #fdfbfb;
     text-align: center;
-    /* font-family: Cairo, sans-serif; */
     font-size: 20px;
     font-weight: 500;
     line-height: 120%;
@@ -310,9 +309,7 @@
 }
 
 .div-44 {
-    align-self: center;
     display: flex;
-    width: 100%;
     max-width: 1042px;
     flex-direction: column;
     margin: 190px 0 -30px;
@@ -327,7 +324,6 @@
 
 .div-45 {
     text-align: center;
-
     font-size: 38px;
     font-weight: 700;
     line-height: 44px;
@@ -335,9 +331,6 @@
     align-self: stretch;
     margin-left: 18px;
     text-wrap: nowrap;
-
-
-
     text-align: center;
     letter-spacing: 1.6px;
     background: linear-gradient(91deg, #ff1cf7 2.26%, #00f0ff 100%);
@@ -360,7 +353,6 @@
 .div-46 {
     color: #ffffff;
     text-align: center;
-
     font-size: 15px;
     font-weight: 400;
     align-self: center;
@@ -436,7 +428,6 @@
 .div-50 {
     color: #f86642;
     text-align: center;
-
     font-size: 20px;
     font-weight: 600;
     line-height: 110%;
@@ -469,7 +460,6 @@
 .div-54 {
     color: #ffffff;
     text-align: center;
-
     font-size: 14px;
     font-weight: 400;
     margin-top: 11px;
@@ -513,7 +503,6 @@
 }
 
 .div-56 {
-
     font-size: 20px;
     font-weight: 600;
     line-height: 110%;
@@ -649,17 +638,14 @@
 .div-63 {
     color: #fefefe;
     text-align: center;
-
     font-size: 14px;
     font-weight: 400;
     margin-top: 5px;
 }
 
 .div-64 {
-    align-self: center;
     display: flex;
     width: 100%;
-    max-width: 1160px;
     flex-direction: column;
     margin: 142px 0 20px;
     padding: 0 20px;
