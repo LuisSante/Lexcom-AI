@@ -10,24 +10,6 @@
     height: auto;
 }
 
-/* @media (min-width: 768px) and (max-width: 1202px){
-    .welcome-container {
-        margin-top: 103.2px;
-    }
-}
-
-@media (max-width: 768px) {
-    .welcome-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        width: 100%;
-        position: relative;
-        background-color: #000;
-    }
-} */
-
 .phrase-up {
     letter-spacing: 1.6px;
     background: linear-gradient(91deg, #ff1cf7 2.26%, #00f0ff 100%);

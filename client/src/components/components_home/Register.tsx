@@ -61,6 +61,9 @@ const Register: React.FC = () => {
                             controlOutline: '#000000',
                         },
                     },
+                    token: {
+                        fontFamily: "Poppins, sans-serif",
+                    },
                 }}
             >
                 <Form

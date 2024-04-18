@@ -8,7 +8,7 @@ import About from '../components/components_home/About';
 import Welcome from '../components/components_home/Welcome';
 import ForYou from '../components/components_home/ForYou';
 import Amazing from '../components/components_home/Amazing';
-
+import { TransitionX, TransitionY } from '../components/Section';
 
 const Home: React.FC = () => {
     const [scrollHeight, setScrollHeight] = useState(0);
@@ -31,13 +31,25 @@ const Home: React.FC = () => {
         <div className='position-pages'>
             <Navbar isScrolling={scrollHeight} />
             <div>
-                <Welcome></Welcome>
+                <TransitionY>
+                    <Welcome />
+                </TransitionY>
                 <How_work id="howork" />
-                <Services id="services" />
-                <ForYou/>
-                <Faq id="faq"></Faq>
-                <Amazing/>
-                <About id='about' />
+                <TransitionY>
+                    <Services id="services" />
+                </TransitionY>
+                <TransitionX>
+                    <ForYou />
+                </TransitionX>
+                <TransitionY>
+                    <Faq id="faq"></Faq>
+                </TransitionY>
+                <TransitionX>
+                    <Amazing />
+                </TransitionX>
+                <TransitionY>
+                    <About id='about' />
+                </TransitionY>
             </div>
         </div>
     )

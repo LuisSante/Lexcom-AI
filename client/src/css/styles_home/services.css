@@ -1,3 +1,7 @@
+/* .demo {
+    width: 110%;
+} */
+
 .container-page-services {
     font-family: "Poppins", sans-serif;
     color: white;
@@ -59,8 +63,9 @@
 @media (max-width: 685px) {
     .grip-pricing {
         grid-template-columns: repeat(1, calc(80% - 1rem));
-        ;
         justify-content: center;
+        /* margin-right: -20px; */
+        margin: 40px 0 10px;
     }
 
     .pricingTable {

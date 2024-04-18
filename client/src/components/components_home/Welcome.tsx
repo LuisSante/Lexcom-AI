@@ -52,7 +52,6 @@ const Welcome = () => {
             }}
         >
             <div className="welcome-container">
-                {/* <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'></link> */}
                 <div className="phrase-up">
                     Encuentra fácilmente tu
                     <br />
