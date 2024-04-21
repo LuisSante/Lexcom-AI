@@ -11,6 +11,7 @@ import michael from '../../assets/michael_lexcom.svg'
 import woman from '../../assets/woman.svg'
 import mostache from '../../assets/mostache_lexcom.svg'
 import { ComponentProps } from '../../interface/home'
+import TestimonialCarousel from './Carrusel'
 
 const How_work: React.FC<ComponentProps> = ({ id }) => {
 
@@ -56,73 +57,9 @@ const How_work: React.FC<ComponentProps> = ({ id }) => {
               </div>
             </div>
             <div className="div-44">
-              <div className="div-45">
-                <span>¿¡Cómo </span>
-                <span> LexCom funciona </span>
-                <span>Para productos Ganadores</span>
-                {/* <span>Trabaja</span> */}
-                <span> !?</span>
-              </div>
-              <div className="div-46">
-                ¿Te ha pasado elegir un producto sin estar seguro si se venderá
-                bien? Ahora, puedes dejar atrás esas dudas gracias a nuestra IA para
-                encontrar productos ganadores. Es como tener a tu mejor amigo que
-                siempre te asegura el éxito. Esta herramienta hace que todo sea
-                fácil y te garantiza un alto potencial de ventas. ¡No te preocupes
-                más y aumenta tus ingresos con nuestra inteligencia artificial!
-              </div>
               <div className="div-47">
                 <div className="div-48" >
-
-                  <div className="column-9">
-                    <div className="div-49" style={{ display: 'flex', alignContent: 'center', justifyContent: 'space-between' }} >
-                      <div style={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
-                        <img src={number_one} />
-                      </div>
-                      <div className="div-56">Regístrate e ingresa</div>
-                      <img loading="lazy" src={michael} className="img-16" />
-                      <div className="div-54">
-                        Ofrecemos un periodo gratuito para que puedas probar todo
-                        nuestro potencial!
-                        <br />
-                        Registrarse es simple, pero encontrar un producto ganador
-                        sin LexCom no 😉
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="column-10">
-                    <div className="div-55">
-                      <div style={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
-                        <img src={number_two}></img>
-                      </div>
-                      <div className="div-56">
-                        Detalla el producto que planeas vender
-                      </div>
-                      <img loading="lazy" src={woman} className="img-16" />
-                      <div className="div-57">
-                        Podras detallar sesde imágenes hasta tipo de producto, esto
-                        ayudará a hacer más específica tu búsqueda
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="column-11">
-                    <div className="div-58">
-                      <div style={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
-                        <img src={number_three} />
-                      </div>
-                      <div className="div-56">
-                        Visualiza si tendrá éxito en ventas o no
-                      </div>
-                      <img loading="lazy" src={mostache} className="img-16" />
-                      <div className="div-63">
-                        Proporcionamos, no solo una respuesta afirmativa/negativa,
-                        con nosotros podras ver estadísticas de éxito de ventas de
-                        tu producto
-                      </div>
-                    </div>
-                  </div>
+                  <TestimonialCarousel/>
                 </div>
               </div>
             </div>
