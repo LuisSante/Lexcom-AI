@@ -343,7 +343,7 @@ const Dashboard: React.FC = () => {
               <Menu.Item key={'GeoTrend Lex'} icon={<LineChartOutlined ref={ref1} />}>
                 {'GeoTrend Lex'}
               </Menu.Item>
-              <Menu.SubMenu icon={<CalculatorOutlined ref={ref2} />} key={'BudgetControlPro'} title={'Budget Control Pro'}>
+              <Menu.SubMenu icon={<CalculatorOutlined ref={ref2} />} key={'BudgetControlPro'} title={'AutoPro Finance'}>
                 <Menu.ItemGroup key={'BudgetControlPro'}>
                   <Menu.Item key={'Standard'}>
                     {'Standard'}
@@ -362,13 +362,13 @@ const Dashboard: React.FC = () => {
               <Menu.Item key={'TikTok TrendFeed'} icon={<TikTokOutlined ref={ref4} />}> {/* Utilizamos el ref aquí */}
                 {'TikTok TrendFeed'}
               </Menu.Item>
-              <Menu.SubMenu icon={<DesktopOutlined ref={ref5} />} key={'Prompt Generators'} title={'Prompt Generators'}>
+              <Menu.SubMenu icon={<DesktopOutlined ref={ref5} />} key={'Prompt Generators'} title={'LexGeneration'}>
                 <Menu.ItemGroup key={'Prompt Generators'} >
                   <Menu.Item key={'Prompt Generator Video'}>
-                    {'Prompt Generator Video'}
+                    {'LexVid Pro'}
                   </Menu.Item>
                   <Menu.Item key={'Prompt Generator Copys'}>
-                    {'Prompt Generator Copys'}
+                    {'LexCopy Pro'}
                   </Menu.Item>
                 </Menu.ItemGroup>
               </Menu.SubMenu>
