@@ -46,22 +46,20 @@ const OpenAI: React.FC<TypeOpenAI> = ({ searchValue }) => {
                 {data && !isLoading && (
                     <div className='tutorial'>
                         <h2>Introducción:</h2>
-
-                        <div>{data.prompt.split('Click Bait:')[1].split('Problema:')[0]}</div>
+                        <div>{data.prompt && data.prompt.includes('Click Bait:') && data.prompt.split('Click Bait:')[1].split('Problema:')[0]}</div>
                         <h2>Problema:</h2>
-                        <div>{data.prompt.split('Problema:')[1].split('Solución:')[0]}</div>
+                        <div>{data.prompt && data.prompt.includes('Problema:') && data.prompt.split('Problema:')[1].split('Solución:')[0]}</div>
                         <h2>Solución:</h2>
-                        <div>{data.prompt.split('Solución:')[1].split('Características:')[0]}</div>
+                        <div>{data.prompt && data.prompt.includes('Solución:') && data.prompt.split('Solución:')[1].split('Características:')[0]}</div>
                         <h2>Características:</h2>
-                        <div>{data.prompt.split('Características:')[1].split('Beneficios:')[0]}</div>
+                        <div>{data.prompt && data.prompt.includes('Características:') && data.prompt.split('Características:')[1].split('Beneficios:')[0]}</div>
                         <h2>Beneficios:</h2>
-                        <div>{data.prompt.split('Beneficios:')[1].split('Testimonios:')[0]}</div>
+                        <div>{data.prompt && data.prompt.includes('Beneficios:') && data.prompt.split('Beneficios:')[1].split('Testimonios:')[0]}</div>
                         <h2>Testimonios:</h2>
-                        <div>{data.prompt.split('Testimonios:')[1].split('Final:')[0]}</div>
+                        <div>{data.prompt && data.prompt.includes('Testimonios:') && data.prompt.split('Testimonios:')[1].split('Final:')[0]}</div>
                         <br></br>
-                        <div>{data.prompt.split('Final:')[1]}</div>
+                        <div>{data.prompt && data.prompt.includes('Final:') && data.prompt.split('Final:')[1]}</div>
                         <h2>Recuerda que tu video no debe durar mas de 30 a 40 segundos dependiendo de tu producto.</h2>
-                        {/* <h2>Reseñas 4.9/5</h2> */}
                     </div>
                 )}
             </div>
