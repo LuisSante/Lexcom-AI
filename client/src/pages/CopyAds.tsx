@@ -47,9 +47,9 @@ const CopyAI: React.FC<TypeCopyAds> = ({ searchValue }) => {
                     <div className='tutorial'>
                         {data.prompt.split('<br>').map((paragraph, pIndex) => (
                             <React.Fragment key={`paragraph-${pIndex}`}>
-                                {paragraph.split('-').map((line, lineIndex) => (
+                                {paragraph.split('\u2705').map((line, lineIndex) => (
                                     <React.Fragment key={`line-${pIndex}-${lineIndex}`}>
-                                        {lineIndex !== 0 && '-'}{line}{(lineIndex < paragraph.split('-').length - 1) && <br />}
+                                        {lineIndex !== 0 && '\u2705'}{line}{(lineIndex < paragraph.split('\u2705').length - 1) && <br />}
                                     </React.Fragment>
                                 ))}
                                 {pIndex < data.prompt.split('<br>').length - 1 && <br />}
