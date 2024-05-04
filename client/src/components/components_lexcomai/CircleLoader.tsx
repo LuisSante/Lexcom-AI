@@ -16,12 +16,10 @@ export const CircleLoader = () => {
                     width: "2rem",
                     height: "2rem",
                     border: "0.2rem solid #e9e9e9",
-                    borderTop: "0.2rem solid #3498db",
+                    borderTop: "0.2rem solid #000000",
                     borderRadius: "50%",
                     position: "absolute",
                     boxSizing: "border-box",
-                    // top: 0,
-                    // left: 0
                 }}
                 animate={{ rotate: 360 }}
                 transition={{

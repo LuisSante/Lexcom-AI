@@ -34,14 +34,16 @@ class OpenAIClient:
     def get_copy(self , product:str):
         prompt = (
             f"Eres un experto desarrollando copys ganadores para anuncios en Facebook. "
-            f"Crea un NUEVO copy del producto: {product}:\n\n"
-            "¡Además, no olvides añadir emojis para enfatizar el mensaje!'que el copy tenga esta estructura 'enganche del producto' 'solucion del producto'\n\n"
-            "- Beneficios:<br>\n"
-            f"  - Beneficio 1 del {product}<br>\n"
-            f"  - Beneficio 2 del {product}<br>\n"
-            f"  - Beneficio 3 del {product}<br>\n"
-            f"  - Beneficio 4 del {product}<br>\n"
-            f"  - Beneficio 5 del {product}<br>\n\n"
+            f"Tu misión: crear un copy de 100 palabras para el producto: {product}:\n\n"
+            "Requisito 1: el copy siempre tiene que tener la siguiente estructura tal cual, sin agregar ni disminuir cosas:"
+            f"'enganche del producto', 'solucion del producto'</br>\n"
+            "Beneficios:\n\n"
+            f"  - Beneficio 1 del {product}\n\n"
+            f"  - Beneficio 2 del {product}\n\n"
+            f"  - Beneficio 3 del {product}\n\n"
+            f"  - Beneficio 4 del {product}\n\n"
+            f"Requisito 2: los beneficios siempre tienen que empezar con el emoji '\u2705' \n\n"
+            f"Requisito 3: usa emojis \n\n"
         )
 
         response = self.openai_client.completions.create(

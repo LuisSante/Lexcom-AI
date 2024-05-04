@@ -18,11 +18,9 @@ import {
   DesktopOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  LineChartOutlined,
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import About from '../components/components_home/About';
-import Product from './Product';
 import OpenAI from './OpenAI';
 import LandingAI from './Landing';
 import CopyAds from './CopyAds';
@@ -49,7 +47,6 @@ const defaultUserData: UserType = {
 
 const Dashboard: React.FC = () => {
   const { Header, Content, Sider } = Layout;
-  const ref1 = useRef(null);
   const ref2 = useRef(null);
   const ref3 = useRef(null);
   const ref4 = useRef(null);
@@ -83,12 +80,12 @@ const Dashboard: React.FC = () => {
   };
 
   const steps: TourProps['steps'] = [
-    {
-      title: 'GeoTrend Lex',
-      description: 'Explora la pestaña de ranking de ventas en la parte izquierda de tu pantalla. Con esta pestaña podrás conocer si tu producto tiene un buen interés y en que países es el más buscado.',
-      placement: 'right',
-      target: () => ref1.current,
-    },
+    // {
+    //   title: 'GeoTrend Lex',
+    //   description: 'Explora la pestaña de ranking de ventas en la parte izquierda de tu pantalla. Con esta pestaña podrás conocer si tu producto tiene un buen interés y en que países es el más buscado.',
+    //   placement: 'right',
+    //   target: () => ref1.current,
+    // },
     {
       title: 'Budget Control Pro',
       description: 'Te ofrecemos tres calculadoras para que de esta forma puedas saber que precio debe tener tu producto, el CPA y CPU asi como estadisticas generales.',
@@ -282,6 +279,10 @@ const Dashboard: React.FC = () => {
                   })
                   .catch(error => {
                     console.error('Error al actualizar el contador de búsquedas:', error);
+                    api.error({
+                      message: 'Error al actualizar el contador de búsquedas',
+                      duration: 3
+                    });
                   });
               }
             }}
@@ -341,10 +342,7 @@ const Dashboard: React.FC = () => {
                 }
               }}
             >
-              <Menu.Item key={'GeoTrend Lex'} icon={<LineChartOutlined ref={ref1} />}>
-                {'GeoTrend Lex'}
-              </Menu.Item>
-              <Menu.SubMenu icon={<CalculatorOutlined ref={ref2} />} key={'BudgetControlPro'} title={'Budget Control Pro'}>
+              <Menu.SubMenu icon={<CalculatorOutlined ref={ref2} />} key={'BudgetControlPro'} title={'AutoPro Finance'}>
                 <Menu.ItemGroup key={'BudgetControlPro'}>
                   <Menu.Item key={'Standard'}>
                     {'Standard'}
@@ -363,13 +361,13 @@ const Dashboard: React.FC = () => {
               <Menu.Item key={'TikTok TrendFeed'} icon={<TikTokOutlined ref={ref4} />}> {/* Utilizamos el ref aquí */}
                 {'TikTok TrendFeed'}
               </Menu.Item>
-              <Menu.SubMenu icon={<DesktopOutlined ref={ref5} />} key={'Prompt Generators'} title={'Prompt Generators'}>
+              <Menu.SubMenu icon={<DesktopOutlined ref={ref5} />} key={'Prompt Generators'} title={'LexGeneration'}>
                 <Menu.ItemGroup key={'Prompt Generators'} >
                   <Menu.Item key={'Prompt Generator Video'}>
-                    {'Prompt Generator Video'}
+                    {'LexVid Pro'}
                   </Menu.Item>
                   <Menu.Item key={'Prompt Generator Copys'}>
-                    {'Prompt Generator Copys'}
+                    {'LexCopy Pro'}
                   </Menu.Item>
                   <Menu.Item key={'Prompt Generator Landing'}>
                     {'LexLanding Pro'}
@@ -409,7 +407,6 @@ const Dashboard: React.FC = () => {
           }} className="lexcom-layout">
 
             <Content style={{ margin: '0 16px', padding: '0 24px', minHeight: 700 }} >
-              {selectedMenu === 'GeoTrend Lex' && <Product searchValue={searchValue} />}
               {selectedMenu === 'Standard' && <Standard />}
               {selectedMenu === 'Precio_del_Producto' && <Precio_del_Producto />}
               {selectedMenu === 'CPA_CVU' && <CPA_CVU />}
