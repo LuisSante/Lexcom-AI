@@ -25,6 +25,7 @@ import About from '../components/components_home/About';
 import Product from './Product';
 import OpenAI from './OpenAI';
 import CopyAds from './CopyAds';
+import LandingAI from './Landing';
 import Tiktok from './Tiktok';
 import LexcomAI from './LexcomAI';
 import axiosInstance from '../components/axios';
@@ -370,6 +371,9 @@ const Dashboard: React.FC = () => {
                   <Menu.Item key={'Prompt Generator Copys'}>
                     {'Prompt Generator Copys'}
                   </Menu.Item>
+                  <Menu.Item key={'Prompt Generator Landing'}>
+                    {'LexLanding Pro'}
+                  </Menu.Item>
                 </Menu.ItemGroup>
               </Menu.SubMenu>
               <Menu.Item key={'Lexcom Courses'} icon={<BookOutlined ref={ref6} />}> {/* Utilizamos el ref aquí */}
@@ -413,6 +417,7 @@ const Dashboard: React.FC = () => {
               {selectedMenu === 'TikTok TrendFeed' && <Tiktok searchValue={searchValue} />}
               {selectedMenu === 'Prompt Generator Video' && <OpenAI searchValue={searchValue} />}
               {selectedMenu === 'Prompt Generator Copys' && <CopyAds searchValue={searchValue} />}
+              {selectedMenu === 'Prompt Generator Landing' && <LandingAI searchValue={searchValue} />}
               {selectedMenu === 'Guide Lexcom' && <Tutorial />}
               {selectedMenu === '' && <Tutorial />}
             </Content>
