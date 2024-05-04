@@ -8,5 +8,5 @@ google-search-results
 djangorestframework-oauth
 djangorestframework-simplejwt
 djangorestframework-simplejwt[crypto]
-scikit-learn==1.2.2
+scikit-learn==1.3.2
 django-rest-passwordreset
