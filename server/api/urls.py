@@ -28,7 +28,8 @@ urlpatterns = [
     # Endpoints for  OpenAI
     path(r'openai/<str:id>' , openai.OpenAIApiView.as_view({'get': 'recommend_video'}), name="recommend_video"),
     path(r'copy_ads/<str:id>' , openai.OpenAIApiView.as_view({'get': 'recommend_copy'}), name="recommend_copy"),
-    
+    path(r'landing/<str:id>' , openai.OpenAIApiView.as_view({'get': 'recommend_landing'}), name="recommend_landing"),
+
     # Endpoint for TikTok Api
     path(r'tiktok/<str:id>' , tiktok.TiktTokApiView.as_view({'get': 'video_interest'}), name="video_interest"),
 

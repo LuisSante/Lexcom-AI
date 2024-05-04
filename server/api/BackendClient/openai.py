@@ -51,3 +51,29 @@ class OpenAIClient:
         )
 
         return response
+    
+    def get_landing(self , product:str):
+        prompt = (f"Pretende que eres un experto redactor de textos de marketing, tu mision es escribir un landing del producto: {product}."
+                "La estructura es: problema(problema relacionado al producto), " \
+                "problema ( donde se  tocan puntos de dolor), " \
+                "oferta ( oferta irresistible para la compra del producto), " \
+                "beneficio 1( 3 beneficios del producto), " \
+                "beneficio 2( 3 beneficios mas del producto), " \
+                "beneficio 3( 3 beneficios mas del producto), " \
+                "especificaciones ( especificaciones del producto), " \
+                "La estructura del landing debe ser:\n\n" \
+                "Problema:<br>\n" \
+                "Oferta:<br>\n" \
+                "Beneficio 1:<br>\n" \
+                "Beneficio 2:<br>\n" \
+                "Beneficio 3:<br>\n" \
+                "Especificaciones:<br><br>"
+        )
+
+        response = self.openai_client.completions.create(
+            model="gpt-3.5-turbo-instruct",
+            prompt=prompt,
+            max_tokens=1000
+        )
+
+        return response
