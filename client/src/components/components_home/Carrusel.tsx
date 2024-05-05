@@ -17,114 +17,114 @@ const testimonials = [
 ];
 
 const TestimonialCarousel = () => {
-    const settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 2,
-      slidesToScroll: 1,
-      autoplay: true,
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 2,
-          },
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    autoplay: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
         },
-        {
-          breakpoint: 768, 
-          settings: {
-            slidesToShow: 1,
-          },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
         },
-        {
-          breakpoint: 480, 
-          settings: {
-            slidesToShow: 1,
-          },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
         },
-      ],
-    };
-  
-    return (
-      <div style={containerStyle}>
-        <Slider {...settings}>
-          {testimonials.map((testimonial) => (
-            <div key={testimonial.id} style={testimonialStyle}>
-              <div style={contentContainerStyle}>
-                <div style={photoContainerStyle}>
-                  <img src={testimonial.photoUrl} alt={`Foto de ${testimonial.name}`} style={photoStyle} />
-                </div>
-                <div style={textContainerStyle}>
-                  <div style={{ ...testimonialTextStyle, textAlign: 'justify' }}>{testimonial.text}</div>
-                  <div style={testimonialNameStyle}>- {testimonial.name}</div>
-                  <div style={testimonialStarsStyle}>
-                    {'★'.repeat(testimonial.stars)}
-                    {'☆'.repeat(5 - testimonial.stars)}
-                  </div>
+      },
+    ],
+  };
+
+  return (
+    <div style={containerStyle}>
+      <Slider {...settings}>
+        {testimonials.map((testimonial) => (
+          <div key={testimonial.id} style={testimonialStyle}>
+            <div style={contentContainerStyle}>
+              <div style={photoContainerStyle}>
+                <img src={testimonial.photoUrl} alt={`Foto de ${testimonial.name}`} style={photoStyle} />
+              </div>
+              <div style={textContainerStyle}>
+                <div style={{ ...testimonialTextStyle, textAlign: 'justify' }}>{testimonial.text}</div>
+                <div style={testimonialNameStyle}>- {testimonial.name}</div>
+                <div style={testimonialStarsStyle}>
+                  {'★'.repeat(testimonial.stars)}
+                  {'☆'.repeat(5 - testimonial.stars)}
                 </div>
               </div>
             </div>
-          ))}
-        </Slider>
-      </div>
-    );
-  };
-  
-  
-  const containerStyle = {
-    maxWidth: 'calc(100% - 40px)', 
-    margin: '0 auto',
-  };
-  
-  const testimonialStyle = {
-    textAlign: 'center',
-    padding: '20px',
-    outline: 'none',
-  };
-  
-  const contentContainerStyle = {
-    display: 'flex',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start', 
-  };
-  
-  const photoContainerStyle = {
-    width: '80px',
-    height: '80px',
-    borderRadius: '50%',
-    overflow: 'hidden',
-    marginRight: '20px',
-  };
-  
-  const photoStyle = {
-    width: '100%',
-    height: 'auto',
-    objectFit: 'cover',
-  };
-  
-  const textContainerStyle = {
-    flex: 1,
-    marginLeft: '20px', 
-    marginRight: '20px', 
-  };
-  
-  const testimonialTextStyle = {
-    fontSize: '18px', 
-    color: '#FFF',
-    marginBottom: '10px',
-  };
-  
-  const testimonialStarsStyle = {
-    color: 'gold',
-    fontSize: '20px',
-  };
-  
-  const testimonialNameStyle = {
-    fontStyle: 'italic',
-    marginTop: '10px',
-    fontWeight: 'bold',
-    color: '#FFF', 
-  };
-  
-  export default TestimonialCarousel;
+          </div>
+        ))}
+      </Slider>
+    </div>
+  );
+};
+
+
+const containerStyle = {
+  maxWidth: 'calc(100% - 40px)',
+  margin: '0 auto',
+};
+
+const testimonialStyle = {
+  textAlign: 'center',
+  padding: '20px',
+  outline: 'none',
+};
+
+const contentContainerStyle = {
+  display: 'flex',
+  alignItems: 'flex-start',
+  justifyContent: 'flex-start',
+};
+
+const photoContainerStyle = {
+  width: '80px',
+  height: '80px',
+  borderRadius: '50%',
+  overflow: 'hidden',
+  marginRight: '20px',
+};
+
+const photoStyle = {
+  width: '100%',
+  height: 'auto',
+  objectFit: 'cover',
+};
+
+const textContainerStyle = {
+  flex: 1,
+  marginLeft: '20px',
+  marginRight: '20px',
+};
+
+const testimonialTextStyle = {
+  fontSize: '18px',
+  color: '#FFF',
+  marginBottom: '10px',
+};
+
+const testimonialStarsStyle = {
+  color: 'gold',
+  fontSize: '20px',
+};
+
+const testimonialNameStyle = {
+  fontStyle: 'italic',
+  marginTop: '10px',
+  fontWeight: 'bold',
+  color: '#FFF',
+};
+
+export default TestimonialCarousel;

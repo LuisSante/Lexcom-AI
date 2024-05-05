@@ -95,7 +95,7 @@ const Login: React.FC<FieldType> = () => {
             >
               <Checkbox style={{ color: '#f6ffed' }}>Recuerdame</Checkbox>
               <br />
-              <a className="p-10px login-form-forgot" onClick={recoverpassword}>
+              <a className="login-form-forgot p-10px" onClick={recoverpassword}>
                 ¿Olvidaste tu contraseña?
               </a>
             </Form.Item>
