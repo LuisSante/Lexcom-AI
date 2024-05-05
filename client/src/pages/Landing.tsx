@@ -4,6 +4,11 @@ import Skeleton from '../components/Skeleton';
 import axiosInstance from '../components/axios';
 import { notification } from 'antd';
 import { LandingData, TypeLanding } from '../interface/landing';
+import GifIcon from '../assets/gif.svg'
+import ImageIcon from '../assets/imageicon.svg'
+import ImageIcon2 from '../assets/imageicon2.svg'
+import VideoIcon from '../assets/videoicon.svg'
+import { TransitionDiagonal, TransitionX, TransitionY } from '../components/Section';
 
 const LandingAI: React.FC<TypeLanding> = ({ searchValue }) => {
 
@@ -31,9 +36,9 @@ const LandingAI: React.FC<TypeLanding> = ({ searchValue }) => {
                 setIsLoading(false);
             }
         };
-    
+
         fetchData();
-    
+
         // Limpieza, en este caso no es necesario, pero si se agregan dependencias, deberían ir aquí
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchValue]);
@@ -41,27 +46,103 @@ const LandingAI: React.FC<TypeLanding> = ({ searchValue }) => {
     return (
         <>
             {contextHolder}
-            <div>
+            <div className="justify-center items-center">
                 {isLoading && <Skeleton />}
                 {data && !isLoading && (
                     <div className='tutorial'>
-                        <div style={{ paddingLeft: '10cm', paddingRight: '10cm', justifyContent: 'center' }}>
-                            <strong> [Pon aqui imagen principal/video/GIF] </strong> <br/>
-                            <div>{data.prompt && data.prompt.includes('Problema:') && data.prompt.split('Problema:')[1].split('Oferta:')[0]}</div>
-                            <div style={{ color: 'red' }}>{data.prompt && data.prompt.includes('Oferta:') && data.prompt.split('Oferta:')[1].split('Beneficio 1:')[0]}</div>
-                            <strong> [Pon aqui boton de comprar] </strong> <br/>
-                            <div>{data.prompt && data.prompt.includes('Beneficio 1:') && data.prompt.split('Beneficio 1:')[1].split('Beneficio 2:')[0]}</div>
-                            <strong> [Pon aqui GIF] </strong> <br/>
-                            <div>{data.prompt && data.prompt.includes('Beneficio 2:') && data.prompt.split('Beneficio 2:')[1].split('Beneficio 3:')[0]}</div>
-                            <strong> [Pon aqui boton de comprar] </strong> <br/>
-                            <div>{data.prompt && data.prompt.includes('Beneficio 3:') && data.prompt.split('Beneficio 3:')[1].split('Especificaciones:')[0]}</div>
-                            <strong> [Pon aqui imagen] </strong> <br/>
-                            <div>{data.prompt.split('Especificaciones:')[1]}</div>
-                            <strong> [Pon aqui formulario de compra] </strong> <br/>
+                        <div className='px-4 max-w-prose text-center'>
+                            <TransitionY>
+                                <span className='text-[#000000] text-4xl'>Produto </span>
+                                <span className='mb-4 text-[#ab2d2d] text-4xl'>Mínimo viable </span>
+                                <br />
+                            </TransitionY>
+                            <TransitionY>
+                                <span className='text-[#1677ff] text-lg'> [Imagen principal/video/GIF que más sea conveniente] </span>
+                                <br />
+                                <div className='flex justify-center items-center gap-4'>
+                                    <img className='w-36' src={ImageIcon}></img>
+                                    <img className='w-36' src={VideoIcon}></img>
+                                    <img className='w-36' src={GifIcon}></img>
+                                </div>
+                            </TransitionY>
+                            <TransitionY>
+                                <div>
+                                    {data.prompt && data.prompt.includes('Problema:') && data.prompt.split('Problema:')[1].split('Oferta:')[0]}
+                                </div>
+                            </TransitionY>
+                            <TransitionY>
+                                <div className='text-red-800'>
+                                    {data.prompt && data.prompt.includes('Oferta:') && data.prompt.split('Oferta:')[1].split('Beneficio 1:')[0]}
+                                </div>
+                            </TransitionY>
+
+                            <TransitionX>
+                                <span className='text-[#1677ff] text-lg'> [Botón de comprar] </span >
+                                <br />
+                                <div className='flex justify-center items-center'>
+                                    <p className="bg-green-600 rounded-md w-36 h-8 text-center text-lg text-white">
+                                        Buy
+                                    </p>
+                                </div>
+                            </TransitionX>
+                            <TransitionY>
+                                <div>
+                                    {data.prompt && data.prompt.includes('Beneficio 1:') && data.prompt.split('Beneficio 1:')[1].split('Beneficio 2:')[0]}
+                                </div>
+                                <span className='text-[#1677ff] text-lg'> [GIF que sea más conveniente] </span >
+                                <br />
+                                <img className='w-36' src={GifIcon}></img>
+                                <br />
+                                <div>
+                                    {data.prompt && data.prompt.includes('Beneficio 2:') && data.prompt.split('Beneficio 2:')[1].split('Beneficio 3:')[0]}
+                                </div>
+                            </TransitionY>
+                            <TransitionY>
+                                <span className='text-[#1677ff] text-lg'> [Botón de comprar] </span >
+                                <br />
+                                <div className='flex justify-center items-center'>
+                                    <p className="bg-green-600 rounded-md w-36 h-8 text-center text-lg text-white">
+                                        Buy
+                                    </p>
+                                </div>
+                            </TransitionY>
+                            <TransitionY>
+                                <div>
+                                    {data.prompt && data.prompt.includes('Beneficio 3:') && data.prompt.split('Beneficio 3:')[1].split('Especificaciones:')[0]}
+                                </div>
+                                <span className='text-[#1677ff] text-lg'> [Pon aqui imagen] </span >
+                                <br />
+                                <img className='w-36' src={ImageIcon2}></img>
+                                <br />
+                                <div>
+                                    {data.prompt.split('Especificaciones:')[1]}
+                                </div>
+                            </TransitionY>
+                            <TransitionDiagonal>
+                                <span className='mt-8 text-[#1677ff] text-lg'> [Pon aqui formulario de compra] </ span>
+                                <br />
+                                <div className='flex flex-col justify-center items-center'>
+                                    <div className='border-5 p-4 border-black border-solid rounded-md w-80 h-80 text-center'>
+                                        <span className='text-[#000000] text-4xl'>Formulario </span>
+                                        <br />
+                                        <span className='text-[#ab2d2d] text-4xl'>Compra </span>
+                                        <br />
+                                        <div className='flex flex-col gap-2 mt-14 text-center'>
+                                            <p className="justify-center items-center bg-sky-600 rounded-md h-8">
+                                                <div className="text-center text-lg text-white">Upsells 1-click</div>
+                                            </p>
+                                            <p className="justify-center items-center bg-yellow-600 rounded-md h-8">
+                                                <div className="text-center text-lg text-white">Upsells 1-click</div>
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </TransitionDiagonal>
                         </div>
                     </div>
                 )}
-            </div>
+            </div >
         </>
 
     )
