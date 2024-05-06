@@ -35,7 +35,7 @@ class LexcomIA_ApiView(viewsets.ViewSet):
         lexcom_client = self.get_lexcom_client()
         response = lexcom_client.get_prediction_binary_class(data)
         serializer = LexcomBinaryClassSerializer(
-            data={'success': response[0][0]})
+            data={'success': response[0][0], 'failure': response[0][1]})
 
         if serializer.is_valid():
             serialized_data = serializer.data

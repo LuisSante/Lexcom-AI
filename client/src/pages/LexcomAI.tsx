@@ -24,7 +24,7 @@ import {
     LineElement,
     registerables
 } from 'chart.js';
-import { Bar, Pie, PolarArea } from 'react-chartjs-2';
+import { Pie, PolarArea } from 'react-chartjs-2';
 import { formItemLayout } from '../components/logic/components_form/position_form';
 ChartJS.register(
     ArcElement,
@@ -44,6 +44,7 @@ import UploadProduct from '../components/components_lexcomai/UploadProduct';
 import { Grid } from '../components/components_lexcomai/Grid';
 import { CircleLoader } from '../components/components_lexcomai/CircleLoader';
 import CupIcon from '../assets/cup.svg'
+import WardIcon from '../assets/wardicon.svg'
 
 const LexcomAI: React.FC = () => {
     const [initialFormValues] = useState<attibute_bool>({
@@ -87,29 +88,7 @@ const LexcomAI: React.FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [api, contextHolder] = notification.useNotification();
 
-    const secondOptions = {
-        responsive: true,
-        maintainAspectRatio: true,
-        plugins: {
-            legend: {
-                display: false,
-            },
-            tooltips: {
-                enabled: false,
-            }
-        },
-        scales: {
-            x: {
-                display: false, // Oculta el eje x
-            },
-            y: {
-                display: false, // Oculta el eje y
-            },
-        },
-    };
-
     const onFinish = async (formData: FormValues) => {
-        console.log(formData);
         setIsLoading(true);
 
         try {
@@ -139,18 +118,25 @@ const LexcomAI: React.FC = () => {
             };
             setChartData(newChartData);
 
-            const secondResponse = await axiosInstance.post('lexcom_binary_class/', formData);
-            const secondData = secondResponse.data;
+            // const secondResponse = await axiosInstance.post('lexcom_binary_class/', formData);
+            const values = Object.values(data);
+            const secondData = {
+                success: (Number(values[0]) + Number(values[1])) / 2,
+                failure: (Number(values[3]) + Number(values[4])) / 2
+            };
+            console.log(secondData);
             // const secondValue = (secondData['Éxito'] * 100).toString + '%';
             const newSecondChartData: TypePrediction = {
-                labels: ['Éxito'],
+                labels: ['Éxito', 'Fallo'],
                 datasets: [{
                     data: Object.values(secondData),
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
                     ],
                     borderColor: [
                         'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
                     ],
                     borderWidth: 2.5,
                 }]
@@ -339,21 +325,24 @@ const LexcomAI: React.FC = () => {
                     </Form>
                     {isLoading && <Skeleton active />}
                     {chartData && secondChartData && !isLoading && (
-                        <div>
-                            <h2 className="text-center">Diagrama sectorial del producto buscado</h2>
+                        <div className='text-center text-xl'>
+                            <span className="">Diagrama sectorial del producto buscado</span>
                             <div className="flex justify-around">
-                                <div className="w-1/3">
+                                <div className="w-1/3 h-80">
                                     <Pie data={chartData} />
                                 </div>
-                                <div className="w-1/3">
+                                <div className="w-1/3 h-80">
                                     <PolarArea data={chartData} />
                                 </div>
                             </div>
-                            <h2 className="text-center">Probabilidad de éxito</h2>
+                            <span className="text-center">Probabilidad de éxito</span>
                             <div className="flex justify-around">
-                                <div className="flex flex-col items-center w-1/3">
-                                    <img className="w-16" src={CupIcon} alt="CupIcon" />
-                                    <Bar data={secondChartData} options={secondOptions} />
+                                <div className="justify-center items-center w-1/4 text-center">
+                                    <img className="w-20" src={CupIcon} alt="CupIcon" />
+                                    <div className='flex'>
+                                        <Pie data={secondChartData} />
+                                        <img className="w-20" src={WardIcon} alt="WardIcon" />
+                                    </div>
                                     <span className="mt-2">{secondChartData.datasets[0].data[0].toFixed(2)} % de Éxito</span>
                                 </div>
                             </div>

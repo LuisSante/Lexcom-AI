@@ -17,7 +17,7 @@ class LexcomFiveClassSerializer(serializers.Serializer):
 
 class LexcomBinaryClassSerializer(serializers.Serializer):
     success = serializers.FloatField()
-    # failure = serializers.FloatField()
+    failure = serializers.FloatField()
 
     class Meta:
-        fields = ('success')
+        fields = ('success', 'failure')

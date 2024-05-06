@@ -108,7 +108,7 @@ const Tutorial: React.FC = () => {
               ),
             },
             {
-              color: 'lime-10',
+              color: 'lime',
               children: (
                 <>
                   <Card title="LexGeneration / LexLanding Pro" bordered={false}>

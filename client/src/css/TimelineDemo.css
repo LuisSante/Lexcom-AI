@@ -14,5 +14,15 @@
   border-radius: 40px;
   align-items: center;
   justify-content: center;
+}
+
+.tutorial2 {
+  background-color: #ffffff95;
+  margin-top: 2%;
+  padding: 5%;
+  padding-inline: 10%;
+  border-radius: 40px;
+  align-items: center;
+  justify-content: center;
   display: flex;
 }
