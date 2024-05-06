@@ -1,6 +1,6 @@
 import { Button, ConfigProvider, Form, Input, Modal, notification } from 'antd';
 import React, { useState } from 'react'
-import { ButtonPlanType } from '../../interface/dashboard';
+import { ButtonPlanType, PayType } from '../../interface/dashboard';
 import axiosInstance from '../axios';
 import { useNavigate } from 'react-router-dom';
 import { Card } from '../logic/components_dashboard/CardAccept';
@@ -42,8 +42,14 @@ export const ButtonPlan: React.FC<ButtonPlanType> = ({ plan, value, styleButton 
     setButtonModalVisible(true);
   };
 
-  const onFinish = () => {
-    console.log('envio form');
+  const onFinish = async (values: PayType) => {
+    try {
+      console.log(values);
+    }
+
+    catch (err) {
+      console.log('error');
+    }
   };
 
   const onFinishFailed = () => {
@@ -81,9 +87,7 @@ export const ButtonPlan: React.FC<ButtonPlanType> = ({ plan, value, styleButton 
             <p>Total: ${value}</p>
 
             <Form
-              // {...formItemLayoutPay}
               form={form}
-              // layout="vertical"
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
             >
@@ -144,19 +148,19 @@ export const ButtonPlan: React.FC<ButtonPlanType> = ({ plan, value, styleButton 
                 <Input />
               </Form.Item>
 
-              <Button onClick={handlePayment} type="primary" block>
+              <Button onClick={handlePayment} type="primary" htmlType="submit">
                 Pagar
               </Button>
             </Form>
 
-            {Card.map((item, index) => (
-              <div className='flex' key={index}>
-                <img height="24" width="38" src={item.src} />
-              </div>
-            ))}
+            <div className='flex gap-4 mt-4'>
+              {Card.map((item, index) => (
+                < img height="24" width="38" key={index} src={item.src} />
+              ))}
+            </div>
           </div>
         </Modal>
-      </ConfigProvider>
+      </ConfigProvider >
     </>
   )
 }
