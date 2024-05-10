@@ -4,25 +4,6 @@ import axiosInstance from '../components/axios';
 import { Skeleton, notification } from 'antd';
 import { CopyAds, TypeCopyAds } from '../interface/copyads';
 
-// const Loading = () => {
-//     return (
-//         <>
-//             <div className="tutorial">
-//                 <Skeleton />
-//             </div>
-//             <div className="tutorial">
-//                 <Skeleton />
-//             </div>
-//             <div className="tutorial">
-//                 <Skeleton />
-//             </div>
-//             <div className="tutorial">
-//                 <Skeleton />
-//             </div>
-//         </>
-//     )
-// }
-
 const CopyAI: React.FC<TypeCopyAds> = ({ searchValue }) => {
 
     const [data, setData] = useState<CopyAds[]>([]);

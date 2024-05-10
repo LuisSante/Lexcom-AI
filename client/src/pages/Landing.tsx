@@ -39,7 +39,7 @@ const LandingAI: React.FC<TypeLanding> = ({ searchValue }) => {
         fetchData();
         // Limpieza, en este caso no es necesario, pero si se agregan dependencias, deberían ir aquí
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [searchValue]);
+    }, []);
 
     const problema = data?.prompt && data.prompt.includes('Problema:') && data.prompt.split('Problema:')[1].split('Oferta:')[0];
     const oferta = data?.prompt && data.prompt.includes('Oferta:') && data.prompt.split('Oferta:')[1].split('Beneficio 1:')[0];

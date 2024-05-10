@@ -36,7 +36,7 @@ const OpenAI: React.FC<TypeOpenAI> = ({ searchValue }) => {
         fetchData();
         // Limpieza, en este caso no es necesario, pero si se agregan dependencias, deberían ir aquí
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [searchValue]);
+    }, []);
 
     const introduction = data?.prompt && data.prompt.includes('Click Bait:') && data.prompt.split('Click Bait:')[1].split('Problema:')[0];
     const problema = data?.prompt && data.prompt.includes('Problema:') && data.prompt.split('Problema:')[1].split('Solución:')[0];
