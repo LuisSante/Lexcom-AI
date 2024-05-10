@@ -34,7 +34,9 @@ const Home: React.FC = () => {
                 <TransitionY>
                     <Welcome />
                 </TransitionY>
-                <How_work id="howork" />
+                <TransitionX>
+                    <How_work id="howork" />
+                </TransitionX>
                 <TransitionY>
                     <Services id="services" />
                 </TransitionY>

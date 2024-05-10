@@ -1,4 +1,3 @@
-import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -15,6 +14,61 @@ const testimonials = [
   { id: 9, name: 'Sara V.', text: 'Muy útil. Gracias a su ayuda, pude optimizar mi estrategia de ventas, ofreciendo los productos más demandados con eficacia y aumentando mis ingresos.', stars: 4, photoUrl: 'https://vizualmexico.com.mx/wp-content/uploads/2019/08/titulo-color-2.jpg' },
   { id: 10, name: 'David W.', text: 'Altamente recomendado. Su capacidad para identificar los productos más vendidos combinada con sus herramientas de e-commerce fue clave para el éxito de mi negocio en línea.', stars: 5, photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLbKyH5e2j1gF9hjLTmcckcLfaEYw4BxC1W33NBxJAQYAPDQjDWUa36iRoKdKbFUNJ3dk&usqp=CAU' },
 ];
+
+const containerStyle = {
+  maxWidth: 'calc(100% - 40px)',
+  margin: '0 auto',
+};
+
+const testimonialStyle: React.CSSProperties = {
+  textAlign: 'center',
+  padding: '20px',
+  outline: 'none',
+};
+
+const contentContainerStyle = {
+  display: 'flex',
+  alignItems: 'flex-start',
+  justifyContent: 'flex-start',
+};
+
+const photoContainerStyle: React.CSSProperties = {
+  width: '80px',
+  height: '80px',
+  borderRadius: '50%',
+  overflow: 'hidden',
+  marginRight: '20px',
+};
+
+const photoStyle: React.CSSProperties = {
+  width: '100%',
+  height: 'auto',
+  objectFit: 'cover',
+};
+
+const textContainerStyle = {
+  flex: 1,
+  marginLeft: '20px',
+  marginRight: '20px',
+};
+
+const testimonialTextStyle = {
+  fontSize: '18px',
+  color: '#FFF',
+  marginBottom: '10px',
+};
+
+const testimonialStarsStyle = {
+  color: 'gold',
+  fontSize: '20px',
+};
+
+const testimonialNameStyle = {
+  fontStyle: 'italic',
+  marginTop: '10px',
+  fontWeight: 'bold',
+  color: '#FFF',
+};
 
 const TestimonialCarousel = () => {
   const settings = {
@@ -72,59 +126,6 @@ const TestimonialCarousel = () => {
 };
 
 
-const containerStyle = {
-  maxWidth: 'calc(100% - 40px)',
-  margin: '0 auto',
-};
 
-const testimonialStyle = {
-  textAlign: 'center',
-  padding: '20px',
-  outline: 'none',
-};
-
-const contentContainerStyle = {
-  display: 'flex',
-  alignItems: 'flex-start',
-  justifyContent: 'flex-start',
-};
-
-const photoContainerStyle = {
-  width: '80px',
-  height: '80px',
-  borderRadius: '50%',
-  overflow: 'hidden',
-  marginRight: '20px',
-};
-
-const photoStyle = {
-  width: '100%',
-  height: 'auto',
-  objectFit: 'cover',
-};
-
-const textContainerStyle = {
-  flex: 1,
-  marginLeft: '20px',
-  marginRight: '20px',
-};
-
-const testimonialTextStyle = {
-  fontSize: '18px',
-  color: '#FFF',
-  marginBottom: '10px',
-};
-
-const testimonialStarsStyle = {
-  color: 'gold',
-  fontSize: '20px',
-};
-
-const testimonialNameStyle = {
-  fontStyle: 'italic',
-  marginTop: '10px',
-  fontWeight: 'bold',
-  color: '#FFF',
-};
 
 export default TestimonialCarousel;
