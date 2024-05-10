@@ -23,12 +23,12 @@ const LandingAI: React.FC<TypeLanding> = ({ searchValue }) => {
             const response = await axiosInstance.get<LandingData>(url);
             setData(response.data);
             api.success({
-                message: 'Prompt generado',
+                message: 'Generado',
                 duration: 4
             });
         } catch (err) {
             api.error({
-                message: 'Error al generar prompt',
+                message: 'Error al generar',
                 duration: 4
             });
         } finally {

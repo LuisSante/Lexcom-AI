@@ -32,8 +32,8 @@ const Pay: React.FC = () => {
             <NavbarPricing isScrolling={scrollHeight} />
             <div className='container-page-services'>
                 <TransitionY>
-                    <h1 style={{ marginTop: '100px', textAlign: 'center' }}>Elige el plan de LexCom adecuado para ti</h1>
-                    <p style={{ textAlign: 'center' }}>LexCom te ofrece 5 búsquedas gratuitas al comenzar. <br /> Sin embargo, cuando estas acaben, dispones de opciones de pago aumentar tus búsuedas</p>
+                    <h1 className='mt-[100px] text-center'>Elige el plan de LexCom adecuado para ti</h1>
+                    <p className='text-center'>LexCom te ofrece 5 búsquedas gratuitas al comenzar. <br /> Sin embargo, cuando estas acaben, dispones de opciones de pago aumentar tus búsuedas</p>
                     <ConfigProvider
                         theme={{
                             components: {
@@ -61,7 +61,6 @@ const Pay: React.FC = () => {
                                     </div>
                                     <ul className="pricing-content">
                                         <li>{item.n_search}</li>
-                                        <li>GeoTrend Lex: Recomendación de ventas</li>
                                         <li>AutoFinance Pro: Calculadora de precios</li>
                                         <li>LexIA Determination: Porcentaje de éxito</li>
                                         <li>TikTok TrendFeed: Videos de tiktok</li>
@@ -79,7 +78,9 @@ const Pay: React.FC = () => {
                             ))}
                         </div>
                         <div style={{ marginTop: '40px' }}></div>
-                        <Faq id="faq" />
+                        <div className='mt-20 mb-72'>
+                            <Faq id="faq" />
+                        </div>
                         <About id='about' />
                     </ConfigProvider>
                 </TransitionY>

@@ -38,12 +38,12 @@ const CopyAI: React.FC<TypeCopyAds> = ({ searchValue }) => {
                 const allData = responses.map(response => response.data);
                 setData(allData);
                 api.success({
-                    message: 'Prompt generado',
+                    message: 'Generado',
                     duration: 4
                 });
             } catch (err) {
                 api.error({
-                    message: 'Error al generar prompt',
+                    message: 'Error al generar',
                     duration: 4
                 });
             } finally {

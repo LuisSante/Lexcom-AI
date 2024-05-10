@@ -7,8 +7,7 @@ export const visual_analysis: QuestionType[] = [
   },
   {
     id: "persepcion_unisex",
-    question:
-      "¿Tu producto tiene percepcion de valor alta, es Unisex, NO tiene tallas?",
+    question: "¿Tu producto es Unisex, NO tiene tallas?",
   },
   {
     id: "relevancia",

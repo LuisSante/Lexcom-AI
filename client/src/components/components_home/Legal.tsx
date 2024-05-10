@@ -1,56 +1,41 @@
 import { Modal } from "antd";
 
 export const termofUse = () => {
+
     Modal.info({
         title: 'Términos y Condiciones',
         content: (
-            <div>
-                <h2>Las siguientes condiciones se aplican al uso de nuestros servicios:</h2>
-                <h3>Registro y utilización de cuentas:</h3>
-                <p>
-                    El uso de nuestros servicios requiere necesariamente la creación de una cuenta de usuario con nosotros. El registro es gratuito y cuenta con 2 búsquedas gratuitas. <br />
-                    Usted es responsable de todas las actividades que se produzcan en su cuenta y se compromete a mantener segura su contraseña y a no compartirla con terceros. Si tiene conocimiento de cualquier uso no autorizado de su cuenta, deberá notificárlo inmediatamente.
-                </p>
-                <h3>
-                    Productos digitales:
-                </h3>
-                <p>
-                    Nuestros productos son exclusivamente fichas digitales que pueden utilizarse para utilizar el modelo de nuestra plataforma. Una vez realizado el pago, las búsquedas correspondientes se abonan en su cuenta en tiempo real.
-                </p>
-                <h3>
-                    Condiciones de uso:
-                </h3>
-                <p>
-                    Las búsquedas adquiridos sólo podrán utilizarse para los fines indicados en nuestra plataforma. No está permitido ceder o vender a terceros.
-                </p>
-                <h3>
-                    Expiración de búsquedas y cuentas, así como cancelación de cuentas:
-                </h3>
-                <p>
-                    Con el fin de garantizar la administración y el mantenimiento eficaces de nuestra plataforma, nos reservamos el derecho a eliminar las cuentas y las búsquedas no utilizados tras un periodo de inactividad de al menos un año. Los búsquedas pierden su valor al darse de baja. <br />
-                    Esto se hace con el fin de utilizar nuestros recursos de manera eficiente y para garantizar que los usuarios no puedan reclamar sus búquedas no utilizados después de un período significativo de inactividad. Le recomendamos que acceda regularmente a su cuenta y utilice sus búsquedas.<br />
-                    {/* Usted mismo tiene derecho a eliminar su cuenta en cualquier momento. Tenga en cuenta que al eliminar su cuenta se borrarán irrevocablemente todos los datos almacenados en ella y lo que haya comprado.<br /> */}
-                    {/* Nos reservamos el derecho a eliminar su cuenta y poner fin a su uso de nuestros servicios si incumple estas Condiciones Generales o si tenemos conocimiento de cualquier uso indebido o ilegal de su cuenta. */}
-                </p>
-                <h3>
-                    Cambios y rescisión de servicios:
-
-                </h3>
-                <p>
-                    Nos reservamos el derecho de cambiar o interrumpir nuestros servicios en cualquier momento, incluyendo, pero no limitado a, en el caso de que nuestra cooperación con Google Cloud o cualquier otro proveedor de servicios se termine o debido a circunstancias fuera de nuestro control.<br />
-                    En caso de que se produzca un cambio sustancial en nuestros Servicios o se ponga fin a los mismos, nos esforzaremos por notificárselo con antelación y tomaremos todas las medidas necesarias para minimizar el impacto sobre usted. <br />
-                    Sin embargo, no garantizamos ni aceptamos responsabilidad alguna por cualquier cambio, fallo, interrupción o finalización de nuestros servicios, y no podemos garantizar que podamos proporcionar reembolsos u otras formas de compensación en tales casos.<br />
-                </p>
-                <h3>
-                    Precios y condiciones de pago:
-                </h3>
-
-                <p>
-                    Los precios de nuestros productos se indican en la descripción del producto en la pagina principal.
-                </p>
-            </div>
+            <ol>
+                <li>
+                    <strong>Privacidad:</strong> La IA respeta y protege tus datos personales según las leyes de privacidad aplicables, tus datos son totalmente privados y toda información brindada hacia nosotros.
+                </li>
+                <li>
+                    <strong>Uso Adecuado:</strong> Utilizamos la AI de manera ética y legal. No la utilices para actividades ilegales o dañinas, es importante llevar el buen manejo de nuestro software y sus diversas herramientas.
+                </li>
+                <li>
+                    <strong>Propiedad Intelectual:</strong> Reconoce que la AI y sus resultados pueden estar protegidos por derechos de autor u otras leyes de propiedad intelectual, nuestro modelo de software está registrado y no se puede imitar a menos que sea con nuestra previa autorización.
+                </li>
+                <li>
+                    <strong>Exactitud de la Información:</strong> Aunque la IA hace su mejor esfuerzo para proporcionar información precisa, no garantiza la precisión completa. Siempre verifica la información crítica, es importante que la IA fue creada para acelerar procesos, por ende, iguales para poder usarla, mejor apóyate con tu criterio propio a la par que usas nuestra AI para sacarle el máximo beneficio.
+                </li>
+                <li>
+                    <strong>Responsabilidad:</strong> La responsabilidad del uso de la IA recae en el usuario. La empresa detrás de la IA no se hace responsable por cualquier daño derivado del uso de la misma.
+                </li>
+                <li>
+                    <strong>Actualizaciones y Mantenimiento:</strong> La empresa se reserva el derecho de actualizar y mantener la AI para mejorar su funcionamiento y seguridad.
+                </li>
+                <li>
+                    <strong>Suspensión o Terminación del Servicio:</strong> La empresa puede suspender o terminar el servicio de la AI si se violan los términos y condiciones o por otras razones justificadas.
+                </li>
+                <li>
+                    <strong>Modificaciones en los Términos:</strong> Los términos y condiciones pueden actualizarse ocasionalmente. Es responsabilidad del usuario revisarlos periódicamente.
+                </li>
+                <li>
+                    <strong>Consentimiento:</strong> Al utilizar la AI, aceptas automáticamente estos términos y condiciones.
+                </li>
+            </ol>
         ),
         onOk() { },
-        width: '40%',
+        width: '38%',
     });
 };

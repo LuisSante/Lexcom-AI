@@ -30,6 +30,7 @@ import axiosInstance from '../components/axios';
 import type { TourProps } from 'antd';
 import { UserType } from '../interface/dashboard';
 import { ShowData } from '../components/components_dashboard/ShowData';
+import Courses from './Courses';
 
 const defaultUserData: UserType = {
   id: 0,
@@ -80,12 +81,6 @@ const Dashboard: React.FC = () => {
   };
 
   const steps: TourProps['steps'] = [
-    // {
-    //   title: 'GeoTrend Lex',
-    //   description: 'Explora la pestaña de ranking de ventas en la parte izquierda de tu pantalla. Con esta pestaña podrás conocer si tu producto tiene un buen interés y en que países es el más buscado.',
-    //   placement: 'right',
-    //   target: () => ref1.current,
-    // },
     {
       title: 'Budget Control Pro',
       description: 'Te ofrecemos tres calculadoras para que de esta forma puedas saber que precio debe tener tu producto, el CPA y CPU asi como estadisticas generales.',
@@ -184,12 +179,6 @@ const Dashboard: React.FC = () => {
       icon: <SmileOutlined style={{ color: '#108ee9' }} />,
     });
   };
-
-  useEffect(() => {
-    if (selectedMenu === 'Lexcom Courses') {
-      window.location.href = 'https://home.upcommercelatam.com/login/?wppb_referer_url=https%3A%2F%2Fhome.upcommercelatam.com%2F';
-    }
-  }, [selectedMenu]);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -415,6 +404,7 @@ const Dashboard: React.FC = () => {
               {selectedMenu === 'Prompt Generator Video' && <OpenAI searchValue={searchValue} />}
               {selectedMenu === 'Prompt Generator Copys' && <CopyAds searchValue={searchValue} />}
               {selectedMenu === 'Prompt Generator Landing' && <LandingAI searchValue={searchValue} />}
+              {selectedMenu === 'Lexcom Courses' && <Courses />}
               {selectedMenu === 'Guide Lexcom' && <Tutorial />}
               {selectedMenu === '' && <Tutorial />}
             </Content>

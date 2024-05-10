@@ -46,7 +46,6 @@ const Pricing = () => {
                         <ul className="pricing-content">
                             <li>Primera vez usando: 5 búsquedas gratuitas </li>
                             <li>{item.n_search}</li>
-                            <li>GeoTrend Lex: Recomendación de ventas</li>
                             <li>AutoFinance Pro: Calculadora de precios</li>
                             <li>LexIA Determination: Porcentaje de éxito</li>
                             <li>TikTok TrendFeed: Videos de tiktok</li>

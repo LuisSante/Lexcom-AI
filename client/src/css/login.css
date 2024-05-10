@@ -1,41 +1,43 @@
-.formlogin{
-    margin-top: 10%;
+.formlogin {
+  margin-top: 10%;
 }
 
 .div-148 {
-    align-items: center;
-    border-radius: 15px;
-    align-self: center;
-    display: flex;
-    margin-top: 15px;
-    width: 192px;
-    max-width: 100%;
-    flex-grow: 1;
-    flex-direction: column;
-    padding: 21px 20px;
-    background: linear-gradient(90deg,
-            #9b05cd 10.49%,
-            rgba(37, 203, 243, 0.81) 100%);
-    align-self: center;
-    transition: .4s;
-    color: #fff;
-    text-align: center;
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 120%;
-    text-transform: uppercase;
-    align-self: center;
-    text-wrap: nowrap;
-    justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  align-self: center;
+  display: flex;
+  margin-top: 15px;
+  width: 192px;
+  max-width: 100%;
+  flex-grow: 1;
+  flex-direction: column;
+  padding: 21px 20px;
+  background: linear-gradient(
+    90deg,
+    #9b05cd 10.49%,
+    rgba(37, 203, 243, 0.81) 100%
+  );
+  align-self: center;
+  transition: 0.4s;
+  color: #fff;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 120%;
+  text-transform: uppercase;
+  align-self: center;
+  text-wrap: nowrap;
+  justify-content: center;
 }
 
 .div-149 {
-    color: #ffffff;
-    text-align: center;
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 120%;
-    text-transform: uppercase;
-    align-self: center;
-    text-wrap: nowrap;
+  color: #ffffff;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 120%;
+  text-transform: uppercase;
+  align-self: center;
+  text-wrap: nowrap;
 }

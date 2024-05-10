@@ -121,8 +121,8 @@ const LexcomAI: React.FC = () => {
             // const secondResponse = await axiosInstance.post('lexcom_binary_class/', formData);
             const values = Object.values(data);
             const secondData = {
-                success: (Number(values[0]) + Number(values[1])) / 2,
-                failure: (Number(values[3]) + Number(values[4])) / 2
+                success: ((Number(values[0]) + Number(values[1]))) * 100,
+                failure: ((Number(values[3]) + Number(values[4]))) * 100
             };
             console.log(secondData);
             // const secondValue = (secondData['Éxito'] * 100).toString + '%';
