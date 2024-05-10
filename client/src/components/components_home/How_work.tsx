@@ -2,14 +2,6 @@ import '../../css/styles_home/how_work.css'
 import line_chart from '../../assets/line_chart.svg'
 import shop from '../../assets/shop.svg'
 import kevin_systrom from '../../assets/kevin_systrom.svg'
-import number_one from '../../assets/number_one.svg'
-import number_two from '../../assets/number_two.svg'
-import number_three from '../../assets/number_three.svg'
-
-
-import michael from '../../assets/michael_lexcom.svg'
-import woman from '../../assets/woman.svg'
-import mostache from '../../assets/mostache_lexcom.svg'
 import { ComponentProps } from '../../interface/home'
 import { TransitionX } from '../Section'
 import TestimonialCarousel from './Carrusel'
@@ -63,10 +55,12 @@ const How_work: React.FC<ComponentProps> = ({ id }) => {
             </div>
             <div className="div-section">
               <TransitionX>
-                <div className="div-44">
-                  <div className="div-47">
-                    <div className="div-48" >
-                      <TestimonialCarousel/>
+                <div className="mt-52">
+                  <div className="div-44">
+                    <div className="div-47">
+                      <div className="div-48" >
+                        <TestimonialCarousel />
+                      </div>
                     </div>
                   </div>
                 </div>
