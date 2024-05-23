@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import user, openai, tiktok, lexcomia, usersettings, healthz
+from .views import user, openai, tiktok, lexcomia, usersettings, healthz, payment
 
 from rest_framework_simplejwt import views as jwt_views
 
@@ -50,6 +50,12 @@ urlpatterns = [
     path(r'increment_search_count/', user.IncrementSearchCountView.as_view(),
          name='increment_search_count'),
 
+
+    # Endpoint for user pay
+    path(r'create_preference/', payment.PaymentApiView.as_view(
+        {'post': 'create_preference'}), name="create_payment"),
+
     # Endpoint for test
     path(r'test/', healthz.TestView.as_view(), name='healthz')
+
 ]

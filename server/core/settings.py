@@ -21,8 +21,6 @@ load_dotenv()
 DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')
 PASSWORD_GMAIL = os.getenv('PASSWORD_GMAIL')
 PASSWORD_APP_LEXCOM_SUPPORT = os.getenv('PASSWORD_APP_LEXCOM_SUPPORT')
-# PASSWORD_INSTANCE = os.getenv('PASSWORD_INSTANCE')
-# PASSWORD_DATABASE = os.getenv('PASSWORD_DATABASE')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,7 +33,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# True in developer and False in production
+DEBUG = True
+
 
 ALLOWED_HOSTS = ['*']
 RENDER_EXTERNAL = os.environ.get('RENDER_EXTERNAL')
@@ -126,14 +126,14 @@ DATABASES = {
 # }
 
 # DATABASES = {
-    # "default": {
-        # "ENGINE": "django.db.backends.postgresql_psycopg2",
-        # "HOST": os.environ.get("DB_HOST", "172.17.0.1"),
-        # "PORT": os.environ.get("DB_PORT", "5432"),
-        # "NAME": os.environ.get("DB_NAME", "lexcom_db"),
-        # "USER": os.environ.get("DB_USER", "lexcom"),
-        # "PASSWORD": os.environ.get("DB_PASSWORD", f"{DATABASE_PASSWORD}"),
-    # }
+# "default": {
+# "ENGINE": "django.db.backends.postgresql_psycopg2",
+# "HOST": os.environ.get("DB_HOST", "172.17.0.1"),
+# "PORT": os.environ.get("DB_PORT", "5432"),
+# "NAME": os.environ.get("DB_NAME", "lexcom_db"),
+# "USER": os.environ.get("DB_USER", "lexcom"),
+# "PASSWORD": os.environ.get("DB_PASSWORD", f"{DATABASE_PASSWORD}"),
+# }
 # }
 
 
@@ -183,6 +183,8 @@ STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_MODELS_IA = os.path.join(BASE_DIR, 'api')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+PUBLIC_KEY = os.getenv("DEVELOPER_PUBLIC_KEY")
+SECRET_ACCESS_KEY = os.getenv("DEVELOPER_ACCESS_TOKEN")
 
 if not DEBUG:
     # Tell Django to copy statics to the `staticfiles` directory
@@ -192,6 +194,8 @@ if not DEBUG:
     # and creating unique names for each version so they can safely be cached forever.
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     STATIC_MODELS_IA = os.path.join(BASE_DIR, 'api')
+    PUBLIC_KEY = os.getenv("PRODUCTION_PUBLIC_KEY")
+    SECRET_ACCESS_KEY = os.getenv("PRODUCTION_ACCESS_TOKEN")
 
 AUTH_USER_MODEL = "core.User"
 
@@ -210,8 +214,7 @@ SIMPLE_JWT = {
     "JWK_URL": None,
     "LEEWAY": 0,
 
-    "AUTH_HEADER_TYPES": ("JWT",),
-    "AUTH_HEADER_TYPES": ("JWT",),
+    "AUTH_HEADER_TYPES": ("Bearer",),
     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
     "USER_ID_FIELD": "id",
     "USER_ID_CLAIM": "user_id",

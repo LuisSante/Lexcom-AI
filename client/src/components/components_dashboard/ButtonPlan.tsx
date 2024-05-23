@@ -1,64 +1,112 @@
-import { Button, ConfigProvider, Form, Input, Modal, notification } from 'antd';
+import { Button, ConfigProvider, Modal } from 'antd';
 import React, { useState } from 'react'
 import { ButtonPlanType, PayType } from '../../interface/dashboard';
-import axiosInstance from '../axios';
-import { useNavigate } from 'react-router-dom';
+// import axiosInstance from '../axios';
+import axios from 'axios';
+// import { useNavigate } from 'react-router-dom';
 import { Card } from '../logic/components_dashboard/CardAccept';
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+
 
 export const ButtonPlan: React.FC<ButtonPlanType> = ({ plan, value, styleButton }) => {
-  const navigate = useNavigate()
-  const [form] = Form.useForm();
+  initMercadoPago('TEST-1a4ae6c1-f284-46ff-9084-9385b30b0bbd', {
+    locale: 'es-PE'
+  });
+
+  // const navigate = useNavigate()
+  // const [form] = Form.useForm();
   const [buttonModalVisible, setButtonModalVisible] = useState(false);
-  const [api, contextHolder] = notification.useNotification();
+  // const [api, contextHolder] = notification.useNotification();
+  // const [showMercadoPagoButton, setShowMercadoPagoButton] = useState(false);
+  const [preferenceId, setPreferenceId] = useState(null);
 
   const handleRegisterModalCancel = () => {
     setButtonModalVisible(false);
+    // setShowMercadoPagoButton(false)
   };
 
-  const handlePayment = () => {
-    axiosInstance.post('update_plan/', { new_plan: plan })
-      .then(response => {
-        handleRegisterModalCancel();
-        console.log(response.data);
-        api.success({
-          message: 'Compra realizada con éxito',
-          description: 'Espere un momento por favor, actualizando...',
-          duration: 3
-        });
-        setTimeout(() => {
-          navigate('/dashboard');
-        }, 3000); // 3000 milisegundos = 3 segundos
-      })
-      .catch(error => {
-        console.error('Error al realizar la compra:', error);
-        api.error({
-          message: 'Error al realizar la compra',
-          duration: 3
-        });
+  // const handlePayment = () => {
+  //   setShowMercadoPagoButton(true);
+  // }
+
+  const createPreference = async () => {
+    try {
+      const response = await axios.post("http://localhost:8000/api/v1/create_preference/", {
+        title: plan,
+        quantity: 1,
+        price: value,
       });
-  };
+
+      console.log('response', response)
+
+      const id = response.data;
+
+      console.log(id)
+      return id;
+    }
+
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handleBuy = async () => {
+    const id = await createPreference();
+    console.log(id);
+    if (id) {
+      setPreferenceId(id);
+    }
+  }
+
+  const handleMercadoPagoPayment = () => {
+    // Aquí puedes agregar la lógica para procesar el pago con Mercado Pago
+    console.log('Procesando pago con Mercado Pago');
+  }
+
+  // const handlePayment = () => {
+  //   axiosInstance.post('update_plan/', { new_plan: plan })
+  //     .then(response => {
+  //       handleRegisterModalCancel();
+  //       console.log(response.data);
+  //       api.success({
+  //         message: 'Compra realizada con éxito',
+  //         description: 'Espere un momento por favor, actualizando...',
+  //         duration: 3
+  //       });
+  //       setTimeout(() => {
+  //         navigate('/dashboard');
+  //       }, 3000); // 3000 milisegundos = 3 segundos
+  //     })
+  //     .catch(error => {
+  //       console.error('Error al realizar la compra:', error);
+  //       api.error({
+  //         message: 'Error al realizar la compra',
+  //         duration: 3
+  //       });
+  //     });
+  // };
 
   const handleButtonClick = () => {
     setButtonModalVisible(true);
   };
 
-  const onFinish = async (values: PayType) => {
-    try {
-      console.log(values);
-    }
+  // const onFinish = async (values: PayType) => {
+  //   try {
+  //     console.log(values);
+  //   }
 
-    catch (err) {
-      console.log('error');
-    }
-  };
+  //   catch (err) {
+  //     console.log('error');
+  //   }
+  // };
 
-  const onFinishFailed = () => {
-    console.log('errorr');
-  };
+  // const onFinishFailed = () => {
+  //   console.log('errorr');
+  // };
 
   return (
     <>
-      {contextHolder}
+      {/* {contextHolder} */}
       <ConfigProvider
         theme={{
           components: {
@@ -86,7 +134,7 @@ export const ButtonPlan: React.FC<ButtonPlanType> = ({ plan, value, styleButton 
             <p>Tu pedido: {plan.charAt(0).toUpperCase() + plan.slice(1)} Plan</p>
             <p>Total: ${value}</p>
 
-            <Form
+            {/* <Form
               form={form}
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
@@ -148,11 +196,15 @@ export const ButtonPlan: React.FC<ButtonPlanType> = ({ plan, value, styleButton 
                 <Input />
               </Form.Item>
 
-              <Button onClick={handlePayment} type="primary" htmlType="submit">
+            </Form> */}
+            <div className='flex flex-col gap-4'  >
+              <Button onClick={handleBuy} type="primary" htmlType="submit">
                 Pagar
               </Button>
-            </Form>
-
+              {preferenceId && (
+                <Wallet initialization={{ preferenceId: preferenceId }} />
+              )}
+            </div>
             <div className='flex gap-4 mt-4'>
               {Card.map((item, index) => (
                 < img height="24" width="38" key={index} src={item.src} />
