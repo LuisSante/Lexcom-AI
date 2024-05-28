@@ -54,6 +54,8 @@ urlpatterns = [
     # Endpoint for user pay
     path(r'create_preference/', payment.PaymentApiView.as_view(
         {'post': 'create_preference'}), name="create_payment"),
+    path(r'webhook/', payment.WebHookNotifications.as_view(
+        {'post': 'webhook_notifications'}), name="webhook_notifications"),
 
     # Endpoint for test
     path(r'test/', healthz.TestView.as_view(), name='healthz')

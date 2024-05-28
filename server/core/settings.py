@@ -183,8 +183,8 @@ STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_MODELS_IA = os.path.join(BASE_DIR, 'api')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-PUBLIC_KEY = os.getenv("DEVELOPER_PUBLIC_KEY")
 SECRET_ACCESS_KEY = os.getenv("DEVELOPER_ACCESS_TOKEN")
+# SECRET_ACCESS_KEY = os.getenv("PRODUCTION_ACCESS_TOKEN")
 
 if not DEBUG:
     # Tell Django to copy statics to the `staticfiles` directory
@@ -194,7 +194,6 @@ if not DEBUG:
     # and creating unique names for each version so they can safely be cached forever.
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     STATIC_MODELS_IA = os.path.join(BASE_DIR, 'api')
-    PUBLIC_KEY = os.getenv("PRODUCTION_PUBLIC_KEY")
     SECRET_ACCESS_KEY = os.getenv("PRODUCTION_ACCESS_TOKEN")
 
 AUTH_USER_MODEL = "core.User"

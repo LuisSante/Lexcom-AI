@@ -10,6 +10,7 @@ import Pay from './components/components_dashboard/Pay';
 import Success from './pages/Success';
 import Failure from './pages/Failure';
 import Pendings from './pages/Pending';
+import Notifications from './pages/Notifications';
 
 const App: React.FC = () => {
 
@@ -27,6 +28,7 @@ const App: React.FC = () => {
         <Route path="/success" element={<Success />} />
         <Route path="/failure" element={<Failure />} />
         <Route path="/pending" element={<Pendings />} />
+        <Route path="/notification" element={<Notifications />} />
       </Routes>
     </BrowserRouter>
   )

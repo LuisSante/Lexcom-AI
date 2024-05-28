@@ -30,7 +30,7 @@ class User(AbstractUser):
 
     def max_searches(self):
         return {
-            'free': 5,
+            'free': 8,
             'standard': 35,
             'business': 50,
             'premium': 100
