@@ -56,7 +56,8 @@ urlpatterns = [
         {'post': 'create_preference'}), name="create_payment"),
     path(r'webhook/', payment.WebHookNotifications.as_view(
         {'post': 'webhook_notifications'}), name="webhook_notifications"),
-
+    path(r'check_payment_status/',
+         payment.CheckPaymentStatusView.as_view(), name="check_payment_status"),
     # Endpoint for test
     path(r'test/', healthz.TestView.as_view(), name='healthz')
 

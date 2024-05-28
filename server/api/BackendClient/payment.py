@@ -34,9 +34,9 @@ class PaymentApiClient():
         preference_data = {
             "items": [item],
             "back_urls": {
-                "success": "https://lexcom.tech/" + "",
-                "failure": "https://lexcom.tech/" + "",
-                "pending": "https://lexcom.tech/" + ""
+                "success": "https://lexcom.tech/dashboard" + "",
+                "failure": "https://lexcom.tech/dashboard" + "",
+                "pending": "https://lexcom.tech/dashboard" + ""
             },
             "auto_return": "approved",
             "notification_url": url + "api/v1/webhook/"

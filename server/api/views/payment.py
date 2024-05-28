@@ -3,7 +3,8 @@ from api.BackendClient.payment import PaymentApiClient, NotificationApiClient
 from django.conf import settings
 from rest_framework import viewsets
 from rest_framework.response import Response
-from rest_framework import status
+from core.models import User
+from rest_framework.views import APIView
 
 access_token = settings.SECRET_ACCESS_KEY
 
@@ -36,22 +37,44 @@ class WebHookNotifications(viewsets.ViewSet):
 
     def webhook_notifications(self, request):
         notification = request.query_params
-        print("NOTIFICACION", notification)
+        print(notification)
         if notification.get('type') == 'payment':
             payment_id = notification.get('data.id')
             client_notification = self.get_notification_client()
             notification_res = client_notification.get_payment_notification(
                 payment_id)
-            # print(notification_res)
-            return Response(payment_id, status=notification_res['status'])
-        else:
-            return Response({'prev': 'tramite en proceso'}, status=status.HTTP_200_OK)
+            print('notification: ', notification_res)
+            status = notification_res['response']['status']
+            status_detail = notification_res['response']['status_detail']
+            payment_status, created = User.objects.get_or_create(
+                payment_id=payment_id,
+                defaults={'status': status, 'status_detail': status_detail}
+            )
 
-        #     response = notification_res['response']['status']
-        #     if (status == 'approved'):
-        #         print(status)
-        #         return Response({'state': status}, status=200)
-        #     else:
-        #         return Response({'state': 'error', 'message': 'Falla en el pago'}, status=500)
-        # else:
-        #     return Response({'prev': 'tramite en proceso'})
+            if not created:
+                payment_status.status = status
+                payment_status.status_detail = status_detail
+                payment_status.save()
+
+                return Response(payment_id, status=notification_res['status'])
+        else:
+            return Response({'message': 'In proccess'})
+
+
+class CheckPaymentStatusView(APIView):
+    def get(self, request):
+        payment_id = request.query_params.get('payment_id')
+        if payment_id:
+            try:
+                payment_status = User.objects.get(
+                    payment_id=payment_id)
+                status = payment_status.status
+                status_detail = payment_status.status_detail
+            except User.DoesNotExist:
+                status = 'pending'
+                status_detail = None
+        else:
+            status = 'pending'
+            status_detail = None
+
+        return Response({'status': status, 'status_detail': status_detail})
