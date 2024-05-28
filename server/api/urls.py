@@ -21,6 +21,7 @@ urlpatterns = [
 
     # Update perfil
     path(r'update/', usersettings.UserDetailView.as_view(), name='settings'),
+    path(r'get_email/', usersettings.UserEmailView.as_view(), name='emailview'),
 
     # Endpoints for  OpenAI
     path(r'openai/<str:id>', openai.OpenAIApiView.as_view(
@@ -54,8 +55,14 @@ urlpatterns = [
     # Endpoint for user pay
     path(r'create_preference/', payment.PaymentApiView.as_view(
         {'post': 'create_preference'}), name="create_payment"),
+    path(r'cache/', payment.WebHookNotifications.as_view(
+        {'post': 'get_email'}), name="cache"),
     path(r'webhook/', payment.WebHookNotifications.as_view(
-        {'post': 'webhook_notifications'}), name="webhook_notifications"),
+        {'post': 'webhook_notifications'}), name="webhook"),
+    path(r'user_status/', payment.UserStatusView.as_view(),
+         name="user_status"),
+    path(r'reset_status/', payment.ResetPaymentStatusView.as_view(),
+         name="reset_status"),
 
     # Endpoint for test
     path(r'test/', healthz.TestView.as_view(), name='healthz')

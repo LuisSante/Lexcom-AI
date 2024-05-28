@@ -254,7 +254,7 @@ const Dashboard: React.FC = () => {
             onSearch={(value) => {
               if (value.trim() === '') {
                 emptyNotification();
-              } else if (searchCount == maxSearches) {
+              } else if (searchCount >= maxSearches) {
                 navigate('/pricing')
               } else {
                 setSearchValue(value);

@@ -1,22 +1,22 @@
-import { Button, ConfigProvider, Modal } from 'antd';
+import { Button, ConfigProvider, Modal, notification } from 'antd';
 import React, { useState } from 'react'
 import { ButtonPlanType } from '../../interface/dashboard';
 import { Card } from '../logic/components_dashboard/CardAccept';
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import { initMercadoPago } from '@mercadopago/sdk-react'
 import axiosInstance from '../axios';
+import { useNavigate } from 'react-router-dom';
 
 
 export const ButtonPlan: React.FC<ButtonPlanType> = ({ plan, value, styleButton }) => {
 
   const public_key = import.meta.env.VITE_PUBLIC_KEY;
+  const navigate = useNavigate();
+  const [buttonModalVisible, setButtonModalVisible] = useState(false);
+  const [api, contextHolder] = notification.useNotification();
 
   initMercadoPago(public_key, {
     locale: 'es-PE'
   });
-
-
-  const [buttonModalVisible, setButtonModalVisible] = useState(false);
-  // const [preferenceId, setPreferenceId] = useState(null);
 
   const handleRegisterModalCancel = () => {
     setButtonModalVisible(false);
@@ -29,33 +29,22 @@ export const ButtonPlan: React.FC<ButtonPlanType> = ({ plan, value, styleButton 
         quantity: 1,
         price: value,
       });
-
-      // const id = response.data;
+      const responseData = await axiosInstance.get("get_email/");
+      const email = responseData.data.email;
       const data = response.data;
-
       const sandbox = data.sandbox_init_point;
-      // const sandbox = data.init_point;
-      // window.location.href = sandbox;
       window.open(sandbox);
-      // return id;
 
-      try {
-        const response = await axiosInstance.post("webhook/");
-        console.log('datos', response.data);
-        // const status = response.data.state;
-        // console.log('estado', status);
+      await axiosInstance.post("cache/", { 'email': email });
+      await axiosInstance.post("webhook/");
 
-        // if (status === 'approved') {
-        //   // window.location.href = "https://www.youtube.com/watch?v=QqiDandkcBY";
-        //   console.log("estadooooo aprovadoooooo")
-        // }
-        // console.log("TARJETAZOO", response);
+      const responseStatus = await axiosInstance.post("user_status/", { 'email': email });
+      const status = responseStatus.data.status;
+      console.log(status);
+      if (status === 'approved') {
+        handlePayment();
+        await axiosInstance.post("reset_status/", { 'email': email });
       }
-
-      catch {
-        console.log("algo")
-      }
-
     }
 
     catch (error) {
@@ -63,63 +52,36 @@ export const ButtonPlan: React.FC<ButtonPlanType> = ({ plan, value, styleButton 
     }
   }
 
-  // const handleBuy = async () => {
-  //   const id = await createPreference();
-  //   console.log(id);
-  //   if (id) {
-  //     setPreferenceId(id);
-  //   }
-  // }
-
-  // const handleMercadoPagoPayment = () => {
-  //   // Aquí puedes agregar la lógica para procesar el pago con Mercado Pago
-  //   console.log('Procesando pago con Mercado Pago');
-  // }
-
-  // const handlePayment = () => {
-  //   axiosInstance.post('update_plan/', { new_plan: plan })
-  //     .then(response => {
-  //       handleRegisterModalCancel();
-  //       console.log(response.data);
-  //       api.success({
-  //         message: 'Compra realizada con éxito',
-  //         description: 'Espere un momento por favor, actualizando...',
-  //         duration: 3
-  //       });
-  //       setTimeout(() => {
-  //         navigate('/dashboard');
-  //       }, 3000); // 3000 milisegundos = 3 segundos
-  //     })
-  //     .catch(error => {
-  //       console.error('Error al realizar la compra:', error);
-  //       api.error({
-  //         message: 'Error al realizar la compra',
-  //         duration: 3
-  //       });
-  //     });
-  // };
+  const handlePayment = () => {
+    axiosInstance.post('update_plan/', { new_plan: plan })
+      .then(response => {
+        handleRegisterModalCancel();
+        console.log(response.data);
+        api.success({
+          message: 'Compra realizada con éxito',
+          description: 'Espere un momento por favor, actualizando...',
+          duration: 3
+        });
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 3000); // 3000 milisegundos = 3 segundos
+      })
+      .catch(error => {
+        console.error('Error al realizar la compra:', error);
+        api.error({
+          message: 'Error al realizar la compra',
+          duration: 3
+        });
+      });
+  };
 
   const handleButtonClick = () => {
     setButtonModalVisible(true);
   };
 
-  // const onFinish = async (values: PayType) => {
-  //   try {
-  //     console.log(values);
-  //   }
-
-  //   catch (err) {
-  //     console.log('error');
-  //   }
-  // };
-
-  // const onFinishFailed = () => {
-  //   console.log('errorr');
-  // };
-
   return (
     <>
-      {/* {contextHolder} */}
+      {contextHolder}
       <ConfigProvider
         theme={{
           components: {
