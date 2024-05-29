@@ -14,15 +14,20 @@ class RegisterView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-class HomeView(APIView): 
+
+
+class HomeView(APIView):
     permission_classes = (IsAuthenticated, )
-    def post(self, request):     
-        content = {'message': 'Welcome to the JWT  Authentication page using React Js and Django!'}
+
+    def post(self, request):
+        content = {
+            'message': 'Welcome to the JWT  Authentication page using React Js and Django!'}
         return Response(content)
+
 
 class LogoutView(APIView):
     permission_classes = (IsAuthenticated, )
+
     def post(self, request):
         try:
             refresh_token = request.data["refresh_token"]
@@ -31,6 +36,7 @@ class LogoutView(APIView):
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
 
 class UserInfoView(APIView):
     permission_classes = (IsAuthenticated, )
@@ -47,11 +53,12 @@ class UserInfoView(APIView):
         }
         return Response(data)
 
+
 class UpdateSearchPlanView(APIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
-        new_plan = request.data.get('new_plan')
+        new_plan = request.data.get('suscription')
         if new_plan not in ['standard', 'business', 'premium']:
             return Response({'error': 'Invalid search plan'}, status=400)
 
@@ -64,12 +71,13 @@ class UpdateSearchPlanView(APIView):
 
         return Response({'message': 'Search plan updated successfully', 'new_searches_allowed': user.searches_allowed, 'current_search_count': user.search_count}, status=200)
 
+
 class IncrementSearchCountView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         user = request.user
         user.search_count += 1
-        user.progress_count = (user.search_count/ user.searches_allowed) * 100
-        user.save() 
+        user.progress_count = (user.search_count / user.searches_allowed) * 100
+        user.save()
         return Response({'new_search_count': user.search_count, 'new_progress_count': user.progress_count})

@@ -53,16 +53,18 @@ const Welcome = () => {
         >
             <div className="welcome-container">
                 <div className="phrase-up">
-                    Encuentra fácilmente tu
+                    Determina la probabilidad
                     <br />
-                    Producto Ganador
+                    de éxito de productos ganadores
                 </div>
                 <img src={welcome} className='welcome-logo' alt="welcome" />
                 <div className="phrase-down">
-                    Potencia tus ventas con nuestra IA de productos ganadores:
+                    Potencia tu negocio y ahórrate miles de dólares y mucho tiempo a la hora de testear
                     <br />
-                    ¡Descubre el éxito en el comercio electrónico de manera confiable!
+                    malos productos y ten más asertividad con LexCom asi logrando tener más precisión.
                 </div>
+
+
                 <div className={clicked ? "welcome-button-container active" : "welcome-button-container"}>
                     <Button className="welcome-register-btn" onClick={showRegisterModal}>Conoce Más!</Button>
                     <Button className="welcome-login-btn" onClick={showLoginModal}>Vamos</Button>

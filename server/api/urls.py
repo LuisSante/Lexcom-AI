@@ -21,7 +21,6 @@ urlpatterns = [
 
     # Update perfil
     path(r'update/', usersettings.UserDetailView.as_view(), name='settings'),
-    path(r'get_email/', usersettings.UserEmailView.as_view(), name='emailview'),
 
     # Endpoints for  OpenAI
     path(r'openai/<str:id>', openai.OpenAIApiView.as_view(
@@ -38,8 +37,6 @@ urlpatterns = [
     # Endpoint for predictions Lexcom
     path(r'lexcom_five_class/', lexcomia.LexcomIA_ApiView.as_view(
         {'post': 'probability_percentage'}), name="probability_percentage"),
-    # path(r'lexcom_binary_class/', lexcomia.LexcomIA_ApiView.as_view(
-    #     {'post': 'probability_success'}), name="probability_success"),
 
     # Endpoint for reset password
     path(r'password_reset/', include('django_rest_passwordreset.urls',
@@ -53,16 +50,13 @@ urlpatterns = [
 
 
     # Endpoint for user pay
+    path(r'get_email/', usersettings.UserEmailView.as_view(), name='get_email'),
     path(r'create_preference/', payment.PaymentApiView.as_view(
-        {'post': 'create_preference'}), name="create_payment"),
-    path(r'cache/', payment.WebHookNotifications.as_view(
-        {'post': 'get_email'}), name="cache"),
-    path(r'webhook/', payment.WebHookNotifications.as_view(
-        {'post': 'webhook_notifications'}), name="webhook"),
-    path(r'user_status/', payment.UserStatusView.as_view(),
-         name="user_status"),
-    path(r'reset_status/', payment.ResetPaymentStatusView.as_view(),
-         name="reset_status"),
+        {'post': 'create_preference'}), name="create_preference"),
+    path(r'cache/', payment.CurrentPlan.as_view(
+        {'post': 'cache'}), name="cache"),
+    path(r'send_plan/', payment.CurrentPlan.as_view(
+        {'post': 'send_plan'}), name="send_plan"),
 
     # Endpoint for test
     path(r'test/', healthz.TestView.as_view(), name='healthz')

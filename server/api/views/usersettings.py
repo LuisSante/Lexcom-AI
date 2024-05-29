@@ -10,7 +10,6 @@ User = get_user_model()  # Obtén el modelo de usuario personalizado
 
 
 class UserDetailView(APIView):
-    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -49,8 +48,7 @@ class UserDetailView(APIView):
 
 
 class UserEmailView(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         try:

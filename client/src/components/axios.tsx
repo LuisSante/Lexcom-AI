@@ -13,7 +13,7 @@ const axiosInstance = axios.create({
 	timeout: 300000,
 	headers: {
 		Authorization: localStorage.getItem('access_token')
-			? 'Bearer ' + localStorage.getItem('access_token')
+			? 'JWT ' + localStorage.getItem('access_token')
 			: null,
 		'Content-Type': 'application/json',
 		accept: 'application/json',
@@ -74,11 +74,11 @@ axiosInstance.interceptors.response.use(
 								localStorage.setItem('refresh_token', response.data.refresh);
 
 								axiosInstance.defaults.headers['Authorization'] =
-									'Bearer ' + response.data.access;
+									'JWT ' + response.data.access;
 								originalRequest.headers =
 									originalRequest.headers || {}; // Ensure headers is defined
 								originalRequest.headers['Authorization'] =
-									'Bearer ' + response.data.access;
+									'JWT ' + response.data.access;
 
 								return axiosInstance(originalRequest);
 							})

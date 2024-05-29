@@ -1,15 +1,11 @@
 import mercadopago
 from django.conf import settings
 
-# idempotency_key = str(uuid.uuid4())
-# request_options = mercadopago.config.RequestOptions()
-# request_options.custom_headers = {
-#     'x-idempotency-key': idempotency_key
-# }
-
-url = "https://7276-181-176-72-46.ngrok-free.app/"
+# url = "https://7276-181-176-72-46.ngrok-free.app/api/v1/webhook/"
+url_notification = "http://localhost:5173/pricing"
 if not settings.DEBUG:
-    url = "https://nginxpm.lexcom.tech/api/v1/"
+    # url = "https://nginxpm.lexcom.tech/api/v1/webhook"
+    url_notification = "https://lexcom.tech/pricing"
 
 
 class PaymentApiClient():
@@ -34,12 +30,12 @@ class PaymentApiClient():
         preference_data = {
             "items": [item],
             "back_urls": {
-                "success": "https://lexcom.tech/" + "",
-                "failure": "https://lexcom.tech/" + "",
-                "pending": "https://lexcom.tech/" + ""
+                "success": url_notification,
+                "failure": url_notification,
+                "pending": url_notification
             },
             "auto_return": "approved",
-            "notification_url": url + "api/v1/webhook/"
+            # "notification_url": url
         }
 
         preference_response = client.preference().create(preference_data)

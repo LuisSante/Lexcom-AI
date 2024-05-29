@@ -44,7 +44,7 @@ const Pricing = () => {
                             </div>
                         </div>
                         <ul className="pricing-content">
-                            <li>Primera vez usando: 5 búsquedas gratuitas </li>
+                            <li>Primera vez usando: 8 búsquedas gratuitas </li>
                             <li>{item.n_search}</li>
                             <li>AutoFinance Pro: Calculadora de precios</li>
                             <li>LexIA Determination: Porcentaje de éxito</li>

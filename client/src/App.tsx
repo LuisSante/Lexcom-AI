@@ -6,16 +6,11 @@ import RecoverPassword from './pages/RecoverPassword';
 import ResetPassword from './pages/ResetPassword';
 import Settings from './pages/Settings';
 import Healtz from './pages/Healtz';
-import Pay from './components/components_dashboard/Pay';
-import Success from './pages/Success';
-import Failure from './pages/Failure';
-import Pendings from './pages/Pending';
-import Notifications from './pages/Notifications';
+import PayWrapper from './pages/PayWrapper';
 
 const App: React.FC = () => {
 
   return (
-
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -23,12 +18,8 @@ const App: React.FC = () => {
         <Route path="/recoverpassword" element={<RecoverPassword />} />
         <Route path="/reset-password-form/:token" element={<ResetPassword />} />
         <Route path="/settings" element={<Settings />} />
-        <Route path="/pricing" element={<Pay />} />
+        <Route path="/pricing" element={<PayWrapper />} />
         <Route path="/test" element={<Healtz />} />
-        <Route path="/success" element={<Success />} />
-        <Route path="/failure" element={<Failure />} />
-        <Route path="/pending" element={<Pendings />} />
-        <Route path="/notification" element={<Notifications />} />
       </Routes>
     </BrowserRouter>
   )

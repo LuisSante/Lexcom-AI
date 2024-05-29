@@ -23,11 +23,6 @@ class User(AbstractUser):
     search_count = models.IntegerField(default=0)
     progress_count = models.IntegerField(default=0)
     searches_allowed = models.IntegerField(default=2)
-    payment_id = models.CharField(
-        max_length=100, null=True, blank=True, unique=True)
-    payment_status = models.CharField(max_length=20, null=True, blank=True)
-    payment_status_detail = models.CharField(
-        max_length=50, null=True, blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
