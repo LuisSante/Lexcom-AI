@@ -44,7 +44,6 @@ import UploadProduct from '../components/components_lexcomai/UploadProduct';
 import { Grid } from '../components/components_lexcomai/Grid';
 import { CircleLoader } from '../components/components_lexcomai/CircleLoader';
 import CupIcon from '../assets/cup.svg'
-import WardIcon from '../assets/wardicon.svg'
 
 const LexcomAI: React.FC = () => {
     const [initialFormValues] = useState<attibute_bool>({
@@ -339,10 +338,7 @@ const LexcomAI: React.FC = () => {
                             <div className="flex justify-around">
                                 <div className="justify-center items-center w-1/4 text-center">
                                     <img className="w-20" src={CupIcon} alt="CupIcon" />
-                                    <div className='flex'>
-                                        <Pie data={secondChartData} />
-                                        <img className="w-20" src={WardIcon} alt="WardIcon" />
-                                    </div>
+                                    <Pie data={secondChartData} />
                                     <span className="mt-2">{secondChartData.datasets[0].data[0].toFixed(2)} % de Éxito</span>
                                 </div>
                             </div>

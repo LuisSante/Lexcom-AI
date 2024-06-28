@@ -108,3 +108,4 @@ typing-extensions==4.10.0
     #   pydantic-core
 urllib3==2.2.1
     # via requests
+mercadopago==2.2.1

@@ -38,7 +38,7 @@ export const ButtonPlan: React.FC<ButtonPlanType> = ({ plan, value, styleButton 
         price: value,
       });
       const data = response.data;
-      const sandbox = data.sandbox_init_point;
+      const sandbox = data.init_point;
       window.location.href = sandbox;
     }
 
