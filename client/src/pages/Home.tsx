@@ -28,30 +28,32 @@ const Home: React.FC = () => {
 
 
     return (
-        <div className='position-pages'>
-            <Navbar isScrolling={scrollHeight} />
-            <div>
-                <TransitionY>
-                    <Welcome />
-                </TransitionY>
-                <TransitionX>
-                    <How_work id="howork" />
-                </TransitionX>
-                <TransitionY>
-                    <Services id="services" />
-                </TransitionY>
-                <TransitionX>
-                    <ForYou />
-                </TransitionX>
-                <TransitionY>
-                    <Faq id="faq"></Faq>
-                </TransitionY>
-                <TransitionX>
-                    <Amazing />
-                </TransitionX>
-                <TransitionY>
-                    <About id='about' />
-                </TransitionY>
+        <div className='ml-[10px]'>
+            <div className='position-pages'>
+                <Navbar isScrolling={scrollHeight} />
+                <div>
+                    <TransitionY>
+                        <Welcome />
+                    </TransitionY>
+                    <TransitionX>
+                        <How_work id="howork" />
+                    </TransitionX>
+                    <TransitionY>
+                        <Services id="services" />
+                    </TransitionY>
+                    <TransitionX>
+                        <ForYou />
+                    </TransitionX>
+                    <TransitionY>
+                        <Faq id="faq"></Faq>
+                    </TransitionY>
+                    <TransitionX>
+                        <Amazing />
+                    </TransitionX>
+                    <TransitionY>
+                        <About id='about' />
+                    </TransitionY>
+                </div>
             </div>
         </div>
     )
