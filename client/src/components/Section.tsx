@@ -31,7 +31,7 @@ export const TransitionX = ({ children }: { children: ReactNode }) => {
         transform: isInView ? "none" : "translateX(-100px)",
         opacity: isInView ? 1 : 0,
         // transition: "transform 1.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s, opacity 1.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
-        transition: "all 1.9s cubic-bezier(0.17, 0.55, 0.55, 1) 1.5s"
+        transition: "all 1.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s"
       }}
     >
       {children}
