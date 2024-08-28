@@ -5,10 +5,7 @@ import '../css/recoverpassword.css'
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/lexcom.svg';
 import { axiosInstancewithoutPermissions } from '../components/axios';
-
-interface FieldType {
-    email: string
-}
+import { RecoverType }  from '../interface/recover'
 
 const RecoverPassword = () => {
     const [form] = Form.useForm();
@@ -19,7 +16,7 @@ const RecoverPassword = () => {
         navigate('/');
     }
 
-    const onFinish = async (email: FieldType) => {
+    const onFinish = async (email: RecoverType) => {
         const url = 'password_reset/'
         axiosInstancewithoutPermissions.post(url, email)
             .then(
@@ -84,7 +81,7 @@ const RecoverPassword = () => {
                                     initialValues={{ remember: true }}
                                     autoComplete="off"
                                 >
-                                    <Form.Item<FieldType>
+                                    <Form.Item<RecoverType>
                                         name="email"
                                         rules={[
                                             {

@@ -4,12 +4,11 @@ import Precio_del_Producto from '../components/components_calculator/Calculator_
 import Tutorial from '../pages/Tutorial';
 import '../css/Dashboard.css';
 import React, { useEffect, useRef, useState } from 'react';
-import { Avatar, Space, Input, Button, notification, Tour, Drawer, Row, Col, Divider, Modal, Radio } from 'antd';
+import { Avatar, Space, Input, Button, notification, Tour, Divider, Drawer } from 'antd';
 import { Dropdown, ConfigProvider, Layout, Menu, Progress } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import { UserOutlined, CalculatorOutlined, TikTokOutlined, TrophyOutlined, WarningOutlined } from '@ant-design/icons';
+import { UserOutlined, CalculatorOutlined, TikTokOutlined, TrophyOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-
 import logo from '../assets/lexcom.svg';
 import '../css/Dashboard.css';
 import { SmileOutlined, CloseOutlined } from '@ant-design/icons';
@@ -19,47 +18,36 @@ import {
   DesktopOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  LineChartOutlined,
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import About from '../components/components_home/About';
-import Product from './Product';
 import OpenAI from './OpenAI';
+import LandingAI from './Landing';
 import CopyAds from './CopyAds';
 import Tiktok from './Tiktok';
 import LexcomAI from './LexcomAI';
 import axiosInstance from '../components/axios';
 import type { TourProps } from 'antd';
+import { UserType } from '../interface/dashboard';
+import { ShowData } from '../components/components_dashboard/ShowData';
+import Courses from './Courses';
 
-interface UserType {
-  id: number,
-  username: string,
-  email: string,
-  name: string,
-  surname: string,
-  phone: string,
-  country: string,
-  city: string,
-  address: string,
-  gender: string,
-  date_of_birth: string
-}
-
-interface DescriptionItemProps {
-  title: string;
-  content: React.ReactNode;
-}
-
-const DescriptionItem = ({ title, content }: DescriptionItemProps) => (
-  <div className="site-description-item-profile-wrapper">
-    <p className="site-description-item-profile-p-label">{title}:</p>
-    {content}
-  </div>
-);
+const defaultUserData: UserType = {
+  id: 0,
+  username: '',
+  email: '',
+  name: '',
+  surname: '',
+  phone: '',
+  country: '',
+  city: '',
+  address: '',
+  gender: '',
+  date_of_birth: ''
+};
 
 const Dashboard: React.FC = () => {
   const { Header, Content, Sider } = Layout;
-  const ref1 = useRef(null);
   const ref2 = useRef(null);
   const ref3 = useRef(null);
   const ref4 = useRef(null);
@@ -74,6 +62,15 @@ const Dashboard: React.FC = () => {
   const [marginL, setmarginL] = useState(250);
 
   const [openD, setOpenD] = useState(false);
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [api, contextHolder] = notification.useNotification();
+  const Context = React.createContext({ name: 'Default' });
+
+  // To Progress
+  const [progress, setProgress] = useState(0);
+  const [searchCount, setSearchCount] = useState(0);
+  const [maxSearches, setMaxSearches] = useState(0);
+  const [data, setData] = useState<UserType>(defaultUserData);
 
   const showDrawer = () => {
     setOpenD(true);
@@ -84,12 +81,6 @@ const Dashboard: React.FC = () => {
   };
 
   const steps: TourProps['steps'] = [
-    {
-      title: 'GeoTrend Lex',
-      description: 'Explora la pestaña de ranking de ventas en la parte izquierda de tu pantalla. Con esta pestaña podrás conocer si tu producto tiene un buen interés y en que países es el más buscado.',
-      placement: 'right',
-      target: () => ref1.current,
-    },
     {
       title: 'Budget Control Pro',
       description: 'Te ofrecemos tres calculadoras para que de esta forma puedas saber que precio debe tener tu producto, el CPA y CPU asi como estadisticas generales.',
@@ -127,19 +118,19 @@ const Dashboard: React.FC = () => {
 
   const handleLogout = async () => {
     try {
-        await axiosInstance.post('logout/', {
-            refresh_token: localStorage.getItem('refresh_token'),
-        });
+      await axiosInstance.post('logout/', {
+        refresh_token: localStorage.getItem('refresh_token'),
+      });
 
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
-        axiosInstance.defaults.headers['Authorization'] = null;
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      axiosInstance.defaults.headers['Authorization'] = null;
 
-        navigate('/');
+      navigate('/');
     } catch (error) {
-        console.error('Error al cerrar sesión:', error);
+      console.error('Error al cerrar sesión:', error);
     }
-};
+  };
 
   const handleSettings = async () => {
     navigate('/settings');
@@ -173,51 +164,11 @@ const Dashboard: React.FC = () => {
     },
   ];
 
-  const [searchValue, setSearchValue] = useState<string>("");
-  const [api, contextHolder] = notification.useNotification();
-  const Context = React.createContext({ name: 'Default' });
-
-  // To Progress
-  const [progress, setProgress] = useState(0);
-  const [searchCount, setSearchCount] = useState(0);
-  const [maxSearches, setMaxSearches] = useState(0);
-
   const emptyNotification = () => {
     api.open({
       message: "ERROR!!!",
       description: <Context.Consumer>{() => "Error! Realiza una búsqueda"}</Context.Consumer>,
       icon: <CloseOutlined style={{ color: '#108ee9' }} />,
-    });
-  };
-
-  const searchLimited = () => {
-    let newPlan = 'standard';
-    Modal.confirm({
-      title: 'LEXCOM WARNING!!!',
-      content: (
-        <div>
-          <p>Se ha excedido el límite de búsquedas permitidas. Selecciona un nuevo plan para continuar.</p>
-          <Radio.Group defaultValue="standard" onChange={(e) => newPlan = e.target.value}>
-            <Radio.Button value="standard">Standard (5 búsquedas más)</Radio.Button>
-            <Radio.Button value="business">Business (10 búsquedas más)</Radio.Button>
-            <Radio.Button value="premium">Premium (20 búsquedas más)</Radio.Button>
-          </Radio.Group>
-        </div>
-      ),
-      icon: <WarningOutlined style={{ color: '#108ee9' }} />,
-      onOk() {
-        axiosInstance.post('update_plan/', { new_plan: newPlan })
-          .then(response => {
-            const { new_max_searches, new_search_count, new_progress_count } = response.data;
-            setMaxSearches(new_max_searches);
-            setSearchCount(new_search_count);
-            setProgress(new_progress_count);
-            location.reload();
-          })
-          .catch(error => {
-            console.error('Error updating search plan:', error);
-          });
-      }
     });
   };
 
@@ -228,12 +179,6 @@ const Dashboard: React.FC = () => {
       icon: <SmileOutlined style={{ color: '#108ee9' }} />,
     });
   };
-
-  useEffect(() => {
-    if (selectedMenu === 'Lexcom Courses') {
-      window.location.href = 'https://home.upcommercelatam.com/login/?wppb_referer_url=https%3A%2F%2Fhome.upcommercelatam.com%2F';
-    }
-  }, [selectedMenu]);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -251,15 +196,12 @@ const Dashboard: React.FC = () => {
     fetchUserInfo();
   }, []);
 
-
-  const [data, setData] = useState<UserType | null>(null);
-
   useEffect(() => {
     const url = `update/`
     axiosInstance.get<UserType>(url)
       .then(response => {
         setData(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch(err => {
         console.error(err.message);
@@ -273,8 +215,6 @@ const Dashboard: React.FC = () => {
     setSearchValue("");
     setSelectedMenu('Guide Lexcom');
   }
-
-  // const [selectedMenuItem, setSelectedMenuItem] = useState<string | null>(null);
 
   return (
     <ConfigProvider
@@ -313,10 +253,9 @@ const Dashboard: React.FC = () => {
             onChange={(e) => setSearchValue(e.target.value)}
             onSearch={(value) => {
               if (value.trim() === '') {
-                // setSelectedMenu('Guide Lexcom');
                 emptyNotification();
-              } else if (searchCount == maxSearches) {
-                searchLimited();
+              } else if (searchCount >= maxSearches) {
+                navigate('/pricing')
               } else {
                 setSearchValue(value);
                 setSelectedMenu('Guide Lexcom');
@@ -329,6 +268,10 @@ const Dashboard: React.FC = () => {
                   })
                   .catch(error => {
                     console.error('Error al actualizar el contador de búsquedas:', error);
+                    api.error({
+                      message: 'Error al actualizar el contador de búsquedas',
+                      duration: 3
+                    });
                   });
               }
             }}
@@ -368,7 +311,6 @@ const Dashboard: React.FC = () => {
               </div>
             }
             style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 60, bottom: 0 }}
-          // key={selectedMenuItem}
           >
             <Menu
               className="lexcom-menu"
@@ -389,10 +331,7 @@ const Dashboard: React.FC = () => {
                 }
               }}
             >
-              <Menu.Item key={'GeoTrend Lex'} icon={<LineChartOutlined ref={ref1} />}>
-                {'GeoTrend Lex'}
-              </Menu.Item>
-              <Menu.SubMenu icon={<CalculatorOutlined ref={ref2} />} key={'BudgetControlPro'} title={'Budget Control Pro'}>
+              <Menu.SubMenu icon={<CalculatorOutlined ref={ref2} />} key={'BudgetControlPro'} title={'AutoPro Finance'}>
                 <Menu.ItemGroup key={'BudgetControlPro'}>
                   <Menu.Item key={'Standard'}>
                     {'Standard'}
@@ -411,13 +350,16 @@ const Dashboard: React.FC = () => {
               <Menu.Item key={'TikTok TrendFeed'} icon={<TikTokOutlined ref={ref4} />}> {/* Utilizamos el ref aquí */}
                 {'TikTok TrendFeed'}
               </Menu.Item>
-              <Menu.SubMenu icon={<DesktopOutlined ref={ref5} />} key={'Prompt Generators'} title={'Prompt Generators'}>
+              <Menu.SubMenu icon={<DesktopOutlined ref={ref5} />} key={'Prompt Generators'} title={'LexGeneration'}>
                 <Menu.ItemGroup key={'Prompt Generators'} >
                   <Menu.Item key={'Prompt Generator Video'}>
-                    {'Prompt Generator Video'}
+                    {'LexVid Pro'}
                   </Menu.Item>
                   <Menu.Item key={'Prompt Generator Copys'}>
-                    {'Prompt Generator Copys'}
+                    {'LexCopy Pro'}
+                  </Menu.Item>
+                  <Menu.Item key={'Prompt Generator Landing'}>
+                    {'LexLanding Pro'}
                   </Menu.Item>
                 </Menu.ItemGroup>
               </Menu.SubMenu>
@@ -433,7 +375,7 @@ const Dashboard: React.FC = () => {
                 <Progress
                   type="circle"
                   percent={progress}
-                  width={80}
+                  size={80}
                   strokeColor='#108ee9'
                   trailColor="#ffffff"
                   format={() => (
@@ -445,10 +387,6 @@ const Dashboard: React.FC = () => {
               </div>
 
             </Menu>
-
-
-
-
           </Sider>
           <Tour open={open} onClose={() => setOpen(false)} steps={steps} />
           <Layout style={{
@@ -458,7 +396,6 @@ const Dashboard: React.FC = () => {
           }} className="lexcom-layout">
 
             <Content style={{ margin: '0 16px', padding: '0 24px', minHeight: 700 }} >
-              {selectedMenu === 'GeoTrend Lex' && <Product searchValue={searchValue} />}
               {selectedMenu === 'Standard' && <Standard />}
               {selectedMenu === 'Precio_del_Producto' && <Precio_del_Producto />}
               {selectedMenu === 'CPA_CVU' && <CPA_CVU />}
@@ -466,6 +403,8 @@ const Dashboard: React.FC = () => {
               {selectedMenu === 'TikTok TrendFeed' && <Tiktok searchValue={searchValue} />}
               {selectedMenu === 'Prompt Generator Video' && <OpenAI searchValue={searchValue} />}
               {selectedMenu === 'Prompt Generator Copys' && <CopyAds searchValue={searchValue} />}
+              {selectedMenu === 'Prompt Generator Landing' && <LandingAI searchValue={searchValue} />}
+              {selectedMenu === 'Lexcom Courses' && <Courses />}
               {selectedMenu === 'Guide Lexcom' && <Tutorial />}
               {selectedMenu === '' && <Tutorial />}
             </Content>
@@ -475,48 +414,8 @@ const Dashboard: React.FC = () => {
           <About id='about' />
         </Layout>
       </Layout>
-      <Drawer width={640} placement="right" closable={false} onClose={onCloseD} open={openD}>
-        <p className="site-description-item-profile-p" style={{ marginBottom: 24 }}>
-          Perfil
-        </p>
-        <Divider />
-        <p className="site-description-item-profile-p">Personal</p>
-        <Row>
-          <Col span={12}>
-            <DescriptionItem title="Nombres" content={data?.name} />
-          </Col>
-          <Col span={12}>
-            <DescriptionItem title="Apellidos" content={data?.surname} />
-          </Col>
-        </Row>
-        <Row>
-          <Col span={12}>
-            <DescriptionItem title="Ciudad" content={data?.city} />
-          </Col>
-          <Col span={12}>
-            <DescriptionItem title="País" content={data?.country} />
-          </Col>
-        </Row>
-        <Row>
-          <Col span={12}>
-            <DescriptionItem title="Cumpleaños" content={data?.date_of_birth ? new Date(data.date_of_birth).toISOString().split('T')[0] : ''} />
-
-          </Col>
-          <Col span={12}>
-            <DescriptionItem title="Usuario" content={data?.username} />
-          </Col>
-        </Row>
-
-        <Divider />
-        <p className="site-description-item-profile-p">Contacto</p>
-        <Row>
-          <Col span={12}>
-            <DescriptionItem title="Email" content={data?.email} />
-          </Col>
-          <Col span={12}>
-            <DescriptionItem title="Teléfono" content={data?.phone} />
-          </Col>
-        </Row>
+      <Drawer key={data?.id} width={640} placement="right" closable={false} onClose={onCloseD} open={openD}>
+        <ShowData data={data} />
       </Drawer>
     </ConfigProvider>
 

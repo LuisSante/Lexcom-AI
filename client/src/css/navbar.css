@@ -53,7 +53,8 @@
 }
 
 .nav_links {
-  color:purple;
+  /* color:purple; */
+  color: white;
   text-decoration: none;
   padding: 0.5rem 1rem;
 }
@@ -68,6 +69,7 @@
   background-color: white;
   border-radius: 4px;
   transition: all 0.2s ease-out;
+  color: black;
 }
 
 .menu_icon {
@@ -86,6 +88,10 @@
   gap: 10px;
   width: 500px;
   justify-content: flex-end;
+}
+
+.login-btn-li {
+  margin-left: 100px;
 }
 
 .button-container .login-btn,

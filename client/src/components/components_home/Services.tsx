@@ -1,9 +1,6 @@
 import '../../css/styles_home/services.css'
+import { ComponentProps } from '../../interface/home';
 import Pricing from './Pricing';
-
-interface ComponentProps {
-  id: string;
-}
 
 const Services: React.FC<ComponentProps> = ({ id }) => {
 
@@ -11,7 +8,7 @@ const Services: React.FC<ComponentProps> = ({ id }) => {
     <div className='container-page-services' id={id}>
       <div className="div-75">
         <div className="demo">
-        <Pricing/>
+          <Pricing />
         </div>
 
         <div className="div-146">
@@ -22,11 +19,11 @@ const Services: React.FC<ComponentProps> = ({ id }) => {
         </div>
         <div className="div-147">
           <br />
-          Pruebe nuestros servicios sin compromiso durante
+          Pruebe nuestros servicios sin compromiso
           <br />
-          7 días.
-          <br />
-          Si no queda satisfecho, le devolvemos su dinero.
+          con 8 búsquedas gratuitas
+          {/* <br /> */}
+          {/* Si no queda satisfecho, le devolvemos su dinero. */}
           <br />
           ¡Sin riesgos, garantizado!
         </div>

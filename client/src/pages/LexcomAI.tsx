@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
+import axiosInstance from '../components/axios';
 import { Button, Checkbox, Col, ConfigProvider, Form, Row, Skeleton, Typography, notification } from 'antd';
-import { Input } from 'antd';
 import './../css/TimelineDemo.css';
 import {
     firstColumnItems_visual,
@@ -11,33 +11,45 @@ import {
     secondColumnItems_strategic,
     firstColumnItems_financial,
     secondColumnItems_financial,
-    attibute_bool
 } from '../components/logic/components_lexcomai/questions';
-import axiosInstance from '../components/axios';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import {
+    Chart as ChartJS,
+    ArcElement,
+    Tooltip,
+    Legend,
+    RadialLinearScale,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    registerables
+} from 'chart.js';
 import { Pie, PolarArea } from 'react-chartjs-2';
 import { formItemLayout } from '../components/logic/components_form/position_form';
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(
+    ArcElement,
+    Tooltip,
+    Legend,
+    RadialLinearScale,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    ...registerables
+);
 
 import "../css/lexcomai.css"
-
-interface FormValues {
-    relevancia: number;
-    check: attibute_bool;
-}
-
-interface TypePrediction {
-    labels: string[];
-    datasets: {
-        data: number[];
-        backgroundColor: string[];
-        borderColor: string[];
-        borderWidth: number;
-    }[];
-}
+import { FormValues, TypePrediction, attibute_bool } from '../interface/lexcomai';
+import UploadProduct from '../components/components_lexcomai/UploadProduct';
+import { Grid } from '../components/components_lexcomai/Grid';
+import { CircleLoader } from '../components/components_lexcomai/CircleLoader';
+import CupIcon from '../assets/cup.svg'
 
 const LexcomAI: React.FC = () => {
     const [initialFormValues] = useState<attibute_bool>({
+        persepcion_visual: false,
+        persepcion_unisex: false,
+        relevancia: false,
         usabilidad: false,
         innovacion: false,
         diversificacion: false,
@@ -47,7 +59,7 @@ const LexcomAI: React.FC = () => {
         calidad: false,
         portabilidad: false,
         complementariedad: false,
-        reconocimiento: false,
+        ads_library: false,
         disponibilidad: false,
         competencia: false,
         frecuencia: false,
@@ -57,26 +69,29 @@ const LexcomAI: React.FC = () => {
         realismo: false,
         internacionalizacion: false,
         estacionalidad: false,
-        abastecimiento: false,
-        percepcion_valor: false,
+        variantes: false,
+        unisex: false,
+        emociones: false,
         tamano: false,
         frecuencia_estrategica: false,
         agrupamiento: false,
+        utilidad: false,
         rentabilidad: false,
         analisis_ventas: false,
         gastos_fijos: false,
-        publicidad: false
+        publicidad: false,
     });
 
     const [chartData, setChartData] = useState<TypePrediction | null>(null);
+    const [secondChartData, setSecondChartData] = useState<TypePrediction | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [api, contextHolder] = notification.useNotification();
 
     const onFinish = async (formData: FormValues) => {
         setIsLoading(true);
-    
+
         try {
-            const response = await axiosInstance.post('lexcom/', formData);
+            const response = await axiosInstance.post('lexcom_five_class/', formData);
             const data = response.data;
             const newChartData: TypePrediction = {
                 labels: ['Muy Bueno', 'Bueno', 'Normal', 'Malo', 'Muy malo'],
@@ -96,22 +111,49 @@ const LexcomAI: React.FC = () => {
                         'rgba(54, 162, 235, 1)',
                         'rgba(153, 102, 255, 1)',
                     ],
-    
+
                     borderWidth: 2.5,
                 }]
             };
-    
+            setChartData(newChartData);
+
+            // const secondResponse = await axiosInstance.post('lexcom_binary_class/', formData);
+            const values = Object.values(data);
+            const secondData = {
+                success: ((Number(values[0]) + Number(values[1]))) * 100,
+                failure: ((Number(values[3]) + Number(values[4]))) * 100
+            };
+            console.log(secondData);
+            // const secondValue = (secondData['Éxito'] * 100).toString + '%';
+            const newSecondChartData: TypePrediction = {
+                labels: ['Éxito', 'Fallo'],
+                datasets: [{
+                    data: Object.values(secondData),
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                    ],
+                    borderWidth: 2.5,
+                }]
+
+            };
+
+            setSecondChartData(newSecondChartData);
+
             api.success({
                 message: 'Operación realizada',
                 description: 'Espere por favor',
                 duration: 4
             });
-    
-            setChartData(newChartData);
+
         } catch (err) {
             api.error({
                 message: 'Error al realizar la operación',
-                description:'Es obligatorio que llene el primer campo',
+                description: 'Contáctate con nosotros para solucionar el error',
                 duration: 6
             });
         } finally {
@@ -123,8 +165,17 @@ const LexcomAI: React.FC = () => {
         <>
             {contextHolder}
             <div className='tutorial'>
-                <Typography.Title level={4} style={{ color: '#000' }}>¡Vamos a calcular si tu producto es ganador!</Typography.Title>
-
+                <Typography.Title level={4} className="text-black">¡Vamos a calcular si tu producto es ganador!</Typography.Title>
+                <div className="upload-product-container">
+                    <div className="flex align-center">
+                        <UploadProduct />
+                        {isLoading && (
+                            <Grid>
+                                <CircleLoader />
+                            </Grid>
+                        )}
+                    </div>
+                </div>
                 <ConfigProvider
                     theme={{
                         token: {
@@ -144,24 +195,6 @@ const LexcomAI: React.FC = () => {
                             <div>
                                 <h2>Análisis Visual</h2>
                             </div>
-                            <Form.Item
-                                label="¿Cuál es el nivel de interés de su producto entre el público objetivo?"
-                                name="relevancia"
-                                tooltip={
-                                    <span>
-                                        Este espacio de aquí lo sacas del módulo GeoTrend Lex
-                                        <a> GeoTrend Lex</a>
-                                    </span>
-                                }
-                                rules={[
-                                    { 
-                                        required: false, 
-                                        message: 'Por favor ingresa el interés sobre el producto!' 
-                                    }
-                                ]}
-                            >
-                                <Input />
-                            </Form.Item>
                             <Row>
                                 <Col span={12}>
                                     {firstColumnItems_visual.map((item, index) => (
@@ -290,23 +323,29 @@ const LexcomAI: React.FC = () => {
 
                     </Form>
                     {isLoading && <Skeleton active />}
-                    {chartData && !isLoading && (
-                        <div>
-
-                            <h2>Diagrama sectorial del producto buscado</h2>
-                            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                                <div style={{ width: '50%', height: '300px' }}>
+                    {chartData && secondChartData && !isLoading && (
+                        <div className='text-center text-xl'>
+                            <span className="">Diagrama sectorial del producto buscado</span>
+                            <div className="flex justify-around">
+                                <div className="w-1/3 h-80">
                                     <Pie data={chartData} />
                                 </div>
-                                <div style={{ width: '50%', height: '300px' }}>
+                                <div className="w-1/3 h-80">
                                     <PolarArea data={chartData} />
+                                </div>
+                            </div>
+                            <span className="text-center">Probabilidad de éxito</span>
+                            <div className="flex justify-around">
+                                <div className="justify-center items-center w-1/4 text-center">
+                                    <img className="w-20" src={CupIcon} alt="CupIcon" />
+                                    <Pie data={secondChartData} />
+                                    <span className="mt-2">{secondChartData.datasets[0].data[0].toFixed(2)} % de Éxito</span>
                                 </div>
                             </div>
                         </div>
                     )}
-
                 </ConfigProvider>
-            </div>
+            </div >
         </>
     )
 }

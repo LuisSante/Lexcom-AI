@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import ButtonComponent from '../ButtonComponent';
+import ButtonComponent from './ButtonComponent';
 import { ConfigProvider } from 'antd';
+import { PlanPayment } from '../logic/components_dashboard/plan';
 
 const styleButton = {
     background: 'transparent',
@@ -34,71 +35,31 @@ const Pricing = () => {
             }}
         >
             <div className="grip-pricing">
-                <div className="pricingTable">
-                    <div className="pricingTable-header">
-                        <h3 className="heading">Standard</h3>
-                        <div className="price-value">19
-                            <span className="currency">$</span>
+                {PlanPayment.map((item, index) => (
+                    <div className="pricingTable" key={index}>
+                        <div className="pricingTable-header">
+                            <h3 className="heading">{item.title}</h3>
+                            <div className="price-value">{item.value}
+                                <span className="currency">$</span>
+                            </div>
+                        </div>
+                        <ul className="pricing-content">
+                            <li>Primera vez usando: 8 búsquedas gratuitas </li>
+                            <li>{item.n_search}</li>
+                            <li>AutoFinance Pro: Calculadora de precios</li>
+                            <li>LexIA Determination: Porcentaje de éxito</li>
+                            <li>TikTok TrendFeed: Videos de tiktok</li>
+                            <li>Lex Generator</li>
+                            <li>Lexcom Courses: E-Commerce</li>
+                        </ul>
+                        <div className={clicked ? "read active" : "read "}>
+                            <ButtonComponent
+                                name="Regístrate ahora"
+                                styleButton={styleButton}
+                            />
                         </div>
                     </div>
-                    <ul className="pricing-content">
-                        <li>Primera vez usando: 2 búsquedas gratuitas </li>
-                        <li>5 búsquedas </li>
-                        <li>Porcentaje de éxito</li>
-                        <li>Recomendacion de ventas</li>
-                        <li>-</li>
-                    </ul>
-                    <div className={clicked ? "read active" : "read "}>
-                    <ButtonComponent
-                            name="Regístrate ahora"
-                            styleButton={styleButton}
-                        />
-                    </div>
-
-                </div>
-
-                <div className="pricingTable">
-                    <div className="pricingTable-header">
-                        <h3 className="heading">Business</h3>
-                        <div className="price-value">36
-                            <span className="currency">$</span>
-                        </div>
-                    </div>
-                    <ul className="pricing-content">
-                        <li>Primera vez usando: 2 búsquedas gratuitas </li>
-                        <li>10 búsquedas</li>
-                        <li>Porcentaje y estadísticas</li>
-                        <li> Recomendación de ventas</li>
-                        <li>- </li>
-                    </ul>
-                    <div className={clicked ? "read active" : "read "}>
-                        <ButtonComponent
-                            name="Regístrate ahora"
-                            styleButton={styleButton}
-                        />
-                    </div>
-                </div>
-                <div className="pricingTable">
-                    <div className="pricingTable-header">
-                        <h3 className="heading">Premium</h3>
-                        <div className="price-value">70
-                            <span className="currency">$</span>
-                        </div>
-                    </div>
-                    <ul className="pricing-content">
-                        <li>Primera vez usando: 2 búsquedas gratuitas </li>
-                        <li>20 búsquedas</li>
-                        <li>Porcentaje y estadísticas</li>
-                        <li>Recomendacion de ventas</li>
-                        <li>-</li>
-                    </ul>
-                    <div className={clicked ? "read active" : "read "}>
-                        <ButtonComponent
-                            name="Regístrate ahora"
-                            styleButton={styleButton}
-                        />
-                    </div>
-                </div>
+                ))}
             </div>
         </ConfigProvider>
     )

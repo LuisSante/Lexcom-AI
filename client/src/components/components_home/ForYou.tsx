@@ -1,4 +1,4 @@
-import ForYouItems from '../logic/ForYouItems'
+import ForYouItems from '../logic/component_home/ForYouItems'
 import '../../css/styles_home/for_you.css'
 
 const ForYou = () => {

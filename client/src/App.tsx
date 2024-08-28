@@ -6,11 +6,11 @@ import RecoverPassword from './pages/RecoverPassword';
 import ResetPassword from './pages/ResetPassword';
 import Settings from './pages/Settings';
 import Healtz from './pages/Healtz';
+import PayWrapper from './pages/PayWrapper';
 
 const App: React.FC = () => {
 
   return (
-
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -18,6 +18,7 @@ const App: React.FC = () => {
         <Route path="/recoverpassword" element={<RecoverPassword />} />
         <Route path="/reset-password-form/:token" element={<ResetPassword />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/pricing" element={<PayWrapper />} />
         <Route path="/test" element={<Healtz />} />
       </Routes>
     </BrowserRouter>

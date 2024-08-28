@@ -9,24 +9,7 @@ import logo from '../assets/lexcom.svg';
 import '../css/Dashboard.css';
 import About from '../components/components_home/About';
 import { useNavigate } from 'react-router-dom';
-
-interface UserType {
-  id: number,
-  username: string,
-  email: string,
-  name: string,
-  surname: string,
-  phone: string,
-  country: string,
-  city: string,
-  address: string,
-  gender: string,
-  date_of_birth: string,
-  password: string,
-}
-interface FieldType {
-  email: string
-}
+import { SeetingsFieldType, UserType } from '../interface/settings';
 
 const Settings: React.FC = () => {
 
@@ -60,7 +43,7 @@ const Settings: React.FC = () => {
     setIsModalVisible(false);
   };
 
-  const handleOk = async (email: FieldType) => {
+  const handleOk = async (email: SeetingsFieldType) => {
     try {
       const res = await axiosInstance.post('password_reset/', email);
 

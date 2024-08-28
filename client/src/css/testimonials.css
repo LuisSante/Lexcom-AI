@@ -1,0 +1,29 @@
+.bannerWrapper {
+  width: 100%;
+  height: 210px;
+  overflow: hidden;
+}
+
+.bannerWrapper .wrapper {
+  display: flex;
+}
+
+.bannerWrapper .wrapper .card {
+  display: flex;
+  gap: 32px;
+  animation: swipe 38000ms linear infinite;
+}
+
+.bannerWrapper:hover .wrapper .card {
+  animation-play-state: paused;
+}
+
+@keyframes swipe {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}

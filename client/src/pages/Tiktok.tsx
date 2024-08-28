@@ -3,36 +3,8 @@ import { Space, Card, ConfigProvider, notification } from 'antd';
 import { Col } from 'antd';
 import Skeleton from '../components/Skeleton';
 import axiosInstance from '../components/axios';
-interface AdData {
-    id: number;
-    first_shown_date: string;
-    last_shown_date: string;
-    reach: {
-        unique_users_seen: string;
-    };
-    videos: {
-        cover_image_url: string;
-        url: string;
-    }[];
-}
+import { TiktokData, TiktokData_, TypeTikTok } from '../interface/tiktok';
 
-interface TiktokData {
-    ad: AdData;
-}
-
-interface TypeTikTok {
-    searchValue: string;
-}
-interface TiktokData_ {
-    ad: {
-        reach: {
-            unique_users_seen: string;
-        };
-        videos: {
-            url: string;
-        }[];
-    };
-}
 const Tiktok: React.FC<TypeTikTok> = ({ searchValue }) => {
     const [data, setData] = useState<TiktokData[]>([]);
     const [dataSR, setDataSR] = useState<TiktokData_[]>([]);
