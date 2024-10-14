@@ -34,7 +34,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # True in developer and False in production
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['*']
@@ -174,17 +174,15 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_MODELS_IA = os.path.join(BASE_DIR, 'api')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 SECRET_ACCESS_KEY = os.getenv("DEVELOPER_ACCESS_TOKEN")
-# SECRET_ACCESS_KEY = os.getenv("PRODUCTION_ACCESS_TOKEN")
+URL_GOOGLE = os.getenv("URL_DEVELOPMENT")
 
 if not DEBUG:
-    # Tell Django to copy statics to the `staticfiles` directory
-    # in your application directory on Render.
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    # Turn on WhiteNoise storage backend that takes care of compressing static files
-    # and creating unique names for each version so they can safely be cached forever.
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     STATIC_MODELS_IA = os.path.join(BASE_DIR, 'api')
     SECRET_ACCESS_KEY = os.getenv("PRODUCTION_ACCESS_TOKEN")
+    URL_GOOGLE = os.getenv("URL_PRODUCTION")
+
 
 AUTH_USER_MODEL = "core.User"
 

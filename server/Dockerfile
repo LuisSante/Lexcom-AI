@@ -15,6 +15,7 @@ COPY . .
 RUN pip install --no-cache-dir -r requirements/requirements.txt
 RUN pip install whitenoise[brotli]
 RUN pip install gunicorn==21.2.0
+RUN pip install mercadopago
 
 ENV DJANGO_SETTINGS_MODULE=core.settings
 

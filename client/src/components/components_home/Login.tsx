@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import '../../css/login.css'
 import axiosInstance from '../axios';
 import { FieldType } from '../../interface/home';
+// import GoogleIcon from '../../assets/google-icon.svg';
+// import { reachGoogle } from '../components_login/Login';
 
 const Login: React.FC<FieldType> = () => {
   const [form] = Form.useForm();
@@ -107,6 +109,10 @@ const Login: React.FC<FieldType> = () => {
             </Form.Item>
           </Form>
         </div >
+        {/* <button className='flex justify-center items-center gap-x-2 bg-[#F2F2F2] hover:bg-slate-300 px-3 py-[6px] border-none rounded-md w-full max-w-36 font-medium font-poppins cursor-pointer' onClick={reachGoogle}>
+          <img src={GoogleIcon} className='max-w-4' />
+          <span>Google</span>
+        </button> */}
       </ConfigProvider>
     </>
   )

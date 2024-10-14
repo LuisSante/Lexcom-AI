@@ -1,13 +1,41 @@
 import logo from '../../assets/vectores.svg';
 import Register from '../components_home/Register';
 import GoogleIcon from '../../assets/google-icon.svg';
+// import { axiosInstancewithoutPermissions } from '../axios';
+
+
+
+const reachGoogle = async () => {
+    const clientID = import.meta.env.VITE_CLIENDID;
+    const callBackURI = import.meta.env.VITE_CALLBACKURI;
+    console.log(callBackURI);
+    window.location.replace(`https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=${callBackURI}&prompt=consent&response_type=code&client_id=${clientID}&scope=openid%20email%20profile&access_type=offline`)
+}
+
 
 const Login = () => {
+
+    // const googleLogin = (code) => async dispatch => {
+    //     const body = JSON.stringify({ code });
+    //     try {
+    //         const res = await axiosInstancewithoutPermissions.post("dj-rest-auth/google", body)
+    //         dispatch({
+    //             type: "LOGIN_SUCCESS",
+    //             payload: res.data
+    //         })
+    //     } catch (err) {
+    //         dispatch({
+    //             type: "LOGIN_FAIL",
+    //         })
+    //     }
+    // }
+
+
     return (
         <div className='relative flex bg-[#000C26] w-full h-screen'>
             <div>
-                <div className='top-0 right-0 z-0 absolute bg-[#C62D28] blur-[150px] rounded-full w-96 h-96' />
-                <div className='bottom-0 left-0 z-0 absolute bg-[#C62D28] blur-[200px] rounded-full w-96 h-96' />
+                <div className='top-0 right-0 z-0 absolute bg-[#C62D28] blur-[100px] sm:blur-[150px] rounded-full w-60 sm:w-96 h-60 sm:h-96' />
+                <div className='bottom-0 left-0 z-0 absolute bg-[#C62D28] blur-[150px] sm:blur-[200px] rounded-full w-60 sm:w-96 h-60 sm:h-96' />
             </div>
             <div className="relative lg:flex justify-center items-center hidden w-1/2 h-full">
                 <img src={logo} alt="Logo" className="z-10 px-6 w-full max-w-full h-full max-h-full" />
@@ -19,7 +47,7 @@ const Login = () => {
                     </div>
                     <div className='flex flex-col w-full max-w-md'>
                         <div className='flex justify-center items-center'>
-                            <button className='flex justify-center items-center gap-x-2 bg-[#F2F2F2] hover:bg-slate-300 px-3 py-[6px] border-none rounded-md w-full max-w-36 font-medium font-poppins cursor-pointer'>
+                            <button className='flex justify-center items-center gap-x-2 bg-[#F2F2F2] hover:bg-slate-300 px-3 py-[6px] border-none rounded-md w-full max-w-36 font-medium font-poppins cursor-pointer' onClick={reachGoogle}>
                                 <img src={GoogleIcon} className='max-w-4' />
                                 <span>Google</span>
                             </button>
