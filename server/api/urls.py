@@ -59,6 +59,12 @@ urlpatterns = [
         {'post': 'send_plan'}), name="send_plan"),
 
     # Endpoint for test
-    path(r'test/', healthz.TestView.as_view(), name='healthz')
+    path(r'test/', healthz.TestView.as_view(), name='healthz'),
+
+    # Endpoints for Login with Google
+    path(r'dj-rest-auth/', include('dj_rest_auth.urls')),
+    path(r'dj-rest-auth/registration/',
+         include('dj_rest_auth.registration.urls')),
+    path(r'accounts/', include('allauth.urls')),
 
 ]

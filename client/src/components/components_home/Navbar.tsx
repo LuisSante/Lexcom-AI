@@ -1,20 +1,19 @@
-import { Button, Modal,ConfigProvider } from "antd";
-import { NavbarItems } from "../logic/component_home/NavbarItems";
-import { useState } from "react";
-import { Bars3Icon } from "@heroicons/react/24/outline";
-import '../../css/navbar.css'
-import { Link } from 'react-router-dom';
 import Login from "./Login";
-import Register from "./Register";
+import { Button, Modal, ConfigProvider } from "antd";
+import { NavbarProps } from "../../interface/home";
+import { NavbarItems } from "../logic/component_home/NavbarItems";
+import { Bars3Icon } from "@heroicons/react/24/outline";
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from "react";
 import logo from '../../assets/lexcom.svg';
 import React from 'react';
-import { NavbarProps } from "../../interface/home";
+import '../../css/navbar.css'
 
 const Navbar: React.FC<NavbarProps> = ({ isScrolling }) => {
 
     const [clicked, setClicked] = useState(false);
     const [loginModalVisible, setLoginModalVisible] = useState(false);
-    const [registerModalVisible, setRegisternModalVisible] = useState(false);
+    const navigate = useNavigate();
 
     const initialFormData = {
         email: "",
@@ -48,13 +47,9 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolling }) => {
         setLoginModalVisible(false);
     };
 
-    const showRegisterModal = () => {
-        setRegisternModalVisible(true);
-    };
-
-    const handleRegisterModalCancel = () => {
-        setRegisternModalVisible(false);
-    };
+    const handleRegister = () => {
+        navigate('/login')
+    }
 
     return (
         <nav className={`navbar ${isScrolling > 10 ? 'scrolling' : ''}`}>
@@ -64,7 +59,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolling }) => {
             <ul className={(clicked && isScrolling > 10) ? "nav_menu active scrolling_bars_container active" :
                 (clicked && isScrolling < 10) ? "nav_menu active" : "nav_menu"}>
                 {NavbarItems.map((item, index) => (
-                    
+
                     <li key={index}>
                         <Link to={`#${item.id_}`} onClick={() => scrollToSection(item.id_)}
                             className="nav_links">
@@ -74,44 +69,34 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolling }) => {
                 ))}
                 <div className={clicked ? "button-container active" : "button-container"}>
                     <Button className="login-btn" onClick={showLoginModal}>Login</Button>
-                    <Button className="register-btn" onClick={showRegisterModal}>Regístrate</Button>
+                    <Button className="register-btn" onClick={handleRegister}>Regístrate</Button>
                 </div>
                 <ConfigProvider
-                  theme={{
-                    components: {
-                      Modal: {
-                              titleColor:'#fff',
-                              colorBgContainer: '#f6ffed',
-                              controlOutline:'#000000',
-                              contentBg:'#000000',
-                              titleFontSize:25,
-                              headerBg:'#000000',
-                              colorIcon:'#fff',
-                              colorIconHover:'#ecb6ff'
-                      },
-                    },
-                  }}
+                    theme={{
+                        components: {
+                            Modal: {
+                                titleColor: '#fff',
+                                colorBgContainer: '#f6ffed',
+                                controlOutline: '#000000',
+                                contentBg: '#000000',
+                                titleFontSize: 25,
+                                headerBg: '#000000',
+                                colorIcon: '#fff',
+                                colorIconHover: '#ecb6ff'
+                            },
+                        },
+                    }}
                 >
-                <Modal
-                    title="Bienvenido a LexCom"
-                    className="login-container"
-                    open={loginModalVisible}
-                    onCancel={handleLoginModalCancel}
-                    footer={null}
-                >
-                    <Login {...initialFormData} />
-                </Modal>
-                
-                <Modal
-                    title="Regístrate en LexCom"
-                    className="login-container"
-                    open={registerModalVisible}
-                    onCancel={handleRegisterModalCancel}
-                    footer={null}
+                    <Modal
+                        title="Bienvenido a LexCom"
+                        className="login-container"
+                        open={loginModalVisible}
+                        onCancel={handleLoginModalCancel}
+                        footer={null}
                     >
-                    <Register />
-                </Modal>
-             </ConfigProvider>
+                        <Login {...initialFormData} />
+                    </Modal>
+                </ConfigProvider>
             </ul>
             <Bars3Icon className="menu_icon" onClick={handleClick} />
         </nav>

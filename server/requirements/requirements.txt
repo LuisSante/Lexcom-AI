@@ -23,16 +23,24 @@ cffi==1.16.0
     # via cryptography
 charset-normalizer==3.3.2
     # via requests
+colorama==0.4.6
+    # via tqdm
 cryptography==42.0.5
     # via djangorestframework-simplejwt
 distro==1.9.0
     # via openai
+dj-rest-auth==6.0.0
+    # via -r requirements.in
 django==5.0.3
     # via
     #   -r requirements.in
+    #   dj-rest-auth
+    #   django-allauth
     #   django-cors-headers
     #   djangorestframework
     #   djangorestframework-simplejwt
+django-allauth==65.0.2
+    # via -r requirements.in
 django-cors-headers==4.3.1
     # via -r requirements.in
 django-rest-passwordreset==1.4.0
@@ -40,6 +48,7 @@ django-rest-passwordreset==1.4.0
 djangorestframework==3.14.0
     # via
     #   -r requirements.in
+    #   dj-rest-auth
     #   djangorestframework-simplejwt
 djangorestframework-oauth==1.1.0
     # via -r requirements.in
@@ -106,6 +115,7 @@ typing-extensions==4.10.0
     #   openai
     #   pydantic
     #   pydantic-core
+tzdata==2024.2
+    # via django
 urllib3==2.2.1
     # via requests
-mercadopago==2.2.1

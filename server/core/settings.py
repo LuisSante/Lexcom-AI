@@ -34,11 +34,13 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # True in developer and False in production
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['*']
 RENDER_EXTERNAL = os.environ.get('RENDER_EXTERNAL')
+TOKEN_MODEL = None
+SITE_ID = 1
 
 if RENDER_EXTERNAL:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL)
@@ -52,6 +54,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
+    "rest_framework.authtoken",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    "dj_rest_auth",
+    "dj_rest_auth.registration",
     "api",
     "core",
     "rest_framework",
@@ -59,6 +69,7 @@ INSTALLED_APPS = [
     'django_rest_passwordreset',
     'rest_framework_simplejwt.token_blacklist',
 ]
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -70,10 +81,12 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
 }
@@ -113,29 +126,6 @@ DATABASES = {
         "PASSWORD": os.environ.get("DB_PASSWORD", f"{DATABASE_PASSWORD}"),
     }
 }
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "HOST": os.environ.get("DB_HOST", "34.172.231.217"),
-#         "PORT": os.environ.get("DB_PORT", "5432"),
-#         "NAME": os.environ.get("DB_NAME", "lexcomdb"),
-#         "USER": os.environ.get("DB_USER", "lexcomdb"),
-#         "PASSWORD": os.environ.get("DB_PASSWORD", f"{PASSWORD_DATABASE}"),
-#     }
-# }
-
-# DATABASES = {
-# "default": {
-# "ENGINE": "django.db.backends.postgresql_psycopg2",
-# "HOST": os.environ.get("DB_HOST", "172.17.0.1"),
-# "PORT": os.environ.get("DB_PORT", "5432"),
-# "NAME": os.environ.get("DB_NAME", "lexcom_db"),
-# "USER": os.environ.get("DB_USER", "lexcom"),
-# "PASSWORD": os.environ.get("DB_PASSWORD", f"{DATABASE_PASSWORD}"),
-# }
-# }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -229,6 +219,34 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
 }
+
+REST_USE_JWT = True
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'APP': {
+            'client_id': '751598689501-3c9pba15kcprp8mju2hs9qkeoh1v37ul.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        }
+    }
+}
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
