@@ -28,9 +28,9 @@ const Home: React.FC = () => {
 
 
     return (
-        <div className='ml-[10px]'>
+        <div className=''>
             <div className='position-pages'>
-                <Navbar isScrolling={scrollHeight} />
+                <Navbar />
                 <div>
                     <TransitionY>
                         <Welcome />

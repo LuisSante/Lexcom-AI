@@ -1,35 +1,20 @@
+import { useState } from 'react';
 import { ConfigProvider } from 'antd';
-import React, { useEffect, useState } from 'react'
+import { TransitionY } from '../Section';
 import { PlanPayment } from '../logic/components_dashboard/plan';
 import { ButtonPlan } from './ButtonPlan';
 import { styleButton } from '../logic/components_dashboard/style_antd';
 import About from '../components_home/About';
 import Faq from '../components_home/FAQ';
 import NavbarPricing from './NavbarPricing';
-import { TransitionY } from '../Section';
 
-const Pay: React.FC = () => {
+const Pay = () => {
 
     const [clicked] = useState(false);
 
-    const [scrollHeight, setScrollHeight] = useState(0);
-
-    const handleScroll = () => {
-        const position = window.pageYOffset;
-        setScrollHeight(position);
-    }
-
-    useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, [scrollHeight]);
-
     return (
         <>
-            <NavbarPricing isScrolling={scrollHeight} />
+            <NavbarPricing />
             <div className='container-page-services'>
                 <TransitionY>
                     <h1 className='mt-[100px] text-center'>Elige el plan de LexCom adecuado para ti</h1>

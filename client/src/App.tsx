@@ -7,7 +7,7 @@ import ResetPassword from './pages/ResetPassword';
 import Settings from './pages/Settings';
 import Healtz from './pages/Healtz';
 import PayWrapper from './pages/PayWrapper';
-import Login from './components/components_login/Login';
+import AuthPage from './components/components_login/AuthPage';
 
 const App: React.FC = () => {
 
@@ -16,7 +16,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/auth" element={< AuthPage />} />
         <Route path="/recoverpassword" element={<RecoverPassword />} />
         <Route path="/reset-password-form/:token" element={<ResetPassword />} />
         <Route path="/settings" element={<Settings />} />
