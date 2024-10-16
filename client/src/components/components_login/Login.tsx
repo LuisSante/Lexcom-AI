@@ -1,35 +1,15 @@
 import logo from '../../assets/vectores.svg';
 import Register from '../components_home/Register';
 import GoogleIcon from '../../assets/google-icon.svg';
-// import { axiosInstancewithoutPermissions } from '../axios';
-
-
 
 const reachGoogle = async () => {
     const clientID = import.meta.env.VITE_CLIENDID;
     const callBackURI = import.meta.env.VITE_CALLBACKURI;
-    console.log(callBackURI);
-    window.location.replace(`https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=${callBackURI}&prompt=consent&response_type=code&client_id=${clientID}&scope=openid%20email%20profile&access_type=offline`)
+    const URL = `https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=${callBackURI}&prompt=consent&response_type=code&client_id=${clientID}&scope=openid%20email%20profile&access_type=offline`;
+    window.location.replace(URL);
 }
 
-
 const Login = () => {
-
-    // const googleLogin = (code) => async dispatch => {
-    //     const body = JSON.stringify({ code });
-    //     try {
-    //         const res = await axiosInstancewithoutPermissions.post("dj-rest-auth/google", body)
-    //         dispatch({
-    //             type: "LOGIN_SUCCESS",
-    //             payload: res.data
-    //         })
-    //     } catch (err) {
-    //         dispatch({
-    //             type: "LOGIN_FAIL",
-    //         })
-    //     }
-    // }
-
 
     return (
         <div className='relative flex bg-[#000C26] w-full h-screen'>

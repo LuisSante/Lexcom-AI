@@ -109,10 +109,6 @@ const Login: React.FC<FieldType> = () => {
             </Form.Item>
           </Form>
         </div >
-        {/* <button className='flex justify-center items-center gap-x-2 bg-[#F2F2F2] hover:bg-slate-300 px-3 py-[6px] border-none rounded-md w-full max-w-36 font-medium font-poppins cursor-pointer' onClick={reachGoogle}>
-          <img src={GoogleIcon} className='max-w-4' />
-          <span>Google</span>
-        </button> */}
       </ConfigProvider>
     </>
   )

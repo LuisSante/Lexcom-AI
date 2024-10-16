@@ -34,13 +34,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # True in developer and False in production
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['*']
 RENDER_EXTERNAL = os.environ.get('RENDER_EXTERNAL')
 TOKEN_MODEL = None
-SITE_ID = 1
 
 if RENDER_EXTERNAL:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL)
@@ -54,21 +53,22 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django.contrib.sites",
-    "rest_framework.authtoken",
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
-    "allauth.socialaccount.providers.google",
-    "dj_rest_auth",
-    "dj_rest_auth.registration",
+    "corsheaders",
     "api",
     "core",
     "rest_framework",
-    "corsheaders",
+    "rest_framework.authtoken",
+    "dj_rest_auth",
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "dj_rest_auth.registration",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
     'django_rest_passwordreset',
     'rest_framework_simplejwt.token_blacklist',
 ]
+SITE_ID = 1
 
 
 MIDDLEWARE = [
@@ -83,6 +83,12 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
 ]
+
+REST_AUTH = {
+    "USE_JWT": True,
+    "JWT_AUTH_COOKIE": "access",
+    "JWT_AUTH_REFRESH_COOKIE": "refresh",
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -222,17 +228,14 @@ REST_USE_JWT = True
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
+        'SCOPE': ['profile', 'email',],
         'AUTH_PARAMS': {
             'access_type': 'online',
         },
+        # 'OAUTH_PKCE_ENABLED': True,
         'APP': {
             'client_id': '751598689501-3c9pba15kcprp8mju2hs9qkeoh1v37ul.apps.googleusercontent.com',
             'secret': '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',
-            'key': ''
         }
     }
 }
@@ -244,7 +247,7 @@ AUTHENTICATION_BACKENDS = (
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'

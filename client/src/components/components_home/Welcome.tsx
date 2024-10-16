@@ -1,8 +1,11 @@
-import welcome from '../../assets/welcome.svg'
 import { useState } from 'react';
+import { axiosInstancewithoutPermissions } from '../axios';
 import { Button, ConfigProvider, Modal } from 'antd';
-import Login from './Login';
+import { useEffect } from 'react';
 import Register from './Register';
+import Login from './Login';
+
+import welcome from '../../assets/welcome.svg'
 import plane from '../../assets/plane.svg'
 
 const Welcome = () => {
@@ -31,6 +34,33 @@ const Welcome = () => {
     const handleRegisterModalCancel = () => {
         setRegisternModalVisible(false);
     };
+
+    const getGoogleAuthCode = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        console.log(code);
+        console.log(urlParams.get('scope'));
+        return code;
+    };
+
+    const googleLogin = async () => {
+        const code = getGoogleAuthCode();
+        if (code) {
+            try {
+                const res = await axiosInstancewithoutPermissions.post("dj-rest-auth/google/", {
+                    code: code,
+                });
+                console.log("Autenticación exitosa:", res.data);
+            } catch (error) {
+                console.error("Error en la autenticación:", error);
+            }
+        }
+    };
+
+    useEffect(() => {
+        googleLogin();
+    }, []);
+
 
 
     return (
