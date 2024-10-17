@@ -1,15 +1,13 @@
-import '../../css/styles_home/faq.css';
 import { Collapse, ConfigProvider } from 'antd';
-import React from "react";
 import { ComponentProps } from '../../interface/home';
 
-const Faq: React.FC<ComponentProps> = ({ id }) => {
+const Faq = ({ id }: ComponentProps) => {
 
   const { Panel } = Collapse;
 
   return (
-    <div id={id} className="faq-container">
-      <div className="div-166">
+    <div id={id} className="mx-auto max-w-[300px] sm:max-w-[550px] md:max-w-[750px] lg:max-w-[1000px]">
+      <div className="pb-6 font-medium text-[38px] text-center text-white leading-10">
         <span>Nuestras más </span>
         <span className='text-[#0561ac]'>frecuentes </span>
         <span >preguntas</span>

@@ -9,7 +9,7 @@ import { reachGoogle } from '../logic/components_form/redirect-oauth';
 const initialFormData = {
     email: "",
     password: "",
-    remember: "",
+    // remember: "",
 };
 
 const AuthPage = () => {

@@ -14,12 +14,12 @@ const How_work: React.FC<ComponentProps> = ({ id }) => {
           <div className="flex flex-col px-10" id="div-29">
             <div className="self-center">
               <TransitionX>
-                <div className="flex flex-col max-w-[400px] md:max-w-full">
+                <div className="flex flex-col max-w-[300px] md:max-w-full">
                   <div className="text-center text-4xl font-bold leading-[47px] capitalize">
                     <span className="text-[#f4eded]">¿Qué es un</span>
                     <span className="text-[#61a4fb]"> Producto Ganador?</span>
                   </div>
-                  <div className="text-[#fdfbfb] text-center leading-[120%] self-center mt-10 max-w-[400px] md:max-w-[830px] md:mt-10">
+                  <div className="text-[#fdfbfb] text-center leading-[120%] self-center mt-10 max-w-[2500px] md:max-w-[830px] md:mt-10">
                     Es aquel que la gente quiere comprar, te permite ganar dinero, no
                     tiene demasiada competencia, puede crecer más en ventas, recibe
                     buenas críticas, se adapta a las modas o estaciones, se anuncia bien
@@ -33,7 +33,7 @@ const How_work: React.FC<ComponentProps> = ({ id }) => {
                           <div className="text-white text-lg font-bold leading-[115.789%] self-center whitespace-nowrap mt-6">
                             Costos 70% menos
                           </div>
-                          <div className="text-white text-center w-[400px] leading-[171.429%] mt-3.5">
+                          <div className="text-white text-center w-[300px] leading-[171.429%] mt-3.5">
                             Con nuestra IA olvídate de invertir en servicios de prueba
                             para cada aplicación de tus productos ganadores
                           </div>
@@ -45,7 +45,7 @@ const How_work: React.FC<ComponentProps> = ({ id }) => {
                           <div className="text-white text-lg font-bold leading-[115.789%] self-center whitespace-nowrap mt-6">
                             Acorde al mercado actual
                           </div>
-                          <div className="text-white w-[400px] text-center leading-[150%] mt-3.5">
+                          <div className="text-white w-[300px] text-center leading-[150%] mt-3.5">
                             Gracias al aprendizaje autmatico, los resultados de tus
                             búsquedas estarán siempre de acorde a las nuevas tendencias
                           </div>

@@ -46,21 +46,14 @@ const Welcome = () => {
 
 
     return (
-        <div className="flex flex-col justify-center items-center mt-[140px]">
+        <div className="flex flex-col justify-center items-center mx-auto mt-[140px] md:px-0 w-full md:max-w-[1000px]">
             <div
-                className='py-2'
+                className='py-2 font-thin text-3xl text-center sm:text-2xl md:text-5xl'
                 style={{
-                    letterSpacing: '1.6px',
                     background: 'linear-gradient(91deg, #ff1cf7 2.26%, #00f0ff 100%)',
                     backgroundClip: 'text',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
-                    textAlign: 'center',
-                    fontWeight: 100,
-                    fontSize: '45px',
-                    lineHeight: '50px',
-                    fontFamily: '"Poppins", sans-serif',
-                    color: 'white'
                 }}
             >
                 Determina la probabilidad
@@ -68,7 +61,7 @@ const Welcome = () => {
                 de éxito de productos ganadores
             </div>
             <img src={welcome} className='mt-[-17px] mb-[14px] w-[55%] h-[55%]' alt="welcome" />
-            <div className="mt-[-39px] font-poppins text-[20px] text-center text-white leading-[33px] tracking-[0.72px]">
+            <div className="mt-[-39px] font-poppins text-center text-white text-xs sm:text-lg md:text-[20px] leading-relaxed md:leading-[33px] tracking-[0.72px]">
                 Potencia tu negocio y ahórrate miles de dólares y mucho tiempo a la hora de testear
                 <br />
                 malos productos y ten más asertividad con LexCom asi logrando tener más precisión.
