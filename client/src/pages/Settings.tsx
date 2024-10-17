@@ -154,9 +154,9 @@ const Settings: React.FC = () => {
 
   const handleLogout = async () => {
     try {
-      await axiosInstance.post('logout/', {
-        refresh_token: localStorage.getItem('refresh_token'),
-      });
+      // await axiosInstance.post('logout/', {
+      // refresh_token: localStorage.getItem('refresh_token'),
+      // });
 
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
