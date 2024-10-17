@@ -118,9 +118,9 @@ const Dashboard: React.FC = () => {
 
   const handleLogout = async () => {
     try {
-      await axiosInstance.post('logout/', {
-        refresh_token: localStorage.getItem('refresh_token'),
-      });
+      // await axiosInstance.post('logout/', {
+      //   refresh_token: localStorage.getItem('refresh_token'),
+      // });
 
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
@@ -201,13 +201,14 @@ const Dashboard: React.FC = () => {
     axiosInstance.get<UserType>(url)
       .then(response => {
         setData(response.data);
-        // console.log(response.data);
       })
       .catch(err => {
         console.error(err.message);
-      })
-      .finally(() => {
-
+        api.error({
+          message: 'Error en la actualización',
+          description: 'Hubo un problema al obtener los datos. Por favor, verifica tu conexión o contacta con soporte.',
+          duration: 3
+        });
       })
   }, []);
 

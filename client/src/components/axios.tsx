@@ -25,7 +25,6 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.response.use(
 	(response) => {
-		// console.log('baseurl', baseURL)
 		return response;
 	},
 	async function (error: AxiosError) {
@@ -89,11 +88,9 @@ axiosInstance.interceptors.response.use(
 								console.log(err);
 							});
 					} else {
-						// console.log('Refresh token is expired', tokenParts.exp, now);
 						window.location.href = '/';
 					}
 				} else {
-					// console.log('Refresh token not available.');
 					window.location.href = '/';
 				}
 			}

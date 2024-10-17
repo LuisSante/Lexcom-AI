@@ -91,11 +91,20 @@ const Settings: React.FC = () => {
       password: data?.password
     };
 
+
     try {
-      const response = await axiosInstance.put(url, userData);
-      console.log(response.data);
+      await axiosInstance.put(url, userData);
+      api.success({
+        message: 'Actualización realizada',
+        duration: 4
+      });
     } catch (err) {
       console.error('error:', err);
+      api.error({
+        message: 'Error en la actualización',
+        description: 'Hubo un problema al obtener los datos. Por favor, verifica tu conexión o contacta con soporte.',
+        duration: 3
+      });
     }
 
     setIsEditing(false);
@@ -129,8 +138,9 @@ const Settings: React.FC = () => {
 
       } catch (err) {
         api.error({
-          message: 'Error en la actualizacion',
-          duration: 4
+          message: 'Error en la actualización',
+          description: 'Hubo un problema al obtener los datos. Por favor, verifica tu conexión o contacta con soporte.',
+          duration: 3
         });
       }
     };

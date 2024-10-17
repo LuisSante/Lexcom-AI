@@ -123,7 +123,6 @@ const LexcomAI: React.FC = () => {
                 success: ((Number(values[0]) + Number(values[1]))) * 100,
                 failure: ((Number(values[3]) + Number(values[4]))) * 100
             };
-            console.log(secondData);
             // const secondValue = (secondData['Éxito'] * 100).toString + '%';
             const newSecondChartData: TypePrediction = {
                 labels: ['Éxito', 'Fallo'],

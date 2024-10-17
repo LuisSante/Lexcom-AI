@@ -7,16 +7,16 @@ from django.core.mail import send_mail, EmailMessage
 
 
 class User(AbstractUser):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, blank=True, null=True)
     email = models.EmailField(max_length=200, unique=True)
     password = models.CharField(max_length=200)
     username = models.CharField(max_length=200, default='username')
-    surname = models.CharField(max_length=200)
-    phone = models.CharField(max_length=15)
-    country = models.CharField(max_length=200)
-    city = models.CharField(max_length=200)
-    address = models.CharField(max_length=200)
-    gender = models.CharField(max_length=30)
+    surname = models.CharField(max_length=200, blank=True, null=True)
+    phone = models.CharField(max_length=15, blank=True, null=True)
+    country = models.CharField(max_length=200, blank=True, null=True)
+    city = models.CharField(max_length=200, blank=True, null=True)
+    address = models.CharField(max_length=200, blank=True, null=True)
+    gender = models.CharField(max_length=30, blank=True, null=True)
     date_of_birth = models.DateTimeField(null=True, blank=True)
     search_plan = models.CharField(max_length=50, choices=[('free', 'Free'), (
         'standard', 'Standard'), ('business', 'Business'), ('premium', 'Premium')], default='free')

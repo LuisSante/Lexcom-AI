@@ -61,9 +61,10 @@ export const ButtonPlan: React.FC<ButtonPlanType> = ({ plan, value, styleButton 
     const currentPlan = responsePlan.data.plan;
 
     axiosInstance.post('update_plan/', { suscription: currentPlan })
+
       .then(response => {
         handleRegisterModalCancel();
-        console.log(response.data);
+        console.log("compra realizada", response);
         api.success({
           message: 'Compra realizada con éxito',
           description: 'Espere un momento por favor, actualizando...',
@@ -86,16 +87,18 @@ export const ButtonPlan: React.FC<ButtonPlanType> = ({ plan, value, styleButton 
     const fetchRequest = async () => {
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
-      const collectionStatus = urlParams.get('collection_status');
+      // const collectionStatus = urlParams.get('collection_status');
       const status = urlParams.get('status');
 
-      console.log('collectionStatus ', collectionStatus);
-      console.log('status ', status);
+      // console.log('collectionStatus ', collectionStatus);
+      // console.log('status ', status);
       if (status === 'approved') {
-        // console.log('CURRENT PLAN', currentPlan);
         handlePayment();
       } else {
-        console.log('Error en la compra');
+        api.error({
+          message: 'Compra no aprobada',
+          duration: 3
+        });
       }
     }
 
