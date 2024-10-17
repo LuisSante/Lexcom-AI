@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { axiosInstancewithoutPermissions } from '../axios';
+import axiosInstance, { axiosInstancewithoutPermissions } from '../axios';
 import { Button } from 'antd';
 import { useEffect } from 'react';
 
@@ -28,11 +28,13 @@ const Welcome = () => {
                 const res = await axiosInstancewithoutPermissions.post("dj-rest-auth/google/", {
                     code: code,
                 });
-                const { access, user } = res.data;
+                const { access } = res.data;
+                // const { access, user } = res.data;
                 localStorage.setItem("access_token", access);
-                localStorage.setItem("user", JSON.stringify(user));
+                axiosInstance.defaults.headers['Authorization'] = 'JWT ' + access;
+                // localStorage.setItem("user", JSON.stringify(user));
 
-                // navigate("/dashboard");
+                navigate("/dashboard");
             } catch (error) {
                 console.error("Error en la autenticación:", error);
             }
