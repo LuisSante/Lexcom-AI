@@ -21,6 +21,8 @@ load_dotenv()
 DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')
 PASSWORD_GMAIL = os.getenv('PASSWORD_GMAIL')
 PASSWORD_APP_LEXCOM_SUPPORT = os.getenv('PASSWORD_APP_LEXCOM_SUPPORT')
+CLIENT_ID_GOOGLE = os.getenv('CLIENT_ID_GOOGLE')
+SECRET_GOOGLE = os.getenv('SECRET_GOOGLE')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -234,8 +236,8 @@ SOCIALACCOUNT_PROVIDERS = {
         },
         # 'OAUTH_PKCE_ENABLED': True,
         'APP': {
-            'client_id': '751598689501-3c9pba15kcprp8mju2hs9qkeoh1v37ul.apps.googleusercontent.com',
-            'secret': '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',
+            'client_id': f'{CLIENT_ID_GOOGLE}',
+            'secret': f'{SECRET_GOOGLE}',
         }
     }
 }
