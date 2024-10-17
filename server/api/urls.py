@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import user, openai, tiktok, lexcomia, usersettings, healthz, payment
+from .views import user, openai, tiktok, lexcomia, usersettings, healthz, payment, account
 
 from rest_framework_simplejwt import views as jwt_views
 
@@ -59,6 +59,13 @@ urlpatterns = [
         {'post': 'send_plan'}), name="send_plan"),
 
     # Endpoint for test
-    path(r'test/', healthz.TestView.as_view(), name='healthz')
+    path(r'test/', healthz.TestView.as_view(), name='healthz'),
 
+    # Endpoints for Login with Google
+    # path(r'accounts/', include('allauth.urls')),
+    # path(r'dj-rest-auth/', include('dj_rest_auth.urls')),
+    # path(r'dj-rest-auth/registration/',
+    #      include('dj_rest_auth.registration.urls')),
+    path(r'dj-rest-auth/google/',
+         account.GoogleLogin.as_view(), name="google_login"),
 ]

@@ -1,5 +1,3 @@
-import '../css/styles_home/home.css'
-import { useEffect, useState } from 'react';
 import Navbar from '../components/components_home/Navbar';
 import How_work from '../components/components_home/How_work';
 import Services from '../components/components_home/Services';
@@ -11,26 +9,11 @@ import Amazing from '../components/components_home/Amazing';
 import { TransitionX, TransitionY } from '../components/Section';
 
 const Home: React.FC = () => {
-    const [scrollHeight, setScrollHeight] = useState(0);
-
-    const handleScroll = () => {
-        const position = window.pageYOffset;
-        setScrollHeight(position);
-    }
-
-    useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, [scrollHeight]);
-
 
     return (
-        <div className='ml-[10px]'>
-            <div className='position-pages'>
-                <Navbar isScrolling={scrollHeight} />
+        <div className='mx-auto w-full md:w-11/12 lg:w-10/12'>
+            <div className='w-full'>
+                <Navbar />
                 <div>
                     <TransitionY>
                         <Welcome />

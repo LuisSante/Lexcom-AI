@@ -6,6 +6,9 @@ const baseURL = import.meta.env.VITE_API_URL;
 export const axiosInstancewithoutPermissions = axios.create({
 	baseURL: baseURL,
 	timeout: 100000,
+	headers: {
+		'Content-Type': 'application/json',
+	}
 });
 
 const axiosInstance = axios.create({

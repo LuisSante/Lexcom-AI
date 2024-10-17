@@ -23,16 +23,28 @@ cffi==1.16.0
     # via cryptography
 charset-normalizer==3.3.2
     # via requests
+colorama==0.4.6
+    # via tqdm
 cryptography==42.0.5
-    # via djangorestframework-simplejwt
+    # via
+    #   djangorestframework-simplejwt
+    #   pyjwt
+defusedxml==0.7.1
+    # via python3-openid
 distro==1.9.0
     # via openai
+dj-rest-auth==6.0.0
+    # via -r requirements.in
 django==5.0.3
     # via
     #   -r requirements.in
+    #   dj-rest-auth
+    #   django-allauth
     #   django-cors-headers
     #   djangorestframework
     #   djangorestframework-simplejwt
+django-allauth==0.61.1
+    # via -r requirements.in
 django-cors-headers==4.3.1
     # via -r requirements.in
 django-rest-passwordreset==1.4.0
@@ -40,6 +52,7 @@ django-rest-passwordreset==1.4.0
 djangorestframework==3.14.0
     # via
     #   -r requirements.in
+    #   dj-rest-auth
     #   djangorestframework-simplejwt
 djangorestframework-oauth==1.1.0
     # via -r requirements.in
@@ -62,10 +75,14 @@ idna==3.6
     #   requests
 joblib==1.3.2
     # via scikit-learn
+mercadopago==2.2.3
+    # via -r requirements.in
 numpy==1.26.4
     # via
     #   scikit-learn
     #   scipy
+oauthlib==3.2.2
+    # via requests-oauthlib
 openai==1.14.0
     # via -r requirements.in
 psycopg2-binary==2.9.9
@@ -76,14 +93,24 @@ pydantic==2.6.4
     # via openai
 pydantic-core==2.16.3
     # via pydantic
-pyjwt==2.8.0
-    # via djangorestframework-simplejwt
+pyjwt[crypto]==2.8.0
+    # via
+    #   django-allauth
+    #   djangorestframework-simplejwt
 python-dotenv==1.0.1
     # via -r requirements.in
+python3-openid==3.2.0
+    # via django-allauth
 pytz==2024.1
     # via djangorestframework
 requests==2.31.0
-    # via google-search-results
+    # via
+    #   django-allauth
+    #   google-search-results
+    #   mercadopago
+    #   requests-oauthlib
+requests-oauthlib==2.0.0
+    # via django-allauth
 scikit-learn==1.3.2
     # via -r requirements.in
 scipy==1.12.0
@@ -106,6 +133,9 @@ typing-extensions==4.10.0
     #   openai
     #   pydantic
     #   pydantic-core
+tzdata==2024.2
+    # via django
 urllib3==2.2.1
     # via requests
-mercadopago==2.2.1
+whitenoise==6.7.0
+    # via -r requirements.in

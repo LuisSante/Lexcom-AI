@@ -5,7 +5,7 @@ import '../css/recoverpassword.css'
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/lexcom.svg';
 import { axiosInstancewithoutPermissions } from '../components/axios';
-import { RecoverType }  from '../interface/recover'
+import { RecoverType } from '../interface/recover'
 
 const RecoverPassword = () => {
     const [form] = Form.useForm();
@@ -96,7 +96,7 @@ const RecoverPassword = () => {
 
                                     >
 
-                                        <Input prefix={<UserOutlined className="site-form-item-icon" />} />
+                                        <Input prefix={<UserOutlined />} />
                                     </Form.Item>
 
                                     <Divider className="custom-divider" />

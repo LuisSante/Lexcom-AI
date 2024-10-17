@@ -1,10 +1,11 @@
 import React from 'react';
-import { Button, Checkbox, Form, Input, notification, ConfigProvider } from 'antd';
+import axiosInstance from '../axios';
+import { Button, Form, Input, notification, ConfigProvider } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import '../../css/login.css'
-import axiosInstance from '../axios';
 import { FieldType } from '../../interface/home';
+import GoogleIcon from '../../assets/google-icon.svg';
+import { reachGoogle } from '../logic/components_form/redirect-oauth';
 
 const Login: React.FC<FieldType> = () => {
   const [form] = Form.useForm();
@@ -63,7 +64,7 @@ const Login: React.FC<FieldType> = () => {
       >
         <div  >
           <Form
-            name="basic"
+            // name="basic"
             form={form}
             onFinish={onFinish}
             labelCol={{ span: 8 }}
@@ -71,43 +72,56 @@ const Login: React.FC<FieldType> = () => {
             initialValues={{ remember: true }}
             autoComplete="off"
           >
-            <Form.Item<FieldType>
-              label="E-mail"
-              name="email"
-              rules={[{ required: true, message: 'Porfavor ingresa tu usuario!' }]}
+            <div className='flex flex-col justify-center md:pl-28 max-w-xl'>
+              <Form.Item<FieldType>
+                wrapperCol={{ span: 24 }}
+                // label="E-mail"
+                name="email"
+                rules={[{ required: true, message: 'Por favor ingresa tu email' }]}
 
-            >
-              <Input prefix={<UserOutlined className="site-form-item-icon" />} />
-            </Form.Item>
+              >
+                <Input prefix={<UserOutlined />} />
+              </Form.Item>
 
-            <Form.Item<FieldType>
-              label="Password"
-              name="password"
-              rules={[{ required: true, message: 'Porfavor ingresa tu contraseña!' }]}
-            >
-              <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} />
-            </Form.Item>
+              <Form.Item<FieldType>
+                wrapperCol={{ span: 24 }}
+                // label="Password"
+                name="password"
+                rules={[{ required: true, message: 'Por favor ingresa tu contraseña!' }]}
+              >
+                <Input.Password prefix={<LockOutlined />} />
+              </Form.Item>
 
-            <Form.Item<FieldType>
-              name="remember"
-              valuePropName="checked"
-              wrapperCol={{ offset: 8, span: 16 }}
-            >
-              <Checkbox style={{ color: '#f6ffed' }}>Recuerdame</Checkbox>
-              <br />
-              <a className="login-form-forgot p-10px" onClick={recoverpassword}>
-                ¿Olvidaste tu contraseña?
-              </a>
-            </Form.Item>
+              <div className='flex flex-col justify-center items-center'>
+                <Form.Item wrapperCol={{ span: 24 }}>
+                  <Button className="w-52" type="primary" htmlType="submit">
+                    Continue
+                  </Button>
+                </Form.Item>
 
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-              <Button className={"div-148"} type="primary" htmlType="submit">
-                Enviar
-              </Button>
-            </Form.Item>
+                <div className='flex items-center pb-4 w-full'>
+                  <hr className="flex-grow border-[#F2F2F2] border-t" />
+                </div>
+
+                <button
+                  className='flex justify-center items-center gap-x-2 bg-[#F2F2F2] hover:bg-slate-300 py-[6px] border-none rounded-md w-52 font-medium font-poppins cursor-pointer'
+                  onClick={reachGoogle}
+                >
+                  <img src={GoogleIcon} className='max-w-full' />
+                  <span>Google</span>
+                </button>
+                <div className='pt-4'>
+                  <a onClick={recoverpassword}>
+                    ¿Olvidaste tu contraseña?
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
           </Form>
         </div >
-      </ConfigProvider>
+      </ConfigProvider >
     </>
   )
 };
