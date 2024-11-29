@@ -10,13 +10,13 @@
   }
 
   .menu-button {
-    color: white !important; /* !important se usa para asegurarse de que este estilo tenga prioridad */
+    color: white !important; 
     background: 'transparent';
     border: 'none';
   }
 
   .sider-trigger-container {
-    background: #000; /* Fondo del área alrededor del botón */
+    background: #000;
   }
 
   .body-layout {
@@ -28,6 +28,7 @@
   
   .lexcom-layout {
     background: #ececec;
+    /* background: #1D1D18; */
     background-size: cover;
     background-position: center center;
     
