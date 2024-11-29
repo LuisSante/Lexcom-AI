@@ -76,41 +76,65 @@ const Tiktok: React.FC<TypeTikTok> = ({ searchValue }) => {
         xxl: 8
     };
     return (
-        <>
-            {contextHolder}
-            <div>
-                {isLoading && <Skeleton/>}
-                {data && dataSR && !isLoading && (
-                    <Space style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
-                        {dataSR.map((item, index) => (
-                            <Col key={index} span={100 / responsiveGrid.xl} style={{ alignItems: 'center' }}>
-                                <ConfigProvider
-                                    theme={{
-                                        token: {
-                                            colorText: '#fff',
-                                            colorTextDescription: 'rgba(255, 255, 255, 0.64)'/* here is your global tokens */
-                                        },
-                                    }}
-                                >
-
-                                    <Card style={{ width: '100%', backgroundColor: '#000', color: '#0c0c0c95' }}>
-                                        {item.ad.videos.map((video, idx) => (
-                                            video && (
-                                                <video key={idx} controls style={{ width: '100%', height: 'auto' }}>
-                                                    <source src={video.url} type="video/mp4" />
-                                                </video>
-                                            )
-                                        ))}
-                                        <Card.Meta title="Numero de vistas" description={item.ad.reach.unique_users_seen} />
-                                    </Card>
-                                </ConfigProvider>
-                            </Col>
-                        ))}
-                    </Space>
-                )}
-
-            </div>
-        </>
+      <>
+        {contextHolder}
+        <div className="p-4">
+          {isLoading && <Skeleton />}
+          {data && dataSR && !isLoading && (
+            <Space
+              style={{
+                width: "100%",
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+                gap: "20px",
+              }}
+            >
+              {dataSR.map((item, index) => (
+                <Col
+                  key={index}
+                  span={100 / responsiveGrid.xl}
+                  style={{ alignItems: "center" }}
+                >
+                  <ConfigProvider
+                    theme={{
+                      token: {
+                        colorText: "#fff",
+                        colorTextDescription:
+                          "rgba(255, 255, 255, 0.64)" /* here is your global tokens */,
+                      },
+                    }}
+                  >
+                    <Card
+                      style={{
+                        width: "100%",
+                        backgroundColor: "#000",
+                        color: "#0c0c0c95",
+                      }}
+                    >
+                      {item.ad.videos.map(
+                        (video, idx) =>
+                          video && (
+                            <video
+                              key={idx}
+                              controls
+                              style={{ width: "100%", height: "auto" }}
+                            >
+                              <source src={video.url} type="video/mp4" />
+                            </video>
+                          )
+                      )}
+                      <Card.Meta
+                        title="Numero de vistas"
+                        description={item.ad.reach.unique_users_seen}
+                      />
+                    </Card>
+                  </ConfigProvider>
+                </Col>
+              ))}
+            </Space>
+          )}
+        </div>
+      </>
     );
 }
 

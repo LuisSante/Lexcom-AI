@@ -1,49 +1,54 @@
 import Standard from '../components/components_calculator/Calculator_1';
 import CPA_CVU from '../components/components_calculator/Calculator_2';
 import Precio_del_Producto from '../components/components_calculator/Calculator_3';
-import Tutorial from '../pages/Tutorial';
-import '../css/Dashboard.css';
-import React, { useEffect, useRef, useState } from 'react';
-import { Avatar, Space, Input, Button, notification, Tour, Divider, Drawer } from 'antd';
-import { Dropdown, ConfigProvider, Layout, Menu, Progress } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
-import { UserOutlined, CalculatorOutlined, TikTokOutlined, TrophyOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import logo from '../assets/lexcom.svg';
-import '../css/Dashboard.css';
-import { SmileOutlined, CloseOutlined } from '@ant-design/icons';
+import Tutorial from "../pages/Tutorial";
+import React, { useEffect, useRef, useState } from "react";
+import { Avatar, Space, Input, Button, notification, Tour, Drawer } from "antd";
+import { Dropdown, ConfigProvider, Layout, Menu } from "antd";
+import { DownOutlined } from "@ant-design/icons";
+import {
+  UserOutlined,
+  CalculatorOutlined,
+  TikTokOutlined,
+  TrophyOutlined,
+  LockOutlined,
+} from "@ant-design/icons";
+import type { MenuProps } from "antd";
+import logo from "../assets/lexcom.svg";
+import "../css/Dashboard.css";
+import { SmileOutlined, CloseOutlined } from "@ant-design/icons";
 import {
   QuestionCircleOutlined,
   BookOutlined,
   DesktopOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-} from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
-import About from '../components/components_home/About';
-import OpenAI from './OpenAI';
-import LandingAI from './Landing';
-import CopyAds from './CopyAds';
-import Tiktok from './Tiktok';
-import LexcomAI from './LexcomAI';
-import axiosInstance from '../components/axios';
-import type { TourProps } from 'antd';
-import { UserType } from '../interface/dashboard';
-import { ShowData } from '../components/components_dashboard/ShowData';
-import Courses from './Courses';
+} from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+import About from "../components/components_home/About";
+import OpenAI from "./OpenAI";
+import LandingAI from "./Landing";
+import CopyAds from "./CopyAds";
+import Tiktok from "./Tiktok";
+import LexcomAI from "./LexcomAI";
+import axiosInstance from "../components/axios";
+import type { TourProps } from "antd";
+import { UserType } from "../interface/dashboard";
+import { ShowData } from "../components/components_dashboard/ShowData";
+import Courses from "./Courses";
 
 const defaultUserData: UserType = {
   id: 0,
-  username: '',
-  email: '',
-  name: '',
-  surname: '',
-  phone: '',
-  country: '',
-  city: '',
-  address: '',
-  gender: '',
-  date_of_birth: ''
+  username: "",
+  email: "",
+  name: "",
+  surname: "",
+  phone: "",
+  country: "",
+  city: "",
+  address: "",
+  gender: "",
+  date_of_birth: "",
 };
 
 const Dashboard: React.FC = () => {
@@ -58,18 +63,19 @@ const Dashboard: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
-  const [selectedMenu, setSelectedMenu] = useState<string | null>('Guide Lexcom');
+  const [selectedMenu, setSelectedMenu] = useState<string | null>(
+    "Guide Lexcom"
+  );
   const [marginL, setmarginL] = useState(250);
 
   const [openD, setOpenD] = useState(false);
   const [searchValue, setSearchValue] = useState<string>("");
   const [api, contextHolder] = notification.useNotification();
-  const Context = React.createContext({ name: 'Default' });
+  const Context = React.createContext({ name: "Default" });
 
-  // To Progress
-  const [progress, setProgress] = useState(0);
-  const [searchCount, setSearchCount] = useState(0);
-  const [maxSearches, setMaxSearches] = useState(0);
+  // const [progress, setProgress] = useState(0);
+  // const [searchCount, setSearchCount] = useState(0);
+  // const [maxSearches, setMaxSearches] = useState(0);
   const [data, setData] = useState<UserType>(defaultUserData);
 
   const showDrawer = () => {
@@ -80,38 +86,46 @@ const Dashboard: React.FC = () => {
     setOpenD(false);
   };
 
-  const steps: TourProps['steps'] = [
+  const steps: TourProps["steps"] = [
     {
-      title: 'Budget Control Pro',
-      description: 'Te ofrecemos tres calculadoras para que de esta forma puedas saber que precio debe tener tu producto, el CPA y CPU asi como estadisticas generales.',
-      placement: 'right',
+      title: "Budget Control Pro",
+      description:
+        "Te ofrecemos tres calculadoras para que de esta forma puedas saber que precio debe tener tu producto, el CPA y CPU asi como estadisticas generales.",
+      placement: "right",
       target: () => ref2.current,
     },
     {
-      title: 'LexIA Determination',
-      description: 'Aquí conocerás si tu producto tendrá éxito o no a la hora de vender. Completa el formulario y no olvides poner el interés que anotaste anteriormente.',
-      placement: 'right',
+      title: "LexIA Determination",
+      description:
+        "Aquí conocerás si tu producto tendrá éxito o no a la hora de vender. Completa el formulario y no olvides poner el interés que anotaste anteriormente.",
+      placement: "right",
       target: () => ref3.current,
     },
     {
-      title: 'TikTok TrendFeed',
-      description: 'Visualizar a la competencia es clave del éxito, ya que podrás conocer sus puntos débiles y usarlo a tu favor. Con esta ventana tendrás los tiktoks más populares de tu producto, úsalos de inspiración para elaborar tu propio video ganador.',
-      placement: 'right',
+      title: "TikTok TrendFeed",
+      description:
+        "Visualizar a la competencia es clave del éxito, ya que podrás conocer sus puntos débiles y usarlo a tu favor. Con esta ventana tendrás los tiktoks más populares de tu producto, úsalos de inspiración para elaborar tu propio video ganador.",
+      placement: "right",
       target: () => ref4.current,
-    }, {
-      title: 'Prompt Generators',
-      description: '¿Tu producto es ganador, pero no sabes como estructurar tu video para que sea una venta segura? En esta pestaña obtendrás ideas de como hacerlo, te brindamos una estructura ganadora para que puedas estructurar tu video y generar tus copys.',
-      placement: 'right',
+    },
+    {
+      title: "Prompt Generators",
+      description:
+        "¿Tu producto es ganador, pero no sabes como estructurar tu video para que sea una venta segura? En esta pestaña obtendrás ideas de como hacerlo, te brindamos una estructura ganadora para que puedas estructurar tu video y generar tus copys.",
+      placement: "right",
       target: () => ref5.current,
-    }, {
-      title: 'Lexcom Courses',
-      description: '¿No sabes como continuar vendiendo? Te ofrecemos una amplia variedad de cursos que te permitiran continuar tu camino al exito.',
-      placement: 'right',
+    },
+    {
+      title: "Lexcom Courses",
+      description:
+        "¿No sabes como continuar vendiendo? Te ofrecemos una amplia variedad de cursos que te permitiran continuar tu camino al exito.",
+      placement: "right",
       target: () => ref6.current,
-    }, {
-      title: 'Guide Lexcom',
-      description: 'Ver el tutorial',
-      placement: 'right',
+    },
+    {
+      title: "Guide Lexcom",
+      description: "Ver el tutorial",
+      placement: "right",
       target: () => ref7.current,
     },
   ];
@@ -122,23 +136,23 @@ const Dashboard: React.FC = () => {
       //   refresh_token: localStorage.getItem('refresh_token'),
       // });
 
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('refresh_token');
-      axiosInstance.defaults.headers['Authorization'] = null;
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+      axiosInstance.defaults.headers["Authorization"] = null;
 
-      navigate('/');
+      navigate("/");
     } catch (error) {
-      console.error('Error al cerrar sesión:', error);
+      console.error("Error al cerrar sesión:", error);
     }
   };
 
   const handleSettings = async () => {
-    navigate('/settings');
-  }
+    navigate("/settings");
+  };
 
-  const items: MenuProps['items'] = [
+  const items: MenuProps["items"] = [
     {
-      key: '2',
+      key: "2",
       label: (
         <a target="_blank" rel="noopener noreferrer" onClick={showDrawer}>
           Perfil
@@ -146,7 +160,7 @@ const Dashboard: React.FC = () => {
       ),
     },
     {
-      key: '3',
+      key: "3",
       label: (
         <a target="_blank" rel="noopener noreferrer" onClick={handleSettings}>
           Configuraciones
@@ -154,7 +168,7 @@ const Dashboard: React.FC = () => {
       ),
     },
     {
-      key: '4',
+      key: "4",
       danger: true,
       label: (
         <a target="_blank" rel="noopener noreferrer" onClick={handleLogout}>
@@ -167,119 +181,183 @@ const Dashboard: React.FC = () => {
   const emptyNotification = () => {
     api.open({
       message: "ERROR!!!",
-      description: <Context.Consumer>{() => "Error! Realiza una búsqueda"}</Context.Consumer>,
-      icon: <CloseOutlined style={{ color: '#108ee9' }} />,
+      description: (
+        <Context.Consumer>
+          {() => "Error! Realiza una búsqueda"}
+        </Context.Consumer>
+      ),
+      icon: <CloseOutlined style={{ color: "#108ee9" }} />,
     });
   };
 
   const openNotification = () => {
     api.open({
       message: "LEXCOM CHECK!!!",
-      description: <Context.Consumer>{() => "Búsqueda realizada existósamente"}</Context.Consumer>,
-      icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+      description: (
+        <Context.Consumer>
+          {() => "Búsqueda realizada existósamente"}
+        </Context.Consumer>
+      ),
+      icon: <SmileOutlined style={{ color: "#108ee9" }} />,
     });
   };
 
-  useEffect(() => {
-    const fetchUserInfo = async () => {
-      try {
-        const response = await axiosInstance.get('user_info/');
-        const userData = response.data;
-        setMaxSearches(userData.max_searches);
-        setSearchCount(userData.search_count);
-        setProgress(userData.progress_count);
-      } catch (error) {
-        console.error('Error al recuperar la información del usuario:', error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchUserInfo = async () => {
+  //     try {
+  //       const response = await axiosInstance.get("user_info/");
+  //       const userData = response.data;
+  //       setMaxSearches(userData.max_searches);
+  //       setSearchCount(userData.search_count);
+  //       setProgress(userData.progress_count);
+  //     } catch (error) {
+  //       console.error("Error al recuperar la información del usuario:", error);
+  //     }
+  //   };
 
-    fetchUserInfo();
-  }, []);
+  //   fetchUserInfo();
+  // }, []);
 
   useEffect(() => {
-    const url = `update/`
-    axiosInstance.get<UserType>(url)
-      .then(response => {
+    const url = `update/`;
+    axiosInstance
+      .get<UserType>(url)
+      .then((response) => {
         setData(response.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err.message);
         api.error({
-          message: 'Error en la actualización',
-          description: 'Hubo un problema al obtener los datos. Por favor, verifica tu conexión o contacta con soporte.',
-          duration: 3
+          message: "Error en la actualización",
+          description:
+            "Hubo un problema al obtener los datos. Por favor, verifica tu conexión o contacta con soporte.",
+          duration: 3,
         });
-      })
+      });
   }, []);
 
   const handleHome = () => {
     setSearchValue("");
-    setSelectedMenu('Guide Lexcom');
-  }
+    setSelectedMenu("Guide Lexcom");
+  };
+
+  const [userPlan, setUserPlan] = useState<string>("");
+  useEffect(() => {
+    const storedPlan = localStorage.getItem("selectedPlan") || "Star Plan"; // Plan predeterminado si no existe
+    setUserPlan(storedPlan);
+  }, []);
+
+  const isModuleEnabled = (moduleName: string) => {
+    const planPermissions: Record<
+      "Star Plan" | "LexPro" | "Lexcom Super Pro",
+      string[]
+    > = {
+      "Star Plan": ["LexIA Determination", "Prompt Generator Copys"],
+      LexPro: [
+        "LexIA Determination",
+        "Prompt Generator Copys",
+        "Prompt Generator Video",
+        "Prompt Generator Landing",
+      ],
+      "Lexcom Super Pro": [
+        "LexIA Determination",
+        "Prompt Generator Copys",
+        "Prompt Generator Video",
+        "Prompt Generator Landing",
+        "TikTok TrendFeed",
+        "Lexcom Courses",
+        "Guide Lexcom",
+      ],
+    };
+
+    return planPermissions[userPlan as keyof typeof planPermissions]?.includes(
+      moduleName
+    );
+  };
 
   return (
     <ConfigProvider
       theme={{
         components: {
           Layout: {
-            headerBg: '#000',
-            bodyBg: '#000',
+            headerBg: "#000",
+            bodyBg: "#000",
           },
           Divider: {
             lineWidth: 1.5,
             marginLG: 0,
-
-          }
+          },
         },
         token: {
           fontFamily: "Poppins, sans-serif",
-        }
-
+        },
       }}
     >
       {contextHolder}
-      <Layout className="body-layout" style={{ minHeight: '100vh' }}>
-        <Header style={{
-          display: 'flex', alignItems: 'center', justifyItems: 'space-between', position: 'sticky',
-          top: 0,
-          zIndex: 1,
-          width: '100%'
-        }}>
-          <img src={logo} alt="Lexcom Logo" className="navbar_logo_" onClick={handleHome} />
+      <Layout className="body-layout" style={{ minHeight: "100vh" }}>
+        <Header
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyItems: "space-between",
+            position: "sticky",
+            top: 0,
+            zIndex: 1,
+            width: "100%",
+          }}
+        >
+          <img
+            src={logo}
+            alt="Lexcom Logo"
+            className="navbar_logo_"
+            onClick={handleHome}
+          />
           <Input.Search
             size="large"
             placeholder="Search"
-            style={{ width: '400px', marginLeft: 'auto', marginRight: '160px' }}
+            style={{ width: "400px", marginLeft: "auto", marginRight: "160px" }}
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
             onSearch={(value) => {
-              if (value.trim() === '') {
+              if (value.trim() === "") {
                 emptyNotification();
-              } else if (searchCount >= maxSearches) {
-                navigate('/pricing')
               } else {
                 setSearchValue(value);
-                setSelectedMenu('Guide Lexcom');
+                setSelectedMenu("Guide Lexcom");
                 openNotification();
-                axiosInstance.post('increment_search_count/')
-                  .then(response => {
-                    const { new_search_count, new_progress_count } = response.data;
-                    setSearchCount(new_search_count);
-                    setProgress(new_progress_count);
-                  })
-                  .catch(error => {
-                    console.error('Error al actualizar el contador de búsquedas:', error);
-                    api.error({
-                      message: 'Error al actualizar el contador de búsquedas',
-                      duration: 3
-                    });
-                  });
+                //   axiosInstance
+                //     .post("increment_search_count/")
+                //     .then((response) => {
+                //       const { new_search_count, new_progress_count } =
+                //         response.data;
+                //       setSearchCount(new_search_count);
+                //       setProgress(new_progress_count);
+                //     })
+                //     .catch((error) => {
+                //       console.error(
+                //         "Error al actualizar el contador de búsquedas:",
+                //         error
+                //       );
+                //       api.error({
+                //         message: "Error al actualizar el contador de búsquedas",
+                //         duration: 3,
+                //       });
+                //     });
               }
             }}
           />
 
           <p className="welcome">Bienvenido {data?.name}</p>
-          <Avatar style={{ backgroundColor: '#87d068', minWidth: '35px', marginLeft: '20px', marginRight: '10px' }} icon={<UserOutlined />} onClick={showDrawer} />
+          <Avatar
+            style={{
+              backgroundColor: "#87d068",
+              minWidth: "35px",
+              marginLeft: "20px",
+              marginRight: "10px",
+            }}
+            icon={<UserOutlined />}
+            onClick={showDrawer}
+          />
           <Dropdown menu={{ items }} arrow={{ pointAtCenter: true }}>
             <a onClick={(e) => e.preventDefault()}>
               <Space>
@@ -288,8 +366,9 @@ const Dashboard: React.FC = () => {
             </a>
           </Dropdown>
         </Header>
-        <Layout >
-          <Sider className="lexcom-sider"
+        <Layout>
+          <Sider
+            className="lexcom-sider"
             width={250}
             collapsible
             collapsed={collapsed}
@@ -306,120 +385,229 @@ const Dashboard: React.FC = () => {
                 <Button
                   type="text"
                   className="menu-button"
-                  icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                  icon={
+                    collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />
+                  }
                   onClick={() => setCollapsed(!collapsed)}
                 />
               </div>
             }
-            style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 60, bottom: 0 }}
+            style={{
+              overflow: "auto",
+              height: "100vh",
+              position: "fixed",
+              left: 0,
+              top: 60,
+              bottom: 0,
+            }}
           >
             <Menu
               className="lexcom-menu"
               mode="inline"
-              defaultSelectedKeys={['1']}
+              defaultSelectedKeys={["1"]}
               selectedKeys={selectedMenu ? [selectedMenu] : []}
               theme="dark"
               onSelect={(item) => {
-                if (item.key === 'Guide Lexcom') {
-                  setSelectedMenu('Guide Lexcom');
-                } else if (item.key === 'Lexcom Courses') {
-                  setSelectedMenu('Lexcom Courses');
-                } else if (searchValue.trim() === '') {
+                if (item.key === "Guide Lexcom") {
+                  setSelectedMenu("Guide Lexcom");
+                } else if (item.key === "Lexcom Courses") {
+                  setSelectedMenu("Lexcom Courses");
+                } else if (searchValue.trim() === "") {
                   emptyNotification();
-                  setSelectedMenu('');
+                  setSelectedMenu("");
                 } else {
                   setSelectedMenu(item.key as string);
                 }
               }}
             >
-              <Menu.SubMenu icon={<CalculatorOutlined ref={ref2} />} key={'BudgetControlPro'} title={'AutoPro Finance'}>
-                <Menu.ItemGroup key={'BudgetControlPro'}>
-                  <Menu.Item key={'Standard'}>
-                    {'Standard'}
-                  </Menu.Item>
-                  <Menu.Item key={'CPA_CVU'}>
-                    {'CPA CVU'}
-                  </Menu.Item>
-                  <Menu.Item key={'Precio_del_Producto'}>
-                    {'Precio del Producto'}
-                  </Menu.Item>
-                </Menu.ItemGroup>
-              </Menu.SubMenu>
-              <Menu.Item key={'LexIA Determination'} icon={<TrophyOutlined ref={ref3} />}> {/* Utilizamos el ref aquí */}
-                {'LexIA Determination'}
-              </Menu.Item>
-              <Menu.Item key={'TikTok TrendFeed'} icon={<TikTokOutlined ref={ref4} />}> {/* Utilizamos el ref aquí */}
-                {'TikTok TrendFeed'}
-              </Menu.Item>
-              <Menu.SubMenu icon={<DesktopOutlined ref={ref5} />} key={'Prompt Generators'} title={'LexGeneration'}>
-                <Menu.ItemGroup key={'Prompt Generators'} >
-                  <Menu.Item key={'Prompt Generator Video'}>
-                    {'LexVid Pro'}
-                  </Menu.Item>
-                  <Menu.Item key={'Prompt Generator Copys'}>
-                    {'LexCopy Pro'}
-                  </Menu.Item>
-                  <Menu.Item key={'Prompt Generator Landing'}>
-                    {'LexLanding Pro'}
+              <Menu.SubMenu
+                icon={<CalculatorOutlined ref={ref2} />}
+                key={"BudgetControlPro"}
+                title={"AutoPro Finance"}
+              >
+                <Menu.ItemGroup key={"BudgetControlPro"}>
+                  <Menu.Item key={"Standard"}>{"Standard"}</Menu.Item>
+                  <Menu.Item key={"CPA_CVU"}>{"CPA CVU"}</Menu.Item>
+                  <Menu.Item key={"Precio_del_Producto"}>
+                    {"Precio del Producto"}
                   </Menu.Item>
                 </Menu.ItemGroup>
               </Menu.SubMenu>
-              <Menu.Item key={'Lexcom Courses'} icon={<BookOutlined ref={ref6} />}> {/* Utilizamos el ref aquí */}
-                {'Lexcom Courses'}
-              </Menu.Item>
-              <Menu.Item key={'Guide Lexcom'} icon={<QuestionCircleOutlined ref={ref7} />} onClick={() => setOpen(true)}> {/* Utilizamos el ref aquí */}
-                {'Guide Lexcom'}
+
+              <Menu.Item
+                key={"LexIA Determination"}
+                icon={
+                  isModuleEnabled("LexIA Determination") ? (
+                    <TrophyOutlined ref={ref3} />
+                  ) : (
+                    <LockOutlined />
+                  )
+                }
+                disabled={!isModuleEnabled("LexIA Determination")}
+              >
+                {"LexIA Determination"}
               </Menu.Item>
 
-              <Divider className="custom-divider_dashboard" />
-              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px', backgroundColor: 'black' }}>
+              <Menu.Item
+                key={"TikTok TrendFeed"}
+                icon={
+                  isModuleEnabled("TikTok TrendFeed") ? (
+                    <TikTokOutlined ref={ref4} />
+                  ) : (
+                    <LockOutlined />
+                  )
+                }
+                disabled={!isModuleEnabled("TikTok TrendFeed")}
+              >
+                {"TikTok TrendFeed"}
+              </Menu.Item>
+
+              <Menu.SubMenu
+                icon={<DesktopOutlined ref={ref5} />}
+                key={"Prompt Generators"}
+                title={"LexGeneration"}
+              >
+                <Menu.ItemGroup key={"Prompt Generators"}>
+                  <Menu.Item
+                    key={"Prompt Generator Video"}
+                    icon={
+                      isModuleEnabled("Prompt Generator Video") ? undefined : (
+                        <LockOutlined />
+                      )
+                    }
+                    disabled={!isModuleEnabled("Prompt Generator Video")}
+                  >
+                    {"LexVid Pro"}
+                  </Menu.Item>
+                  <Menu.Item
+                    key={"Prompt Generator Copys"}
+                    icon={
+                      isModuleEnabled("Prompt Generator Copys") ? undefined : (
+                        <LockOutlined />
+                      )
+                    }
+                    disabled={!isModuleEnabled("Prompt Generator Copys")}
+                  >
+                    {"LexCopy Pro"}
+                  </Menu.Item>
+                  <Menu.Item
+                    key={"Prompt Generator Landing"}
+                    icon={
+                      isModuleEnabled(
+                        "Prompt Generator Landing"
+                      ) ? undefined : (
+                        <LockOutlined />
+                      )
+                    }
+                    disabled={!isModuleEnabled("Prompt Generator Landing")}
+                  >
+                    {"LexLanding Pro"}
+                  </Menu.Item>
+                </Menu.ItemGroup>
+              </Menu.SubMenu>
+
+              <Menu.Item
+                key={"Lexcom Courses"}
+                icon={
+                  isModuleEnabled("Lexcom Courses") ? (
+                    <BookOutlined ref={ref6} />
+                  ) : (
+                    <LockOutlined />
+                  )
+                }
+                disabled={!isModuleEnabled("Lexcom Courses")}
+              >
+                {"Lexcom Courses"}
+              </Menu.Item>
+
+              <Menu.Item
+                key={"Guide Lexcom"}
+                icon={<QuestionCircleOutlined ref={ref7} />}
+                onClick={() => setOpen(true)}
+              >
+                {"Guide Lexcom"}
+              </Menu.Item>
+
+              {/* <Divider className="custom-divider_dashboard" /> */}
+              {/* <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "100px",
+                  backgroundColor: "black",
+                }}
+              >
                 <Progress
                   type="circle"
                   percent={progress}
                   size={80}
-                  strokeColor='#108ee9'
+                  strokeColor="#108ee9"
                   trailColor="#ffffff"
                   format={() => (
-                    <span style={{ color: progress === 100 ? '#108ee9' : '#108ee9' }}>
+                    <span
+                      style={{
+                        color: progress === 100 ? "#108ee9" : "#108ee9",
+                      }}
+                    >
                       {searchCount} / {maxSearches}
                     </span>
                   )}
                 />
-              </div>
-
+              </div> */}
             </Menu>
           </Sider>
           <Tour open={open} onClose={() => setOpen(false)} steps={steps} />
-          <Layout style={{
-            padding: 24,
-            minHeight: 360,
-            marginLeft: marginL
-          }} className="lexcom-layout">
-
-            <Content style={{ margin: '0 16px', padding: '0 24px', minHeight: 700 }} >
-              {selectedMenu === 'Standard' && <Standard />}
-              {selectedMenu === 'Precio_del_Producto' && <Precio_del_Producto />}
-              {selectedMenu === 'CPA_CVU' && <CPA_CVU />}
-              {selectedMenu === 'LexIA Determination' && <LexcomAI />}
-              {selectedMenu === 'TikTok TrendFeed' && <Tiktok searchValue={searchValue} />}
-              {selectedMenu === 'Prompt Generator Video' && <OpenAI searchValue={searchValue} />}
-              {selectedMenu === 'Prompt Generator Copys' && <CopyAds searchValue={searchValue} />}
-              {selectedMenu === 'Prompt Generator Landing' && <LandingAI searchValue={searchValue} />}
-              {selectedMenu === 'Lexcom Courses' && <Courses />}
-              {selectedMenu === 'Guide Lexcom' && <Tutorial />}
-              {selectedMenu === '' && <Tutorial />}
+          <Layout
+            style={{
+              // padding: 24,
+              // minHeight: 360,
+              marginLeft: marginL,
+            }}
+            className="lexcom-layout"
+          >
+            <Content
+            // style={{ margin: "0 16px", padding: "0 24px", minHeight: 700 }}
+            >
+              {selectedMenu === "Standard" && <Standard />}
+              {selectedMenu === "Precio_del_Producto" && (
+                <Precio_del_Producto />
+              )}
+              {selectedMenu === "CPA_CVU" && <CPA_CVU />}
+              {selectedMenu === "LexIA Determination" && <LexcomAI />}
+              {selectedMenu === "TikTok TrendFeed" && (
+                <Tiktok searchValue={searchValue} />
+              )}
+              {selectedMenu === "Prompt Generator Video" && (
+                <OpenAI searchValue={searchValue} />
+              )}
+              {selectedMenu === "Prompt Generator Copys" && (
+                <CopyAds searchValue={searchValue} />
+              )}
+              {selectedMenu === "Prompt Generator Landing" && (
+                <LandingAI searchValue={searchValue} />
+              )}
+              {selectedMenu === "Lexcom Courses" && <Courses />}
+              {selectedMenu === "Guide Lexcom" && <Tutorial />}
+              {selectedMenu === "" && <Tutorial />}
             </Content>
           </Layout>
-        </Layout >
+        </Layout>
         <Layout style={{ marginLeft: marginL }}>
-          <About id='about' />
+          <About id="about" />
         </Layout>
       </Layout>
-      <Drawer key={data?.id} width={640} placement="right" closable={false} onClose={onCloseD} open={openD}>
+      <Drawer
+        key={data?.id}
+        width={640}
+        placement="right"
+        closable={false}
+        onClose={onCloseD}
+        open={openD}
+      >
         <ShowData data={data} />
       </Drawer>
     </ConfigProvider>
-
   );
 };
 
